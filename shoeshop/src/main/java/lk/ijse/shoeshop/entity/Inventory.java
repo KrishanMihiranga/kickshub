@@ -1,8 +1,6 @@
 package lk.ijse.shoeshop.entity;
 
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lk.ijse.shoeshop.entity.enums.Color;
 import lk.ijse.shoeshop.entity.enums.Size;
 import lk.ijse.shoeshop.entity.enums.StockStatus;
@@ -13,16 +11,21 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-//@Entity
-//Need to implement composite keys
+@Entity
 @Table(name = "inventory")
 public class Inventory {
+    @Id
+    private String inventoryId;
     @Enumerated(EnumType.STRING)
     private Size size;
-    private Integer qty;
-    private Integer maxQty;
+    private Integer originalQty;
+    private Integer currentQty;
     @Enumerated(EnumType.STRING)
     private StockStatus status;
     @Enumerated(EnumType.STRING)
     private Color color;
+    @ManyToOne
+    private Item item;
+    @ManyToOne
+    private ItemImage itemImage;
 }

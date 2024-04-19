@@ -1,11 +1,11 @@
 package lk.ijse.shoeshop.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,6 +17,16 @@ public class Item {
     private String itemCode;
     private String itemDescription;
     private String category;
-    private Double purchasePrice;
-    private Double sellingPrice;
+    private String supplierName;
+    @ManyToOne
+    private Supplier supplier;
+    private Double unitPurchasePrice;
+    private Double unitSellingPrice;
+    private Double profitPerUnit;
+
+    @OneToMany(mappedBy="saleItemId.item", cascade = CascadeType.ALL)
+    private List<SaleItems> saleItems;
+
+    @OneToMany(mappedBy = "supplyItemId.item", cascade = CascadeType.ALL)
+    private List<SupplierHistoryItem> supplierHistoryItems;
 }

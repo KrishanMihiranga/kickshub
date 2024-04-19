@@ -1,12 +1,12 @@
 package lk.ijse.shoeshop.entity;
 
 import jakarta.persistence.*;
-import lk.ijse.shoeshop.entity.enums.Color;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,8 +17,10 @@ public class SupplierHistory {
     @Id
     private String supplierHistoryId;
     private Date suppliedDate;
-    @Enumerated(EnumType.STRING)
-    private Color color;
     private Integer totalQty;
     private Double totalValue;
+    @ManyToOne
+    private Supplier supplier;
+    @OneToMany(mappedBy = "supplyItemId.supplierHistory", cascade = CascadeType.ALL)
+    private List<SupplierHistoryItem> supplierHistoryItems;
 }
