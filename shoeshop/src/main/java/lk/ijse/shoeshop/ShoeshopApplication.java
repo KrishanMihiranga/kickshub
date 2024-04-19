@@ -1,4 +1,4 @@
-package lk.ijse.shoeshop.shoeshop;
+package lk.ijse.shoeshop;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
