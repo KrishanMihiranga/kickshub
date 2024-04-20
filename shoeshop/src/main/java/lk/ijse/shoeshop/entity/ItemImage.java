@@ -1,12 +1,11 @@
 package lk.ijse.shoeshop.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,4 +17,7 @@ public class ItemImage {
     private String imageId;
     @Column(columnDefinition = "LONGTEXT")
     private String image;
+
+    @OneToMany(mappedBy = "itemImage" , cascade = CascadeType.ALL , orphanRemoval = true , fetch = FetchType.LAZY)
+    private List<Inventory> stockList;
 }

@@ -17,7 +17,6 @@ public class Item {
     private String itemCode;
     private String itemDescription;
     private String category;
-    private String supplierName;
     @ManyToOne
     private Supplier supplier;
     private Double unitPurchasePrice;
@@ -29,4 +28,7 @@ public class Item {
 
     @OneToMany(mappedBy = "supplyItemId.item", cascade = CascadeType.ALL)
     private List<SupplierHistoryItem> supplierHistoryItems;
+
+    @OneToMany(mappedBy = "item" , cascade = CascadeType.ALL , orphanRemoval = true , fetch = FetchType.LAZY)
+    private List<Inventory> inventoryList;
 }

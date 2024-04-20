@@ -15,8 +15,13 @@ import java.util.Date;
 public class Refund {
    @Id
    private String refundId;
+   private double value;
     private Date refundDate;
     private String description;
-    @OneToOne
+
+    @ManyToOne(fetch = FetchType.EAGER)
     private Employee employee;
+
+    @OneToOne
+    private SaleItems itemSale;
 }

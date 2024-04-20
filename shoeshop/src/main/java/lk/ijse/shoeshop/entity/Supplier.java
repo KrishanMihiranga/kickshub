@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -27,4 +29,7 @@ public class Supplier {
     private String addressState;
     private String addressCountry;
     private String postalCode;
+
+    @OneToMany(mappedBy = "supplier" , cascade = CascadeType.ALL , orphanRemoval = true , fetch = FetchType.LAZY)
+    private List<Item> itemList;
 }

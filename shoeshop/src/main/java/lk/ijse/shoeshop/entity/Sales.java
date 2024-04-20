@@ -17,11 +17,11 @@ import java.util.List;
 public class Sales {
     @Id
     private String orderId;
-//    private Integer itemQty;
+    private Integer itemQty;
     private Integer addedPoints;
     @Enumerated(EnumType.STRING)
     private PaymentMethod paymentMethod;
-//    private Date orderDate;
+    private Date orderDate;
     private Double totalPrice;
 
     @ManyToOne

@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -40,4 +41,10 @@ public class Employee {
     private String postalCode;
     private String emergencyContactNumber;
     private String emergencyContactName;
+
+    @OneToMany(mappedBy = "employee" , cascade = CascadeType.ALL , orphanRemoval = true , fetch = FetchType.LAZY)
+    private List<Sales> saleList;
+
+    @OneToMany(mappedBy = "employee" , cascade = CascadeType.ALL , orphanRemoval = true , fetch = FetchType.LAZY)
+    private List<Refund> refundList;
 }
