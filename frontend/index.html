@@ -26,13 +26,13 @@
                 </div>
             </div>
             <div class="sidebar">
-                <a href="#" class="active">
+                <a href="#" id="dashboard-btn" class="active">
                     <span class="material-icons-sharp">grid_view</span>
                     <h3>Dashboard</h3>
                 </a>
-                <a href="#">
+                <a href="#" id="add-employee">
                     <span class="material-icons-sharp">person_outline</span>
-                    <h3>Customers</h3>
+                    <h3>Employee</h3>
                 </a>
                 <a href="#">
                     <span class="material-icons-sharp">receipt_long</span>
@@ -78,6 +78,9 @@
             <div class="date">
                 <input type="date">
             </div>
+
+            <!-- ******dashboard****** -->
+
             <!-- insights-->
             <div class="insights">
 
@@ -211,6 +214,168 @@
                 <a href="#">Show All</a>
             </div>
             <!-- end-of-recent-ordrs --> 
+
+
+            <!-- ******Employee Registration****** -->
+            <div id="page" class="site">
+                <div class="employee-register-container">
+                    <div class="form-box">
+                        <div class="progress">
+                            <div class="logo"><a href="#">KICKSHUB</a></div>
+                            <ul class="progress-steps">
+                                <li class="step active-step">
+                                    <span>1</span>
+                                    <p><b>Personal</b><br><span><small class="text-muted">25 secs to complete</small></span></p>
+                                </li>
+                                <li class="step">
+                                    <span>2</span>
+                                    <p><b>Contact</b><br><span><small class="text-muted">60 secs to complete</small></span></p>
+                                </li>
+                                <li class="step">
+                                    <span>3</span>
+                                    <p><b>Security</b><br><span><small class="text-muted">30 secs to complete</small></span></p>
+                                </li>
+                            </ul>
+                        </div>
+                        <form action="">
+                            <div class="form-one form-step active-step">
+                                <div class="bg-svg"></div>
+                                <h2>Personal Information</h2>
+                                <p class="text-muted">Enter your personal information correctly</p>
+                                <div class="user-img">
+                                    <img src="/images/default_user.jpg" id="profile-picture-employee">
+                                    <input type="file" id="employee-file">
+                                    <label for="employee-file" id="emp-file-upload-btn"><span class="material-icons-sharp">add_a_photo</span></label>
+                                </div>
+                                <div>
+                                    <label>First Name</label>
+                                    <input type="text" placeholder="e.g. Krishan">
+                                </div>
+                                <div>
+                                    <label>Last Name</label>
+                                    <input type="text" placeholder="e.g. Mihiranga">
+                                </div>
+                                <div class="birth">
+                                    <label>Date of Birth</label>
+                                    <div class="grouping">
+                                        <input type="text" pattern="[0-9]*" name="day" value="" min="0" max="31" placeholder="DD">
+                                        <input type="text" pattern="[0-9]*" name="month" value="" min="0" max="12" placeholder="MM">
+                                        <input type="text" pattern="[0-9]*" name="year" value="" min="0" max="2050" placeholder="YYYY">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label>Gender</label>
+                                    <select name="gender" id="gender-employee">
+                                        <option value="MALE">Male</option>
+                                        <option value="FEMAlE">Female</option>
+                                        <option value="OTHER">Other</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label>Designation</label>
+                                    <select name="designation" id="designation-employee">
+                                        <option value="manager">Manager</option>
+                                        <option value="salesman">Salesman</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label>Status</label>
+                                    <select name="status" id="status-employee">
+                                        <option value="married">Married</option>
+                                        <option value="unmarried">Unmarried</option>
+                                        <option value="student">Student</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label>Attached Branch</label>
+                                    <select name="branch" id="branch-employee">
+                                        <option value="branch1">Branch 01</option>
+                                        <option value="branch2">Branch 02</option>
+                                        <option value="branch3">Branch 03</option>
+                                        <option value="branch4">Branch 04</option>
+                                        <option value="branch5">Branch 05</option>
+                                        <option value="branch6">Branch 06</option>
+                                        <option value="branch7">Branch 07</option>
+                                        <option value="branch8">Branch 08</option>
+                                        <option value="branch9">Branch 09</option>
+                                        <option value="branch10">Branch 10</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label>Joined Date</label>
+                                    <input type="date">
+                                </div>
+                            </div>
+                            <div class="form-two form-step">
+                                <div class="bg-svg"></div>
+                                <h2>Contact Information</h2>
+                                <div>
+                                    <label>Phone</label>
+                                    <input type="tel" placeholder="+94xxxxxxx29">
+                                </div>
+                                <div>
+                                    <label>Address</label>
+                                    <input type="text" placeholder="Street Address">
+                                </div>
+                                <div>
+                                    <input type="text" placeholder="Suite, Building">
+                                </div>
+                                <div>
+                                    <label>City</label>
+                                    <input type="text" placeholder="city">
+                                </div>
+                                <div>
+                                    <label>State</label>
+                                    <input type="text" placeholder="State / Province">
+                                </div>
+                                <div>
+                                    <label>Zip Code</label>
+                                    <input type="text" placeholder="Zip / Postal Code">
+                                </div>
+                                <div>
+                                    <label>Country</label>
+                                    <select name="country" id="country">
+                                        <option value="Sri Lanka">Sri Lanka</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-three form-step">
+                                <div class="bg-svg"></div>
+                                <h2>Security Information</h2>
+                                <div>
+                                    <label>Email</label>
+                                    <input type="email" placeholder="Your email address">
+                                </div>
+                                <div>
+                                    <label>Guardian or Nominated Person</label>
+                                    <input type="text" placeholder="Guardian / Nominee Name">
+                                </div>
+                                <div>
+                                    <label>Username</label>
+                                    <input type="text" placeholder="Username">
+                                </div>
+                                <div>
+                                    <label>Password</label>
+                                    <input type="password" placeholder="Password">
+                                </div>
+                                <div>
+                                    <input type="password" placeholder="Confirm Password">
+                                </div>
+                                <div class="checkbox">
+                                    <input type="checkbox">
+                                    <label>Receive our news letter and special offers</label>
+                                </div>
+                            </div>
+                            <div class="btn-group">
+                                <button type="button" class="btn-prev" disabled>Back</button>
+                                <button type="button" class="btn-next">Next Step</button>
+                                <button type="button" class="btn-submit">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
         </main>
         <!-- end of middle section  -->
 

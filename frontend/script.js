@@ -2,6 +2,16 @@ const sideMenu = $("aside");
 const menuBtn = $("#menu-btn");
 const closeBtn = $("#close-btn");
 const themeToggler = $(".theme-toggler");
+const nextButton = $(".btn-next");
+const prevButton = $(".btn-prev");
+const submitButton = $(".btn-submit");
+const steps = $(".step");
+const form_steps = $(".form-step");
+let active = 1;
+const imgDiv = $('.user-img');
+const img = $('#profile-picture-employee');
+const file = $('#employee-file');
+const employeeDpUploadBtn = $('#emp-file-upload-btn');
 
 // Show sidebar
 menuBtn.on('click', function() {
@@ -18,6 +28,120 @@ themeToggler.on('click', function() {
     $("body").toggleClass("dark-theme-variables");
     themeToggler.find("span:nth-child(1)").toggleClass("active");
     themeToggler.find("span:nth-child(2)").toggleClass("active");
+});
+
+//swap active class
+$('#dashboard-btn, #add-employee').click(function() {
+  $('#dashboard-btn, #add-employee').removeClass('active');
+  $(this).addClass('active');
+});
+
+//load countries
+const countries = [
+  "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", 
+  "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", 
+  "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan", "Bolivia", 
+  "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", 
+  "Burundi", "Cabo Verde", "Cambodia", "Cameroon", "Canada", "Central African Republic", 
+  "Chad", "Chile", "China", "Colombia", "Comoros", "Congo, Democratic Republic of the", 
+  "Congo, Republic of the", "Costa Rica", "Croatia", "Cuba", "Cyprus", "Czech Republic", 
+  "Denmark", "Djibouti", "Dominica", "Dominican Republic", "East Timor (Timor-Leste)", 
+  "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", 
+  "Ethiopia", "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany", 
+  "Ghana", "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", 
+  "Honduras", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", 
+  "Israel", "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", 
+  "Korea, North", "Korea, South", "Kosovo", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", 
+  "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", 
+  "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", 
+  "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", 
+  "Montenegro", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal", 
+  "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Macedonia", 
+  "Norway", "Oman", "Pakistan", "Palau", "Palestine", "Panama", "Papua New Guinea", 
+  "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Qatar", "Romania", "Russia", 
+  "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", 
+  "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", 
+  "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", 
+  "Somalia", "South Africa", "South Sudan", "Spain", "Sri Lanka", "Sudan", "Suriname", 
+  "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", 
+  "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Tuvalu", 
+  "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", 
+  "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Yemen", 
+  "Zambia", "Zimbabwe"
+];
+
+function populateCountries() {
+  const select = $('#country');
+  select.empty();
+
+  countries.forEach(country => {
+    select.append($('<option>', {
+      value: country,
+      text: country
+    }));
+  });
+}
+
+$(document).ready(function() {
+  populateCountries();
+  $('#country').val('Sri Lanka');
+});
+
+
+//register form
+nextButton.on('click',function(){
+  active++;
+  if(active > steps.length){
+    active = steps.length;
+  }
+  updateProgress();
+});
+
+prevButton.on('click',function(){
+  active--;
+  if(active < 1){
+    active = 1;
+  }
+  updateProgress();
+});
+
+const updateProgress = () => {
+  console.log('steps.length => ' + steps.length);
+  console.log('active => ' + active);
+
+  steps.each((i, step) => {
+    if (i === (active - 1)) {
+      $(step).addClass('active-step');
+      $(form_steps[i]).addClass('active-step');
+      console.log('i => ' + i);
+    } else {
+      $(step).removeClass('active-step');
+      $(form_steps[i]).removeClass('active-step');
+    }
+  });
+
+  if (active === 1) {
+    $(prevButton).prop('disabled', true);
+  } else if (active === steps.length) {
+    $(nextButton).prop('disabled', true);
+  } else {
+    $(prevButton).prop('disabled', false);
+    $(nextButton).prop('disabled', false);
+  }
+}
+
+//choose dp
+file.on('change', function() {
+  const choosedFile = this.files[0];
+  if (choosedFile) {
+      const reader = new FileReader();
+
+      reader.onload = function() {
+          img.attr('src', reader.result);
+      };
+
+      reader.readAsDataURL(choosedFile);
+  }
 });
 
 //*********charts**********
@@ -254,3 +378,15 @@ const areaChartOptions = {
     areaChartOptions
   );
   areaChart.render();
+
+
+  //routes
+  $('#add-employee').on('click', () => {
+    $('.charts, .recent-orders, .sales, .expenses, .income').hide();
+    $('#page').show();
+  });
+  $('#dashboard-btn').on('click', () => {
+    $('.charts, .recent-orders, .sales, .expenses, .income').show();
+    $('#page').hide();
+  });
+
