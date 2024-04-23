@@ -6,12 +6,21 @@ const nextButton = $(".btn-next");
 const prevButton = $(".btn-prev");
 const submitButton = $(".btn-submit");
 const steps = $(".step");
+const stepsCustomer = $(".stepCustomer");
+const stepsSupplier = $(".stepSupplier");
 const form_steps = $(".form-step");
+const form_stepsCustomer = $(".form-stepCustomer");
+const form_stepsSupplier = $(".form-stepSupplier");
 let active = 1;
+let activeCustomer = 1;
+let activeSupplier = 1;
 const imgDiv = $('.user-img');
 const img = $('#profile-picture-employee');
 const file = $('#employee-file');
 const employeeDpUploadBtn = $('#emp-file-upload-btn');
+const toast = $(".toast");
+const closeIcon = $(".noti-close");
+const progressNoti = $(".progress-noti");
 
 // Show sidebar
 menuBtn.on('click', function() {
@@ -23,6 +32,27 @@ closeBtn.on('click', function() {
   sideMenu.css("display", "none");
 });
 
+//notification
+submitButton.on('click',()=>{
+  toast.addClass("active-noti");
+  progressNoti.addClass("active-noti");
+  setTimeout(()=>{
+    toast.removeClass("active-noti");
+  },5000);
+
+  setTimeout(()=>{
+    progressNoti.removeClass("active-noti");
+  },5300);
+  
+});
+closeIcon.on('click',()=>{
+  toast.removeClass("active-noti");
+
+  setTimeout(()=>{
+    progressNoti.removeClass("active-noti");
+  },300);
+});
+
 // Change theme
 themeToggler.on('click', function() {
     $("body").toggleClass("dark-theme-variables");
@@ -31,10 +61,12 @@ themeToggler.on('click', function() {
 });
 
 //swap active class
-$('#dashboard-btn, #add-employee').click(function() {
-  $('#dashboard-btn, #add-employee').removeClass('active');
+$('#dashboard-btn, #add-employee, #add-customer, #add-supplier').click(function() {
+  $('#dashboard-btn, #add-employee, #add-customer, #add-supplier').removeClass('active');
   $(this).addClass('active');
 });
+
+
 
 //load countries
 const countries = [
@@ -72,10 +104,22 @@ const countries = [
 
 function populateCountries() {
   const select = $('#country');
+  const selectCustomer = $('#country-customer');
+  const selectSupplier = $('#country-Supplier');
   select.empty();
+  selectCustomer.empty();
+  selectSupplier.empty();
 
   countries.forEach(country => {
     select.append($('<option>', {
+      value: country,
+      text: country
+    }));
+    selectCustomer.append($('<option>', {
+      value: country,
+      text: country
+    }));
+    selectSupplier.append($('<option>', {
       value: country,
       text: country
     }));
@@ -85,29 +129,69 @@ function populateCountries() {
 $(document).ready(function() {
   populateCountries();
   $('#country').val('Sri Lanka');
+  $('#country-customer').val('Sri Lanka');
+  $('#country-Supplier').val('Sri Lanka');
 });
 
 
 //register form
 nextButton.on('click',function(){
   active++;
+  activeCustomer++;
+  activeSupplier++;
   if(active > steps.length){
     active = steps.length;
+  }else if(activeCustomer > stepsCustomer.length){
+    activeCustomer = stepsCustomer.length;
+  }else if(activeSupplier > stepsSupplier.length){
+    activeSupplier = stepsSupplier.length;
   }
   updateProgress();
 });
 
 prevButton.on('click',function(){
   active--;
+  activeCustomer--;
+  activeSupplier--;
   if(active < 1){
     active = 1;
+  }else if(activeCustomer < 1){
+    activeCustomer = 1;
+  }else if(activeSupplier < 1){
+    activeSupplier = 1;
   }
   updateProgress();
 });
 
 const updateProgress = () => {
   console.log('steps.length => ' + steps.length);
+  console.log('stepsCustomer.length => ' + stepsCustomer.length);
+  console.log('stepsSupplier.length => ' + stepsSupplier.length);
   console.log('active => ' + active);
+  console.log('active Customer => ' + activeCustomer);
+  console.log('active Supplier => ' + activeSupplier);
+
+  stepsSupplier.each((i, step)=>{
+    if(i === (activeSupplier -1)){
+      $(step).addClass('active-step');
+      $(form_stepsSupplier[i]).addClass('active-step');
+      console.log('i +> '+ i);
+    }else{
+      $(step).removeClass('active-step');
+      $(form_stepsSupplier[i]).removeClass('active-step');
+    }
+  });
+
+  stepsCustomer.each((i, step)=>{
+    if(i === (activeCustomer -1)){
+      $(step).addClass('active-step');
+      $(form_stepsCustomer[i]).addClass('active-step');
+      console.log('i +> '+ i);
+    }else{
+      $(step).removeClass('active-step');
+      $(form_stepsCustomer[i]).removeClass('active-step');
+    }
+  });
 
   steps.each((i, step) => {
     if (i === (active - 1)) {
@@ -379,14 +463,21 @@ const areaChartOptions = {
   );
   areaChart.render();
 
-
+  
   //routes
   $('#add-employee').on('click', () => {
-    $('.charts, .recent-orders, .sales, .expenses, .income').hide();
+    $('.charts, .recent-orders, .sales, .expenses, .income, #page-customer, #page-supplier').hide();
     $('#page').show();
   });
   $('#dashboard-btn').on('click', () => {
     $('.charts, .recent-orders, .sales, .expenses, .income').show();
-    $('#page').hide();
+    $('#page, #page-customer, #page-supplier').hide();
   });
-
+  $('#add-customer').on('click', () => {
+    $('.charts, .recent-orders, .sales, .expenses, .income, #page, #page-supplier').hide();
+    $('#page-customer').show();
+  });
+  $('#add-supplier').on('click', () => {
+    $('.charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer').hide();
+    $('#page-supplier').show();
+  });
