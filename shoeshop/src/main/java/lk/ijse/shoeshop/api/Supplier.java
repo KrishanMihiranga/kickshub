@@ -3,6 +3,7 @@ package lk.ijse.shoeshop.api;
 import lk.ijse.shoeshop.dto.SupplierDTO;
 import lk.ijse.shoeshop.service.SupplierService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -17,7 +18,7 @@ public class Supplier {
     }
 
     @PostMapping
-    public SupplierDTO saveSupplier(@RequestBody SupplierDTO supplier){
-        return supplierService.saveSupplier(supplier);
+    public ResponseEntity<SupplierDTO> saveSupplier(@RequestBody SupplierDTO supplier){
+        return ResponseEntity.ok(supplierService.saveSupplier(supplier));
     }
 }

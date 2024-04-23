@@ -4,6 +4,7 @@ import lk.ijse.shoeshop.dto.CustomerDTO;
 import lk.ijse.shoeshop.entity.enums.CustomerLevel;
 import lk.ijse.shoeshop.service.CustomerService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -17,7 +18,7 @@ public class Customer {
     }
 
     @PostMapping
-    public CustomerDTO saveCustomer(@RequestBody CustomerDTO customer){
-        return customerService.saveCustomer(customer);
+    public ResponseEntity<CustomerDTO> saveCustomer(@RequestBody CustomerDTO customer){
+        return ResponseEntity.ok(customerService.saveCustomer(customer));
     }
 }

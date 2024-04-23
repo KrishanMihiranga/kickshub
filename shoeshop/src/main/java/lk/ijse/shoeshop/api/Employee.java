@@ -10,6 +10,7 @@ import lk.ijse.shoeshop.util.UtilMatters;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -27,28 +28,28 @@ public class Employee {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public EmployeeDTO saveEmployee(@Valid
+    public ResponseEntity<EmployeeDTO> saveEmployee(@Valid
                                     @RequestPart("profilePic")String profilePic,
-                                    @RequestPart("employeeCode")String employeeCode,
-                                    @RequestPart("name")String name,
-                                    @RequestPart("gender")String gender,
-                                    @RequestPart("status")String status,
-                                    @RequestPart("dob")String dob,
-                                    @RequestPart("joinedDate")String joinedDate,
-                                    @RequestPart("branch")String branch,
-                                    @RequestPart("addressNo")String addressNo,
-                                    @RequestPart("addressLane")String addressLane,
-                                    @RequestPart("addressCity")String addressCity,
-                                    @RequestPart("addressState")String addressState,
-                                    @RequestPart("postalCode")String postalCode,
-                                    @RequestPart("email")String email,
-                                    @RequestPart("phone")String phone,
-                                    @RequestPart("password")String password,
-                                    @RequestPart("guardianOrNominatedPerson")String guardianOrNominatedPerson,
-                                    @RequestPart("role")String role,
-                                    @RequestPart("designation")String designation,
-                                    @RequestPart("emergencyContact")String emergencyContact,
-                                    Errors errors){
+                                       @RequestPart("employeeCode")String employeeCode,
+                                       @RequestPart("name")String name,
+                                       @RequestPart("gender")String gender,
+                                       @RequestPart("status")String status,
+                                       @RequestPart("dob")String dob,
+                                       @RequestPart("joinedDate")String joinedDate,
+                                       @RequestPart("branch")String branch,
+                                       @RequestPart("addressNo")String addressNo,
+                                       @RequestPart("addressLane")String addressLane,
+                                       @RequestPart("addressCity")String addressCity,
+                                       @RequestPart("addressState")String addressState,
+                                       @RequestPart("postalCode")String postalCode,
+                                       @RequestPart("email")String email,
+                                       @RequestPart("phone")String phone,
+                                       @RequestPart("password")String password,
+                                       @RequestPart("guardianOrNominatedPerson")String guardianOrNominatedPerson,
+                                       @RequestPart("role")String role,
+                                       @RequestPart("designation")String designation,
+                                       @RequestPart("emergencyContact")String emergencyContact,
+                                       Errors errors){
         if (errors.hasFieldErrors()){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     errors.getFieldErrors().get(0).getDefaultMessage());
@@ -78,6 +79,6 @@ public class Employee {
         updatedBuildEmployee.setRole(UserRole.valueOf(role));
         updatedBuildEmployee.setProfilePic(base64ProPic);
 
-        return employeeService.saveEmployee(updatedBuildEmployee);
+        return ResponseEntity.ok(employeeService.saveEmployee(updatedBuildEmployee));
     }
 }
