@@ -61,8 +61,8 @@ themeToggler.on('click', function() {
 });
 
 //swap active class
-$('#dashboard-btn, #add-employee, #add-customer, #add-supplier').click(function() {
-  $('#dashboard-btn, #add-employee, #add-customer, #add-supplier').removeClass('active');
+$('#dashboard-btn, #add-employee, #add-customer, #add-supplier,#edit-profile').click(function() {
+  $('#dashboard-btn, #add-employee, #add-customer, #add-supplier,#edit-profile').removeClass('active');
   $(this).addClass('active');
 });
 
@@ -227,6 +227,19 @@ file.on('change', function() {
       reader.readAsDataURL(choosedFile);
   }
 });
+
+//open popup
+$('#save-changes-employee').on('click', () => {
+  console.log("hola");
+  $('.popup').addClass("active-popup");
+  $('.overlay').addClass("active-overlay"); // Add class to overlay
+});
+
+$('.close-btn-popup').on('click', () => {
+  $('.popup').removeClass("active-popup");
+  $('.overlay').removeClass("active-overlay"); // Remove class from overlay
+});
+
 
 //*********charts**********
 
@@ -466,18 +479,22 @@ const areaChartOptions = {
   
   //routes
   $('#add-employee').on('click', () => {
-    $('.charts, .recent-orders, .sales, .expenses, .income, #page-customer, #page-supplier').hide();
+    $('.charts, .recent-orders, .sales, .expenses, .income, #page-customer, #page-supplier, #update-profile').hide();
     $('#page').show();
   });
   $('#dashboard-btn').on('click', () => {
     $('.charts, .recent-orders, .sales, .expenses, .income').show();
-    $('#page, #page-customer, #page-supplier').hide();
+    $('#page, #page-customer, #page-supplier, #update-profile').hide();
   });
   $('#add-customer').on('click', () => {
-    $('.charts, .recent-orders, .sales, .expenses, .income, #page, #page-supplier').hide();
+    $('.charts, .recent-orders, .sales, .expenses, .income, #page, #page-supplier, #update-profile').hide();
     $('#page-customer').show();
   });
   $('#add-supplier').on('click', () => {
-    $('.charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer').hide();
+    $('.charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer, #update-profile').hide();
     $('#page-supplier').show();
+  });
+  $('#dashboard-photo').on('click', () => {
+    $('.charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer,#page-supplier').hide();
+    $('#update-profile').show();
   });

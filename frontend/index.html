@@ -14,8 +14,9 @@
     <link rel="stylesheet" href="./customNotification.css">
 </head>
 <body>
+    <div class="overlay"></div>
 
-    <div class="toast">
+    <!-- <div class="toast">
         <div class="toast-content">
             <i class="fas fa-solid fa-check check-noti"></i>
 
@@ -26,7 +27,7 @@
         </div>
         <i class="fa-solid fa-xmark noti-close"></i>
         <div class="progress-noti"></div>
-    </div>
+    </div> -->
 
     <div class="container">
         <!-- side-bar -->
@@ -57,9 +58,9 @@
                     <span class="material-icons-sharp">person_outline</span>
                     <h3>Supplier</h3>
                 </a>
-                <a href="#">
+                <a href="#" id="edit-profile">
                     <span class="material-icons-sharp">receipt_long</span>
-                    <h3>Orders</h3>
+                    <h3>Profile</h3>
                 </a>
                 <a href="#">
                     <span class="material-icons-sharp">insights</span>
@@ -244,7 +245,7 @@
                 <div class="employee-register-container">
                     <div class="form-box">
                         <div class="progress">
-                            <div class="logo"><a href="#">KICKSHUB</a></div>
+                            <div class="logo-kh"><a href="#">KICKSHUB</a></div>
                             <ul class="progress-steps">
                                 <li class="step active-step">
                                     <span>1</span>
@@ -405,7 +406,7 @@
                 <div class="employee-register-container">
                     <div class="form-box">
                         <div class="progress">
-                            <div class="logo"><a href="#">KICKSHUB</a></div>
+                            <div class="logo-kh"><a href="#">KICKSHUB</a></div>
                             <ul class="progress-steps">
                                 <li class="stepCustomer active-step">
                                     <span>1</span>
@@ -516,7 +517,7 @@
                 <div class="employee-register-container">
                     <div class="form-box">
                         <div class="progress">
-                            <div class="logo"><a href="#">KICKSHUB</a></div>
+                            <div class="logo-kh"><a href="#">KICKSHUB</a></div>
                             <ul class="progress-steps">
                                 <li class="stepSupplier active-step">
                                     <span>1</span>
@@ -611,7 +612,179 @@
                 </div>
             </div>
             
-
+            <!-- ******** Edit Profile ******** -->
+            <div id="update-profile">
+                <div class="profile-container">
+                    <div class="profile-cover">
+                        <!-- <h1>KICKS<span> HUB</span></h1> -->
+                    </div>
+                    <div class="update-profile-top">
+                        <div class="update-profile-top-left">
+                            <div class="update-profile-top-left-profilePic-container">
+                                <img src="./images/profile-1.jpg" alt="ProfilePic" id="update-profile-top-left-profilePic">
+                            </div>
+                            <h2>Krishan Mihiranga</h2>
+                            <h3 class="text-muted">Admin</h3>
+                        </div>
+                        <div class="update-profile-top-right">
+                            <button>Edit Profile <i class="fa-solid fa-pen-to-square"></i></button>
+                        </div>
+                    </div>
+                    <div class="update-profile-details">
+                        <div class="update-profile-details-personal">
+                            <h2>Personal Infromation</h2>
+                            <div class="grid-profile">
+                                <div>
+                                    <label>First Name</label>
+                                    <input type="text" placeholder="e.g. Krishan">
+                                </div>
+                                <div>
+                                    <label>Last Name</label>
+                                    <input type="text" placeholder="e.g. Mihiranga">
+                                </div>
+                                <div class="birth">
+                                    <label>Date of Birth</label>
+                                    <div class="grouping">
+                                        <input type="text" pattern="[0-9]*" name="day" value="" min="0" max="31" placeholder="DD">
+                                        <input type="text" pattern="[0-9]*" name="month" value="" min="0" max="12" placeholder="MM">
+                                        <input type="text" pattern="[0-9]*" name="year" value="" min="0" max="2050" placeholder="YYYY">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label>Gender</label>
+                                    <select name="gender">
+                                        <option value="MALE">Male</option>
+                                        <option value="FEMAlE">Female</option>
+                                        <option value="OTHER">Other</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label>Designation</label>
+                                    <select name="designation">
+                                        <option value="manager">Manager</option>
+                                        <option value="salesman">Salesman</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label>Status</label>
+                                    <select name="status">
+                                        <option value="married">Married</option>
+                                        <option value="unmarried">Unmarried</option>
+                                        <option value="student">Student</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label>Attached Branch</label>
+                                    <select name="branch">
+                                        <option value="branch1">Branch 01</option>
+                                        <option value="branch2">Branch 02</option>
+                                        <option value="branch3">Branch 03</option>
+                                        <option value="branch4">Branch 04</option>
+                                        <option value="branch5">Branch 05</option>
+                                        <option value="branch6">Branch 06</option>
+                                        <option value="branch7">Branch 07</option>
+                                        <option value="branch8">Branch 08</option>
+                                        <option value="branch9">Branch 09</option>
+                                        <option value="branch10">Branch 10</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label>Joined Date</label>
+                                    <input type="date">
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="update-profile-details-contact">
+                            <h2>Contact Information</h2>
+                            <div class="grid-profile">
+                                <div>
+                                    <label>Phone</label>
+                                    <input type="tel" placeholder="+94xxxxxxx29">
+                                </div>
+                                <div>
+                                    <label>Address</label>
+                                    <input type="text" placeholder="Street Address">
+                                </div>
+                                <div>
+                                    <label>Building Number</label>
+                                    <input type="text" placeholder="Suite, Building">
+                                </div>
+                                <div>
+                                    <label>City</label>
+                                    <input type="text" placeholder="city">
+                                </div>
+                                <div>
+                                    <label>State</label>
+                                    <input type="text" placeholder="State / Province">
+                                </div>
+                                <div>
+                                    <label>Zip Code</label>
+                                    <input type="text" placeholder="Zip / Postal Code">
+                                </div>
+                                <div>
+                                    <label>Country</label>
+                                    <select name="country" id="country">
+                                        <option value="Sri Lanka">Sri Lanka</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="update-profile-details-security">
+                            <h2>Security Information</h2>
+                            <div class="grid-profile">
+                                <div>
+                                    <label>Email</label>
+                                    <input type="email" placeholder="Your email address">
+                                </div>
+                                <div>
+                                    <label>Guardian or Nominated Person</label>
+                                    <input type="text" placeholder="Guardian / Nominee Name">
+                                </div>
+                                <!-- <div>
+                                    <label>Username</label>
+                                    <input type="text" placeholder="Username">
+                                </div>
+                                <div>
+                                    <label>Password</label>
+                                    <input type="password" placeholder="Password">
+                                </div>
+                                <div>
+                                    <label>Confirm Password</label>
+                                    <input type="password" placeholder="Confirm Password">
+                                </div> -->
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="employee-save">
+                        <button class="save-update-profile" id="save-changes-employee">Save Changes</button>
+                    </div>
+                </div>
+            </div>
+            <!-- ******** popup ******** -->
+            <div class="popup">
+                <div class="close-btn-popup">&times;</div>
+                <div class="form-popup">
+                    <h2>Confirm Changes</h2>
+                    <div class="form-elment">
+                        <label for="email-popup" class="text-muted">Email</label>
+                        <input type="email" id="email-popup" placeholder="Enter Email">
+                    </div>
+                    <div class="form-elment">
+                        <label for="password-popup" class="text-muted">Password</label>
+                        <input type="password" id="password-popup" placeholder="Enter Password">
+                        <input type="password" id="password-confirm-popup" placeholder="Confirm Password">
+                    </div>
+                    <div class="form-elment">
+                        <button>Save Changes</button>
+                    </div>
+                    <div class="form-element">
+                        <a href="#" class="forgot-password-popup">Forgot Password?</a>
+                    </div>
+                </div>
+            </div>
         </main>
         <!-- end of middle section  -->
 
@@ -630,7 +803,7 @@
                         <p>Hey, <b>Krishan</b></p>
                         <small class="text-muted">Admin</small>
                     </div>
-                    <div class="profile-photo">
+                    <div class="profile-photo" id="dashboard-photo">
                         <img src="./images/profile-1.jpg" alt="user profile picture">
                     </div>
                 </div>
