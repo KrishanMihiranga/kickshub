@@ -9,6 +9,8 @@ import lk.ijse.shoeshop.util.UtilMatters;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -20,5 +22,10 @@ public class SupplierServiceImpl implements SupplierService {
     public SupplierDTO saveSupplier(SupplierDTO supplierDTO) {
         supplierDTO.setCode(UtilMatters.generateId());
         return mapping.toSupplierDTO(supplierRepo.save(mapping.toSupplierEntity(supplierDTO)));
+    }
+
+    @Override
+    public List<SupplierDTO> getAllSuppliers() {
+        return mapping.getSupplierDTOList(supplierRepo.findAll());
     }
 }

@@ -1,11 +1,12 @@
 package lk.ijse.shoeshop.api;
 
 import lk.ijse.shoeshop.dto.CustomerDTO;
-import lk.ijse.shoeshop.entity.enums.CustomerLevel;
 import lk.ijse.shoeshop.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/customer")
@@ -20,5 +21,11 @@ public class Customer {
     @PostMapping
     public ResponseEntity<CustomerDTO> saveCustomer(@RequestBody CustomerDTO customer){
         return ResponseEntity.ok(customerService.saveCustomer(customer));
+    }
+
+    @GetMapping(value = "/getAllCustomers",produces = "application/json")
+    public ResponseEntity<List<CustomerDTO>> getALlCustomers(){
+        List<CustomerDTO> customers = customerService.getAllCustomers();
+        return ResponseEntity.ok(customers);
     }
 }

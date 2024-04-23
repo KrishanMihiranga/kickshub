@@ -15,6 +15,8 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/v1/employee")
 @RequiredArgsConstructor
@@ -80,5 +82,12 @@ public class Employee {
         updatedBuildEmployee.setProfilePic(base64ProPic);
 
         return ResponseEntity.ok(employeeService.saveEmployee(updatedBuildEmployee));
+    }
+
+
+    @GetMapping(value = "/getAllEmployees",produces = "application/json")
+    public ResponseEntity<List<EmployeeDTO>> getALlEmployees(){
+        List<EmployeeDTO> employees = employeeService.getAllEmployees();
+        return ResponseEntity.ok(employees);
     }
 }

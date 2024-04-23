@@ -9,6 +9,8 @@ import lk.ijse.shoeshop.util.UtilMatters;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -20,5 +22,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     public EmployeeDTO saveEmployee(EmployeeDTO employeeDTO) {
         employeeDTO.setEmployeeCode(UtilMatters.generateId());
         return mapping.toEmployeeDTO(employeeRepo.save(mapping.toEmployeeEntity(employeeDTO)));
+    }
+
+    @Override
+    public List<EmployeeDTO> getAllEmployees() {
+        return mapping.getEmployeeDTOList(employeeRepo.findAll());
     }
 }

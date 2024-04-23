@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
@@ -26,6 +27,9 @@ public class Mapping {
     public EmployeeEntity toEmployeeEntity(EmployeeDTO employeeDTO){
         return mapper.map(employeeDTO, EmployeeEntity.class);
     }
+    public List<EmployeeDTO> getEmployeeDTOList(List<EmployeeEntity> employeeEntities){
+        return mapper.map(employeeEntities, List.class);
+    }
 
 
     //Supplier Mapping
@@ -35,6 +39,9 @@ public class Mapping {
     public SupplierEntity toSupplierEntity(SupplierDTO supplierDTO){
         return mapper.map(supplierDTO, SupplierEntity.class);
     }
+    public List<SupplierDTO> getSupplierDTOList(List<SupplierEntity> supplierEntities){
+        return mapper.map(supplierEntities, List.class);
+    }
 
     //Customer Mapping
     public CustomerDTO toCustomerDTO(CustomerEntity customer){
@@ -42,6 +49,9 @@ public class Mapping {
     }
     public CustomerEntity toCustomerEntity(CustomerDTO customerDTO){
         return mapper.map(customerDTO, CustomerEntity.class);
+    }
+    public List<CustomerDTO> getCustomerDTOList(List<CustomerEntity> customerEntities){
+        return mapper.map(customerEntities, List.class);
     }
 
     //String to date

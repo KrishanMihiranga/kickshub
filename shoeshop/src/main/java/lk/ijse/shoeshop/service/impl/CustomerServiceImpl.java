@@ -9,6 +9,8 @@ import lk.ijse.shoeshop.util.UtilMatters;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -19,5 +21,10 @@ public class CustomerServiceImpl implements CustomerService {
     public CustomerDTO saveCustomer(CustomerDTO customerDTO) {
         customerDTO.setCustomerCode(UtilMatters.generateId());
         return mapping.toCustomerDTO(customerRepo.save(mapping.toCustomerEntity(customerDTO)));
+    }
+
+    @Override
+    public List<CustomerDTO> getAllCustomers() {
+        return mapping.getCustomerDTOList(customerRepo.findAll());
     }
 }
