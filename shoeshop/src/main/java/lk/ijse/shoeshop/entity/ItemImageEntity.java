@@ -1,5 +1,6 @@
 package lk.ijse.shoeshop.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -7,18 +8,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Time;
-import java.util.Date;
-
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
 @Entity
-@Table(name = "alert")
-public class Alert {
+@Table(name = "itemImage")
+public class ItemImageEntity {
     @Id
-    private String alertId;
-    private Date alertDate;
-    private Time alertTime;
-    private String message;
+    private String id;
+    @Column(columnDefinition = "LONGTEXT")
+    private String image;
 }

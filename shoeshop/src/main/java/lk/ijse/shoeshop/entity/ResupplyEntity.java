@@ -8,19 +8,20 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 import java.util.List;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
 @Entity
-@Table(name = "supplier-history")
-public class SupplierHistory {
+@Table(name = "resupply")
+public class ResupplyEntity {
     @Id
-    private String supplierHistoryId;
+    private String supplyId;
     private Date suppliedDate;
+    private Double totalAmount;
     private Integer totalQty;
-    private Double totalValue;
+
     @ManyToOne
-    private Supplier supplier;
-    @OneToMany(mappedBy = "supplyItemId.supplierHistory", cascade = CascadeType.ALL)
-    private List<SupplierHistoryItem> supplierHistoryItems;
+    private SupplierEntity supplier;
+    @OneToMany(mappedBy = "resupplyItemId.resupply", cascade = CascadeType.ALL)
+    private List<ResupplyItemEntity> resupplyItems;
 }

@@ -1,18 +1,19 @@
-package lk.ijse.shoeshop.entity.key;
+package lk.ijse.shoeshop.entity.keys;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.ManyToOne;
-import lk.ijse.shoeshop.entity.Item;
-import lk.ijse.shoeshop.entity.SupplierHistory;
+import lk.ijse.shoeshop.entity.InventoryEntity;
+import lk.ijse.shoeshop.entity.ResupplyEntity;
 import lombok.Data;
 
 import java.io.Serializable;
+
 @Embeddable
 @Data
-public class SupplyItemId implements Serializable {
+public class ResupplyItemId implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL)
-    private Item item;
+    private InventoryEntity inventory;
     @ManyToOne(cascade = CascadeType.ALL)
-    private SupplierHistory supplierHistory;
+    private ResupplyEntity resupply;
 }

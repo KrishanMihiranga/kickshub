@@ -1,33 +1,29 @@
 package lk.ijse.shoeshop.entity;
 
 import jakarta.persistence.*;
-import lk.ijse.shoeshop.entity.enums.PaymentMethod;
+import lk.ijse.shoeshop.entity.enums.PaymentMethods;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
 import java.util.List;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
 @Entity
-@Table(name = "sales")
-public class Sales {
+@Table(name = "sale")
+public class SaleEntity {
     @Id
     private String orderId;
-    private Integer itemQty;
-    private Integer addedPoints;
-    @Enumerated(EnumType.STRING)
-    private PaymentMethod paymentMethod;
-    private Date orderDate;
     private Double totalPrice;
+    private PaymentMethods paymentMethod;
+    private Integer addedPoints;
 
     @ManyToOne
-    private Employee employee;
+    private EmployeeEntity employee;
     @ManyToOne
-    private Customer customer;
+    private CustomerEntity customer;
     @OneToMany(mappedBy = "saleItemId.sale", cascade = CascadeType.ALL)
-    private List<SaleItems> saleItems;
+    private List<SaleItemEntity> saleItems;
 }
