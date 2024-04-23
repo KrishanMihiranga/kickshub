@@ -1,7 +1,9 @@
 package lk.ijse.shoeshop.util;
 
+import lk.ijse.shoeshop.dto.CustomerDTO;
 import lk.ijse.shoeshop.dto.EmployeeDTO;
 import lk.ijse.shoeshop.dto.SupplierDTO;
+import lk.ijse.shoeshop.entity.CustomerEntity;
 import lk.ijse.shoeshop.entity.EmployeeEntity;
 import lk.ijse.shoeshop.entity.SupplierEntity;
 import lombok.RequiredArgsConstructor;
@@ -32,6 +34,14 @@ public class Mapping {
     }
     public SupplierEntity toSupplierEntity(SupplierDTO supplierDTO){
         return mapper.map(supplierDTO, SupplierEntity.class);
+    }
+
+    //Customer Mapping
+    public CustomerDTO toCustomerDTO(CustomerEntity customer){
+        return mapper.map(customer, CustomerDTO.class);
+    }
+    public CustomerEntity toCustomerEntity(CustomerDTO customerDTO){
+        return mapper.map(customerDTO, CustomerEntity.class);
     }
 
     //String to date
