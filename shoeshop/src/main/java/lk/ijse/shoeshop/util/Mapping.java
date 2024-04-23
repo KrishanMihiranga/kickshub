@@ -1,7 +1,9 @@
 package lk.ijse.shoeshop.util;
 
 import lk.ijse.shoeshop.dto.EmployeeDTO;
+import lk.ijse.shoeshop.dto.SupplierDTO;
 import lk.ijse.shoeshop.entity.EmployeeEntity;
+import lk.ijse.shoeshop.entity.SupplierEntity;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
@@ -23,6 +25,14 @@ public class Mapping {
         return mapper.map(employeeDTO, EmployeeEntity.class);
     }
 
+
+    //Supplier Mapping
+    public SupplierDTO toSupplierDTO(SupplierEntity supplier){
+        return mapper.map(supplier, SupplierDTO.class);
+    }
+    public SupplierEntity toSupplierEntity(SupplierDTO supplierDTO){
+        return mapper.map(supplierDTO, SupplierEntity.class);
+    }
 
     //String to date
     public static Date convertToDate(String date){
