@@ -1064,6 +1064,55 @@ border: 2px solid var(--color-primary);
  position: relative;
  right: 5rem;
 }
+.update-profile-user-code{
+    display: flex;
+    align-items: center;
+    gap: .1rem;
+}
+.update-profile-user-code i{
+    color: var(--color-dark);
+    margin-left: .5rem;
+    cursor: pointer;
+}
+.update-profile-user-code i:hover{
+    color: var(--color-primary);
+}
+.update-profile-user-name-password{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.update-profile-user-unique-code-copy{
+    background: transparent;
+    width: 1.6rem;
+    height: 1.6rem;
+}
+.update-profile-user-unique-code-copy:before{
+    content: "Copied";
+    position: absolute;
+    bottom: 3.5rem;
+    background: var(--color-primary);
+    padding: 4px 5px;
+    border-radius: 10px;
+    color: #fff;
+    display: none;
+}
+.update-profile-user-unique-code-copy:after{
+    content: "";
+    position: absolute;
+    bottom: 3.2rem;
+    right: .1rem;
+    width: 8px;
+    height: 8px;
+    background: var(--color-primary);
+    transform: rotate(45deg);
+    display: none;
+}
+.update-profile-user-unique-code-copy.active-copy:after,
+.update-profile-user-unique-code-copy.active-copy:before{
+    display: block;
+}
 
  /* popup */
  .popup{

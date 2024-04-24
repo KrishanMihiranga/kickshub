@@ -116,6 +116,26 @@ $(document.body).on('click', function(event) {
 });
 
 
+//copy id
+$('.update-profile-user-unique-code-copy').click(function(){
+  var $this = $(this);
+  $this.addClass('active-copy');
+  var textToCopy = $this.siblings('.update-profile-user-unique-code').text();
+  
+  navigator.clipboard.writeText(textToCopy)
+      .then(function() {
+          console.log('Text copied to clipboard: ' + textToCopy);
+      })
+      .catch(function(err) {
+          console.error('Error copying text to clipboard: ', err);
+      });
+
+  setTimeout(function() {
+      $this.removeClass('active-copy');
+  }, 3000);
+});
+
+
 
 //load countries
 const countries = [
