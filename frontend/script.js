@@ -21,6 +21,7 @@ const employeeDpUploadBtn = $('#emp-file-upload-btn');
 const toast = $(".toast");
 const closeIcon = $(".noti-close");
 const progressNoti = $(".progress-noti");
+const dropDown = $(".information-dropdown");
 
 // Show sidebar
 menuBtn.on('click', function() {
@@ -61,9 +62,57 @@ themeToggler.on('click', function() {
 });
 
 //swap active class
-$('#dashboard-btn, #add-employee, #add-customer, #add-supplier,#edit-profile').click(function() {
-  $('#dashboard-btn, #add-employee, #add-customer, #add-supplier,#edit-profile').removeClass('active');
+$('#dashboard-btn, #add-employee, #add-customer, #add-supplier,#edit-profile, #info-log, #register-side-btn').click(function() {
+  $('#dashboard-btn, #add-employee, #add-customer, #add-supplier,#edit-profile, #info-log, #register-side-btn').removeClass('active');
   $(this).addClass('active');
+});
+
+ //information options
+ function showInfo(info) {
+  $('.information-textBox').val(info);
+  if(info == 'Customer'){
+    $('#information-table-customer-wrapper').show();
+    $('#information-table-supplier-wrapper').hide();
+    $('#information-table-employee-wrapper').hide();
+  }else if((info == 'Supplier')){
+    $('#information-table-customer-wrapper').hide();
+    $('#information-table-supplier-wrapper').show();
+    $('#information-table-employee-wrapper').hide();
+  }else if((info == 'Employee')){
+    $('#information-table-customer-wrapper').hide();
+    $('#information-table-supplier-wrapper').hide();
+    $('#information-table-employee-wrapper').show();
+  }else{
+    $('#information-table-customer-wrapper').hide();
+    $('#information-table-supplier-wrapper').hide();
+    $('#information-table-employee-wrapper').hide();
+  }
+}
+
+dropDown.on('click',()=>{
+  dropDown.toggleClass('active-information');
+});
+
+//aside dropdown
+$('#register-side-btn').on('click', function() {
+  var $dropdown = $(this).next('.aside-menu-dropdown').children('.aside-sub-menu');
+  var $icon = $(this).find('.fa-angle-down');
+  
+  $dropdown.slideToggle();
+  $('.aside-sub-menu').not($dropdown).slideUp(); // Slide up other dropdowns
+  
+  if ($icon.hasClass('rotate')) {
+    $icon.removeClass('rotate');
+  } else {
+    $icon.addClass('rotate');
+  }
+});
+
+$(document.body).on('click', function(event) {
+  if (!$(event.target).closest('#register-side-btn').length) {
+    $('.aside-sub-menu').slideUp();
+    $('#register-side-btn .fa-angle-down').removeClass('rotate');
+  }
 });
 
 
@@ -128,6 +177,9 @@ function populateCountries() {
 
 $(document).ready(function() {
   populateCountries();
+  $('#information-table-customer-wrapper').hide();
+  $('#information-table-supplier-wrapper').hide();
+  $('#information-table-employee-wrapper').hide();
   $('#country').val('Sri Lanka');
   $('#country-customer').val('Sri Lanka');
   $('#country-Supplier').val('Sri Lanka');
@@ -484,17 +536,21 @@ const areaChartOptions = {
   });
   $('#dashboard-btn').on('click', () => {
     $('.charts, .recent-orders, .sales, .expenses, .income').show();
-    $('#page, #page-customer, #page-supplier, #update-profile').hide();
+    $('#page, #page-customer, #page-supplier, #update-profile, #information-page').hide();
   });
   $('#add-customer').on('click', () => {
-    $('.charts, .recent-orders, .sales, .expenses, .income, #page, #page-supplier, #update-profile').hide();
+    $('.charts, .recent-orders, .sales, .expenses, .income, #page, #page-supplier, #update-profile, #information-page').hide();
     $('#page-customer').show();
   });
   $('#add-supplier').on('click', () => {
-    $('.charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer, #update-profile').hide();
+    $('.charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer, #update-profile, #information-page').hide();
     $('#page-supplier').show();
   });
   $('#dashboard-photo').on('click', () => {
-    $('.charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer,#page-supplier').hide();
+    $('.charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer,#page-supplier, #information-page').hide();
     $('#update-profile').show();
+  });
+  $('#info-log').on('click', () => {
+    $('.charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer,#page-supplier, #update-profile').hide();
+    $('#information-page').show();
   });

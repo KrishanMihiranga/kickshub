@@ -46,21 +46,21 @@
                     <span class="material-icons-sharp">grid_view</span>
                     <h3>Dashboard</h3>
                 </a>
-                <a href="#" id="add-employee">
+                <a href="#" id="register-side-btn">
                     <span class="material-icons-sharp">person_outline</span>
-                    <h3>Employee</h3>
+                    <h3>Register</h3>
+                    <i class="fa-solid fa-angle-down"></i>
                 </a>
-                <a href="#" id="add-customer">
-                    <span class="material-icons-sharp">person_outline</span>
-                    <h3>Customer</h3>
-                </a>
-                <a href="#" id="add-supplier">
-                    <span class="material-icons-sharp">person_outline</span>
-                    <h3>Supplier</h3>
-                </a>
-                <a href="#" id="edit-profile">
+                <div class="aside-menu-dropdown">
+                    <div class="aside-sub-menu">
+                        <div id="add-employee"><h3 class="text-muted">Employee</h3></div>
+                        <div id="add-customer"><h3 class="text-muted">Customer</h3></div>
+                        <div id="add-supplier"><h3 class="text-muted">Supplier</h3></div>
+                    </div>
+                </div>
+                <a href="#" id="info-log">
                     <span class="material-icons-sharp">receipt_long</span>
-                    <h3>Profile</h3>
+                    <h3>info Log</h3>
                 </a>
                 <a href="#">
                     <span class="material-icons-sharp">insights</span>
@@ -785,6 +785,172 @@
                     </div>
                 </div>
             </div>
+
+            <div id="information-page">
+                <div>
+                    <h2>Business Information</h2>
+                    <p>Select the category you want from the dropdown below</p>
+                </div>
+                <div class="information-dropdown">
+                    <input type="text" class="information-textBox" placeholder="Dropdown Menu" readonly>
+                    <div class="information-option">
+                        <div onclick="showInfo('Employee')"><i class="fa-regular fa-user"></i>Employee</div>
+                        <div onclick="showInfo('Supplier')"><i class="fa-solid fa-box-open"></i> Supplier</div>
+                        <div onclick="showInfo('Customer')"><i class="fa-solid fa-person"></i> Customer</div>
+                    </div>
+                </div>
+                <div id="information-table-customer-wrapper">
+                    <h2>Customer Information</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Product Name</th>
+                                <th>Product Number</th>
+                                <th>Payment</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Nike Red Shoe</td>
+                                <td>83212</td>
+                                <td>Card</td>
+                                <td class="success">Available</td>
+                                <td class="primary">Details</td>
+                            </tr>
+                            <tr>
+                                <td>Nike Blue Shoe</td>
+                                <td>83452</td>
+                                <td>Card</td>
+                                <td class="warning">Unavailable</td>
+                                <td class="primary">Details</td>
+                            </tr>
+                            <tr>
+                                <td>Nike White Shoe</td>
+                                <td>8342</td>
+                                <td>Cash</td>
+                                <td class="success">Available</td>
+                                <td class="primary">Details</td>
+                            </tr>
+                            <tr>
+                                <td>Nike Pink Shoe</td>
+                                <td>34512</td>
+                                <td>Card</td>
+                                <td class="danger">Low</td>
+                                <td class="primary">Details</td>
+                            </tr>
+                            <tr>
+                                <td>Nike Browm Shoe</td>
+                                <td>34512</td>
+                                <td>Cash</td>
+                                <td class="warning">Unavailable</td>
+                                <td class="primary">Details</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="information-table-supplier-wrapper">
+                    <h2>Supplier Information</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Product Name</th>
+                                <th>Product Number</th>
+                                <th>Payment</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Nike Red Shoe</td>
+                                <td>83212</td>
+                                <td>Card</td>
+                                <td class="success">Available</td>
+                                <td class="primary">Details</td>
+                            </tr>
+                            <tr>
+                                <td>Nike Blue Shoe</td>
+                                <td>83452</td>
+                                <td>Card</td>
+                                <td class="warning">Unavailable</td>
+                                <td class="primary">Details</td>
+                            </tr>
+                            <tr>
+                                <td>Nike White Shoe</td>
+                                <td>8342</td>
+                                <td>Cash</td>
+                                <td class="success">Available</td>
+                                <td class="primary">Details</td>
+                            </tr>
+                            <tr>
+                                <td>Nike Pink Shoe</td>
+                                <td>34512</td>
+                                <td>Card</td>
+                                <td class="danger">Low</td>
+                                <td class="primary">Details</td>
+                            </tr>
+                            <tr>
+                                <td>Nike Browm Shoe</td>
+                                <td>34512</td>
+                                <td>Cash</td>
+                                <td class="warning">Unavailable</td>
+                                <td class="primary">Details</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="information-table-employee-wrapper">
+                    <h2>Employee Information</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Product Name</th>
+                                <th>Product Number</th>
+                                <th>Payment</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Nike Red Shoe</td>
+                                <td>83212</td>
+                                <td>Card</td>
+                                <td class="success">Available</td>
+                                <td class="primary">Details</td>
+                            </tr>
+                            <tr>
+                                <td>Nike Blue Shoe</td>
+                                <td>83452</td>
+                                <td>Card</td>
+                                <td class="warning">Unavailable</td>
+                                <td class="primary">Details</td>
+                            </tr>
+                            <tr>
+                                <td>Nike White Shoe</td>
+                                <td>8342</td>
+                                <td>Cash</td>
+                                <td class="success">Available</td>
+                                <td class="primary">Details</td>
+                            </tr>
+                            <tr>
+                                <td>Nike Pink Shoe</td>
+                                <td>34512</td>
+                                <td>Card</td>
+                                <td class="danger">Low</td>
+                                <td class="primary">Details</td>
+                            </tr>
+                            <tr>
+                                <td>Nike Browm Shoe</td>
+                                <td>34512</td>
+                                <td>Cash</td>
+                                <td class="warning">Unavailable</td>
+                                <td class="primary">Details</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
         </main>
         <!-- end of middle section  -->
 
