@@ -1,6 +1,5 @@
 package lk.ijse.shoeshop.api;
 
-import lk.ijse.shoeshop.dto.CustomerDTO;
 import lk.ijse.shoeshop.dto.SupplierDTO;
 import lk.ijse.shoeshop.service.SupplierService;
 import lombok.RequiredArgsConstructor;

@@ -95,6 +95,39 @@ public class Mapping {
         return mapper.map(alertEntities, List.class);
     }
 
+    //Resupply Mapping
+    public ResupplyDTO toResupplyDTO(ResupplyEntity resupply){
+        return mapper.map(resupply, ResupplyDTO.class);
+    }
+    public ResupplyEntity toResupplyEntity(ResupplyDTO resupplyDTO){
+        return mapper.map(resupplyDTO, ResupplyEntity.class);
+    }
+    public List<ResupplyDTO> getResupplyDTOList(List<ResupplyEntity> resupplyEntities){
+        return mapper.map(resupplyEntities, List.class);
+    }
+
+    //Resupply Items Mapping
+    public ResupplyItemDTO toResupplyItemDTO(ResupplyItemEntity resupply){
+        return mapper.map(resupply, ResupplyItemDTO.class);
+    }
+    public ResupplyItemEntity toResupplyItemEntity(ResupplyItemDTO resupplyDTO){
+        return mapper.map(resupplyDTO, ResupplyItemEntity.class);
+    }
+    public List<ResupplyItemDTO> getResupplyItemDTOList(List<ResupplyItemEntity> resupplyEntities){
+        return mapper.map(resupplyEntities, List.class);
+    }
+
+    //Sale Mapping
+    public SaleDTO toSaleDTO(SaleEntity saleEntity){
+        return mapper.map(saleEntity, SaleDTO.class);
+    }
+    public SaleEntity toSaleEntity(SaleDTO saleDTO){
+        return mapper.map(saleDTO, SaleEntity.class);
+    }
+    public List<SaleDTO> getSaleList(List<SaleEntity> saleEntities){
+        return mapper.map(saleEntities, List.class);
+    }
+
     //String to date
     public static Date convertToDate(String date){
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
