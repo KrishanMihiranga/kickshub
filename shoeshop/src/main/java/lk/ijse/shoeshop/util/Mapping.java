@@ -15,42 +15,28 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class Mapping {
-    @Autowired
     private final ModelMapper mapper;
 
     //Employee Mapping
     public EmployeeDTO toEmployeeDTO(EmployeeEntity employee){
         return mapper.map(employee, EmployeeDTO.class);
     }
-    public EmployeeEntity toEmployeeEntity(EmployeeDTO employeeDTO){
-        return mapper.map(employeeDTO, EmployeeEntity.class);
-    }
-    public List<EmployeeDTO> getEmployeeDTOList(List<EmployeeEntity> employeeEntities){
-        return mapper.map(employeeEntities, List.class);
-    }
-
+    public EmployeeEntity toEmployeeEntity(EmployeeDTO employeeDTO){return mapper.map(employeeDTO, EmployeeEntity.class);}
+    public List<EmployeeDTO> getEmployeeDTOList(List<EmployeeEntity> employeeEntities){return mapper.map(employeeEntities, List.class);}
 
     //Supplier Mapping
     public SupplierDTO toSupplierDTO(SupplierEntity supplier){
         return mapper.map(supplier, SupplierDTO.class);
     }
-    public SupplierEntity toSupplierEntity(SupplierDTO supplierDTO){
-        return mapper.map(supplierDTO, SupplierEntity.class);
-    }
-    public List<SupplierDTO> getSupplierDTOList(List<SupplierEntity> supplierEntities){
-        return mapper.map(supplierEntities, List.class);
-    }
+    public SupplierEntity toSupplierEntity(SupplierDTO supplierDTO){return mapper.map(supplierDTO, SupplierEntity.class);}
+    public List<SupplierDTO> getSupplierDTOList(List<SupplierEntity> supplierEntities){return mapper.map(supplierEntities, List.class);}
 
     //Customer Mapping
     public CustomerDTO toCustomerDTO(CustomerEntity customer){
         return mapper.map(customer, CustomerDTO.class);
     }
-    public CustomerEntity toCustomerEntity(CustomerDTO customerDTO){
-        return mapper.map(customerDTO, CustomerEntity.class);
-    }
-    public List<CustomerDTO> getCustomerDTOList(List<CustomerEntity> customerEntities){
-        return mapper.map(customerEntities, List.class);
-    }
+    public CustomerEntity toCustomerEntity(CustomerDTO customerDTO){return mapper.map(customerDTO, CustomerEntity.class);}
+    public List<CustomerDTO> getCustomerDTOList(List<CustomerEntity> customerEntities){return mapper.map(customerEntities, List.class);}
 
     //Item Mapping
     public ItemDTO toItemDTO(ItemEntity item){
@@ -67,23 +53,15 @@ public class Mapping {
     public InventoryDTO toInventoryDTO(InventoryEntity inventory){
         return mapper.map(inventory, InventoryDTO.class);
     }
-    public InventoryEntity toInventoryEntity(InventoryDTO inventoryDTO){
-        return mapper.map(inventoryDTO, InventoryEntity.class);
-    }
-    public List<InventoryDTO> getInventoryDTOList(List<InventoryEntity> inventoryEntities){
-        return mapper.map(inventoryEntities, List.class);
-    }
+    public InventoryEntity toInventoryEntity(InventoryDTO inventoryDTO){return mapper.map(inventoryDTO, InventoryEntity.class);}
+    public List<InventoryDTO> getInventoryDTOList(List<InventoryEntity> inventoryEntities){return mapper.map(inventoryEntities, List.class);}
 
     //Item Image Mapping
     public ItemImageDTO toItemImageDTO(ItemImageEntity itemImage){
         return mapper.map(itemImage, ItemImageDTO.class);
     }
-    public ItemImageEntity toItemImageEntity(ItemImageDTO itemImageDTO){
-        return mapper.map(itemImageDTO, ItemImageEntity.class);
-    }
-    public List<ItemImageDTO> getItemImageDTOList(List<ItemImageEntity> itemImageEntities){
-        return mapper.map(itemImageEntities, List.class);
-    }
+    public ItemImageEntity toItemImageEntity(ItemImageDTO itemImageDTO){return mapper.map(itemImageDTO, ItemImageEntity.class);}
+    public List<ItemImageDTO> getItemImageDTOList(List<ItemImageEntity> itemImageEntities){return mapper.map(itemImageEntities, List.class);}
     //Alert Mapping
     public AlertDTO toAlertDTO(AlertEntity alert){
         return mapper.map(alert, AlertDTO.class);
@@ -91,31 +69,17 @@ public class Mapping {
     public AlertEntity toAlertEntity(AlertDTO alertDTO){
         return mapper.map(alertDTO, AlertEntity.class);
     }
-    public List<AlertDTO> getAlertDTOList(List<AlertEntity> alertEntities){
-        return mapper.map(alertEntities, List.class);
-    }
+    public List<AlertDTO> getAlertDTOList(List<AlertEntity> alertEntities){return mapper.map(alertEntities, List.class);}
 
     //Resupply Mapping
-    public ResupplyDTO toResupplyDTO(ResupplyEntity resupply){
-        return mapper.map(resupply, ResupplyDTO.class);
-    }
-    public ResupplyEntity toResupplyEntity(ResupplyDTO resupplyDTO){
-        return mapper.map(resupplyDTO, ResupplyEntity.class);
-    }
-    public List<ResupplyDTO> getResupplyDTOList(List<ResupplyEntity> resupplyEntities){
-        return mapper.map(resupplyEntities, List.class);
-    }
+    public ResupplyDTO toResupplyDTO(ResupplyEntity resupply){return mapper.map(resupply, ResupplyDTO.class);}
+    public ResupplyEntity toResupplyEntity(ResupplyDTO resupplyDTO){return mapper.map(resupplyDTO, ResupplyEntity.class);}
+    public List<ResupplyDTO> getResupplyDTOList(List<ResupplyEntity> resupplyEntities){return mapper.map(resupplyEntities, List.class);}
 
     //Resupply Items Mapping
-    public ResupplyItemDTO toResupplyItemDTO(ResupplyItemEntity resupply){
-        return mapper.map(resupply, ResupplyItemDTO.class);
-    }
-    public ResupplyItemEntity toResupplyItemEntity(ResupplyItemDTO resupplyDTO){
-        return mapper.map(resupplyDTO, ResupplyItemEntity.class);
-    }
-    public List<ResupplyItemDTO> getResupplyItemDTOList(List<ResupplyItemEntity> resupplyEntities){
-        return mapper.map(resupplyEntities, List.class);
-    }
+    public ResupplyItemDTO toResupplyItemDTO(ResupplyItemEntity resupply){return mapper.map(resupply, ResupplyItemDTO.class);}
+    public ResupplyItemEntity toResupplyItemEntity(ResupplyItemDTO resupplyDTO){return mapper.map(resupplyDTO, ResupplyItemEntity.class);}
+    public List<ResupplyItemDTO> getResupplyItemDTOList(List<ResupplyItemEntity> resupplyEntities){return mapper.map(resupplyEntities, List.class);}
 
     //Sale Mapping
     public SaleDTO toSaleDTO(SaleEntity saleEntity){
@@ -127,6 +91,15 @@ public class Mapping {
     public List<SaleDTO> getSaleList(List<SaleEntity> saleEntities){
         return mapper.map(saleEntities, List.class);
     }
+
+    //Refund Mapping
+    public RefundDTO toRefundDTO(RefundEntity refundEntity){
+        return mapper.map(refundEntity, RefundDTO.class);
+    }
+    public RefundEntity toRefundEntity(RefundDTO refundDTO){
+        return mapper.map(refundDTO, RefundEntity.class);
+    }
+    public List<RefundDTO> getRefundList(List<RefundEntity> refundEntities){return mapper.map(refundEntities, List.class);}
 
     //String to date
     public static Date convertToDate(String date){
