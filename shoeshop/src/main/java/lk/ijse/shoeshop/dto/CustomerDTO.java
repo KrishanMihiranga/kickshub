@@ -1,8 +1,5 @@
 package lk.ijse.shoeshop.dto;
 
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Null;
 import lk.ijse.shoeshop.entity.enums.CustomerLevel;

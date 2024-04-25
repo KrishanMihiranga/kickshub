@@ -5,11 +5,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class ItemImageDTO implements SuperDTO{
-    @Null(message = "Image Id is auto generated")
+public class AlertDTO implements SuperDTO{
+    @Null(message = "ID Auto Generated")
     private String id;
-    private String image;
+    private String message;
+    private Date date;
 }

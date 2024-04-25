@@ -84,6 +84,16 @@ public class Mapping {
     public List<ItemImageDTO> getItemImageDTOList(List<ItemImageEntity> itemImageEntities){
         return mapper.map(itemImageEntities, List.class);
     }
+    //Alert Mapping
+    public AlertDTO toAlertDTO(AlertEntity alert){
+        return mapper.map(alert, AlertDTO.class);
+    }
+    public AlertEntity toAlertEntity(AlertDTO alertDTO){
+        return mapper.map(alertDTO, AlertEntity.class);
+    }
+    public List<AlertDTO> getAlertDTOList(List<AlertEntity> alertEntities){
+        return mapper.map(alertEntities, List.class);
+    }
 
     //String to date
     public static Date convertToDate(String date){
