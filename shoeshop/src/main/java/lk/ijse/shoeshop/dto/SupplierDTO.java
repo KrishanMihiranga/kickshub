@@ -14,7 +14,7 @@ public class SupplierDTO implements SuperDTO{
     @Null(message = "Code is auto generated")
     private String code;
     @NotNull(message = "name cannot be null")
-    private String name;
+    private String supplierName;
     @NotNull(message = "category cannot be null")
     private SupplierCategories category;
     @NotNull(message = "addressNo cannot be null")

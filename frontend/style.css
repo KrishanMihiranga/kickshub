@@ -1313,3 +1313,25 @@ border: 2px solid var(--color-primary);
     text-align: left;
   }
 
+  .radio-wapper {
+    display: flex;
+}
+.radioG{
+    display: none;
+}
+.labelE {
+    padding: 10px 20px;
+    border-radius: var(--bordr-radius-2);
+    background: var(--color-light);
+    color: var(--color-info-dark);
+    cursor: pointer;
+    margin: 0 .3rem;
+}
+.labelE:hover{
+    background-color: #737fec83;
+    color: #fff;
+}
+.radioG:checked + label {
+    background: var(--color-primary);
+    color: #fff;
+}

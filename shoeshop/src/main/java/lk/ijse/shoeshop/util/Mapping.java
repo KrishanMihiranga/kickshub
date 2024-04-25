@@ -1,13 +1,10 @@
 package lk.ijse.shoeshop.util;
 
-import lk.ijse.shoeshop.dto.CustomerDTO;
-import lk.ijse.shoeshop.dto.EmployeeDTO;
-import lk.ijse.shoeshop.dto.SupplierDTO;
-import lk.ijse.shoeshop.entity.CustomerEntity;
-import lk.ijse.shoeshop.entity.EmployeeEntity;
-import lk.ijse.shoeshop.entity.SupplierEntity;
+import lk.ijse.shoeshop.dto.*;
+import lk.ijse.shoeshop.entity.*;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.text.ParseException;
@@ -18,6 +15,7 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class Mapping {
+    @Autowired
     private final ModelMapper mapper;
 
     //Employee Mapping
@@ -52,6 +50,39 @@ public class Mapping {
     }
     public List<CustomerDTO> getCustomerDTOList(List<CustomerEntity> customerEntities){
         return mapper.map(customerEntities, List.class);
+    }
+
+    //Item Mapping
+    public ItemDTO toItemDTO(ItemEntity item){
+        return mapper.map(item, ItemDTO.class);
+    }
+    public ItemEntity toItemEntity(ItemDTO itemDTO){
+        return mapper.map(itemDTO, ItemEntity.class);
+    }
+    public List<ItemDTO> getItemDTOList(List<ItemEntity> itemEntities){
+        return mapper.map(itemEntities, List.class);
+    }
+
+    //Inventory Mapping
+    public InventoryDTO toInventoryDTO(InventoryEntity inventory){
+        return mapper.map(inventory, InventoryDTO.class);
+    }
+    public InventoryEntity toInventoryEntity(InventoryDTO inventoryDTO){
+        return mapper.map(inventoryDTO, InventoryEntity.class);
+    }
+    public List<InventoryDTO> getInventoryDTOList(List<InventoryEntity> inventoryEntities){
+        return mapper.map(inventoryEntities, List.class);
+    }
+
+    //Item Image Mapping
+    public ItemImageDTO toItemImageDTO(ItemImageEntity itemImage){
+        return mapper.map(itemImage, ItemImageDTO.class);
+    }
+    public ItemImageEntity toItemImageEntity(ItemImageDTO itemImageDTO){
+        return mapper.map(itemImageDTO, ItemImageEntity.class);
+    }
+    public List<ItemImageDTO> getItemImageDTOList(List<ItemImageEntity> itemImageEntities){
+        return mapper.map(itemImageEntities, List.class);
     }
 
     //String to date

@@ -33,26 +33,26 @@ closeBtn.on('click', function() {
   sideMenu.css("display", "none");
 });
 
-//notification
-submitButton.on('click',()=>{
-  toast.addClass("active-noti");
-  progressNoti.addClass("active-noti");
-  setTimeout(()=>{
-    toast.removeClass("active-noti");
-  },5000);
+// //notification
+// submitButton.on('click',()=>{
+//   toast.addClass("active-noti");
+//   progressNoti.addClass("active-noti");
+//   setTimeout(()=>{
+//     toast.removeClass("active-noti");
+//   },5000);
 
-  setTimeout(()=>{
-    progressNoti.removeClass("active-noti");
-  },5300);
+//   setTimeout(()=>{
+//     progressNoti.removeClass("active-noti");
+//   },5300);
   
-});
-closeIcon.on('click',()=>{
-  toast.removeClass("active-noti");
+// });
+// closeIcon.on('click',()=>{
+//   toast.removeClass("active-noti");
 
-  setTimeout(()=>{
-    progressNoti.removeClass("active-noti");
-  },300);
-});
+//   setTimeout(()=>{
+//     progressNoti.removeClass("active-noti");
+//   },300);
+// });
 
 // Change theme
 themeToggler.on('click', function() {
@@ -99,7 +99,7 @@ $('#register-side-btn').on('click', function() {
   var $icon = $(this).find('.fa-angle-down');
   
   $dropdown.slideToggle();
-  $('.aside-sub-menu').not($dropdown).slideUp(); // Slide up other dropdowns
+  $('.aside-sub-menu').not($dropdown).slideUp();
   
   if ($icon.hasClass('rotate')) {
     $icon.removeClass('rotate');
@@ -285,20 +285,6 @@ const updateProgress = () => {
     $(nextButton).prop('disabled', false);
   }
 }
-
-//choose dp
-file.on('change', function() {
-  const choosedFile = this.files[0];
-  if (choosedFile) {
-      const reader = new FileReader();
-
-      reader.onload = function() {
-          img.attr('src', reader.result);
-      };
-
-      reader.readAsDataURL(choosedFile);
-  }
-});
 
 //open popup
 $('#save-changes-employee').on('click', () => {
@@ -551,7 +537,7 @@ const areaChartOptions = {
   
   //routes
   $('#add-employee').on('click', () => {
-    $('.charts, .recent-orders, .sales, .expenses, .income, #page-customer, #page-supplier, #update-profile').hide();
+    $('.charts, .recent-orders, .sales, .expenses, .income, #page-customer, #page-supplier, #update-profile, #information-page').hide();
     $('#page').show();
   });
   $('#dashboard-btn').on('click', () => {

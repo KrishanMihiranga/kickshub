@@ -11,23 +11,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
     <!-- styles -->
     <link rel="stylesheet" href="./style.css">
-    <link rel="stylesheet" href="./customNotification.css">
 </head>
 <body>
     <div class="overlay"></div>
-
-    <!-- <div class="toast">
-        <div class="toast-content">
-            <i class="fas fa-solid fa-check check-noti"></i>
-
-            <div class="noti-message">
-                <span class="noti-text noti-text-1">Success</span>
-                <span class="noti-text noti-text-2 text-muted">Your Changes has been saved</span>
-            </div>
-        </div>
-        <i class="fa-solid fa-xmark noti-close"></i>
-        <div class="progress-noti"></div>
-    </div> -->
 
     <div class="container">
         <!-- side-bar -->
@@ -273,46 +259,54 @@
                                 </div>
                                 <div>
                                     <label>First Name</label>
-                                    <input type="text" placeholder="e.g. Krishan">
+                                    <input type="text" placeholder="e.g. Krishan" id="reg-emp-fn">
                                 </div>
                                 <div>
                                     <label>Last Name</label>
-                                    <input type="text" placeholder="e.g. Mihiranga">
+                                    <input type="text" placeholder="e.g. Mihiranga" id="reg-emp-ln">
                                 </div>
                                 <div class="birth">
                                     <label>Date of Birth</label>
                                     <div class="grouping">
-                                        <input type="text" pattern="[0-9]*" name="day" value="" min="0" max="31" placeholder="DD">
-                                        <input type="text" pattern="[0-9]*" name="month" value="" min="0" max="12" placeholder="MM">
-                                        <input type="text" pattern="[0-9]*" name="year" value="" min="0" max="2050" placeholder="YYYY">
+                                        <input type="text" pattern="[0-9]*" name="day" min="0" max="31" placeholder="DD" id="reg-mp-date">
+                                        <input type="text" pattern="[0-9]*" name="month"min="0" max="12" placeholder="MM" id="reg-mp-month">
+                                        <input type="text" pattern="[0-9]*" name="year" min="0" max="2050" placeholder="YYYY" id="reg-mp-year">
                                     </div>
                                 </div>
                                 <div>
                                     <label>Gender</label>
-                                    <select name="gender" id="gender-employee">
-                                        <option value="MALE">Male</option>
-                                        <option value="FEMAlE">Female</option>
-                                        <option value="OTHER">Other</option>
-                                    </select>
+                                    <div class="radio-wapper radio-reg-emp-gender">
+                                        <input type="radio" id="em-g-m" name="gender" value="MALE" class="radioG">
+                                        <label class="labelE label-1" for="em-g-m">Male</label>
+                                        <input type="radio" id="em-g-f" name="gender" value="FEMALE" class="radioG">
+                                        <label class="labelE label-2" for="em-g-f">Female</label>
+                                        <input type="radio" id="em-g-o" name="gender" value="OTHER" class="radioG">
+                                        <label class="labelE label-3" for="em-g-o">Other</label>
+                                    </div>
                                 </div>
                                 <div>
                                     <label>Designation</label>
-                                    <select name="designation" id="designation-employee">
-                                        <option value="manager">Manager</option>
-                                        <option value="salesman">Salesman</option>
-                                    </select>
+                                    <div class="radio-wapper radio-reg-emp-designation">
+                                        <input type="radio" id="em-des-m" name="designation" value="Manager" class="radioG">
+                                        <label class="labelE label-1" for="em-des-m">Manager</label>
+                                        <input type="radio" id="em-des-s" name="designation" value="Salesman" class="radioG">
+                                        <label class="labelE label-2" for="em-des-s">Salesman</label>
+                                    </div>
                                 </div>
                                 <div>
                                     <label>Status</label>
-                                    <select name="status" id="status-employee">
-                                        <option value="married">Married</option>
-                                        <option value="unmarried">Unmarried</option>
-                                        <option value="student">Student</option>
-                                    </select>
+                                    <div class="radio-wapper radio-reg-emp-status">
+                                        <input type="radio" id="em-s-m" name="status" value="MARRIED" class="radioG">
+                                        <label class="labelE label-1" for="em-s-m">Married</label>
+                                        <input type="radio" id="em-s-um" name="status" value="UNMARRIED" class="radioG">
+                                        <label class="labelE label-2" for="em-s-um">Unmarried</label>
+                                        <input type="radio" id="em-s-std" name="status" value="STUDENT" class="radioG">
+                                        <label class="labelE label-3" for="em-s-std">Sudent</label>
+                                    </div>
                                 </div>
                                 <div>
                                     <label>Attached Branch</label>
-                                    <select name="branch" id="branch-employee">
+                                    <select name="branch" id="branch-employee" class="reg-employee-abranch">
                                         <option value="branch1">Branch 01</option>
                                         <option value="branch2">Branch 02</option>
                                         <option value="branch3">Branch 03</option>
@@ -327,7 +321,7 @@
                                 </div>
                                 <div>
                                     <label>Joined Date</label>
-                                    <input type="date">
+                                    <input type="date" id="reg-emp-jdate">
                                 </div>
                             </div>
                             <div class="form-two form-step">
@@ -335,30 +329,30 @@
                                 <h2>Contact Information</h2>
                                 <div>
                                     <label>Phone</label>
-                                    <input type="tel" placeholder="+94xxxxxxx29">
+                                    <input type="tel" placeholder="+94xxxxxxx29" id="reg-emp-phone">
                                 </div>
                                 <div>
                                     <label>Address</label>
-                                    <input type="text" placeholder="Street Address">
+                                    <input type="text" placeholder="Street Address" id="reg-emp-street">
                                 </div>
                                 <div>
-                                    <input type="text" placeholder="Suite, Building">
+                                    <input type="text" placeholder="Suite, Building" id="reg-emp-building">
                                 </div>
                                 <div>
                                     <label>City</label>
-                                    <input type="text" placeholder="city">
+                                    <input type="text" placeholder="city" id="reg-emp-city">
                                 </div>
                                 <div>
                                     <label>State</label>
-                                    <input type="text" placeholder="State / Province">
+                                    <input type="text" placeholder="State / Province" id="reg-emp-state">
                                 </div>
                                 <div>
                                     <label>Zip Code</label>
-                                    <input type="text" placeholder="Zip / Postal Code">
+                                    <input type="text" placeholder="Zip / Postal Code" id="reg-emp-zip">
                                 </div>
                                 <div>
                                     <label>Country</label>
-                                    <select name="country" id="country">
+                                    <select name="country" id="country" class="reg-emp-country">
                                         <option value="Sri Lanka">Sri Lanka</option>
                                     </select>
                                 </div>
@@ -368,22 +362,22 @@
                                 <h2>Security Information</h2>
                                 <div>
                                     <label>Email</label>
-                                    <input type="email" placeholder="Your email address">
+                                    <input type="email" placeholder="Your email address" id="reg-emp-email">
                                 </div>
                                 <div>
                                     <label>Guardian or Nominated Person</label>
-                                    <input type="text" placeholder="Guardian / Nominee Name">
+                                    <input type="text" placeholder="Guardian / Nominee Name" id="reg-emp-nominee">
                                 </div>
                                 <div>
                                     <label>Username</label>
-                                    <input type="text" placeholder="Username">
+                                    <input type="text" placeholder="Username"  id="reg-emp-username">
                                 </div>
                                 <div>
                                     <label>Password</label>
-                                    <input type="password" placeholder="Password">
+                                    <input type="password" placeholder="Password"  id="reg-emp-password">
                                 </div>
                                 <div>
-                                    <input type="password" placeholder="Confirm Password">
+                                    <input type="password" placeholder="Confirm Password"  id="reg-emp-confirmp">
                                 </div>
                                 <div class="checkbox">
                                     <input type="checkbox">
@@ -393,7 +387,7 @@
                             <div class="btn-group">
                                 <button type="button" class="btn-prev" disabled>Back</button>
                                 <button type="button" class="btn-next">Next Step</button>
-                                <button type="button" class="btn-submit">Submit</button>
+                                <button type="button" class="btn-submit" id="register-employee-btn">Submit</button>
                             </div>
                         </form>
                     </div>
@@ -429,31 +423,34 @@
                                 <p class="text-muted">Enter your personal information correctly</p>
                                 <div>
                                     <label>First Name</label>
-                                    <input type="text" placeholder="e.g. Krishan">
+                                    <input type="text" placeholder="e.g. Krishan" id="reg-cus-fn">
                                 </div>
                                 <div>
                                     <label>Last Name</label>
-                                    <input type="text" placeholder="e.g. Mihiranga">
+                                    <input type="text" placeholder="e.g. Mihiranga" id="reg-cus-ln">
                                 </div>
                                 <div class="birth">
                                     <label>Date of Birth</label>
                                     <div class="grouping">
-                                        <input type="text" pattern="[0-9]*" name="day" value="" min="0" max="31" placeholder="DD">
-                                        <input type="text" pattern="[0-9]*" name="month" value="" min="0" max="12" placeholder="MM">
-                                        <input type="text" pattern="[0-9]*" name="year" value="" min="0" max="2050" placeholder="YYYY">
+                                        <input type="text" pattern="[0-9]*" name="day" value="" min="0" max="31" placeholder="DD" id="reg-cus-day">
+                                        <input type="text" pattern="[0-9]*" name="month" value="" min="0" max="12" placeholder="MM" id="reg-cus-month">
+                                        <input type="text" pattern="[0-9]*" name="year" value="" min="0" max="2050" placeholder="YYYY" id="reg-cus-year">
                                     </div>
                                 </div>
                                 <div>
                                     <label>Gender</label>
-                                    <select name="gender" id="gender-customer">
-                                        <option value="MALE">Male</option>
-                                        <option value="FEMAlE">Female</option>
-                                        <option value="OTHER">Other</option>
-                                    </select>
+                                    <div class="radio-wapper reg-customer-radio-gender">
+                                        <input type="radio" id="cus-g-m" name="gender" value="MALE" class="radioG" checked>
+                                        <label class="labelE label-1" for="cus-g-m">Male</label>
+                                        <input type="radio" id="cus-g-f" name="gender" value="FEMALE" class="radioG">
+                                        <label class="labelE label-2" for="cus-g-f">Female</label>
+                                        <input type="radio" id="cus-g-o" name="gender" value="OTHER" class="radioG">
+                                        <label class="labelE label-3" for="cus-g-o">Other</label>
+                                    </div>
                                 </div>
                                 <div>
                                     <label>Joined Date as a Loyalty Customer</label>
-                                    <input type="date">
+                                    <input type="date" id="cus-reg-joined-loyal">
                                 </div>
                             </div>
                             <div class="form-two form-stepCustomer">
@@ -461,26 +458,26 @@
                                 <h2>Contact Information</h2>
                                 <div>
                                     <label>Phone</label>
-                                    <input type="tel" placeholder="+94xxxxxxx29">
+                                    <input type="tel" placeholder="+94xxxxxxx29" id="cus-reg-phone">
                                 </div>
                                 <div>
                                     <label>Address</label>
-                                    <input type="text" placeholder="Street Address">
+                                    <input type="text" placeholder="Street Address" id="cus-reg-street">
                                 </div>
                                 <div>
-                                    <input type="text" placeholder="Suite, Building">
+                                    <input type="text" placeholder="Suite, Building" id="cus-reg-building">
                                 </div>
                                 <div>
                                     <label>City</label>
-                                    <input type="text" placeholder="city">
+                                    <input type="text" placeholder="city" id="cus-reg-city">
                                 </div>
                                 <div>
                                     <label>State</label>
-                                    <input type="text" placeholder="State / Province">
+                                    <input type="text" placeholder="State / Province" id="cus-reg-state">
                                 </div>
                                 <div>
                                     <label>Zip Code</label>
-                                    <input type="text" placeholder="Zip / Postal Code">
+                                    <input type="text" placeholder="Zip / Postal Code"  id="cus-reg-zip">
                                 </div>
                                 <div>
                                     <label>Country</label>
@@ -494,7 +491,7 @@
                                 <h2>Security Information</h2>
                                 <div>
                                     <label>Email</label>
-                                    <input type="email" placeholder="Your email address">
+                                    <input type="email" placeholder="Your email address" id="reg-cus-email">
                                 </div>
                                 <div class="checkbox">
                                     <input type="checkbox">
@@ -504,7 +501,7 @@
                             <div class="btn-group">
                                 <button type="button" class="btn-prev" disabled>Back</button>
                                 <button type="button" class="btn-next">Next Step</button>
-                                <button type="button" class="btn-submit">Submit</button>
+                                <button type="button" class="btn-submit" id="reg-cus-submit">Submit</button>
                             </div>
                         </form>
                     </div>
@@ -540,18 +537,20 @@
                                 <p class="text-muted">Enter your personal information correctly</p>
                                 <div>
                                     <label>First Name</label>
-                                    <input type="text" placeholder="e.g. Krishan">
+                                    <input type="text" placeholder="e.g. Krishan" id="reg-sup-fn">
                                 </div>
                                 <div>
                                     <label>Last Name</label>
-                                    <input type="text" placeholder="e.g. Mihiranga">
+                                    <input type="text" placeholder="e.g. Mihiranga" id="reg-sup-ln">
                                 </div>
                                 <div>
                                     <label>Category</label>
-                                    <select name="Category" id="catgory-supplier">
-                                        <option value="Local">Local</option>
-                                        <option value="International">International</option>
-                                    </select>
+                                    <div class="radio-wapper" id="reg-sup-radio-cat">
+                                        <input type="radio" id="sup-cat-l" name="category" value="LOCAL" class="radioG" checked>
+                                        <label class="labelE label-1" for="sup-cat-l">Local</label>
+                                        <input type="radio" id="sup-cat-Int" name="category" value="INTERNATIONAL" class="radioG">
+                                        <label class="labelE label-2" for="sup-cat-Int">International</label>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-two form-stepSupplier">
@@ -652,26 +651,34 @@
                                 </div>
                                 <div>
                                     <label>Gender</label>
-                                    <select name="gender">
-                                        <option value="MALE">Male</option>
-                                        <option value="FEMAlE">Female</option>
-                                        <option value="OTHER">Other</option>
-                                    </select>
+                                    <div class="radio-wapper">
+                                        <input type="radio" id="emp-g-m" name="gender" value="MALE" class="radioG" checked>
+                                        <label class="labelE label-1" for="emp-g-m">Male</label>
+                                        <input type="radio" id="emp-g-f" name="gender" value="FEMALE" class="radioG">
+                                        <label class="labelE label-2" for="emp-g-f">Female</label>
+                                        <input type="radio" id="emp-g-o" name="gender" value="OTHER" class="radioG">
+                                        <label class="labelE label-3" for="emp-g-o">Other</label>
+                                    </div>
                                 </div>
                                 <div>
                                     <label>Designation</label>
-                                    <select name="designation">
-                                        <option value="manager">Manager</option>
-                                        <option value="salesman">Salesman</option>
-                                    </select>
+                                    <div class="radio-wapper">
+                                        <input type="radio" id="emp-des-m" name="designation" value="Manager" class="radioG" checked>
+                                        <label class="labelE label-1" for="emp-des-m">Manager</label>
+                                        <input type="radio" id="emp-des-s" name="designation" value="Salesman" class="radioG">
+                                        <label class="labelE label-2" for="emp-des-s">Salesman</label>
+                                    </div>
                                 </div>
                                 <div>
                                     <label>Status</label>
-                                    <select name="status">
-                                        <option value="married">Married</option>
-                                        <option value="unmarried">Unmarried</option>
-                                        <option value="student">Student</option>
-                                    </select>
+                                    <div class="radio-wapper">
+                                        <input type="radio" id="emp-s-m" name="status" value="MARRIED" class="radioG" checked>
+                                        <label class="labelE label-1" for="emp-s-m">Married</label>
+                                        <input type="radio" id="emp-s-um" name="status" value="UNMARRIED" class="radioG">
+                                        <label class="labelE label-2" for="emp-s-um">Unmarried</label>
+                                        <input type="radio" id="emp-s-std" name="status" value="STUDENT" class="radioG">
+                                        <label class="labelE label-3" for="emp-s-std">Sudent</label>
+                                    </div>
                                 </div>
                                 <div>
                                     <label>Attached Branch</label>
@@ -785,7 +792,7 @@
                     </div>
                 </div>
             </div>
-
+            <!-- ******** information page ******** -->
             <div id="information-page">
                 <div>
                     <h2>Business Information</h2>
@@ -1084,6 +1091,9 @@
     <!-- apex-charts  -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.49.0/apexcharts.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
     <script src="./script.js"></script>
+    <script src="./employeeController.js"></script>
+    <script src="./customerController.js"></script>
 </body>
 </html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <input type="file" id="image-input">
+    <img id="preview-image" src="#" alt="Preview Image">
+
+
+
+    <script>
+        // Base64 string
+        var base64String = "77+977+977+977+9ABBKRklGAAEBAAABAAEAAO+/ve+/vQBDAAMCAgMCAgMDAwMEAAfO+/ve+/vSrvv703EELvv73vv70vaO+/ve+/vT3ClDUdAu+/vVLvv70w77+9Hu+/vSBWYhDvv71xJ++/vT9jU8iS3aLvv73vv70c77+977+9WFDvv70rBuGWsA/vv71rYO+/vUNW77+977+9OO+/ve+/vTMI77+977+9N++/vRMk77+9Ze+/vQheAu+/ve+/ve+/vXdQ77+9au+/ve+/vSnvv70sLmQF77+9Yu+/vVvvv719HiFaO3Hvv73vv73vv73vv70I77+9A++/vQ9oaFl9OBTvv73vv70S77+977+977+9QFJS2avvv70k77+9Ok1Ya++/vRJ31aPvv73vv73vv73vv70=";
+
+        // Create image element
+        var img = document.createElement('img');
+
+        // Set image source to Base64 string
+        img.src = 'data:image/jpeg;base64,' + base64String;
+
+        // Append image to container
+        document.getElementById('imageContainer').appendChild(img);
+    </script>
+</body>
+</html>

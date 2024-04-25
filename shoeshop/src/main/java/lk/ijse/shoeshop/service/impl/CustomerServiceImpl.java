@@ -2,6 +2,7 @@ package lk.ijse.shoeshop.service.impl;
 
 import jakarta.transaction.Transactional;
 import lk.ijse.shoeshop.dto.CustomerDTO;
+import lk.ijse.shoeshop.entity.enums.CustomerLevel;
 import lk.ijse.shoeshop.repo.CustomerRepo;
 import lk.ijse.shoeshop.service.CustomerService;
 import lk.ijse.shoeshop.util.Mapping;
@@ -20,6 +21,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public CustomerDTO saveCustomer(CustomerDTO customerDTO) {
         customerDTO.setCustomerCode(UtilMatters.generateId());
+        customerDTO.setLevel(CustomerLevel.NEW);
         return mapping.toCustomerDTO(customerRepo.save(mapping.toCustomerEntity(customerDTO)));
     }
 

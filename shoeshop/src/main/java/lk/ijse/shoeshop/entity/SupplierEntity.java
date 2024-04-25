@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class SupplierEntity {
     @Id
     private String code;
-    private String name;
+    private String supplierName;
     @Enumerated(EnumType.STRING)
     private SupplierCategories category;
     private String addressNo;
