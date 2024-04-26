@@ -2,10 +2,12 @@
 /* root  */
 :root{
     --color-primary: #7380ec;
+    --color-primary-light: #bfc5f7;
     --color-secondary: #a29bfe;
     --color-btn-dark:#5560c2;
     --color-btn-light:#757fec;
     --color-danger: #ff7782;
+    --color-danger-hover: #d64955;
     --color-success: #41f1b6;
     --color-warning: #ffbb55;
     --color-white: #fff;
@@ -1334,4 +1336,370 @@ border: 2px solid var(--color-primary);
 .radioG:checked + label {
     background: var(--color-primary);
     color: #fff;
+}
+
+
+/* ****** Refund page ****** */
+#refund-page{
+    padding: var(--card-padding);
+    margin-top: 1.4rem;
+    border-radius: var(--bordr-radius-3);
+    background: var(--color-white);
+}
+#recent-orders-refund,
+#refund-table-orders-wrapper,
+#refund-table-orders-wrapper > table{
+    width: 100%;
+}
+#refund-table-orders-wrapper > table{
+    margin-top: 2rem;
+}
+#refund-table-orders-wrapper > table th{
+    text-align: left;
+}
+
+/* search  */
+  .container-search{
+    margin-top: 3rem;
+  }
+  .search {
+    position: relative;
+    width: 3rem;
+    height: 3rem;
+    background-color: var(--color-white);
+    box-shadow: 0 4px 24px hsla(222, 68%, 12%, 0.1);
+    border-radius: 4rem;
+    padding: 10px;
+    overflow: hidden;
+    transition: width 0.5s cubic-bezier(0.9, 0, 0.3, 0.9);
+  }
+  .search__input {
+    border: none;
+    outline: none;
+    width: calc(100% - 64px);
+    height: 100%;
+    border-radius: 4rem;
+    padding-left: 14px;
+    font-family: var(--color-primary);
+    font-size: var(1rem);
+    font-weight: 500;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1.5s;
+  }
+  .search__input:-webkit-autofill {
+    box-shadow: 0 0 0 100px var(--color-white) inset;
+  }
+  .search__button {
+    width: 3rem;
+    height: 3rem;
+    background-color: var(--color-primary);
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition: transform 0.6s cubic-bezier(0.9, 0, 0.3, 0.9);
+  }
+  .search__icon, .search__close {
+    color: var(--white-color);
+    font-size: 1.5rem;
+    position: absolute;
+    transition: opacity 0.5s cubic-bezier(0.9, 0, 0.3, 0.9);
+  }
+  .search__close {
+    opacity: 0;
+  }
+  
+  /* Search animated */
+  .show-search {
+    width: 100%;
+  }
+  .show-search .search__input {
+    opacity: 1;
+    pointer-events: initial;
+  }
+  .show-search .search__button {
+    transform: rotate(90deg);
+  }
+  .show-search .search__icon {
+    opacity: 0;
+  }
+  .show-search .search__close {
+    opacity: 1;
+  }
+
+  @media all and (min-width: 576px){
+    .show-search {
+      width: 450px;
+    }
+  }
+  /* ////////////  */
+  #refund-table-orders-wrapper{
+    margin-top: 1rem;
+    padding: 3rem;
+  }
+  #recent-orders-refund-page-details{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    gap: 5rem;
+  }
+  .refund-page-right p{
+    margin: .5rem 0;
+  }
+  .refund-page-right p:first-child{
+    color: var(--color-primary);
+  }
+  .refund-page-color{
+    border: 1px solid var(--color-info-dark) ;
+    width: 2.8rem;
+    height: 2.8rem;
+    border-radius: 50%;
+  }
+  .radio-ref{
+    margin-bottom: 1rem;
+  }
+  .refund-page-right>small{
+    color: var(--color-danger);
+  }
+  .refund-page-right-cs{
+    display: flex;
+    gap: 4rem;
+  }
+  .refund-page-right hr{
+    background-color: var(--color-info-dark);
+    width: 90%;
+    height: 1px;
+    margin: 1rem auto;
+    opacity: .3;
+  }
+  .refund-page-right-cusDetails{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: .5rem;
+    margin-top: 1rem;
+  }
+  #refund-page-right-cusName,
+  #refund-page-right-date{
+    background-color: var(--color-light);
+    padding: 2px 6px;
+    border-radius: 10px;
+  }
+  .radio-ref > input{
+    background-color: var(--color-primary);
+  }
+  #refund-page-refund-btn,#recent-orders-back{
+    width: 8rem;
+    height: 2.5rem;
+    border-radius: var(--bordr-radius-2);
+    background: var(--color-danger);
+    color: #fff;
+    cursor: pointer;
+    margin: 2rem 0;
+    transition: .3s all ease;
+  }
+  #recent-orders-back{
+    background-color: var(--color-primary);
+  }
+  #refund-page-refund-btn:hover{
+    background: var(--color-danger-hover);
+  }
+  @media all and( max-width:1290px ) {
+    #recent-orders-refund-page-details{
+        display: flex;
+        flex-direction: column;
+    }
+  }
+
+  /* tables  */
+  table tbody tr td{
+    transition: all .3s ease;
+  }
+  
+  table tbody tr:hover{
+    background-color: var(--color-primary-light);
+    cursor: pointer;
+  }
+  table tbody tr:hover td{
+    color: #181a1e;
+    scale: .9;
+  }
+  table tbody tr:hover td:first-child{
+    border-radius: 10px 0 0 10px;
+  }
+  table tbody tr:hover td:last-child{
+    border-radius: 0 10px 10px 0;
+  }
+  table tbody tr td{
+    padding: .5rem;
+  }
+
+  /* ******** item page ********* */
+
+  #add-item-page{
+    padding: var(--card-padding);
+    margin-top: 1.4rem;
+    border-radius: var(--bordr-radius-3);
+    background: var(--color-white); padding: var(--card-padding);
+    padding: 3rem 3rem;
+    border-radius: var(--bordr-radius-3);
+    background: var(--color-white);
+  }
+  .add-item-container{
+    margin-top: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .add-item-container-left{
+    width: 50%;
+    display: grid;
+    place-items: center;
+    position: relative;
+    bottom: 8rem;
+  }
+  .add-item-container-right{
+    width: 50%;
+  }
+  .container-reg-item-image {
+	max-width: 400px;
+	width: 100%;
+	background: #fff;
+	padding: 30px;
+	border-radius: 30px;
+}
+.img-area {
+	position: relative;
+	width: 100%;
+	height: 240px;
+	background: var(--color-light);
+	margin-bottom: 30px;
+	border-radius: 15px;
+	overflow: hidden;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+.img-area .icon {
+	font-size: 100px;
+}
+.img-area h3 {
+	font-size: 20px;
+	font-weight: 500;
+	margin-bottom: 6px;
+}
+.img-area p {
+	color: #999;
+}
+.img-area p span {
+	font-weight: 600;
+}
+.img-area img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center;
+	z-index: 100;
+}
+.img-area::before {
+	content: attr(data-img);
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, .5);
+	color: #fff;
+	font-weight: 500;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	pointer-events: none;
+	opacity: 0;
+	transition: all .3s ease;
+	z-index: 200;
+}
+.img-area.active:hover::before {
+	opacity: 1;
+}
+.select-image {
+	display: block;
+	width: 100%;
+	padding: 16px 0;
+	border-radius: 15px;
+	background: var(--color-primary);
+	color: #fff;
+	font-weight: 500;
+	font-size: 16px;
+	border: none;
+	cursor: pointer;
+	transition: all .3s ease;
+}
+.select-image:hover {
+	background: var(--color-btn-dark);
+}
+
+.add-item-container-right form :where(input,select) {
+    height: 40px;
+    padding: 0 1rem;
+    border-radius: var(--bordr-radius-2);
+    outline-color: var(--color-secondary);
+    border: 1px solid var(--color-dark);
+    background-color: transparent;
+    appearance: auto;
+}
+.add-item-container-right form > div > div:not(.checkbox) {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+}
+.reg-item-price >div{
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 1rem;
+}
+.reg-item-price >div>div{
+    display: flex;
+    flex-direction: column;
+}
+.reg-item-btn-wrapper{
+    display: flex;
+    justify-content: end;
+}
+.reg-item-btn-wrapper button{
+    background: var(--color-primary);
+    color: #fff;
+    height: 2.8rem;
+    width: 8rem;
+    border-radius: var(--bordr-radius-3);
+    cursor: pointer;
+    transition: all .3s ease;
+}
+.reg-item-btn-wrapper button:hover{
+    background: var(--color-btn-dark);
+}
+.reg-item-supplier-code span{
+    background: var(--color-light);
+    padding: .3rem .8rem;
+    border-radius: var(--bordr-radius-3);
+}
+.reg-item-supplier-code{
+    margin: 1rem 0;
+}
+@media all and (max-width: 1350px) {
+    .add-item-container {
+        flex-direction: column;
+    }
 }

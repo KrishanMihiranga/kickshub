@@ -9,6 +9,8 @@
     <!-- Material icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <!-- styles -->
     <link rel="stylesheet" href="./style.css">
 </head>
@@ -42,11 +44,20 @@
                         <div id="add-employee"><h3 class="text-muted">Employee</h3></div>
                         <div id="add-customer"><h3 class="text-muted">Customer</h3></div>
                         <div id="add-supplier"><h3 class="text-muted">Supplier</h3></div>
+                        <div id="add-item-btn"><h3 class="text-muted">Item</h3></div>
                     </div>
                 </div>
                 <a href="#" id="info-log">
                     <span class="material-icons-sharp">receipt_long</span>
                     <h3>info Log</h3>
+                </a>
+                <a href="#" id="refund-btn">
+                    <span class="material-icons-sharp">report_gmailerrorred</span>
+                    <h3>Refund</h3>
+                </a>
+                <a href="#">
+                    <span class="material-icons-sharp">add</span>
+                    <h3>Add Product</h3>
                 </a>
                 <a href="#">
                     <span class="material-icons-sharp">insights</span>
@@ -68,10 +79,6 @@
                 <a href="#">
                     <span class="material-icons-sharp">settings</span>
                     <h3>Settings</h3>
-                </a>
-                <a href="#">
-                    <span class="material-icons-sharp">add</span>
-                    <h3>Add Product</h3>
                 </a>
                 <a href="#">
                     <span class="material-icons-sharp">logout</span>
@@ -955,6 +962,234 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>
+            </div>
+            <!-- ******** Refund page ******** -->
+            <div id="refund-page">
+                <div id="recent-orders-refund">
+                    <div id="refund-table-orders-wrapper">
+                        <h2>Recent Orders</h2>
+                        <p>Transactions Done within 3 days</p>
+                        <div class="container-search">
+                            <form action="" class="search" id="search-bar">
+                                <input type="search" placeholder="Type something..." name="q" class="search__input">
+                    
+                                <div class="search__button" id="search-button">
+                                    <i class="ri-search-2-line search__icon"></i>
+                                    <i class="ri-close-line search__close"></i>
+                                </div>
+                            </form>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Product Name</th>
+                                    <th>Product Number</th>
+                                    <th>Payment</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Nike Red Shoe</td>
+                                    <td>83212</td>
+                                    <td>Card</td>
+                                    <td class="success">Available</td>
+                                    <td class="primary">Details</td>
+                                </tr>
+                                <tr>
+                                    <td>Nike Blue Shoe</td>
+                                    <td>83452</td>
+                                    <td>Card</td>
+                                    <td class="warning">Unavailable</td>
+                                    <td class="primary">Details</td>
+                                </tr>
+                                <tr>
+                                    <td>Nike White Shoe</td>
+                                    <td>8342</td>
+                                    <td>Cash</td>
+                                    <td class="success">Available</td>
+                                    <td class="primary">Details</td>
+                                </tr>
+                                <tr>
+                                    <td>Nike Pink Shoe</td>
+                                    <td>34512</td>
+                                    <td>Card</td>
+                                    <td class="danger">Low</td>
+                                    <td class="primary">Details</td>
+                                </tr>
+                                <tr>
+                                    <td>Nike Browm Shoe</td>
+                                    <td>34512</td>
+                                    <td>Cash</td>
+                                    <td class="warning">Unavailable</td>
+                                    <td class="primary">Details</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <button id="nexttest">next</button>
+                </div>
+                <div id="recent-orders-refund-page">
+                    <button id="recent-orders-back">back</button>
+                    <h2>Refund Payments</h2>
+                    <p>Money back transaction</p>
+                    <div id="recent-orders-refund-page-details">
+                        <div class="refund-page-left">
+                            <img src="./images/shoe-nike.png" alt="image-refund">
+                        </div>
+                        <div class="refund-page-right">
+                            <p>HEADPHONES</p>
+                            <h1>Beats EP</h1>
+                            <p>The preferred choice of a vast range of acclaimed DJs. Punchy, bass-focused sound and high isolation. Sturdy headband and on-ear cushions suitable for live performance</p>
+                            <hr>
+                            <div class="refund-page-right-cs">
+                             <div>
+                                <p>Color</p>
+                                <div class="refund-page-color"></div>
+                             </div>   
+                                <div>
+                                    <p>Size</p>
+                                    <div class="radio-wapper radio-ref">
+                                        <input type="radio" id="ref-g-m"  class="radioG"checked>
+                                        <label class="labelE label-1" for="ref-g-m">Male</label>
+                                    </div>
+                             </div>
+                             <div>
+                                <p>Qty</p>
+                                <div class="radio-wapper radio-ref">
+                                    <input type="radio" id="ref-g-s"  class="radioref" checked>
+                                    <label class="labelE label-1" for="ref-g-s">Male</label>
+                                </div>
+                         </div>
+                            </div>
+                        
+                            <small>Refunds can't be undone</small>
+                            
+                            <h2>148$</h2>
+                            <hr>
+                            <p>Customer Details</p>
+                            <div class="refund-page-right-cusDetails">
+                                <div id="refund-page-right-cusName">
+                                    <span>Krishan Mihiranga</span>
+                                </div>
+                                <div id="refund-page-right-date">
+                                    <span>2024-04-20</span>
+                                </div>
+                            </div>
+                            <button id="refund-page-refund-btn">Open Refund</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ******** Item page ********  -->
+            <div id="add-item-page">
+                <h2>Item Information</h2>
+                <p class="text-muted">Enter item information correctly</p>
+
+                <div class="add-item-container">
+                    <div class="add-item-container-left">
+                        <div class="container-reg-item-image">
+                            <input type="file" id="file" accept="image/*" hidden>
+                            <div class="img-area" data-img="">
+                                <i class='bx bxs-cloud-upload icon'></i>
+                                <h3>Upload Image</h3>
+                                <p>Image size must be less than <span>2MB</span></p>
+                            </div>
+                            <button class="select-image">Select Image</button>
+                        </div>
+                    </div>
+                    <div class="add-item-container-right">
+                        <form>
+                            <div class="form-one form-stepCustomer">
+                                <div>
+                                    <label>Item Name</label>
+                                    <input type="text" placeholder="Enter Item Name">
+                                </div>
+                                <div>
+                                    <label>Item Category</label>
+                                    <select name="category" class="reg-item-branch">
+                                        <option value="branch1">Branch 01</option>
+                                        <option value="branch2">Branch 02</option>
+                                        <option value="branch3">Branch 03</option>
+                                        <option value="branch4">Branch 04</option>
+                                        <option value="branch5">Branch 05</option>
+                                        <option value="branch6">Branch 06</option>
+                                        <option value="branch7">Branch 07</option>
+                                        <option value="branch8">Branch 08</option>
+                                        <option value="branch9">Branch 09</option>
+                                        <option value="branch10">Branch 10</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label>Size</label>
+                                    <div class="radio-wapper reg-item-radio-size">
+
+                                        <input type="radio" id="reg-i-s5" name="size" value="SIZE_5" class="radioG" >
+                                        <label class="labelE label-1" for="reg-i-s5">5</label>
+                                        <input type="radio" id="reg-i-s6" name="size" value="SIZE_6" class="radioG" >
+                                        <label class="labelE label-2" for="reg-i-s6">6</label>
+                                        <input type="radio" id="reg-i-s7" name="size" value="SIZE_7" class="radioG" >
+                                        <label class="labelE label-3" for="reg-i-s7">7</label>
+                                        <input type="radio" id="reg-i-s8" name="size" value="SIZE_8" class="radioG" >
+                                        <label class="labelE label-4" for="reg-i-s8">8</label>
+                                        <input type="radio" id="reg-i-s9" name="size" value="SIZE_9" class="radioG" >
+                                        <label class="labelE label-5" for="reg-i-s9">9</label>
+                                        <input type="radio" id="reg-i-s10" name="size" value="SIZE_10" class="radioG" >
+                                        <label class="labelE label-6" for="reg-i-s10">10</label>
+                                        <input type="radio" id="reg-i-s11" name="size" value="SIZE_11" class="radioG" >
+                                        <label class="labelE label-7" for="reg-i-s11">11</label>
+                                        <input type="radio" id="reg-i-s12" name="size" value="SIZE_12" class="radioG" >
+                                        <label class="labelE label-8" for="reg-i-s12">12</label>
+                                        
+                                    </div>
+                                </div>
+                                <div>
+                                    <label>Supplier</label>
+                                    <div class="reg-item-supplier-code">
+                                        <span>xxxxxxxxxx-xxxxxxxxx-xxxxx</span>
+                                    </div>
+                                    <select name="suppliers" class="reg-item-supplier">
+                                        <option value="branch1">Branch 01</option>
+                                        <option value="branch2">Branch 02</option>
+                                        <option value="branch3">Branch 03</option>
+                                        <option value="branch4">Branch 04</option>
+                                        <option value="branch5">Branch 05</option>
+                                        <option value="branch6">Branch 06</option>
+                                        <option value="branch7">Branch 07</option>
+                                        <option value="branch8">Branch 08</option>
+                                        <option value="branch9">Branch 09</option>
+                                        <option value="branch10">Branch 10</option>
+                                    </select>
+                                </div>
+                                <div class="reg-item-price">
+                                    <div>
+                                        <div>
+                                            <label>Purchase Price</label>
+                                            <input type="text" placeholder="Enter Price">
+                                        </div>
+                                        <div>
+                                            <label>Selling Price</label>
+                                            <input type="text" placeholder="Enter Price">
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div>
+                                            <label>Excepted Profit</label>
+                                            <input type="text" placeholder="Enter Price">
+                                        </div>
+                                        <div>
+                                            <label>Profit Margin</label>
+                                            <input type="text" placeholder="Enter margin %">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="reg-item-btn-wrapper">
+                                <button id="reg-item-btn">Register</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
 

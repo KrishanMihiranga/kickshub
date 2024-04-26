@@ -62,8 +62,8 @@ themeToggler.on('click', function() {
 });
 
 //swap active class
-$('#dashboard-btn, #add-employee, #add-customer, #add-supplier,#edit-profile, #info-log, #register-side-btn').click(function() {
-  $('#dashboard-btn, #add-employee, #add-customer, #add-supplier,#edit-profile, #info-log, #register-side-btn').removeClass('active');
+$('#dashboard-btn, #add-employee, #add-customer, #add-supplier,#edit-profile, #info-log, #register-side-btn, #refund-btn, #add-item-btn').click(function() {
+  $('#dashboard-btn, #add-employee, #add-customer, #add-supplier,#edit-profile, #info-log, #register-side-btn, #refund-btn, #add-item-btn').removeClass('active');
   $(this).addClass('active');
 });
 
@@ -114,7 +114,8 @@ $(document.body).on('click', function(event) {
     $('#register-side-btn .fa-angle-down').removeClass('rotate');
   }
 });
-
+$('.aside-sub-menu').slideUp();
+    $('#register-side-btn .fa-angle-down').removeClass('rotate');
 
 //copy id
 $('.update-profile-user-unique-code-copy').click(function(){
@@ -134,6 +135,40 @@ $('.update-profile-user-unique-code-copy').click(function(){
       $this.removeClass('active-copy');
   }, 3000);
 });
+
+
+//search button 
+const toggleSearch = (search, button) => {
+  $(`#${button}`).on('click', () => {
+      $(`#${search}`).toggleClass('show-search');
+  });
+};
+
+toggleSearch('search-bar', 'search-button');
+
+//reg item image 
+$('.select-image').on('click', function () {
+  $('#file').click();
+});
+
+$('#file').on('change', function () {
+  const image = this.files[0];
+  if (image.size < 2000000) {
+      const reader = new FileReader();
+      reader.onload = function () {
+          $('.img-area img').remove();
+          const imgUrl = reader.result;
+          const img = $('<img>');
+          img.attr('src', imgUrl);
+          $('.img-area').append(img);
+          $('.img-area').addClass('active').attr('data-img', image.name);
+      };
+      reader.readAsDataURL(image);
+  } else {
+      alert("Image size more than 2MB");
+  }
+});
+
 
 
 
@@ -287,8 +322,8 @@ const updateProgress = () => {
 }
 
 //open popup
-$('#save-changes-employee').on('click', () => {
-  console.log("hola");
+
+$('#save-changes-employee,#reg-item-btn,#refund-page-refund-btn').on('click', () => {
   $('.popup').addClass("active-popup");
   $('.overlay').addClass("active-overlay"); // Add class to overlay
 });
@@ -537,26 +572,43 @@ const areaChartOptions = {
   
   //routes
   $('#add-employee').on('click', () => {
-    $('.charts, .recent-orders, .sales, .expenses, .income, #page-customer, #page-supplier, #update-profile, #information-page').hide();
+    $('.charts, .recent-orders, .sales, .expenses, .income, #page-customer, #page-supplier, #update-profile, #information-page, #refund-page, #add-item-page').hide();
     $('#page').show();
   });
   $('#dashboard-btn').on('click', () => {
     $('.charts, .recent-orders, .sales, .expenses, .income').show();
-    $('#page, #page-customer, #page-supplier, #update-profile, #information-page').hide();
+    $('#page, #page-customer, #page-supplier, #update-profile, #information-page, #refund-page, #add-item-page').hide();
   });
   $('#add-customer').on('click', () => {
-    $('.charts, .recent-orders, .sales, .expenses, .income, #page, #page-supplier, #update-profile, #information-page').hide();
+    $('.charts, .recent-orders, .sales, .expenses, .income, #page, #page-supplier, #update-profile, #information-page, #refund-page, #add-item-page').hide();
     $('#page-customer').show();
   });
   $('#add-supplier').on('click', () => {
-    $('.charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer, #update-profile, #information-page').hide();
+    $('.charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer, #update-profile, #information-page, #refund-page, #add-item-page').hide();
     $('#page-supplier').show();
   });
   $('#dashboard-photo').on('click', () => {
-    $('.charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer,#page-supplier, #information-page').hide();
+    $('.charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer,#page-supplier, #information-page, #refund-page, #add-item-page').hide();
     $('#update-profile').show();
   });
   $('#info-log').on('click', () => {
-    $('.charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer,#page-supplier, #update-profile').hide();
+    $('.charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer,#page-supplier, #update-profile, #refund-page, #add-item-page').hide();
     $('#information-page').show();
   });
+  $('#refund-btn').on('click', () => {
+    $('.charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer,#page-supplier, #update-profile, #information-page, #recent-orders-refund-page, #add-item-page').hide();
+    $('#refund-page').show();
+  });
+  $('#nexttest').on('click', () => {
+    $('#recent-orders-refund-page').show();
+    $('#recent-orders-refund').hide();
+  });
+  $('#recent-orders-back').on('click', () => {
+    $('#recent-orders-refund-page').hide();
+    $('#recent-orders-refund').show();
+  });
+  $('#add-item-btn').on('click', () => {
+    $('.charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer,#page-supplier, #update-profile, #information-page, #recent-orders-refund-page, #refund-page').hide();
+    $('#add-item-page').show();
+  });
+  
