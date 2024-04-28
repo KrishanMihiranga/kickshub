@@ -103,7 +103,7 @@ registerEmployee.on('click', function() {
 
     // Make the AJAX request
     $.ajax({
-        url: 'http://localhost:9090/shoeshop/api/v1/employee',
+        url: 'http://localhost:9090/shoeshop/api/v1/auth/signup',
         type: 'POST',
         data: formData,
         processData: false,

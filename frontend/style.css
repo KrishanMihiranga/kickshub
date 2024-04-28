@@ -1566,10 +1566,11 @@ border: 2px solid var(--color-primary);
     bottom: 8rem;
   }
   .add-item-container-right{
-    width: 50%;
+    padding: 2rem;
+    width: 80%;
   }
   .container-reg-item-image {
-	max-width: 400px;
+	min-width: 400px;
 	width: 100%;
 	background: #fff;
 	padding: 30px;

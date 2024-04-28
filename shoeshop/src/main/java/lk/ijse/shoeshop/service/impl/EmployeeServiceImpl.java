@@ -2,6 +2,7 @@ package lk.ijse.shoeshop.service.impl;
 
 import jakarta.transaction.Transactional;
 import lk.ijse.shoeshop.dto.EmployeeDTO;
+import lk.ijse.shoeshop.entity.EmployeeEntity;
 import lk.ijse.shoeshop.repo.EmployeeRepo;
 import lk.ijse.shoeshop.service.EmployeeService;
 import lk.ijse.shoeshop.util.Mapping;
@@ -9,6 +10,7 @@ import lk.ijse.shoeshop.util.UtilMatters;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Base64;
 import java.util.List;
 
 @Service
@@ -27,5 +29,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public List<EmployeeDTO> getAllEmployees() {
         return mapping.getEmployeeDTOList(employeeRepo.findAll());
+
     }
 }

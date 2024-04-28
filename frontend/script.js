@@ -22,6 +22,29 @@ const toast = $(".toast");
 const closeIcon = $(".noti-close");
 const progressNoti = $(".progress-noti");
 const dropDown = $(".information-dropdown");
+let token = 'eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjpbeyJhdXRob3JpdHkiOiJST0xFX0FETUlOIn1dLCJzdWIiOiJuaWxzYWxpQGdtYWlsLmNvbSIsImlhdCI6MTcxNDMyMDAzMywiZXhwIjoxNzE0MzIwNjMzfQ.ipCuGP-GzrXfI2doGF9lDr09wEtBS1PAtleduDQIgQQ';
+
+$('#getb').on('click' , () => {
+  fetch('http://localhost:9090/shoeshop/api/v1/employee/getAllEmployees', {
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${token}` // Correctly include the token in the header
+    }
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  })
+  .then(data => {
+    console.log(data);
+  })
+  .catch(error => {
+    console.error('There was a problem with your fetch operation:', error);
+  });
+});
+
 
 // Show sidebar
 menuBtn.on('click', function() {
@@ -62,8 +85,8 @@ themeToggler.on('click', function() {
 });
 
 //swap active class
-$('#dashboard-btn, #add-employee, #add-customer, #add-supplier,#edit-profile, #info-log, #register-side-btn, #refund-btn, #add-item-btn').click(function() {
-  $('#dashboard-btn, #add-employee, #add-customer, #add-supplier,#edit-profile, #info-log, #register-side-btn, #refund-btn, #add-item-btn').removeClass('active');
+$('#dashboard-btn, #add-employee, #add-customer, #add-supplier,#edit-profile, #info-log, #register-side-btn, #refund-btn, #add-item-btn, #inventory-btn').click(function() {
+  $('#dashboard-btn, #add-employee, #add-customer, #add-supplier,#edit-profile, #info-log, #register-side-btn, #refund-btn, #add-item-btn, #inventory-btn').removeClass('active');
   $(this).addClass('active');
 });
 

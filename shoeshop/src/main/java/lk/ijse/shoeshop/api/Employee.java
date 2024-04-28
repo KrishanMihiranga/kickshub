@@ -90,6 +90,7 @@ public class Employee {
     @GetMapping(value = "/getAllEmployees",produces = "application/json")
     public ResponseEntity<List<EmployeeDTO>> getALlEmployees(){
         List<EmployeeDTO> employees = employeeService.getAllEmployees();
+
         return ResponseEntity.ok(employees);
     }
 }

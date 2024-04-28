@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Null;
 import lk.ijse.shoeshop.entity.enums.Gender;
 import lk.ijse.shoeshop.entity.enums.UserRole;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,6 +14,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Builder
 public class EmployeeDTO implements SuperDTO{
     @Null(message = "Id is auto generated")
     private String employeeCode;
