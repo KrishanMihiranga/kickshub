@@ -28,7 +28,7 @@ $('#getb').on('click' , () => {
   fetch('http://localhost:9090/shoeshop/api/v1/employee/getAllEmployees', {
     method: 'GET',
     headers: {
-      'Authorization': `Bearer ${token}` // Correctly include the token in the header
+      'Authorization': `Bearer ${token}`
     }
   })
   .then(response => {

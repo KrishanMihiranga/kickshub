@@ -1,5 +1,6 @@
 package lk.ijse.shoeshop.api;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.validation.Valid;
 import lk.ijse.shoeshop.dto.EmployeeDTO;
 import lk.ijse.shoeshop.entity.enums.Gender;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -28,6 +30,17 @@ public class Employee {
     @GetMapping("/health")
     public String healthCheck(){
         return "Employee Health Check";
+    }
+
+    @GetMapping("/user")
+    public String helloUser(){
+        return "Hello User";
+    }
+
+    @GetMapping("/admin")
+    @PreAuthorize("hasRole('ADMIN')")
+    public String helloAdmin(){
+        return "Hello admin";
     }
 
     @ResponseStatus(HttpStatus.CREATED)

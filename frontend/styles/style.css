@@ -947,7 +947,7 @@ border: 2px solid var(--color-primary);
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: url(./images/cover.png)center;
+    background: url(/assets/images/cover.png)center;
 }
 .profile-cover>h1{
     font-size: 6rem;
