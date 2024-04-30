@@ -63,6 +63,10 @@
                     <span class="material-icons-sharp">inventory</span>
                     <h3>Inventory</h3>
                 </a>
+                <a href="#" id="sale-btn">
+                    <span class="material-icons-sharp">shopping_cart</span>
+                    <h3>Sale</h3>
+                </a>
                 <a href="#">
                     <span class="material-icons-sharp">insights</span>
                     <h3>Analytics</h3>
@@ -72,10 +76,7 @@
                     <h3>Messages</h3>
                     <span class="message-count">99+</span>
                 </a>
-                <a href="#">
-                    <span class="material-icons-sharp">inventory</span>
-                    <h3>Products</h3>
-                </a>
+                
                 <a href="#">
                     <span class="material-icons-sharp">report_gmailerrorred</span>
                     <h3>Reports</h3>
@@ -96,10 +97,15 @@
         <main>
             <h1>Dashboard</h1>
 
-            <div class="date">
-                <input type="date">
+            <div class="dateAndSession">
+                <div class="date">
+                    <input type="date">
+                </div>
+                <div class="session-time">
+                    <p>Your session ends in: <span id="session-time">08:00:00</span></p>
+                </div>
             </div>
-
+            
             <!-- ******dashboard****** -->
 
             <!-- insights-->
@@ -1401,9 +1407,550 @@
 
             <!-- ******** Inventory page ******** -->
             <div id="inventory-page">
-                <h1>Hello</h1>
+                <h2>Inventory</h2>
+                <p class="text-muted">Items currently in stock</p>
+                <div class="sort-by">
+                    <div>
+                        <p class="text-muted">Sort by</p>
+                    <div>
+                        <div class="radio-wapper radio-reg-emp-gender">
+                            <input type="radio" id="srts-n" name="sort-by" value="Price" class="radioG">
+                            <label class="labelE label-1" for="srts-n">Price</label>
+                            <input type="radio" id="srts-p" name="sort-by" value="Name" class="radioG">
+                            <label class="labelE label-2" for="srts-p">Name</label>
+                            <input type="radio" id="srts-m" name="sort-by" value="Male" class="radioG">
+                            <label class="labelE label-3" for="srts-m">Male</label>
+                            <input type="radio" id="srts-f" name="sort-by" value="Female" class="radioG">
+                            <label class="labelE label-4" for="srts-f">Female</label>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="container-search">
+                        <form action="" class="search" id="search-bar-inv">
+                            <input type="search" placeholder="Type something..." name="q" class="search__input">
+                
+                            <div class="search__button" id="search-button-inv">
+                                <i class="ri-search-2-line search__icon"></i>
+                                <i class="ri-close-line search__close"></i>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Product Name</th>
+                            <th>Product Number</th>
+                            <th>Payment</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><img src="./assets/images/shoe-nike.png"></td>
+                            <td>Nike Red Shoe</td>
+                            <td>83212</td>
+                            <td>Card</td>
+                            <td class="success">Available</td>
+                            <td class="primary">Details</td>
+                        </tr>
+                        <tr>
+                            <td><img src="./assets/images/shoe-nike.png"></td>
+                            <td>Nike Blue Shoe</td>
+                            <td>83452</td>
+                            <td>Card</td>
+                            <td class="warning">Unavailable</td>
+                            <td class="primary">Details</td>
+                        </tr>
+                        <tr>
+                            <td><img src="./assets/images/shoe-nike.png"></td>
+                            <td>Nike White Shoe</td>
+                            <td>8342</td>
+                            <td>Cash</td>
+                            <td class="success">Available</td>
+                            <td class="primary">Details</td>
+                        </tr>
+                        <tr>
+                            <td><img src="./assets/images/shoe-nike.png"></td>
+                            <td>Nike Pink Shoe</td>
+                            <td>34512</td>
+                            <td>Card</td>
+                            <td class="danger">Low</td>
+                            <td class="primary">Details</td>
+                        </tr>
+                        <tr>
+                            <td><img src="./assets/images/shoe-nike.png"></td>
+                            <td>Nike Browm Shoe</td>
+                            <td>34512</td>
+                            <td>Cash</td>
+                            <td class="warning">Unavailable</td>
+                            <td class="primary">Details</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
 
+            <div id="sale-page">
+                <h2>Add Order</h2>
+                <p class="text-muted">Add new purchase</p>
+
+                <div class="sale-page-container">
+                    <div class="sale-page-main">
+
+                        <div class="sale-page-cus-details">
+                            <div>
+                                <label>Customer Name</label>
+                                <input type="text" placeholder="e.g. Krishan Mihiranga" id="sale-cus-name">
+                            </div>
+                            <div>
+                                <label>Contact Number</label>
+                                <input type="tel" placeholder="+94 xxx xxx x39" id="sale-cus-tel">
+                            </div>
+                        </div>
+                        <p class="si-l">Search Item</p>
+                        <div class="sale-page-search-item">
+                            <div class="container-search">
+                                <form action="" class="search" id="search-bar-sale">
+                                    <input type="search" placeholder="Type something..." name="q" class="search__input">
+                        
+                                    <div class="search__button" id="search-button-sale">
+                                        <i class="ri-search-2-line search__icon"></i>
+                                        <i class="ri-close-line search__close"></i>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="sale-page-item-container">
+                            <div class="sale-page-items">
+
+                                <div class="sale-page-item">
+                                    <div class="sale-item-img">
+                                        <img src="./assets/images/shoe-nike.png">
+                                    </div>
+                                    <div class="sale-item-desc">
+                                        <div>
+                                            <p class="sale-item-card-name">Red jordan 1</p>
+                                            <p>By <span class="sale-item-card-supplier">Nike</span></p>
+                                        </div>
+                                        <div>
+                                            <p class="sale-item-card-price">$100</p>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="sale-item-add-overlay">
+                                        <div>
+                                            <span class="material-icons-sharp">add</span>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                                <div class="sale-page-item">
+                                    <div class="sale-item-img">
+                                        <img src="./assets/images/shoe-nike.png">
+                                    </div>
+                                    <div class="sale-item-desc">
+                                        <div>
+                                            <p class="sale-item-card-name">Red jordan 1</p>
+                                            <p>By <span class="sale-item-card-supplier">Nike</span></p>
+                                        </div>
+                                        <div>
+                                            <p class="sale-item-card-price">$100</p>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="sale-item-add-overlay">
+                                        <div>
+                                            <span class="material-icons-sharp">add</span>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                                <div class="sale-page-item">
+                                    <div class="sale-item-img">
+                                        <img src="./assets/images/shoe-nike.png">
+                                    </div>
+                                    <div class="sale-item-desc">
+                                        <div>
+                                            <p class="sale-item-card-name">Red jordan 1</p>
+                                            <p>By <span class="sale-item-card-supplier">Nike</span></p>
+                                        </div>
+                                        <div>
+                                            <p class="sale-item-card-price">$100</p>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="sale-item-add-overlay">
+                                        <div>
+                                            <span class="material-icons-sharp">add</span>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                                <div class="sale-page-item">
+                                    <div class="sale-item-img">
+                                        <img src="./assets/images/shoe-nike.png">
+                                    </div>
+                                    <div class="sale-item-desc">
+                                        <div>
+                                            <p class="sale-item-card-name">Red jordan 1</p>
+                                            <p>By <span class="sale-item-card-supplier">Nike</span></p>
+                                        </div>
+                                        <div>
+                                            <p class="sale-item-card-price">$100</p>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="sale-item-add-overlay">
+                                        <div>
+                                            <span class="material-icons-sharp">add</span>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                                <div class="sale-page-item">
+                                    <div class="sale-item-img">
+                                        <img src="./assets/images/shoe-nike.png">
+                                    </div>
+                                    <div class="sale-item-desc">
+                                        <div>
+                                            <p class="sale-item-card-name">Red jordan 1</p>
+                                            <p>By <span class="sale-item-card-supplier">Nike</span></p>
+                                        </div>
+                                        <div>
+                                            <p class="sale-item-card-price">$100</p>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="sale-item-add-overlay">
+                                        <div>
+                                            <span class="material-icons-sharp">add</span>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                                <div class="sale-page-item">
+                                    <div class="sale-item-img">
+                                        <img src="./assets/images/shoe-nike.png">
+                                    </div>
+                                    <div class="sale-item-desc">
+                                        <div>
+                                            <p class="sale-item-card-name">Red jordan 1</p>
+                                            <p>By <span class="sale-item-card-supplier">Nike</span></p>
+                                        </div>
+                                        <div>
+                                            <p class="sale-item-card-price">$100</p>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="sale-item-add-overlay">
+                                        <div>
+                                            <span class="material-icons-sharp">add</span>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                                <div class="sale-page-item">
+                                    <div class="sale-item-img">
+                                        <img src="./assets/images/shoe-nike.png">
+                                    </div>
+                                    <div class="sale-item-desc">
+                                        <div>
+                                            <p class="sale-item-card-name">Red jordan 1</p>
+                                            <p>By <span class="sale-item-card-supplier">Nike</span></p>
+                                        </div>
+                                        <div>
+                                            <p class="sale-item-card-price">$100</p>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="sale-item-add-overlay">
+                                        <div>
+                                            <span class="material-icons-sharp">add</span>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                                <div class="sale-page-item">
+                                    <div class="sale-item-img">
+                                        <img src="./assets/images/shoe-nike.png">
+                                    </div>
+                                    <div class="sale-item-desc">
+                                        <div>
+                                            <p class="sale-item-card-name">Red jordan 1</p>
+                                            <p>By <span class="sale-item-card-supplier">Nike</span></p>
+                                        </div>
+                                        <div>
+                                            <p class="sale-item-card-price">$100</p>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="sale-item-add-overlay">
+                                        <div>
+                                            <span class="material-icons-sharp">add</span>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sale-page-right">
+                        <div class="sale-page-right-heading">
+                            <img src="./assets/images/logo.png">
+                            <p>Order #<span class="order-number">999</span></p>
+                        </div>
+                        <div class="sale-page-right-date">
+                            <p class="time-stamp">2024-04-26 08:39:52</p>
+                        </div>
+                        <hr>
+                    <div class="sale-page-right-cart">
+
+                        <div class="sale-cart-item">
+                            <div>
+                                <div>
+                                    <span class="material-icons-sharp overlay-active-btn-sale">remove</span>
+                                </div>
+                            </div>
+
+                            <div class="sale-cart-item-details">
+                                <div class="sale-cart-item-img">
+                                    <img src="./assets/images/shoe-nike.png">
+                                </div>
+                                <div class="sale-cart-item-cred">
+                                    <p class="sale-cart-item-name">Red jordan 1</p>
+                                    <p class="sale-cart-item-price">$100.30</p>
+
+                                    <div class="sale-cart-item-count">
+                                        <div class="cart-btn-min"><span class="material-icons-sharp">remove</span></div>
+                                        <input type="number">
+                                        <div class="cart-btn-add"><span class="material-icons-sharp">add</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sale-item-overlay">
+                                <span class="material-icons-sharp">delete</span>
+                                <p>Remove this item?</p>
+                                <div>
+                                    <div class="sale-item-overlay-no">No</div>
+                                    <div class="sale-item-overlay-yes">Yes</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sale-cart-item">
+                            <div>
+                                <div>
+                                    <span class="material-icons-sharp overlay-active-btn-sale">remove</span>
+                                </div>
+                            </div>
+
+                            <div class="sale-cart-item-details">
+                                <div class="sale-cart-item-img">
+                                    <img src="./assets/images/shoe-nike.png">
+                                </div>
+                                <div class="sale-cart-item-cred">
+                                    <p class="sale-cart-item-name">Red jordan 1</p>
+                                    <p class="sale-cart-item-price">$100.30</p>
+
+                                    <div class="sale-cart-item-count">
+                                        <div class="cart-btn-min"><span class="material-icons-sharp">remove</span></div>
+                                        <input type="number">
+                                        <div class="cart-btn-add"><span class="material-icons-sharp">add</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sale-item-overlay">
+                                <span class="material-icons-sharp">delete</span>
+                                <p>Remove this item?</p>
+                                <div>
+                                    <div class="sale-item-overlay-no">No</div>
+                                    <div class="sale-item-overlay-yes">Yes</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sale-cart-item">
+                            <div>
+                                <div>
+                                    <span class="material-icons-sharp overlay-active-btn-sale">remove</span>
+                                </div>
+                            </div>
+
+                            <div class="sale-cart-item-details">
+                                <div class="sale-cart-item-img">
+                                    <img src="./assets/images/shoe-nike.png">
+                                </div>
+                                <div class="sale-cart-item-cred">
+                                    <p class="sale-cart-item-name">Red jordan 1</p>
+                                    <p class="sale-cart-item-price">$100.30</p>
+
+                                    <div class="sale-cart-item-count">
+                                        <div class="cart-btn-min"><span class="material-icons-sharp">remove</span></div>
+                                        <input type="number">
+                                        <div class="cart-btn-add"><span class="material-icons-sharp">add</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sale-item-overlay">
+                                <span class="material-icons-sharp">delete</span>
+                                <p>Remove this item?</p>
+                                <div>
+                                    <div class="sale-item-overlay-no">No</div>
+                                    <div class="sale-item-overlay-yes">Yes</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sale-cart-item">
+                            <div>
+                                <div>
+                                    <span class="material-icons-sharp overlay-active-btn-sale">remove</span>
+                                </div>
+                            </div>
+
+                            <div class="sale-cart-item-details">
+                                <div class="sale-cart-item-img">
+                                    <img src="./assets/images/shoe-nike.png">
+                                </div>
+                                <div class="sale-cart-item-cred">
+                                    <p class="sale-cart-item-name">Red jordan 1</p>
+                                    <p class="sale-cart-item-price">$100.30</p>
+
+                                    <div class="sale-cart-item-count">
+                                        <div class="cart-btn-min"><span class="material-icons-sharp">remove</span></div>
+                                        <input type="number">
+                                        <div class="cart-btn-add"><span class="material-icons-sharp">add</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sale-item-overlay">
+                                <span class="material-icons-sharp">delete</span>
+                                <p>Remove this item?</p>
+                                <div>
+                                    <div class="sale-item-overlay-no">No</div>
+                                    <div class="sale-item-overlay-yes">Yes</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sale-cart-item">
+                            <div>
+                                <div>
+                                    <span class="material-icons-sharp overlay-active-btn-sale">remove</span>
+                                </div>
+                            </div>
+
+                            <div class="sale-cart-item-details">
+                                <div class="sale-cart-item-img">
+                                    <img src="./assets/images/shoe-nike.png">
+                                </div>
+                                <div class="sale-cart-item-cred">
+                                    <p class="sale-cart-item-name">Red jordan 1</p>
+                                    <p class="sale-cart-item-price">$100.30</p>
+
+                                    <div class="sale-cart-item-count">
+                                        <div class="cart-btn-min"><span class="material-icons-sharp">remove</span></div>
+                                        <input type="number">
+                                        <div class="cart-btn-add"><span class="material-icons-sharp">add</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sale-item-overlay">
+                                <span class="material-icons-sharp">delete</span>
+                                <p>Remove this item?</p>
+                                <div>
+                                    <div class="sale-item-overlay-no">No</div>
+                                    <div class="sale-item-overlay-yes">Yes</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sale-cart-item">
+                            <div>
+                                <div>
+                                    <span class="material-icons-sharp overlay-active-btn-sale">remove</span>
+                                </div>
+                            </div>
+
+                            <div class="sale-cart-item-details">
+                                <div class="sale-cart-item-img">
+                                    <img src="./assets/images/shoe-nike.png">
+                                </div>
+                                <div class="sale-cart-item-cred">
+                                    <p class="sale-cart-item-name">Red jordan 1</p>
+                                    <p class="sale-cart-item-price">$100.30</p>
+
+                                    <div class="sale-cart-item-count">
+                                        <div class="cart-btn-min"><span class="material-icons-sharp">remove</span></div>
+                                        <input type="number">
+                                        <div class="cart-btn-add"><span class="material-icons-sharp">add</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sale-item-overlay">
+                                <span class="material-icons-sharp">delete</span>
+                                <p>Remove this item?</p>
+                                <div>
+                                    <div class="sale-item-overlay-no">No</div>
+                                    <div class="sale-item-overlay-yes">Yes</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sale-cart-item">
+                            <div>
+                                <div>
+                                    <span class="material-icons-sharp overlay-active-btn-sale">remove</span>
+                                </div>
+                            </div>
+
+                            <div class="sale-cart-item-details">
+                                <div class="sale-cart-item-img">
+                                    <img src="./assets/images/shoe-nike.png">
+                                </div>
+                                <div class="sale-cart-item-cred">
+                                    <p class="sale-cart-item-name">Red jordan 1</p>
+                                    <p class="sale-cart-item-price">$100.30</p>
+
+                                    <div class="sale-cart-item-count">
+                                        <div class="cart-btn-min"><span class="material-icons-sharp">remove</span></div>
+                                        <input type="number">
+                                        <div class="cart-btn-add"><span class="material-icons-sharp">add</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sale-item-overlay">
+                                <span class="material-icons-sharp">delete</span>
+                                <p>Remove this item?</p>
+                                <div>
+                                    <div class="sale-item-overlay-no">No</div>
+                                    <div class="sale-item-overlay-yes">Yes</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="sale-page-right-footer">
+                        <div class="subtotal">
+                            <p>Subtotal</p>
+                            <p id="subtotal">$500.00</p>
+                        </div>
+                        <div class="discounts">
+                            <p>Discounts</p>
+                            <p id="discounts">$20.00</p>
+                        </div>
+                        <hr>
+                        <div class="total">
+                            <p>Total</p>
+                            <p id="total">$480.00</p>
+                        </div>
+                        <div id="submit-order"><span>Submit Order</span></div>
+                    </div>
+                    </div>
+                </div>
+            </div>
         </main>
         <!-- end of middle section  -->
 
@@ -1541,5 +2088,6 @@
     <script src="./script.js"></script>
     <script src="./employeeController.js"></script>
     <script src="./customerController.js"></script>
+    <script src="./sessiontimeController.js"></script>
 </body>
 </html>
