@@ -1,7 +1,6 @@
 package lk.ijse.shoeshop.api;
 
 import jakarta.validation.Valid;
-import lk.ijse.shoeshop.dto.EmployeeDTO;
 import lk.ijse.shoeshop.entity.enums.Gender;
 import lk.ijse.shoeshop.entity.enums.UserRole;
 import lk.ijse.shoeshop.reqAndResponse.response.JwtAuthResponse;
@@ -24,6 +23,7 @@ import org.springframework.web.server.ResponseStatusException;
 @RequiredArgsConstructor
 public class User {
     private final AuthenticationService authenticationService;
+
 
     //signIn
     @PostMapping("/signin")

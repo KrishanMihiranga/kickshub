@@ -361,7 +361,7 @@ const updateProgress = () => {
 
 //open popup
 
-$('#save-changes-employee,#reg-item-btn,#refund-page-refund-btn').on('click', () => {
+$('#reg-item-btn,#refund-page-refund-btn').on('click', () => {
   $('.popup').addClass("active-popup");
   $('.overlay').addClass("active-overlay"); // Add class to overlay
 });
@@ -373,10 +373,29 @@ $('.button-ap').on('click', () => {
   $('.popup-stock').addClass("active-popup");
   $('.overlay').addClass("active-overlay"); // Add class to overlay
 });
+$('#submit-order').on('click', () => {
+  $('.popup-paymentmetod').addClass("active-popup");
+  $('.overlay').addClass("active-overlay"); // Add class to overlay
+});
+$('#popup-payment-card-btn').on('click', () => {
+  $('.popup-paymentmetod').removeClass("active-popup");
+  $('.popup-paymentmetod-card').addClass("active-popup");
+});
+$('#up-btn').on('click', () => {
+  $('.popup-edit-confirm').addClass("active-popup");
+  $('.overlay').addClass("active-overlay");
+});
 
+$('#ep-no-btn').on('click', () => {
+  $('.popup-edit-confirm').removeClass("active-popup");
+  $('.overlay').removeClass("active-overlay"); // Remove class from overlay
+});
 $('.close-btn-popup').on('click', () => {
   $('.popup').removeClass("active-popup");
   $('.popup-stock').removeClass("active-popup");
+  $('.popup-paymentmetod').removeClass("active-popup");
+  $('.popup-paymentmetod-card').removeClass("active-popup");
+  $('.popup-edit-confirm').removeClass("active-popup");
   $('.overlay').removeClass("active-overlay"); // Remove class from overlay
 });
 
@@ -617,56 +636,4 @@ const areaChartOptions = {
   areaChart.render();
 
   
-  //routes
-  $('#add-employee').on('click', () => {
-    $('.charts, .recent-orders, .sales, .expenses, .income, #page-customer, #page-supplier, #update-profile, #information-page, #refund-page, #add-item-page, #add-product-page, #inventory-page, #sale-page').hide();
-    $('#page').show();
-  });
-  $('#dashboard-btn').on('click', () => {
-    $('.charts, .recent-orders, .sales, .expenses, .income').show();
-    $('#page, #page-customer, #page-supplier, #update-profile, #information-page, #refund-page, #add-item-page, #add-product-page, #inventory-page, #sale-page').hide();
-  });
-  $('#add-customer').on('click', () => {
-    $('.charts, .recent-orders, .sales, .expenses, .income, #page, #page-supplier, #update-profile, #information-page, #refund-page, #add-item-page, #add-product-page, #inventory-page, #sale-page').hide();
-    $('#page-customer').show();
-  });
-  $('#add-supplier').on('click', () => {
-    $('.charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer, #update-profile, #information-page, #refund-page, #add-item-page, #add-product-page, #inventory-page').hide();
-    $('#page-supplier').show();
-  });
-  $('#dashboard-photo').on('click', () => {
-    $('.charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer,#page-supplier, #information-page, #refund-page, #add-item-page, #add-product-page, #inventory-page, #sale-page').hide();
-    $('#update-profile').show();
-  });
-  $('#info-log').on('click', () => {
-    $('.charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer,#page-supplier, #update-profile, #refund-page, #add-item-page, #add-product-page, #inventory-page, #sale-page').hide();
-    $('#information-page').show();
-  });
-  $('#refund-btn').on('click', () => {
-    $('.charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer,#page-supplier, #update-profile, #information-page, #recent-orders-refund-page, #add-item-page, #add-product-page, #inventory-page, #sale-page').hide();
-    $('#refund-page').show();
-  });
-  $('#nexttest').on('click', () => {
-    $('#recent-orders-refund-page').show();
-    $('#recent-orders-refund').hide();
-  });
-  $('#recent-orders-back').on('click', () => {
-    $('#recent-orders-refund-page').hide();
-    $('#recent-orders-refund').show();
-  });
-  $('#add-item-btn').on('click', () => {
-    $('.charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer,#page-supplier, #update-profile, #information-page, #recent-orders-refund-page, #refund-page, #add-product-page, #inventory-page, #sale-page').hide();
-    $('#add-item-page').show();
-  });
-  $('#add-product-btn').on('click',()=>{
-    $('.charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer,#page-supplier, #update-profile, #information-page, #recent-orders-refund-page, #refund-page, #add-item-page, #inventory-page, #sale-page').hide();
-    $('#add-product-page').show();
-  });
-  $('#inventory-btn').on('click',()=>{
-    $('.charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer,#page-supplier, #update-profile, #information-page, #recent-orders-refund-page, #refund-page, #add-item-page, #add-product-page, #sale-page').hide();
-    $('#inventory-page').show();
-  });
-  $('#sale-btn').on('click',()=>{
-    $('.charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer,#page-supplier, #update-profile, #information-page, #recent-orders-refund-page, #refund-page, #add-item-page, #add-product-page, #inventory-page').hide();
-    $('#sale-page').show();
-  });
+  

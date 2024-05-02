@@ -8,7 +8,7 @@ var empLastName= $('#reg-emp-ln');
 var empdob;
 var empgender;
 var empdesignation;
-var emptatus;
+var empstatus;
 var empRole;
 var empattachedBranch= $('.reg-employee-abranch');
 var empjoinedDate= $('#reg-emp-jdate');

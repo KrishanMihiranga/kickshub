@@ -640,10 +640,10 @@
                                 <img src="assets/images/profile-1.jpg" alt="ProfilePic" id="update-profile-top-left-profilePic">
                             </div>
                             <div class="update-profile-user-name-password"><h2>Krishan Mihiranga</h2><div class="update-profile-user-code"><h3 class="text-muted update-profile-user-unique-code">66250188-1d02-4d1a-922b-ac92d0c9d8a0</h3><button class="update-profile-user-unique-code-copy"><i class="fa-regular fa-clone"></i></button></div></div>
-                            <h3 class="text-muted">Admin</h3>
+                            <h3 class="text-muted" id="update-profile-user-role">Admin</h3>
                         </div>
                         <div class="update-profile-top-right">
-                            <button>Edit Profile <i class="fa-solid fa-pen-to-square"></i></button>
+                            <button id="up-btn">Edit Profile <i class="fa-solid fa-pen-to-square"></i></button>
                         </div>
                     </div>
                     <div class="update-profile-details">
@@ -652,35 +652,35 @@
                             <div class="grid-profile">
                                 <div>
                                     <label>First Name</label>
-                                    <input type="text" placeholder="e.g. Krishan">
+                                    <input id="up-fn" type="text" placeholder="e.g. Krishan">
                                 </div>
                                 <div>
                                     <label>Last Name</label>
-                                    <input type="text" placeholder="e.g. Mihiranga">
+                                    <input id="up-ln" type="text" placeholder="e.g. Mihiranga">
                                 </div>
                                 <div class="birth">
                                     <label>Date of Birth</label>
                                     <div class="grouping">
-                                        <input type="text" pattern="[0-9]*" name="day" value="" min="0" max="31" placeholder="DD">
-                                        <input type="text" pattern="[0-9]*" name="month" value="" min="0" max="12" placeholder="MM">
-                                        <input type="text" pattern="[0-9]*" name="year" value="" min="0" max="2050" placeholder="YYYY">
+                                        <input id="up-d" type="text" name="day" value="" min="0" max="31" placeholder="DD">
+                                        <input id="up-m" type="text" name="month" value="" min="0" max="12" placeholder="MM">
+                                        <input id="up-y" type="text" name="year" value="" min="0" max="2050" placeholder="YYYY">
                                     </div>
                                 </div>
                                 <div>
                                     <label>Gender</label>
-                                    <div class="radio-wapper">
-                                        <input type="radio" id="emp-g-m" name="gender" value="MALE" class="radioG" checked>
+                                    <div class="radio-wapper radio-up-emp-gender">
+                                        <input type="radio" id="emp-g-m" name="gender" value="MALE" class="radioG">
                                         <label class="labelE label-1" for="emp-g-m">Male</label>
                                         <input type="radio" id="emp-g-f" name="gender" value="FEMALE" class="radioG">
                                         <label class="labelE label-2" for="emp-g-f">Female</label>
-                                        <input type="radio" id="emp-g-o" name="gender" value="OTHER" class="radioG">
+                                        <input  type="radio" id="emp-g-o" name="gender" value="OTHER" class="radioG">
                                         <label class="labelE label-3" for="emp-g-o">Other</label>
                                     </div>
                                 </div>
                                 <div>
                                     <label>Designation</label>
-                                    <div class="radio-wapper">
-                                        <input type="radio" id="emp-des-m" name="designation" value="Manager" class="radioG" checked>
+                                    <div class="radio-wapper radio-up-emp-designation">
+                                        <input type="radio" id="emp-des-m" name="designation" value="Manager" class="radioG" >
                                         <label class="labelE label-1" for="emp-des-m">Manager</label>
                                         <input type="radio" id="emp-des-s" name="designation" value="Salesman" class="radioG">
                                         <label class="labelE label-2" for="emp-des-s">Salesman</label>
@@ -688,8 +688,8 @@
                                 </div>
                                 <div>
                                     <label>Status</label>
-                                    <div class="radio-wapper">
-                                        <input type="radio" id="emp-s-m" name="status" value="MARRIED" class="radioG" checked>
+                                    <div class="radio-wapper radio-up-emp-status">
+                                        <input type="radio" id="emp-s-m" name="status" value="MARRIED" class="radioG" >
                                         <label class="labelE label-1" for="emp-s-m">Married</label>
                                         <input type="radio" id="emp-s-um" name="status" value="UNMARRIED" class="radioG">
                                         <label class="labelE label-2" for="emp-s-um">Unmarried</label>
@@ -699,7 +699,7 @@
                                 </div>
                                 <div>
                                     <label>Attached Branch</label>
-                                    <select name="branch">
+                                    <select name="branch up-employee-branch" id="up-bn">
                                         <option value="branch1">Branch 01</option>
                                         <option value="branch2">Branch 02</option>
                                         <option value="branch3">Branch 03</option>
@@ -714,7 +714,7 @@
                                 </div>
                                 <div>
                                     <label>Joined Date</label>
-                                    <input type="date">
+                                    <input type="date" id="up-jd">
                                 </div>
                             </div>
                             
@@ -724,27 +724,27 @@
                             <div class="grid-profile">
                                 <div>
                                     <label>Phone</label>
-                                    <input type="tel" placeholder="+94xxxxxxx29">
+                                    <input id="up-tel" type="tel" placeholder="+94xxxxxxx29">
                                 </div>
                                 <div>
                                     <label>Address</label>
-                                    <input type="text" placeholder="Street Address">
+                                    <input id="up-street" type="text" placeholder="Street Address">
                                 </div>
                                 <div>
                                     <label>Building Number</label>
-                                    <input type="text" placeholder="Suite, Building">
+                                    <input id="up-building" type="text" placeholder="Suite, Building">
                                 </div>
                                 <div>
                                     <label>City</label>
-                                    <input type="text" placeholder="city">
+                                    <input id="up-city" type="text" placeholder="city">
                                 </div>
                                 <div>
                                     <label>State</label>
-                                    <input type="text" placeholder="State / Province">
+                                    <input id="up-province" type="text" placeholder="State / Province">
                                 </div>
                                 <div>
                                     <label>Zip Code</label>
-                                    <input type="text" placeholder="Zip / Postal Code">
+                                    <input id="up-zip" type="text" placeholder="Zip / Postal Code">
                                 </div>
                                 <div>
                                     <label>Country</label>
@@ -760,11 +760,11 @@
                             <div class="grid-profile">
                                 <div>
                                     <label>Email</label>
-                                    <input type="email" placeholder="Your email address">
+                                    <input id="up-email" type="email" placeholder="Your email address">
                                 </div>
                                 <div>
                                     <label>Guardian or Nominated Person</label>
-                                    <input type="text" placeholder="Guardian / Nominee Name">
+                                    <input id="up-nom" type="text" placeholder="Guardian / Nominee Name">
                                 </div>
                                 <!-- <div>
                                     <label>Username</label>
@@ -787,6 +787,19 @@
                     </div>
                 </div>
             </div>
+             <!-- ******** edit confirmation ******** -->
+            <div class="popup-edit-confirm">
+                <div class="close-btn-popup">&times;</div>
+                <div class="form-popup">
+                    <h2>Update Profile</h2>
+                    <p>Are you sure to edit this profile?</p>
+                    <div class="form-elment" id="form-elment-payment">
+                        <button id="ep-no-btn">No</button>
+                        <button id="ep-yes-btn">Yes</button>
+                    </div>
+                </div>
+            </div>
+
             <!-- ******** popup ******** -->
             <div class="popup">
                 <div class="close-btn-popup">&times;</div>
@@ -802,7 +815,7 @@
                         <input type="password" id="password-confirm-popup" placeholder="Confirm Password">
                     </div>
                     <div class="form-elment">
-                        <button>Save Changes</button>
+                        <button id="save-up-btn">Save Changes</button>
                     </div>
                     <div class="form-element">
                         <a href="#" class="forgot-password-popup">Forgot Password?</a>
@@ -1493,6 +1506,7 @@
                 </table>
             </div>
 
+             <!-- ******** Order Page ******** -->
             <div id="sale-page">
                 <h2>Add Order</h2>
                 <p class="text-muted">Add new purchase</p>
@@ -1695,7 +1709,7 @@
                                         
                                     </div>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -1951,6 +1965,33 @@
                     </div>
                 </div>
             </div>
+            <!-- **** payment method popup **** -->
+            <div class="popup-paymentmetod">
+                <div class="close-btn-popup">&times;</div>
+                <div class="form-popup">
+                    <h2>Payment Method</h2>
+                    <p>Select payment method</p>
+                    <div class="form-elment" id="form-elment-payment">
+                        <button id="popup-payment-cash-btn">Cash</button>
+                        <button id="popup-payment-card-btn">Card</button>
+                    </div>
+                </div>
+            </div>
+            <!-- ******** card payment ******* -->
+            <div class="popup-paymentmetod-card">
+                <div class="close-btn-popup">&times;</div>
+                <div class="form-popup">
+                    <h2>Payment Method</h2>
+                    <p>Select payment method</p>
+                    <div class="form-elment" id="form-elment-payment-card">
+                        
+                        <button id="popup-payment-cash-btns">Cash</button>
+                        <button id="popup-payment-card-btsn">Card</button>
+                    </div>
+                </div>
+            </div>
+
+
         </main>
         <!-- end of middle section  -->
 
@@ -2086,8 +2127,62 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
     <script src="./script.js"></script>
+    <script type="module" src="./startup.js"></script>
     <script src="./employeeController.js"></script>
     <script src="./customerController.js"></script>
     <script src="./sessiontimeController.js"></script>
+    <script type="module" src="./controller/DashboardController.js"></script>
+    
+    <script>
+        //routes
+  $('#add-employee').on('click', () => {
+    $('#save-changes-employee, .charts, .recent-orders, .sales, .expenses, .income, #page-customer, #page-supplier, #update-profile, #information-page, #refund-page, #add-item-page, #add-product-page, #inventory-page, #sale-page').hide();
+    $('#page').show();
+  });
+  $('#dashboard-btn').on('click', () => {
+    $('.charts, .recent-orders, .sales, .expenses, .income').show();
+    $('#save-changes-employee, #page, #page-customer, #page-supplier, #update-profile, #information-page, #refund-page, #add-item-page, #add-product-page, #inventory-page, #sale-page').hide();
+  });
+  $('#add-customer').on('click', () => {
+    $('#save-changes-employee, .charts, .recent-orders, .sales, .expenses, .income, #page, #page-supplier, #update-profile, #information-page, #refund-page, #add-item-page, #add-product-page, #inventory-page, #sale-page').hide();
+    $('#page-customer').show();
+  });
+  $('#add-supplier').on('click', () => {
+    $('#save-changes-employee, .charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer, #update-profile, #information-page, #refund-page, #add-item-page, #add-product-page, #inventory-page').hide();
+    $('#page-supplier').show();
+  });
+  $('#info-log').on('click', () => {
+    $('#save-changes-employee, .charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer,#page-supplier, #update-profile, #refund-page, #add-item-page, #add-product-page, #inventory-page, #sale-page').hide();
+    $('#information-page').show();
+  });
+  $('#refund-btn').on('click', () => {
+    $('#save-changes-employee, .charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer,#page-supplier, #update-profile, #information-page, #recent-orders-refund-page, #add-item-page, #add-product-page, #inventory-page, #sale-page').hide();
+    $('#refund-page').show();
+  });
+  $('#nexttest').on('click', () => {
+    $('#recent-orders-refund-page').show();
+    $('#recent-orders-refund').hide();
+  });
+  $('#recent-orders-back').on('click', () => {
+    $('#recent-orders-refund-page').hide();
+    $('#recent-orders-refund').show();
+  });
+  $('#add-item-btn').on('click', () => {
+    $('#save-changes-employee, .charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer,#page-supplier, #update-profile, #information-page, #recent-orders-refund-page, #refund-page, #add-product-page, #inventory-page, #sale-page').hide();
+    $('#add-item-page').show();
+  });
+  $('#add-product-btn').on('click',()=>{
+    $('#save-changes-employee, .charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer,#page-supplier, #update-profile, #information-page, #recent-orders-refund-page, #refund-page, #add-item-page, #inventory-page, #sale-page').hide();
+    $('#add-product-page').show();
+  });
+  $('#inventory-btn').on('click',()=>{
+    $('#save-changes-employee, .charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer,#page-supplier, #update-profile, #information-page, #recent-orders-refund-page, #refund-page, #add-item-page, #add-product-page, #sale-page').hide();
+    $('#inventory-page').show();
+  });
+  $('#sale-btn').on('click',()=>{
+    $('#save-changes-employee, .charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer,#page-supplier, #update-profile, #information-page, #recent-orders-refund-page, #refund-page, #add-item-page, #add-product-page, #inventory-page').hide();
+    $('#sale-page').show();
+  });
+    </script>
 </body>
 </html>

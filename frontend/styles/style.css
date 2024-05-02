@@ -9,6 +9,7 @@
     --color-danger: #ff7782;
     --color-danger-hover: #d64955;
     --color-success: #41f1b6;
+    --color-success-hover: #24ce95;
     --color-warning: #ffbb55;
     --color-white: #fff;
     --color-info-dark: #7d8da1;
@@ -1128,7 +1129,7 @@ border: 2px solid var(--color-primary);
 }
 
  /* popup */
- .popup,.popup-stock{
+ .popup,.popup-stock,.popup-paymentmetod,.popup-paymentmetod-card,.popup-edit-confirm{
     z-index: 5;
     position: absolute;
     top: -150%;
@@ -1145,7 +1146,10 @@ border: 2px solid var(--color-primary);
                 transform 20ms ease-in-out 0ms;
  }
  .popup.active-popup,
- .popup-stock.active-popup{
+ .popup-stock.active-popup,
+ .popup-paymentmetod.active-popup,
+ .popup-paymentmetod-card.active-popup,
+ .popup-edit-confirm.active-popup{
     top: 50%;
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
@@ -1154,7 +1158,10 @@ border: 2px solid var(--color-primary);
     transform 20ms ease-in-out 0ms;
  }
  .popup .close-btn-popup,
-.popup-stock .close-btn-popup{
+.popup-stock .close-btn-popup,
+.popup-paymentmetod .close-btn-popup,
+.popup-paymentmetod-card .close-btn-popup,
+.popup-edit-confirm .close-btn-popup{
     position: absolute;
     top: 10px;
     right: 10px;
@@ -1172,22 +1179,39 @@ border: 2px solid var(--color-primary);
     cursor: pointer;
  }
  .popup .form-popup h2,
- .popup-stock .form-popup h2{
+ .popup-stock .form-popup h2,
+ .popup-paymentmetod .form-popup h2,
+ .popup-paymentmetod-card .form-popup h2,
+ .popup-edit-confirm .form-popup h2{
     text-align: center;
     margin: 10px 0 20px;
     font-size: 25px;
  }
+ .popup-paymentmetod .form-popup p,
+ .popup-paymentmetod-card .form-popup p,
+ .popup-edit-confirm .form-popup p{
+    text-align: center;
+    margin: 10px 0 20px;
+ }
  .popup .form-popup .form-elment,
- .popup-stock .form-popup .form-elment{
+ .popup-stock .form-popup .form-elment,
+ .popup-paymentmetod .form-popup .form-elment,
+ .popup-paymentmetod-card .form-popup .form-elment,
+ .popup-edit-confirm .form-popup .form-elment{
     margin: 15px 0;
  }
  .popup .form-popup .form-elment label,
- .popup-stock .form-popup .form-elment label{
+ .popup-stock .form-popup .form-elment label
+ .popup-paymentmetod .form-popup .form-elment label,
+ .popup-paymentmetod-card .form-popup .form-elment label,
+ .popup-edit-confirm .form-popup .form-elment label{
     font-size: 14px;
  }
  .popup .form-popup .form-elment input[type="email"],
  .popup .form-popup .form-elment input[type="password"],
- .popup-stock .form-popup .form-elment input{
+ .popup-stock .form-popup .form-elment input,
+ .popup-paymentmetod-card .form-popup .form-elment input,
+ .popup-edit-confirm .form-popup .form-elment input{
     margin-top: 5px;
     display: block;
     width: 100%;
@@ -1197,7 +1221,10 @@ border: 2px solid var(--color-primary);
     border-radius: var(--bordr-radius-1);
  }
  .popup .form-popup .form-elment button,
- .popup-stock .form-popup .form-elment button{
+ .popup-stock .form-popup .form-elment button,
+ .popup-paymentmetod .form-popup .form-elment button,
+ .popup-paymentmetod-card .form-popup .form-elment button,
+ .popup-edit-confirm .form-popup .form-elment button{
     width: 100%;
     height: 40px;
     border: none;
@@ -1208,8 +1235,22 @@ border: 2px solid var(--color-primary);
     border-radius: var(--bordr-radius-1);
     cursor: pointer;
  }
+ .popup-paymentmetod .form-popup .form-elment button,
+ .popup-paymentmetod-card .form-popup .form-elment button,
+ .popup-edit-confirm .form-popup .form-elment button{
+    width: 10rem;
+ }
+ #form-elment-payment{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+ }
  .popup .form-popup .form-elment button:hover,
- .popup-stock .form-popup .form-elment button:hover{
+ .popup-stock .form-popup .form-elment button:hover,
+ .popup-paymentmetod .form-popup .form-elment button:hover,
+ .popup-paymentmetod-card .form-popup .form-elment button:hover,
+ .popup-edit-confirm .form-popup .form-elment button:hover{
     background-color: var(--color-btn-dark);
  }
  .forgot-password-popup{
@@ -1992,7 +2033,7 @@ border: 2px solid var(--color-primary);
 }
 .sale-page-right{
     width: 30%;
-    padding: .5rem;
+    /* padding: .5rem; */
     position: relative;
 }
 .sale-page-right hr{
@@ -2185,4 +2226,17 @@ input[type=number]::-webkit-outer-spin-button {
 }
 #submit-order:hover{
     background-color: var(--color-btn-dark);
+}
+
+#ep-no-btn{
+    background-color: var(--color-danger);
+}
+#ep-no-btn:hover{
+    background-color: var(--color-danger-hover);
+}
+#ep-yes-btn{
+    background-color: var(--color-success);
+}
+#ep-yes-btn:hover{
+    background-color: var(--color-success-hover);
 }

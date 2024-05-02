@@ -1,8 +1,7 @@
 package lk.ijse.shoeshop.service.secutiry.impl;
 
 import lk.ijse.shoeshop.dto.EmployeeDTO;
-import lk.ijse.shoeshop.entity.enums.Gender;
-import lk.ijse.shoeshop.entity.enums.UserRole;
+import lk.ijse.shoeshop.dto.ResponseEmployeeDTO;
 import lk.ijse.shoeshop.repo.UserRepo;
 import lk.ijse.shoeshop.reqAndResponse.response.JwtAuthResponse;
 import lk.ijse.shoeshop.reqAndResponse.secure.SignIn;
@@ -17,8 +16,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -37,8 +34,34 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         var userByEmail = userRepo.findByEmail(signIn.getEmail())
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
         var generatedToken = jwtService.generateToken(userByEmail);
-        return JwtAuthResponse.builder().token(generatedToken).build();
+        var employee = mapping.toEmployeeDTO(userByEmail);
+
+        ResponseEmployeeDTO responseEmployeeDTO = null;
+        responseEmployeeDTO = ResponseEmployeeDTO.builder()
+                .employeeCode(employee.getEmployeeCode())
+                .name(employee.getName())
+                .profilePic(employee.getProfilePic())
+                .gender(employee.getGender())
+                .status(employee.getStatus())
+                .designation(employee.getDesignation())
+                .role(employee.getRole())
+                .dob(employee.getDob())
+                .joinedDate(employee.getJoinedDate())
+                .branch(employee.getBranch())
+                .addressNo(employee.getAddressNo())
+                .addressLane(employee.getAddressLane())
+                .addressCity(employee.getAddressCity())
+                .addressState(employee.getAddressState())
+                .postalCode(employee.getPostalCode())
+                .email(employee.getEmail())
+                .phone(employee.getPhone())
+                .guardianOrNominatedPerson(employee.getGuardianOrNominatedPerson())
+                .emergencyContact(employee.getEmergencyContact())
+                .build();
+        System.out.println(employee.getProfilePic());
+        return JwtAuthResponse.builder().token(generatedToken).employee(responseEmployeeDTO).build();
     }
+
 
     @Override
     public JwtAuthResponse signUp(SignUp signUp) {
@@ -77,4 +100,5 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         var refreshToken = jwtService.generateToken(userEntity);
         return JwtAuthResponse.builder().token(refreshToken).build();
     }
+
 }

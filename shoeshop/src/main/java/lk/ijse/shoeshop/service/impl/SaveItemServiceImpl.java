@@ -6,7 +6,6 @@ import lk.ijse.shoeshop.dto.ItemImageDTO;
 import lk.ijse.shoeshop.dto.SaveItemDTO;
 import lk.ijse.shoeshop.entity.ItemEntity;
 import lk.ijse.shoeshop.entity.ItemImageEntity;
-import lk.ijse.shoeshop.entity.enums.ItemCategories;
 import lk.ijse.shoeshop.repo.ItemImageRepo;
 import lk.ijse.shoeshop.repo.ItemRepo;
 import lk.ijse.shoeshop.service.SaveItemService;
