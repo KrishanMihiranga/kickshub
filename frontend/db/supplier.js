@@ -12,3 +12,5 @@ export var supplierData = {
     contactNo1: null,
     contactNo2: null
 };
+
+export var suppliers= [];

@@ -3,19 +3,16 @@ package lk.ijse.shoeshop.api;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Null;
-import lk.ijse.shoeshop.dto.ItemDTO;
 import lk.ijse.shoeshop.dto.SaveItemDTO;
 import lk.ijse.shoeshop.entity.SupplierEntity;
+import lk.ijse.shoeshop.entity.enums.Gender;
 import lk.ijse.shoeshop.entity.enums.ItemCategories;
+import lk.ijse.shoeshop.entity.enums.Occasion;
 import lk.ijse.shoeshop.service.SaveItemService;
 import lk.ijse.shoeshop.util.UtilMatters;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -38,19 +35,22 @@ public class SaveItem {
                                                 @Valid @RequestPart("image")String image,
                                                 @Valid @RequestPart("itemCode") String itemCode,
                                                 @Valid @RequestPart("description") String description,
-                                                @Valid @RequestPart("category") String category, // Convert enum to string
+                                                @Valid @RequestPart("category") String category,
+                                                @Valid @RequestPart("occasion") String occasion,
+                                                @Valid @RequestPart("gender") String gender,
                                                 @Valid @RequestPart("supplierName") String supplierName,
-                                                @Valid @RequestPart("supplier") String supplierJson, // Serialize SupplierEntity to JSON
+                                                @Valid @RequestPart("supplier") String supplierJson,
                                                 @Valid @RequestPart("unitPriceSale") String unitPriceSale,
                                                 @Valid @RequestPart("unitPriceBuy") String unitPriceBuy,
                                                 @Valid @RequestPart("expectedPrice") String expectedPrice,
                                                 @Valid @RequestPart("profitMargin") String profitMargin,
-                                                    Errors errors) throws JsonProcessingException {
-        System.out.println("Hits!");
+                                                Errors errors) throws JsonProcessingException {
 
-        ItemCategories parsedCategory = ItemCategories.valueOf(category); // Convert string to enum
+        ItemCategories parsedCategory = ItemCategories.valueOf(category);
+        Occasion parsedOccasion = Occasion.valueOf(occasion);
+        Gender parsedGender = Gender.valueOf(gender);
 
-        SupplierEntity parsedSupplier = objectMapper.readValue(supplierJson, SupplierEntity.class); // Deserialize JSON to SupplierEntity
+        SupplierEntity parsedSupplier = objectMapper.readValue(supplierJson, SupplierEntity.class);
 
 
         if (errors.hasFieldErrors()){
@@ -64,9 +64,11 @@ public class SaveItem {
         //build Object
         SaveItemDTO saveItemDTO = new SaveItemDTO();
 
-        saveItemDTO.setItemCode(itemCode);
+        saveItemDTO.setItemCode(null);
         saveItemDTO.setDescription(description);
         saveItemDTO.setCategory(parsedCategory);
+        saveItemDTO.setOccasion(parsedOccasion);
+        saveItemDTO.setGender(parsedGender);
         saveItemDTO.setSupplierName(supplierName);
         saveItemDTO.setSupplier(parsedSupplier);
         saveItemDTO.setUnitPriceSale(Double.valueOf(unitPriceSale));
