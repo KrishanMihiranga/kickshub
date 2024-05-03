@@ -3,8 +3,8 @@ import {suppliers} from "../db/supplier.js";
 
 
 var signInData = {
-    email: 'pubudu@gmail.com',
-    password: CryptoJS.SHA256('pubudu123').toString(CryptoJS.enc.Hex)
+    email: 'adminkrishan@gmail.com',
+    password: CryptoJS.SHA256('admin123').toString(CryptoJS.enc.Hex)
 };
 
 $.ajax({

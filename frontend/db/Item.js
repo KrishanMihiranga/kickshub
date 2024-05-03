@@ -1,15 +1,19 @@
-export var formData = {
+export var regItem = {
     id: null,
     image: null,
     itemCode: null,
     description: null,
     category: null,
+    occasion: null,
+    gender: null,
     supplierName: null,
     unitPriceSale: null,
     unitPriceBuy: null,
     expectedPrice: null,
     profitMargin: null,
     supplier: null
+
+};
     // supplier: {
     //     code: null,
     //     supplierName: null,
@@ -24,4 +28,3 @@ export var formData = {
     //     contactNo1: null,
     //     contactNo2: null
     // }
-};

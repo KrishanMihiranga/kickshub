@@ -1129,21 +1129,18 @@
                             <div class="form-one form-stepCustomer">
                                 <div>
                                     <label>Item Name</label>
-                                    <input type="text" placeholder="Enter Item Name">
+                                    <input type="text" placeholder="Enter Item Name" id="reg-item-name">
                                 </div>
                                 <div>
                                     <label>Item Category</label>
-                                    <select name="category" class="reg-item-branch">
-                                        <option value="branch1">Branch 01</option>
-                                        <option value="branch2">Branch 02</option>
-                                        <option value="branch3">Branch 03</option>
-                                        <option value="branch4">Branch 04</option>
-                                        <option value="branch5">Branch 05</option>
-                                        <option value="branch6">Branch 06</option>
-                                        <option value="branch7">Branch 07</option>
-                                        <option value="branch8">Branch 08</option>
-                                        <option value="branch9">Branch 09</option>
-                                        <option value="branch10">Branch 10</option>
+                                    <select name="category" class="reg-item-category">
+                                        <option value="HEEL">Heels</option>
+                                        <option value="FLATS">Flats</option>
+                                        <option value="WEDGES">Wedges</option>
+                                        <option value="FLIP_FLOPS">Filp-Flops</option>
+                                        <option value="SANDALS">Sandals</option>
+                                        <option value="SHOES">Shoes</option>
+                                        <option value="SLIPPERS">Slippers</option>
                                     </select>
                                 </div>
                                 <div>
@@ -1170,50 +1167,63 @@
                                     </div>
                                 </div>
                                 <div>
+                                    <label>Gender</label>
+                                    <div class="radio-wapper reg-item-radio-gender">
+                                        <input type="radio" id="reg-i-m" name="gender" value="MALE" class="radioG" >
+                                        <label class="labelE label-1" for="reg-i-m">Male</label>
+                                        <input type="radio" id="reg-i-f" name="gender" value="FEMALE" class="radioG" >
+                                        <label class="labelE label-2" for="reg-i-f">Female</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label>Occasion</label>
+                                    <div class="radio-wapper reg-item-radio-occasion">
+                                        <input type="radio" id="reg-i-fo" name="occasion" value="FORMAL" class="radioG" >
+                                        <label class="labelE label-1" for="reg-i-fo">Formal</label>
+                                        <input type="radio" id="reg-i-cas" name="occasion" value="CASUAL" class="radioG" >
+                                        <label class="labelE label-2" for="reg-i-cas">Casual</label>
+                                        <input type="radio" id="reg-i-in" name="occasion" value="INDUSTRIAL" class="radioG" >
+                                        <label class="labelE label-2" for="reg-i-in">Industrial</label>
+                                        <input type="radio" id="reg-i-sp" name="occasion" value="SPORT" class="radioG" >
+                                        <label class="labelE label-2" for="reg-i-sp">Sport</label>
+                                    </div>
+                                </div>
+                                <div>
                                     <label>Supplier</label>
                                     <div class="reg-item-supplier-code">
                                         <span>xxxxxxxxxx-xxxxxxxxx-xxxxx</span>
                                     </div>
                                     <select name="suppliers" class="reg-item-supplier">
-                                        <option value="branch1">Branch 01</option>
-                                        <option value="branch2">Branch 02</option>
-                                        <option value="branch3">Branch 03</option>
-                                        <option value="branch4">Branch 04</option>
-                                        <option value="branch5">Branch 05</option>
-                                        <option value="branch6">Branch 06</option>
-                                        <option value="branch7">Branch 07</option>
-                                        <option value="branch8">Branch 08</option>
-                                        <option value="branch9">Branch 09</option>
-                                        <option value="branch10">Branch 10</option>
                                     </select>
                                 </div>
                                 <div class="reg-item-price">
                                     <div>
                                         <div>
                                             <label>Purchase Price</label>
-                                            <input type="text" placeholder="Enter Price">
+                                            <input type="text" placeholder="Enter Price" id="reg-i-pur">
                                         </div>
                                         <div>
                                             <label>Selling Price</label>
-                                            <input type="text" placeholder="Enter Price">
+                                            <input type="text" placeholder="Enter Price" id="reg-i-sell">
                                         </div>
                                     </div>
                                     <div>
                                         <div>
                                             <label>Excepted Profit</label>
-                                            <input type="text" placeholder="Enter Price">
+                                            <input type="text" placeholder="Enter Price" id="reg-i-ex-profit">
                                         </div>
                                         <div>
                                             <label>Profit Margin</label>
-                                            <input type="text" placeholder="Enter margin %">
+                                            <input type="text" placeholder="Enter margin %" id="reg-i-mar">
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="reg-item-btn-wrapper">
-                                <button id="reg-item-btn">Register</button>
-                            </div>
+                            
                         </form>
+                        <div class="reg-item-btn-wrapper">
+                            <button id="reg-item-btn">Register</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -2169,10 +2179,6 @@
   $('#recent-orders-back').on('click', () => {
     $('#recent-orders-refund-page').hide();
     $('#recent-orders-refund').show();
-  });
-  $('#add-item-btn').on('click', () => {
-    $('#save-changes-employee, .charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer,#page-supplier, #update-profile, #information-page, #recent-orders-refund-page, #refund-page, #add-product-page, #inventory-page, #sale-page').hide();
-    $('#add-item-page').show();
   });
   $('#add-product-btn').on('click',()=>{
     $('#save-changes-employee, .charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer,#page-supplier, #update-profile, #information-page, #recent-orders-refund-page, #refund-page, #add-item-page, #inventory-page, #sale-page').hide();

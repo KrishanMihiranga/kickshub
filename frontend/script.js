@@ -361,7 +361,7 @@ const updateProgress = () => {
 
 //open popup
 
-$('#reg-item-btn,#refund-page-refund-btn').on('click', () => {
+$('#refund-page-refund-btn').on('click', () => {
   $('.popup').addClass("active-popup");
   $('.overlay').addClass("active-overlay"); // Add class to overlay
 });
