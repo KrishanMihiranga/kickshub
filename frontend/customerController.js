@@ -1,4 +1,6 @@
 
+import {authData} from "../db/loginData.js";
+
 var cusfirstname = $('#reg-cus-fn');
 var cuslastname = $('#reg-cus-ln');
 var cusgender;
@@ -31,6 +33,7 @@ $('#reg-cus-submit').on('click', function() {
 
     // Format date of birth
     cusdob = year + "-" + month + "-" + day;
+
     // Format the date to ISO 8601 format with milliseconds
     var isoDate = currentDate.toISOString();
 
@@ -40,7 +43,7 @@ $('#reg-cus-submit').on('click', function() {
         gender: cusgender,
         joinedDateAsLoyalty: cusjoinedDateAsLoyalty.val(),
         totalPoints: custotalPoints,
-        dob: cusdob,
+        dob: cusdob.toString(),
         addressNo: cusaddressNo.val(),
         addressLane: cusaddressLane.val(),
         addressCity: cusaddressCity.val(),
@@ -56,9 +59,13 @@ $('#reg-cus-submit').on('click', function() {
         type: "POST",
         url: "http://localhost:9090/shoeshop/api/v1/customer",
         contentType: "application/json",
+        headers: {
+            'Authorization': 'Bearer ' + authData.token
+        },
         data: JSON.stringify(customerData),
         success: function(response) {
             console.log("Customer saved successfully:", response);
+            alert('success');
         },
         error: function(xhr, status, error) {
             console.error("Failed to save customer:", error);

@@ -2,6 +2,7 @@ package lk.ijse.shoeshop.api;
 
 import lk.ijse.shoeshop.dto.CustomerDTO;
 import lk.ijse.shoeshop.service.CustomerService;
+import lk.ijse.shoeshop.util.Mapping;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,7 @@ public class Customer {
 
     @PostMapping
     public ResponseEntity<CustomerDTO> saveCustomer(@RequestBody CustomerDTO customer){
+
         return ResponseEntity.ok(customerService.saveCustomer(customer));
     }
 

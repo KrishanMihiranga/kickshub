@@ -1207,8 +1207,8 @@ border: 2px solid var(--color-primary);
  .popup-edit-confirm .form-popup .form-elment label{
     font-size: 14px;
  }
- .popup .form-popup .form-elment input[type="email"],
- .popup .form-popup .form-elment input[type="password"],
+ .popup .form-popup .form-elment input,
+ .popup .form-popup .form-elment input,
  .popup-stock .form-popup .form-elment input,
  .popup-paymentmetod-card .form-popup .form-elment input,
  .popup-edit-confirm .form-popup .form-elment input{
@@ -2239,4 +2239,24 @@ input[type=number]::-webkit-outer-spin-button {
 }
 #ep-yes-btn:hover{
     background-color: var(--color-success-hover);
+}
+
+/* //toggle password */
+#toggle-password{
+    border: 2px solid var(--color-primary);
+    width: 15px;
+    height: 15px;
+    appearance: auto;
+    background-color: transparent;
+    cursor: pointer;
+    color: #24ce95;
+}
+.password-toggle-wrapper{
+    display: flex;
+    gap: .8rem;
+    align-items: center;
+    margin-top: .5rem;
+}
+.password-toggle-wrapper label{
+    margin-top: 7px;
 }

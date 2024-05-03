@@ -38,6 +38,7 @@ $('#dashboard-photo').on('click', () => {
     $('#update-profile-user-role').text(authData.employee.role);
     
     var fullName = authData.employee.name;
+    $('#up-user-name').text(fullName);
     var nameParts = fullName.split(" ");
     var lastName = nameParts[0];
     var firstName = nameParts.slice(1).join(" ");
@@ -149,6 +150,18 @@ $('#save-changes-employee').on('click', () => {
     console.log(employeeData);
   });
 
+$('#toggle-password').change(function () {
+    var passwordInput = $('#password-popup');
+    var confirmPasswordInput = $('#password-confirm-popup');
+    if ($(this).is(':checked')) {
+        passwordInput.attr('type', 'text');
+        confirmPasswordInput.attr('type', 'text');
+    } else {
+        passwordInput.attr('type', 'password');
+        confirmPasswordInput.attr('type', 'password');
+    }
+});
+
 
 
   $('#save-up-btn').on('click', () => {
@@ -163,7 +176,7 @@ $('#save-changes-employee').on('click', () => {
 
     var dataEmp = {
         email: pop_email,
-        password: pop_password
+        password: CryptoJS.SHA256(pop_password).toString(CryptoJS.enc.Hex)
     };
 
     $.ajax({
@@ -196,7 +209,7 @@ $('#save-changes-employee').on('click', () => {
                 formData.append('phone', employeeData.phone);
                 formData.append('guardianOrNominatedPerson', employeeData.guardianOrNominatedPerson);
                 formData.append('emergencyContact', employeeData.emergencyContact);
-                formData.append('password', employeeData.password);
+                formData.append('password', CryptoJS.SHA256(employeeData.password).toString(CryptoJS.enc.Hex));
 
                 $.ajax({
                     url: 'http://localhost:9090/shoeshop/api/v1/employee',

@@ -23,6 +23,7 @@ public class SupplierEntity {
     private String addressState;
     private String postalCode;
     private String originCountry;
+    @Column(unique = true)
     private String email;
     private String contactNo1;
     private String contactNo2;

@@ -110,6 +110,7 @@ registerEmployee.on('click', function() {
         contentType: false,
         success: function(response) {
             console.log('Success:', response);
+            alert("Successful");
         },
         error: function(xhr, status, error) {
             console.error('Error:', error);

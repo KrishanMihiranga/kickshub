@@ -563,7 +563,7 @@
                                 <div>
                                     <label>Category</label>
                                     <div class="radio-wapper" id="reg-sup-radio-cat">
-                                        <input type="radio" id="sup-cat-l" name="category" value="LOCAL" class="radioG" checked>
+                                        <input type="radio" id="sup-cat-l" name="category" value="LOCAL" class="radioG">
                                         <label class="labelE label-1" for="sup-cat-l">Local</label>
                                         <input type="radio" id="sup-cat-Int" name="category" value="INTERNATIONAL" class="radioG">
                                         <label class="labelE label-2" for="sup-cat-Int">International</label>
@@ -575,29 +575,29 @@
                                 <h2>Contact Information</h2>
                                 <div>
                                     <label>Phone</label>
-                                    <input type="tel" placeholder="+94xxxxxxx29">
+                                    <input type="tel" placeholder="+94xxxxxxx29" id="reg-sup-tel">
                                 </div>
                                 <div>
-                                    <input type="tel" placeholder="+38xxxxxxx29">
+                                    <input type="tel" placeholder="+38xxxxxxx29" id="reg-sup-tel-2">
                                 </div>
                                 <div>
                                     <label>Address</label>
-                                    <input type="text" placeholder="Street Address">
+                                    <input type="text" placeholder="Street Address" id="reg-sup-add-street">
                                 </div>
                                 <div>
-                                    <input type="text" placeholder="Suite, Building">
+                                    <input type="text" placeholder="Suite, Building" id="reg-sup-add-no">
                                 </div>
                                 <div>
                                     <label>City</label>
-                                    <input type="text" placeholder="city">
+                                    <input type="text" placeholder="city" id="reg-sup-add-city">
                                 </div>
                                 <div>
                                     <label>State</label>
-                                    <input type="text" placeholder="State / Province">
+                                    <input type="text" placeholder="State / Province" id="reg-sup-add-state">
                                 </div>
                                 <div>
                                     <label>Zip Code</label>
-                                    <input type="text" placeholder="Zip / Postal Code">
+                                    <input type="text" placeholder="Zip / Postal Code" id="reg-sup-add-zip">
                                 </div>
                                 <div>
                                     <label>Country</label>
@@ -611,7 +611,7 @@
                                 <h2>Security Information</h2>
                                 <div>
                                     <label>Email</label>
-                                    <input type="email" placeholder="Your email address">
+                                    <input type="email" placeholder="Your email address" id="reg-sup-email">
                                 </div>
                                 <div class="checkbox">
                                     <input type="checkbox">
@@ -621,7 +621,7 @@
                             <div class="btn-group">
                                 <button type="button" class="btn-prev" disabled>Back</button>
                                 <button type="button" class="btn-next">Next Step</button>
-                                <button type="button" class="btn-submit">Submit</button>
+                                <button type="button" class="btn-submit" id="add-sup-btn">Submit</button>
                             </div>
                         </form>
                     </div>
@@ -639,7 +639,7 @@
                             <div class="update-profile-top-left-profilePic-container">
                                 <img src="assets/images/profile-1.jpg" alt="ProfilePic" id="update-profile-top-left-profilePic">
                             </div>
-                            <div class="update-profile-user-name-password"><h2>Krishan Mihiranga</h2><div class="update-profile-user-code"><h3 class="text-muted update-profile-user-unique-code">66250188-1d02-4d1a-922b-ac92d0c9d8a0</h3><button class="update-profile-user-unique-code-copy"><i class="fa-regular fa-clone"></i></button></div></div>
+                            <div class="update-profile-user-name-password"><h2 id="up-user-name">Krishan Mihiranga</h2><div class="update-profile-user-code"><h3 class="text-muted update-profile-user-unique-code">66250188-1d02-4d1a-922b-ac92d0c9d8a0</h3><button class="update-profile-user-unique-code-copy"><i class="fa-regular fa-clone"></i></button></div></div>
                             <h3 class="text-muted" id="update-profile-user-role">Admin</h3>
                         </div>
                         <div class="update-profile-top-right">
@@ -813,6 +813,7 @@
                         <label for="password-popup" class="text-muted">Password</label>
                         <input type="password" id="password-popup" placeholder="Enter Password">
                         <input type="password" id="password-confirm-popup" placeholder="Confirm Password">
+                        <div class="password-toggle-wrapper"><label>Toggle password</label><input type="checkbox" id="toggle-password" class="toggle-password"></div>
                     </div>
                     <div class="form-elment">
                         <button id="save-up-btn">Save Changes</button>
@@ -2129,9 +2130,10 @@
     <script src="./script.js"></script>
     <script type="module" src="./startup.js"></script>
     <script src="./employeeController.js"></script>
-    <script src="./customerController.js"></script>
+    <script type="module" src="./customerController.js"></script>
     <script src="./sessiontimeController.js"></script>
     <script type="module" src="./controller/DashboardController.js"></script>
+    <script type="module" src="./controller/SupplierController.js"></script>
     
     <script>
         //routes

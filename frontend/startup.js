@@ -1,8 +1,8 @@
 import {authData} from "./db/loginData.js";
 
 var signInData = {
-    email: 'krishan@gmail.com',
-    password: 'password123'
+    email: 'pubudu@gmail.com',
+    password: CryptoJS.SHA256('pubudu123').toString(CryptoJS.enc.Hex)
 };
 
 $.ajax({
@@ -13,6 +13,7 @@ $.ajax({
     success: function(response) {
         authData.token = response.token;
         authData.employee = response.employee;
+        alert("Welcome! You are now acting as "+ response.employee.name);
     },
     error: function(xhr, status, error) {
         alert('Sign-in failed');
