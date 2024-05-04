@@ -15,7 +15,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.io.IOException;
+import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -32,7 +36,7 @@ public class SaveItem {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping( value= "/saveimage")
     public ResponseEntity<SaveItemDTO> saveItem(@Valid @RequestPart("id")String id,
-                                                @Valid @RequestPart("image")String image,
+                                                @Valid @RequestPart("image") MultipartFile image,
                                                 @Valid @RequestPart("itemCode") String itemCode,
                                                 @Valid @RequestPart("description") String description,
                                                 @Valid @RequestPart("category") String category,
@@ -59,7 +63,13 @@ public class SaveItem {
         }
 
         //convert image to base64
-        String base64ProPic = UtilMatters.convertBase64(image);
+        byte[] byteImage = new byte[0];
+        try {
+            byteImage = image.getBytes();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String base64ProPic = UtilMatters.convertBase64(byteImage);
 
         //build Object
         SaveItemDTO saveItemDTO = new SaveItemDTO();

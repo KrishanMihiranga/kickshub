@@ -25,6 +25,7 @@ $(document).ready(function() {
 });
 
 
+
 $('#dashboard-photo').on('click', () => {
     //route
     $('#save-changes-employee, .charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer,#page-supplier, #information-page, #refund-page, #add-item-page, #add-product-page, #inventory-page, #sale-page').hide();
@@ -114,13 +115,18 @@ $('#dashboard-photo').on('click', () => {
 
 //popup
 $('#save-changes-employee').on('click', () => {
-    $('.popup').addClass("active-popup");
-    $('.overlay').addClass("active-overlay");
-
 
     var imageSrc = $('#update-profile-top-left-profilePic').attr('src');
-    // todo: fix profile picture bug 
-    employeeData.profilePic = imageSrc.split(',')[1];
+    var base64Data = imageSrc.split(',')[1];
+    var byteCharacters = atob(base64Data);
+    var byteNumbers = new Array(byteCharacters.length);
+    for (var i = 0; i < byteCharacters.length; i++) {
+        byteNumbers[i] = byteCharacters.charCodeAt(i);
+    }
+    var byteArray = new Uint8Array(byteNumbers);
+    var blob = new Blob([byteArray], { type: 'image/jpeg' });
+    
+    employeeData.profilePic = blob;
     employeeData.employeeCode = $('.update-profile-user-unique-code').text();
     employeeData.name = $('#up-fn').val()+" "+$('#up-ln').val();
     employeeData.gender = $('.radio-up-emp-gender input[type="radio"]:checked').val();
@@ -148,6 +154,10 @@ $('#save-changes-employee').on('click', () => {
     employeeData.designation= $('.radio-up-emp-designation input[type="radio"]:checked').val();
     employeeData.emergencyContact= $('#up-tel').val();
     console.log(employeeData);
+    $('.popup').addClass("active-popup");
+    $('.overlay').addClass("active-overlay");
+
+    
   });
 
 $('#toggle-password').change(function () {
@@ -236,7 +246,7 @@ $('#toggle-password').change(function () {
             console.error('Error:', error);
         }
     });
-});
+    });
 
 
 

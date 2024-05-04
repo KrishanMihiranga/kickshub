@@ -15,8 +15,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.io.IOException;
 import java.util.List;
 
 @CrossOrigin
@@ -52,7 +54,7 @@ public class Employee {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<EmployeeDTO> saveEmployee(@Valid
-                                    @RequestPart("profilePic")String profilePic,
+                                    @RequestPart("profilePic") MultipartFile profilePic,
                                        @RequestPart("employeeCode")String employeeCode,
                                        @RequestPart("name")String name,
                                        @RequestPart("gender")String gender,
@@ -78,7 +80,13 @@ public class Employee {
                     errors.getFieldErrors().get(0).getDefaultMessage());
         }
         //convert image to base64
-        String base64ProPic = UtilMatters.convertBase64(profilePic);
+        byte[] profilePicByte = new byte[0];
+        try {
+            profilePicByte = profilePic.getBytes();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String base64ProPic = UtilMatters.convertBase64(profilePicByte);
         //build Object
         EmployeeDTO updatedBuildEmployee = new EmployeeDTO();
         updatedBuildEmployee.setEmployeeCode(employeeCode);
@@ -108,7 +116,7 @@ public class Employee {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PatchMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<EmployeeDTO> updateEmployee(@Valid
-                                                    @RequestPart("profilePic")String profilePic,
+                                                    @RequestPart("profilePic")MultipartFile profilePic,
                                                     @RequestPart("employeeCode")String employeeCode,
                                                     @RequestPart("name")String name,
                                                     @RequestPart("gender")String gender,
@@ -134,7 +142,13 @@ public class Employee {
                     errors.getFieldErrors().get(0).getDefaultMessage());
         }
         //convert image to base64
-        String base64ProPic = UtilMatters.convertBase64(profilePic);
+        byte[] profilePicByte = new byte[0];
+        try {
+            profilePicByte = profilePic.getBytes();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String base64ProPic = UtilMatters.convertBase64(profilePicByte);
         //build Object
         EmployeeDTO updatedBuildEmployee = new EmployeeDTO();
         updatedBuildEmployee.setEmployeeCode(employeeCode);

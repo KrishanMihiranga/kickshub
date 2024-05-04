@@ -14,17 +14,17 @@ export var regItem = {
     supplier: null
 
 };
-    // supplier: {
-    //     code: null,
-    //     supplierName: null,
-    //     category: null,
-    //     addressNo: null,
-    //     addressLane: null,
-    //     addressCity: null,
-    //     addressState: null,
-    //     postalCode: null,
-    //     originCountry: null,
-    //     email: null,
-    //     contactNo1: null,
-    //     contactNo2: null
-    // }
+
+export var items = [];
+export var itemImages = [];
+
+export var addToInventory = {
+    inventoryCode: null,
+    size: null,
+    colors: null, 
+    originalQty: null, 
+    currentQty: null, 
+    status: null, 
+    item: null, 
+    itemImage: null
+};

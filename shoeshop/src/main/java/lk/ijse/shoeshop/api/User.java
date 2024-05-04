@@ -15,7 +15,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.io.IOException;
 
 @CrossOrigin
 @RestController
@@ -39,7 +42,7 @@ public class User {
     //signup
     @PostMapping(value = "/signup", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<JwtAuthResponse> saveUser(@Valid
-                                                        @RequestPart("profilePic")String profilePic,
+                                                        @RequestPart("profilePic") MultipartFile profilePic,
                                                     @RequestPart("employeeCode")String employeeCode,
                                                     @RequestPart("name")String name,
                                                     @RequestPart("gender")String gender,
@@ -65,7 +68,14 @@ public class User {
                     errors.getFieldErrors().get(0).getDefaultMessage());
         }
         //convert image to base64
-        String base64ProPic = UtilMatters.convertBase64(profilePic);
+        byte[] byteProfilePic = new byte[0];
+        try {
+            byteProfilePic = profilePic.getBytes();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        String base64ProPic = UtilMatters.convertBase64(byteProfilePic);
 
         SignUp signUp = new SignUp();
 

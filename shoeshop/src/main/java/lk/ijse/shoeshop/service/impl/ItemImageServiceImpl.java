@@ -9,6 +9,8 @@ import lk.ijse.shoeshop.util.UtilMatters;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -20,5 +22,10 @@ public class ItemImageServiceImpl implements ItemImageService {
     public ItemImageDTO saveItemImage(ItemImageDTO itemImageDTO) {
         itemImageDTO.setId(UtilMatters.generateId());
         return mapping.toItemImageDTO(itemImageRepo.save(mapping.toItemImageEntity(itemImageDTO)));
+    }
+
+    @Override
+    public List<ItemImageDTO> getAll() {
+        return mapping.getItemImageDTOList(itemImageRepo.findAll());
     }
 }

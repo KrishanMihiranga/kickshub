@@ -1,4 +1,5 @@
 package lk.ijse.shoeshop.dto;
+import jakarta.validation.constraints.Null;
 import lk.ijse.shoeshop.entity.ItemEntity;
 import lk.ijse.shoeshop.entity.ItemImageEntity;
 import lk.ijse.shoeshop.entity.enums.Colors;
@@ -11,6 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class InventoryDTO implements SuperDTO{
+    @Null
     private String inventoryCode;
     private Sizes size;
     private Colors colors;

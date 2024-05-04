@@ -826,16 +826,17 @@
             <!-- ******** information page ******** -->
             <div id="information-page">
                 <div>
-                    <button id="getb">Get all test</button>
                     <h2>Business Information</h2>
                     <p>Select the category you want from the dropdown below</p>
                 </div>
-                <div class="information-dropdown">
-                    <input type="text" class="information-textBox" placeholder="Dropdown Menu" readonly>
-                    <div class="information-option">
-                        <div onclick="showInfo('Employee')"><i class="fa-regular fa-user"></i>Employee</div>
-                        <div onclick="showInfo('Supplier')"><i class="fa-solid fa-box-open"></i> Supplier</div>
-                        <div onclick="showInfo('Customer')"><i class="fa-solid fa-person"></i> Customer</div>
+                <div>
+                    <div class="radio-wapper" id="inf-cat">
+                        <input type="radio" id="inf-cat-e" name="category" value="employee" class="radioG" checked>
+                        <label class="labelE label-1" for="inf-cat-e">Employee</label>
+                        <input type="radio" id="inf-cat-s" name="category" value="supplier" class="radioG">
+                        <label class="labelE label-2" for="inf-cat-s">Supplier</label>
+                        <input type="radio" id="inf-cat-c" name="category" value="customer" class="radioG">
+                        <label class="labelE label-3" for="inf-cat-c">Customer</label>
                     </div>
                 </div>
                 <div id="information-table-customer-wrapper">
@@ -843,47 +844,51 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>Product Name</th>
-                                <th>Product Number</th>
-                                <th>Payment</th>
-                                <th>Status</th>
+                                <th>Code</th>
+                                <th>Name</th>
+                                <th>Address</th>
+                                <th>Email</th>
+                                <th>Gender</th>
+                                <th>DOB</th>
+                                <th>Level</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Nike Red Shoe</td>
-                                <td>83212</td>
-                                <td>Card</td>
-                                <td class="success">Available</td>
-                                <td class="primary">Details</td>
+                                <td>4c8127dd-11a6-4356-a9b2-b63d5900b013</td>
+                                <td>Pubudu Lakmal</td>
+                                <td>500/1, Garage Lane, Kurunegala</td>
+                                <td>pubudu@gmail.com</td>
+                                <td>Male</td>
+                                <td>1995-05-23</td>
+                                <td>Gold</td>
                             </tr>
                             <tr>
-                                <td>Nike Blue Shoe</td>
-                                <td>83452</td>
-                                <td>Card</td>
-                                <td class="warning">Unavailable</td>
-                                <td class="primary">Details</td>
+                                <td>4c8127dd-11a6-4356-a9b2-b63d5900b013</td>
+                                <td>Pubudu Lakmal</td>
+                                <td>500/1, Garage Lane, Kurunegala</td>
+                                <td>pubudu@gmail.com</td>
+                                <td>Male</td>
+                                <td>1995-05-23</td>
+                                <td>Gold</td>
                             </tr>
                             <tr>
-                                <td>Nike White Shoe</td>
-                                <td>8342</td>
-                                <td>Cash</td>
-                                <td class="success">Available</td>
-                                <td class="primary">Details</td>
+                                <td>4c8127dd-11a6-4356-a9b2-b63d5900b013</td>
+                                <td>Pubudu Lakmal</td>
+                                <td>500/1, Garage Lane, Kurunegala</td>
+                                <td>pubudu@gmail.com</td>
+                                <td>Male</td>
+                                <td>1995-05-23</td>
+                                <td>Gold</td>
                             </tr>
                             <tr>
-                                <td>Nike Pink Shoe</td>
-                                <td>34512</td>
-                                <td>Card</td>
-                                <td class="danger">Low</td>
-                                <td class="primary">Details</td>
-                            </tr>
-                            <tr>
-                                <td>Nike Browm Shoe</td>
-                                <td>34512</td>
-                                <td>Cash</td>
-                                <td class="warning">Unavailable</td>
-                                <td class="primary">Details</td>
+                                <td>4c8127dd-11a6-4356-a9b2-b63d5900b013</td>
+                                <td>Pubudu Lakmal</td>
+                                <td>500/1, Garage Lane, Kurunegala</td>
+                                <td>pubudu@gmail.com</td>
+                                <td>Male</td>
+                                <td>1995-05-23</td>
+                                <td>Gold</td>
                             </tr>
                         </tbody>
                     </table>
@@ -893,48 +898,53 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>Product Name</th>
-                                <th>Product Number</th>
-                                <th>Payment</th>
-                                <th>Status</th>
+                                <th>Code</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Contact</th>
+                                <th>Address</th>
+                                <th>Category</th>
+                                <th>Postal Code</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Nike Red Shoe</td>
-                                <td>83212</td>
-                                <td>Card</td>
-                                <td class="success">Available</td>
-                                <td class="primary">Details</td>
+                                <td>e8de72c4-0c2e-4253-b7e4-42b15bae8fda</td>
+                                <td>Nike Shoe</td>
+                                <td>nike@gmail.com</td>
+                                <td>077xxxxx90</td>
+                                <td>nike hall, templee road, America</td>
+                                <td>International</td>
+                                <td>12532</td>
                             </tr>
                             <tr>
-                                <td>Nike Blue Shoe</td>
-                                <td>83452</td>
-                                <td>Card</td>
-                                <td class="warning">Unavailable</td>
-                                <td class="primary">Details</td>
+                                <td>e8de72c4-0c2e-4253-b7e4-42b15bae8fda</td>
+                                <td>Nike Shoe</td>
+                                <td>nike@gmail.com</td>
+                                <td>077xxxxx90</td>
+                                <td>nike hall, templee road, America</td>
+                                <td>International</td>
+                                <td>12532</td>
                             </tr>
                             <tr>
-                                <td>Nike White Shoe</td>
-                                <td>8342</td>
-                                <td>Cash</td>
-                                <td class="success">Available</td>
-                                <td class="primary">Details</td>
+                                <td>e8de72c4-0c2e-4253-b7e4-42b15bae8fda</td>
+                                <td>Nike Shoe</td>
+                                <td>nike@gmail.com</td>
+                                <td>077xxxxx90</td>
+                                <td>nike hall, templee road, America</td>
+                                <td>International</td>
+                                <td>12532</td>
                             </tr>
                             <tr>
-                                <td>Nike Pink Shoe</td>
-                                <td>34512</td>
-                                <td>Card</td>
-                                <td class="danger">Low</td>
-                                <td class="primary">Details</td>
+                                <td>e8de72c4-0c2e-4253-b7e4-42b15bae8fda</td>
+                                <td>Nike Shoe</td>
+                                <td>nike@gmail.com</td>
+                                <td>077xxxxx90</td>
+                                <td>nike hall, templee road, America</td>
+                                <td>International</td>
+                                <td>12532</td>
                             </tr>
-                            <tr>
-                                <td>Nike Browm Shoe</td>
-                                <td>34512</td>
-                                <td>Cash</td>
-                                <td class="warning">Unavailable</td>
-                                <td class="primary">Details</td>
-                            </tr>
+                            
                         </tbody>
                     </table>
                 </div>
@@ -943,47 +953,51 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>Product Name</th>
-                                <th>Product Number</th>
-                                <th>Payment</th>
-                                <th>Status</th>
+                                <th></th>
+                                <th>Code</th>
+                                <th>Full Name</th>
+                                <th>Contact</th>
+                                <th>Address</th>
+                                <th>Job Role</th>
+                                <th>Email</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Nike Red Shoe</td>
-                                <td>83212</td>
-                                <td>Card</td>
-                                <td class="success">Available</td>
-                                <td class="primary">Details</td>
+                                <td><img src="./assets/images/profile-1.jpg"></td>
+                                <td>afa67711-665e-4231-8c84-5426e64746ed</td>
+                                <td>Krishan Mihiranga</td>
+                                <td>0774512029</td>
+                                <td>212/1,temple Road, Bandaragama, Kalutara</td>
+                                <td class="danger">Manager</td>
+                                <td>adminkrishan@gmail.com</td>
                             </tr>
                             <tr>
-                                <td>Nike Blue Shoe</td>
-                                <td>83452</td>
-                                <td>Card</td>
-                                <td class="warning">Unavailable</td>
-                                <td class="primary">Details</td>
+                                <td><img src="./assets/images/profile-1.jpg"></td>
+                                <td>afa67711-665e-4231-8c84-5426e64746ed</td>
+                                <td>Krishan Mihiranga</td>
+                                <td>0774512029</td>
+                                <td>212/1,temple Road, Bandaragama, Kalutara</td>
+                                <td class="danger">Manager</td>
+                                <td>adminkrishan@gmail.com</td>
                             </tr>
                             <tr>
-                                <td>Nike White Shoe</td>
-                                <td>8342</td>
-                                <td>Cash</td>
-                                <td class="success">Available</td>
-                                <td class="primary">Details</td>
+                                <td><img src="./assets/images/profile-1.jpg"></td>
+                                <td>afa67711-665e-4231-8c84-5426e64746ed</td>
+                                <td>Krishan Mihiranga</td>
+                                <td>0774512029</td>
+                                <td>212/1,temple Road, Bandaragama, Kalutara</td>
+                                <td class="danger">Manager</td>
+                                <td>adminkrishan@gmail.com</td>
                             </tr>
                             <tr>
-                                <td>Nike Pink Shoe</td>
-                                <td>34512</td>
-                                <td>Card</td>
-                                <td class="danger">Low</td>
-                                <td class="primary">Details</td>
-                            </tr>
-                            <tr>
-                                <td>Nike Browm Shoe</td>
-                                <td>34512</td>
-                                <td>Cash</td>
-                                <td class="warning">Unavailable</td>
-                                <td class="primary">Details</td>
+                                <td><img src="./assets/images/profile-1.jpg"></td>
+                                <td>afa67711-665e-4231-8c84-5426e64746ed</td>
+                                <td>Krishan Mihiranga</td>
+                                <td>0774512029</td>
+                                <td>212/1,temple Road, Bandaragama, Kalutara</td>
+                                <td class="danger">Manager</td>
+                                <td>adminkrishan@gmail.com</td>
                             </tr>
                         </tbody>
                     </table>
@@ -1260,142 +1274,7 @@
 
                 </div>
                 <div class="container-ap-wrapper">
-                    <div class="container-ap">
-                        <div class="image-container-ap">
-                            <img src="./assets/images/shoe-nike.png" alt="" class="image-ap">
-                        </div>
-                        <div class="text-container-ap">
-                            <div class="heading-ap">Air Jordan 1</div>
-                            <div class="description-ap">
-                                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
-                            </div>
-                            <div class="footer-ap">
-                                <div class="price-ap">$149.99</div>
-                                <div class="button-ap"><span class="material-icons-sharp">add</span> Add</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container-ap">
-                        <div class="image-container-ap">
-                            <img src="./assets/images/shoe-nike.png" alt="" class="image-ap">
-                        </div>
-                        <div class="text-container-ap">
-                            <div class="heading-ap">Air Jordan 1</div>
-                            <div class="description-ap">
-                                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
-                            </div>
-                            <div class="footer-ap">
-                                <div class="price-ap">$149.99</div>
-                                <div class="button-ap"><span class="material-icons-sharp">add</span> Add</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container-ap">
-                        <div class="image-container-ap">
-                            <img src="./assets/images/shoe-nike.png" alt="" class="image-ap">
-                        </div>
-                        <div class="text-container-ap">
-                            <div class="heading-ap">Air Jordan 1</div>
-                            <div class="description-ap">
-                                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
-                            </div>
-                            <div class="footer-ap">
-                                <div class="price-ap">$149.99</div>
-                                <div class="button-ap"><span class="material-icons-sharp">add</span> Add</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container-ap">
-                        <div class="image-container-ap">
-                            <img src="./assets/images/shoe-nike.png" alt="" class="image-ap">
-                        </div>
-                        <div class="text-container-ap">
-                            <div class="heading-ap">Air Jordan 1</div>
-                            <div class="description-ap">
-                                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
-                            </div>
-                            <div class="footer-ap">
-                                <div class="price-ap">$149.99</div>
-                                <div class="button-ap"><span class="material-icons-sharp">add</span> Add</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container-ap">
-                        <div class="image-container-ap">
-                            <img src="./assets/images/shoe-nike.png" alt="" class="image-ap">
-                        </div>
-                        <div class="text-container-ap">
-                            <div class="heading-ap">Air Jordan 1</div>
-                            <div class="description-ap">
-                                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
-                            </div>
-                            <div class="footer-ap">
-                                <div class="price-ap">$149.99</div>
-                                <div class="button-ap"><span class="material-icons-sharp">add</span> Add</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container-ap">
-                        <div class="image-container-ap">
-                            <img src="./assets/images/shoe-nike.png" alt="" class="image-ap">
-                        </div>
-                        <div class="text-container-ap">
-                            <div class="heading-ap">Air Jordan 1</div>
-                            <div class="description-ap">
-                                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
-                            </div>
-                            <div class="footer-ap">
-                                <div class="price-ap">$149.99</div>
-                                <div class="button-ap"><span class="material-icons-sharp">add</span> Add</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container-ap">
-                        <div class="image-container-ap">
-                            <img src="./assets/images/shoe-nike.png" alt="" class="image-ap">
-                        </div>
-                        <div class="text-container-ap">
-                            <div class="heading-ap">Air Jordan 1</div>
-                            <div class="description-ap">
-                                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
-                            </div>
-                            <div class="footer-ap">
-                                <div class="price-ap">$149.99</div>
-                                <div class="button-ap"><span class="material-icons-sharp">add</span> Add</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="container-ap">
-                        <div class="image-container-ap">
-                            <img src="./assets/images/shoe-nike.png" alt="" class="image-ap">
-                        </div>
-                        <div class="text-container-ap">
-                            <div class="heading-ap">Air Jordan 1</div>
-                            <div class="description-ap">
-                                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
-                            </div>
-                            <div class="footer-ap">
-                                <div class="price-ap">$149.99</div>
-                                <div class="button-ap"><span class="material-icons-sharp">add</span> Add</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container-ap">
-                        <div class="image-container-ap">
-                            <img src="./assets/images/shoe-nike.png" alt="" class="image-ap">
-                        </div>
-                        <div class="text-container-ap">
-                            <div class="heading-ap">Air Jordan 1</div>
-                            <div class="description-ap">
-                                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
-                            </div>
-                            <div class="footer-ap">
-                                <div class="price-ap">$149.99</div>
-                                <div class="button-ap"><span class="material-icons-sharp">add</span> Add</div>
-                            </div>
-                        </div>
-                    </div>
+                    
                     <div class="container-ap">
                         <div class="image-container-ap">
                             <img src="./assets/images/shoe-nike.png" alt="" class="image-ap">
@@ -1422,6 +1301,52 @@
                     <div class="form-elment">
                         <label for="stock-amount-popup" class="text-muted">Enter quantity to add to stock</label>
                         <input type="text" id="stock-amount-popup" placeholder="Enter Amount">
+                    </div>
+                    <div class="upi-item-radio-size-wrapper">
+                        <label>Size</label>
+                        <div class="radio-wapper upi-item-radio-size">
+
+                            <input type="radio" id="upi-i-s5" name="size" value="SIZE_5" class="radioG" >
+                            <label class="labelE label-1" for="upi-i-s5">5</label>
+                            <input type="radio" id="upi-i-s6" name="size" value="SIZE_6" class="radioG" >
+                            <label class="labelE label-2" for="upi-i-s6">6</label>
+                            <input type="radio" id="upi-i-s7" name="size" value="SIZE_7" class="radioG" >
+                            <label class="labelE label-3" for="upi-i-s7">7</label>
+                            <input type="radio" id="upi-i-s8" name="size" value="SIZE_8" class="radioG" >
+                            <label class="labelE label-4" for="upi-i-s8">8</label>
+                            <input type="radio" id="upi-i-s9" name="size" value="SIZE_9" class="radioG" >
+                            <label class="labelE label-5" for="upi-i-s9">9</label>
+                            <input type="radio" id="upi-i-s10" name="size" value="SIZE_10" class="radioG" >
+                            <label class="labelE label-6" for="upi-i-s10">10</label>
+                            <input type="radio" id="upi-i-s11" name="size" value="SIZE_11" class="radioG" >
+                            <label class="labelE label-7" for="upi-i-s11">11</label>
+                            <input type="radio" id="upi-i-s12" name="size" value="SIZE_12" class="radioG" >
+                            <label class="labelE label-8" for="upi-i-s12">12</label>
+                            
+                        </div>
+                    </div>
+                    <div class="upi-item-radio-color-wrapper">
+                        <label>Color</label>
+                        <div class="radio-wapper upi-item-radio-color">
+
+                            <input type="radio" id="upi-i-cblack" name="color" value="BLACK" class="radioG" >
+                            <label class="labelE label-1" for="upi-i-cblack">5</label>
+                            <input type="radio" id="upi-i-cwhite" name="color" value="WHITE" class="radioG" >
+                            <label class="labelE label-2" for="upi-i-cwhite">5</label>
+                            <input type="radio" id="upi-i-cbrown" name="color" value="BROWN" class="radioG" >
+                            <label class="labelE label-3" for="upi-i-cbrown">5</label>
+                            <input type="radio" id="upi-i-cgray" name="color" value="GRAY" class="radioG" >
+                            <label class="labelE label-4" for="upi-i-cgray">5</label>
+                            <input type="radio" id="upi-i-cpink" name="color" value="PINK" class="radioG" >
+                            <label class="labelE label-5" for="upi-i-cpink">5</label>
+                            <input type="radio" id="upi-i-cred" name="color" value="RED" class="radioG" >
+                            <label class="labelE label-6" for="upi-i-cred">5</label>
+                            <input type="radio" id="upi-i-cblue" name="color" value="BLUE" class="radioG" >
+                            <label class="labelE label-7" for="upi-i-cblue">5</label>
+                            <input type="radio" id="upi-i-cother" name="color" value="OTHER" class="radioG" >
+                            <label class="labelE label-8" for="upi-i-cother">5</label>
+                            
+                        </div>
                     </div>
                     <div class="form-elment">
                         <button id="popup-stock-update-btn">Update</button>
@@ -1516,6 +1441,31 @@
                     </tbody>
                 </table>
             </div>
+
+               <!-- ******** popup ******** -->
+               <div class="popup-inv">
+                <div class="close-btn-popup">&times;</div>
+                <div class="form-popup">
+                    <h2>Confirm Changes</h2>
+                    <div class="form-elment">
+                        <label for="email-popup-inv" class="text-muted">Email</label>
+                        <input type="email" id="email-popup-inv" placeholder="Enter Email">
+                    </div>
+                    <div class="form-elment">
+                        <label for="password-popup-inv" class="text-muted">Password</label>
+                        <input type="password" id="password-popup-inv" placeholder="Enter Password">
+                        <input type="password" id="password-confirm-popup-inv" placeholder="Confirm Password">
+                        <div class="password-toggle-wrapper"><label>Toggle password</label><input type="checkbox" id="toggle-password-inv" class="toggle-password"></div>
+                    </div>
+                    <div class="form-elment">
+                        <button id="save-up-btn-inv">Save Changes</button>
+                    </div>
+                    <div class="form-element">
+                        <a href="#" class="forgot-password-popup">Forgot Password?</a>
+                    </div>
+                </div>
+            </div>
+
 
              <!-- ******** Order Page ******** -->
             <div id="sale-page">
@@ -2022,7 +1972,7 @@
                         <small class="text-muted">Admin</small>
                     </div>
                     <div class="profile-photo" id="dashboard-photo">
-                        <img src="assets/images/profile-1.jpg" alt="user profile picture">
+                        <img src="assets/images/profile-1.jpg" alt="user profile picture" id="dashboard-right-top-dp">
                     </div>
                 </div>
             </div>
@@ -2145,6 +2095,8 @@
     <script type="module" src="./controller/DashboardController.js"></script>
     <script type="module" src="./controller/SupplierController.js"></script>
     <script type="module" src="./controller/ItemController.js"></script>
+    <script type="module" src="./controller/InformationController.js"></script>
+    <script type="module" src="./controller/AddProductController.js"></script>
     
     <script>
         //routes
@@ -2164,10 +2116,6 @@
     $('#save-changes-employee, .charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer, #update-profile, #information-page, #refund-page, #add-item-page, #add-product-page, #inventory-page').hide();
     $('#page-supplier').show();
   });
-  $('#info-log').on('click', () => {
-    $('#save-changes-employee, .charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer,#page-supplier, #update-profile, #refund-page, #add-item-page, #add-product-page, #inventory-page, #sale-page').hide();
-    $('#information-page').show();
-  });
   $('#refund-btn').on('click', () => {
     $('#save-changes-employee, .charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer,#page-supplier, #update-profile, #information-page, #recent-orders-refund-page, #add-item-page, #add-product-page, #inventory-page, #sale-page').hide();
     $('#refund-page').show();
@@ -2179,10 +2127,6 @@
   $('#recent-orders-back').on('click', () => {
     $('#recent-orders-refund-page').hide();
     $('#recent-orders-refund').show();
-  });
-  $('#add-product-btn').on('click',()=>{
-    $('#save-changes-employee, .charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer,#page-supplier, #update-profile, #information-page, #recent-orders-refund-page, #refund-page, #add-item-page, #inventory-page, #sale-page').hide();
-    $('#add-product-page').show();
   });
   $('#inventory-btn').on('click',()=>{
     $('#save-changes-employee, .charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer,#page-supplier, #update-profile, #information-page, #recent-orders-refund-page, #refund-page, #add-item-page, #add-product-page, #sale-page').hide();

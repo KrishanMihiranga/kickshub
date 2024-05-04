@@ -1,7 +1,6 @@
 package lk.ijse.shoeshop.service.impl;
 
 import jakarta.transaction.Transactional;
-import jdk.jshell.execution.Util;
 import lk.ijse.shoeshop.dto.ItemDTO;
 import lk.ijse.shoeshop.dto.ItemImageDTO;
 import lk.ijse.shoeshop.dto.SaveItemDTO;
@@ -9,14 +8,11 @@ import lk.ijse.shoeshop.entity.ItemEntity;
 import lk.ijse.shoeshop.entity.ItemImageEntity;
 import lk.ijse.shoeshop.repo.ItemImageRepo;
 import lk.ijse.shoeshop.repo.ItemRepo;
-import lk.ijse.shoeshop.service.ItemService;
 import lk.ijse.shoeshop.service.SaveItemService;
 import lk.ijse.shoeshop.util.Mapping;
 import lk.ijse.shoeshop.util.UtilMatters;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @Transactional
@@ -71,5 +67,5 @@ public class SaveItemServiceImpl implements SaveItemService {
         }
     }
 
-}
+    }
 

@@ -11,8 +11,8 @@ public class UtilMatters {
     public static String generateId(){
         return UUID.randomUUID().toString();
     }
-    public static String convertBase64(String data){
-        return Base64.getEncoder().encodeToString(data.getBytes());
+    public static String convertBase64(byte[] data){
+        return Base64.getEncoder().encodeToString(data);
     }
     public static String generateItemId(long itemCount, Occasion occasion, Gender gender) {
 

@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @CrossOrigin
 @RestController
 @RequestMapping("api/v1/item")
@@ -23,5 +25,10 @@ public class Item {
     @PostMapping("/saveitem")
     public ResponseEntity<ItemDTO> saveItem(@RequestBody ItemDTO item){
         return ResponseEntity.ok(itemService.saveItem(item));
+    }
+
+    @GetMapping("/getall")
+    public ResponseEntity<List<ItemDTO>> getAll(){
+        return ResponseEntity.ok(itemService.getAllItems());
     }
 }

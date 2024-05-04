@@ -20,3 +20,4 @@ export var employeeData = {
     designation: null,
     emergencyContact: null
 };
+export var employees = [];
