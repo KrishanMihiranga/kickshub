@@ -25,7 +25,6 @@ public class InventoryServiceImpl implements InventoryService {
         InventoryEntity existingInventory = inventoryRepo.findBySizeAndColorsAndItem_ItemCodeAndItemImage_Id(inventory.getSize(), inventory.getColors(), inventory.getItem().getItemCode(), inventory.getItemImage().getId());
 
         if (existingInventory != null) {
-
             existingInventory.setOriginalQty(existingInventory.getOriginalQty()+inventory.getOriginalQty());
             existingInventory.setCurrentQty(existingInventory.getCurrentQty()+inventory.getOriginalQty());
             existingInventory.setStatus(inventory.getStatus());
