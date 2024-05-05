@@ -10,6 +10,8 @@ import lk.ijse.shoeshop.util.UtilMatters;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -25,7 +27,7 @@ public class InventoryServiceImpl implements InventoryService {
         if (existingInventory != null) {
 
             existingInventory.setOriginalQty(existingInventory.getOriginalQty()+inventory.getOriginalQty());
-            existingInventory.setCurrentQty(existingInventory.getCurrentQty());
+            existingInventory.setCurrentQty(existingInventory.getCurrentQty()+inventory.getOriginalQty());
             existingInventory.setStatus(inventory.getStatus());
             return mapping.toInventoryDTO(inventoryRepo.save(existingInventory));
         } else {
@@ -33,5 +35,10 @@ public class InventoryServiceImpl implements InventoryService {
             inventory.setInventoryCode(UtilMatters.generateId());
             return mapping.toInventoryDTO(inventoryRepo.save(mapping.toInventoryEntity(inventory)));
         }
+    }
+
+    @Override
+    public List<InventoryDTO> getAll() {
+        return mapping.getInventoryDTOList(inventoryRepo.findAll());
     }
 }

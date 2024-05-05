@@ -23,6 +23,7 @@ public class SaleServiceImpl implements SaleService {
     @Override
     public SaleDTO saveSale(SaleDTO saleDTO) {
         try{
+            System.out.println(saleDTO);
             saleDTO.setOrderId(UtilMatters.generateId());
             SaleEntity savedSaleEntity = saleRepo.save(mapping.toSaleEntity(saleDTO));
             for (SaleItemEntity saleItem : savedSaleEntity.getSaleItems()){

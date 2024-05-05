@@ -11,7 +11,7 @@ $('#add-product-btn').on('click', () => {
 });
 
 function createCards() {
-    $('.container-ap-wrapper').empty(); // Clear existing cards
+    $('.container-ap-wrapper').empty();
     
     items.forEach(item => {
         createCard(item);
@@ -26,10 +26,10 @@ function createCard(item) {
 
     var textContainer = $('<div class="text-container-ap"></div>');
     var heading = $('<div class="heading-ap">' + item.description + '</div>');
-    var description = $('<div class="description-ap"><p>' + item.supplier.supplierName + '</p></div>'); // Assuming description should be repeated
+    var description = $('<div class="description-ap"><p>' + item.supplier.supplierName + '</p></div>'); 
 
     var footer = $('<div class="footer-ap"></div>');
-    var price = $('<div class="price-ap">$' + item.unitPriceSale + '</div>'); // Assuming unitPriceSale is the correct price
+    var price = $('<div class="price-ap">$' + item.unitPriceSale + '</div>');
     var button = $('<div class="button-ap"><span class="material-icons-sharp">add</span> Add</div>');
 
     button.on('click', function() {

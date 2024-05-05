@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -54,7 +55,22 @@ public class Mapping {
         return mapper.map(inventory, InventoryDTO.class);
     }
     public InventoryEntity toInventoryEntity(InventoryDTO inventoryDTO){return mapper.map(inventoryDTO, InventoryEntity.class);}
-    public List<InventoryDTO> getInventoryDTOList(List<InventoryEntity> inventoryEntities){return mapper.map(inventoryEntities, List.class);}
+    public List<InventoryDTO> getInventoryDTOList(List<InventoryEntity> inventoryEntities){
+        List<InventoryDTO> dtos = new ArrayList<>();
+        for (InventoryEntity entity : inventoryEntities) {
+            InventoryDTO dto = new InventoryDTO();
+            dto.setInventoryCode(entity.getInventoryCode());
+            dto.setSize(entity.getSize());
+            dto.setColors(entity.getColors());
+            dto.setOriginalQty(entity.getOriginalQty());
+            dto.setCurrentQty(entity.getCurrentQty());
+            dto.setStatus(entity.getStatus());
+            dto.setItem(entity.getItem());
+            dto.setItemImage(entity.getItemImage());
+            dtos.add(dto);
+        }
+        return dtos;
+    }
 
     //Item Image Mapping
     public ItemImageDTO toItemImageDTO(ItemImageEntity itemImage){

@@ -24,10 +24,12 @@ public class Sale {
     public ResponseEntity<String> saveSale(@RequestBody SaleDTO saleDTO){
 //        return ResponseEntity.ok(saleService.saveSale(saleDTO));
         try {
+            System.out.println(saleDTO);
             saleService.saveSale(saleDTO);
             String successMessage = "Sale saved successfully!";
             return ResponseEntity.ok(successMessage);
         } catch (Exception e) {
+            e.printStackTrace();
             String errorMessage = "Failed to save sale: " + e.getMessage();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorMessage);
         }

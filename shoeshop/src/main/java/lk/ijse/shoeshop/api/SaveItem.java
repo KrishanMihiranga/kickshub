@@ -19,7 +19,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.io.IOException;
-import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -53,7 +52,6 @@ public class SaveItem {
         ItemCategories parsedCategory = ItemCategories.valueOf(category);
         Occasion parsedOccasion = Occasion.valueOf(occasion);
         Gender parsedGender = Gender.valueOf(gender);
-
         SupplierEntity parsedSupplier = objectMapper.readValue(supplierJson, SupplierEntity.class);
 
 

@@ -2,6 +2,7 @@ package lk.ijse.shoeshop.dto;
 
 import jakarta.validation.constraints.Null;
 import lk.ijse.shoeshop.entity.SupplierEntity;
+import lk.ijse.shoeshop.entity.enums.Colors;
 import lk.ijse.shoeshop.entity.enums.Gender;
 import lk.ijse.shoeshop.entity.enums.ItemCategories;
 import lk.ijse.shoeshop.entity.enums.Occasion;

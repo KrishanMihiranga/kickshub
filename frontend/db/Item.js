@@ -17,7 +17,6 @@ export var regItem = {
 
 export var items = [];
 export var itemImages = [];
-
 export var addToInventory = {
     inventoryCode: null,
     size: null,

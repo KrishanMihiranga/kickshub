@@ -2,8 +2,8 @@ import {authData} from "./db/loginData.js";
 import {suppliers} from "../db/supplier.js";
 import {employees} from "../db/employee.js";
 import {customers} from "../db/Customer.js";
-import {items} from "../db/item.js";
-import {itemImages} from "../db/item.js";
+import {items,itemImages} from "../db/item.js";
+import {inventoryItems} from "../db/inventory.js";
 var signInData = {
     // email: 'adminkrishan@gmail.com',
     // password: CryptoJS.SHA256('admin123').toString(CryptoJS.enc.Hex)
@@ -95,6 +95,22 @@ $.ajax({
                 itemImages.length = 0;
                 itemImages.push(...response);
                 console.log('itemImages Array:', itemImages);
+            },
+            error: function(xhr, status, error) {
+                console.error('Error:', error);
+            }
+        });
+
+        $.ajax({
+            url: 'http://localhost:9090/shoeshop/api/v1/inventory/getall',
+            type: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + authData.token
+            },
+            success: function(response) {
+                inventoryItems.length = 0;
+                inventoryItems.push(...response);
+                console.log('inventoryItems Array:', inventoryItems);
             },
             error: function(xhr, status, error) {
                 console.error('Error:', error);

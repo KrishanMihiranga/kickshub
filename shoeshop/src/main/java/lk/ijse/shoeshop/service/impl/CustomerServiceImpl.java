@@ -1,7 +1,9 @@
 package lk.ijse.shoeshop.service.impl;
 
 import jakarta.transaction.Transactional;
+import lk.ijse.shoeshop.dto.CheckCustomerDTO;
 import lk.ijse.shoeshop.dto.CustomerDTO;
+import lk.ijse.shoeshop.entity.CustomerEntity;
 import lk.ijse.shoeshop.entity.enums.CustomerLevel;
 import lk.ijse.shoeshop.repo.CustomerRepo;
 import lk.ijse.shoeshop.service.CustomerService;
@@ -11,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -28,5 +31,11 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public List<CustomerDTO> getAllCustomers() {
         return mapping.getCustomerDTOList(customerRepo.findAll());
+    }
+
+    @Override
+    public Boolean check(CheckCustomerDTO customerDTO) {
+        Optional<CustomerEntity> existingCustomer = customerRepo.findByNameAndPhone(customerDTO.getName(), customerDTO.getContact());
+        return existingCustomer.isPresent();
     }
 }

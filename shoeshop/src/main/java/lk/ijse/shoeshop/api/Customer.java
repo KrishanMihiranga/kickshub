@@ -1,5 +1,6 @@
 package lk.ijse.shoeshop.api;
 
+import lk.ijse.shoeshop.dto.CheckCustomerDTO;
 import lk.ijse.shoeshop.dto.CustomerDTO;
 import lk.ijse.shoeshop.service.CustomerService;
 import lk.ijse.shoeshop.util.Mapping;
@@ -30,5 +31,9 @@ public class Customer {
     public ResponseEntity<List<CustomerDTO>> getALlCustomers(){
         List<CustomerDTO> customers = customerService.getAllCustomers();
         return ResponseEntity.ok(customers);
+    }
+    @PostMapping("/check")
+    public ResponseEntity<Boolean> check(@RequestBody CheckCustomerDTO customerDTO){
+        return ResponseEntity.ok(customerService.check(customerDTO));
     }
 }

@@ -65,7 +65,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public List<EmployeeDTO> getAllEmployees() {
         return mapping.getEmployeeDTOList(employeeRepo.findAll());
-
     }
 
     @Override

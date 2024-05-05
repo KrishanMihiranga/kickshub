@@ -369,14 +369,7 @@ $('#popup-stock-update-btn').on('click',() =>{
   $('.popup-stock').removeClass("active-popup");
   $('.popup-inv').addClass("active-popup");
 });
-$('#submit-order').on('click', () => {
-  $('.popup-paymentmetod').addClass("active-popup");
-  $('.overlay').addClass("active-overlay"); // Add class to overlay
-});
-$('#popup-payment-card-btn').on('click', () => {
-  $('.popup-paymentmetod').removeClass("active-popup");
-  $('.popup-paymentmetod-card').addClass("active-popup");
-});
+
 $('#up-btn').on('click', () => {
   $('.popup-edit-confirm').addClass("active-popup");
   $('.overlay').addClass("active-overlay");
@@ -392,6 +385,7 @@ $('.close-btn-popup').on('click', () => {
   $('.popup-stock').removeClass("active-popup");
   $('.popup-paymentmetod').removeClass("active-popup");
   $('.popup-paymentmetod-card').removeClass("active-popup");
+  $('.popup-paymentmetod-cash').removeClass("active-popup");
   $('.popup-edit-confirm').removeClass("active-popup");
   $('.overlay').removeClass("active-overlay"); // Remove class from overlay
 });
