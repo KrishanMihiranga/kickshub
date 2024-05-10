@@ -2,6 +2,7 @@ package lk.ijse.shoeshop.util;
 
 import lk.ijse.shoeshop.dto.*;
 import lk.ijse.shoeshop.entity.*;
+import lk.ijse.shoeshop.entity.enums.PaymentMethods;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -101,11 +102,62 @@ public class Mapping {
     public SaleDTO toSaleDTO(SaleEntity saleEntity){
         return mapper.map(saleEntity, SaleDTO.class);
     }
+    public SaleDTO toSaleRefundDTO(SaleEntity saleEntity){
+        SaleDTO saleDTO = new SaleDTO();
+
+        saleDTO.setOrderId(saleEntity.getOrderId());
+        saleDTO.setTotalPrice(saleEntity.getTotalPrice());
+        saleDTO.setPaymentMethod(saleEntity.getPaymentMethod());
+        saleDTO.setAddedPoints(saleEntity.getAddedPoints());
+        saleDTO.setEmployee(saleEntity.getEmployee());
+        saleDTO.setCustomer(saleEntity.getCustomer());
+
+        return saleDTO;
+    }
     public SaleEntity toSaleEntity(SaleDTO saleDTO){
         return mapper.map(saleDTO, SaleEntity.class);
     }
     public List<SaleDTO> getSaleList(List<SaleEntity> saleEntities){
-        return mapper.map(saleEntities, List.class);
+        List<SaleDTO> dtoList= new ArrayList<>();
+        for (SaleEntity entity : saleEntities) {
+            SaleDTO saleDTO = new SaleDTO();
+            saleDTO.setOrderId(entity.getOrderId());
+            saleDTO.setTotalPrice(entity.getTotalPrice());
+            saleDTO.setPaymentMethod(entity.getPaymentMethod());
+            saleDTO.setAddedPoints(entity.getAddedPoints());
+            saleDTO.setEmployee(entity.getEmployee());
+            saleDTO.setCustomer(entity.getCustomer());
+            dtoList.add(saleDTO);
+        }
+        return dtoList;
+    }
+    public List<SaleDTO> toSaleDTOList(List<SaleEntity> saleEntities) {
+        List<SaleDTO> dtoList= new ArrayList<>();
+        for (SaleEntity entity : saleEntities) {
+            SaleDTO saleDTO = new SaleDTO();
+            saleDTO.setOrderId(entity.getOrderId());
+            saleDTO.setTotalPrice(entity.getTotalPrice());
+            saleDTO.setPaymentMethod(entity.getPaymentMethod());
+            saleDTO.setAddedPoints(entity.getAddedPoints());
+            saleDTO.setEmployee(entity.getEmployee());
+            saleDTO.setCustomer(entity.getCustomer());
+            dtoList.add(saleDTO);
+        }
+        return dtoList;
+    }
+    public List<SaleDTO> getAvailable(List<SaleEntity> saleEntities){
+        List<SaleDTO> dtoList = new ArrayList<>();
+        for (SaleEntity entity : saleEntities){
+            SaleDTO saleDTO = new SaleDTO();
+            saleDTO.setOrderId(entity.getOrderId());
+            saleDTO.setTotalPrice(entity.getTotalPrice());
+            saleDTO.setPaymentMethod(entity.getPaymentMethod());
+            saleDTO.setAddedPoints(entity.getAddedPoints());
+            saleDTO.setEmployee(entity.getEmployee());
+            saleDTO.setCustomer(entity.getCustomer());
+            dtoList.add(saleDTO);
+        }
+        return dtoList;
     }
 
     //Refund Mapping
@@ -128,4 +180,5 @@ public class Mapping {
         }
         return updatedDate;
     }
+
 }

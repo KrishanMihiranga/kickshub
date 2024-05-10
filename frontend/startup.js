@@ -4,6 +4,7 @@ import {employees} from "../db/employee.js";
 import {customers} from "../db/Customer.js";
 import {items,itemImages} from "../db/item.js";
 import {inventoryItems} from "../db/inventory.js";
+import{orders, recentOrders, refundOrders} from "../db/Orders.js";
 var signInData = {
     // email: 'adminkrishan@gmail.com',
     // password: CryptoJS.SHA256('admin123').toString(CryptoJS.enc.Hex)
@@ -117,9 +118,129 @@ $.ajax({
             }
         });
 
+        $.ajax({
+            url: ' http://localhost:9090/shoeshop/api/v1/sale/getall',
+            type: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + authData.token
+            },
+            success: function(response) {
+                orders.length = 0;
+                orders.push(...response);
+                console.log('Orders Array:', orders);
+            },
+            error: function(xhr, status, error) {
+                console.error('Error:', error);
+            }
+        });
+
+        $.ajax({
+           url: 'http://localhost:9090/shoeshop/api/v1/sale/getrecent',
+            type: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + authData.token
+            },
+            success: function(response) {
+                recentOrders.length = 0;
+                recentOrders.push(...response);
+                console.log('Recent Orders Array:', recentOrders);
+                populateRecentOrdersTable();
+            },
+            error: function(xhr, status, error) {
+                console.error('Error:', error);
+            }
+        });
+        
+        $.ajax({
+            url: 'http://localhost:9090/shoeshop/api/v1/refund/getavailablerefund',
+             type: 'GET',
+             headers: {
+                 'Authorization': 'Bearer ' + authData.token
+             },
+             success: function(response) {
+                refundOrders.length = 0;
+                refundOrders.push(...response);
+                 console.log('Refund Orders Array:', refundOrders);
+                 populateRefundOrdersTable();
+             },
+             error: function(xhr, status, error) {
+                 console.error('Error:', error);
+             }
+         });
+         
+
     },
     error: function(xhr, status, error) {
         alert('Sign-in failed');
     }
 });
+
+function populateRecentOrdersTable() {
+
+    $('.recent-orders tbody').empty();
+    
+    recentOrders.forEach(function(order) {
+
+        $.ajax({
+            url: 'http://localhost:9090/shoeshop/api/v1/sale/getitemname',
+            type: 'POST',
+            contentType: 'text/plain',
+            headers: {
+                'Authorization': 'Bearer ' + authData.token
+            },
+            data: order.orderId,
+            success: function(response) {
+                var row = $('<tr>');
+    
+                row.append($('<td>').text(response));
+                row.append($('<td>').text(order.orderId));
+                row.append($('<td>').text(order.paymentMethod));
+                row.append($('<td class="success">').text("Paid"));
+                row.append($('<td class="primary">').text("Details"));
+
+                $('.recent-orders tbody').append(row);
+                
+            },
+            error: function(xhr, status, error) {
+                console.error('Error:', error);
+                
+            }
+        });
+        
+
+        
+    });
+}
+
+function populateRefundOrdersTable() {
+    $('#refund-table-orders-wrapper tbody').empty();
+
+    refundOrders.forEach(function(order) {
+        $.ajax({
+            url: 'http://localhost:9090/shoeshop/api/v1/sale/getitemname',
+            type: 'POST',
+            contentType: 'text/plain',
+            headers: {
+                'Authorization': 'Bearer ' + authData.token
+            },
+            data: order.orderId,
+            success: function(response) {
+                var row = $('<tr>');
+                row.data('order', order);
+                row.data('response', response);
+
+                row.append($('<td>').text(response));
+                row.append($('<td>').text(order.orderId));
+                row.append($('<td>').text(order.paymentMethod));
+                row.append($('<td class="success">').text("Available"));
+                row.append($('<td class="primary">').text("Details"));
+
+                $('#refund-table-orders-wrapper tbody').append(row);
+            },
+            error: function(xhr, status, error) {
+                console.error('Error:', error);
+            }
+        });
+    });
+}
 

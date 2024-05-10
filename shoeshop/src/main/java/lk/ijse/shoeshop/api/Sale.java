@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @CrossOrigin
 @RestController
 @RequestMapping("api/v1/sale")
@@ -17,6 +19,23 @@ public class Sale {
     @GetMapping("/health")
     public String healthCheck(){
         return "Sale health check";
+    }
+
+    @GetMapping("/getall")
+    public ResponseEntity<List<SaleDTO>> geAll(){
+        return ResponseEntity.ok(saleService.getALl());
+    }
+    @PostMapping("/findorder")
+    public ResponseEntity<SaleDTO> findOrder(@RequestBody String orderId){
+        return ResponseEntity.ok(saleService.findSale(orderId));
+    }
+    @GetMapping("/getrecent")
+    public ResponseEntity<List<SaleDTO>> getRecent(){
+        return ResponseEntity.ok(saleService.latestOrders());
+    }
+    @PostMapping("/getitemname")
+    public ResponseEntity<String> getName(@RequestBody String orderId){
+        return ResponseEntity.ok(saleService.getProductName(orderId));
     }
 
     @ResponseStatus(HttpStatus.CREATED)
@@ -34,4 +53,5 @@ public class Sale {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorMessage);
         }
     }
+
 }

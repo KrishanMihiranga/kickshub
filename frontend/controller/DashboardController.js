@@ -1,9 +1,11 @@
 import {authData} from "../db/loginData.js";
 import {dataEmp} from "../db/detailCheck.js";
 import {employeeData} from "../db/employee.js";
+import{recentOrders} from "../db/Orders.js";
 var pop_email = null;
 var pop_password = null;
 var pop_rePass = null;
+
 
 $(document).ready(function() {
     
@@ -22,6 +24,7 @@ $(document).ready(function() {
         $('.popup-edit-confirm').removeClass("active-popup");
         $('.overlay').removeClass("active-overlay"); 
     });
+    
 });
 
 
@@ -158,7 +161,7 @@ $('#save-changes-employee').on('click', () => {
     $('.overlay').addClass("active-overlay");
 
     
-  });
+});
 
 $('#toggle-password').change(function () {
     var passwordInput = $('#password-popup');
@@ -172,9 +175,19 @@ $('#toggle-password').change(function () {
     }
 });
 
+$('#toggle-password-refund').change(function () {
+    var passwordInput = $('#password-popup-refund');
+    var confirmPasswordInput = $('#password-confirm-popup-refund');
+    if ($(this).is(':checked')) {
+        passwordInput.attr('type', 'text');
+        confirmPasswordInput.attr('type', 'text');
+    } else {
+        passwordInput.attr('type', 'password');
+        confirmPasswordInput.attr('type', 'password');
+    }
+});
 
-
-  $('#save-up-btn').on('click', () => {
+$('#save-up-btn').on('click', () => {
     var pop_email = $('#email-popup').val();
     var pop_password = $('#password-popup').val();
     var pop_rePass = $('#password-confirm-popup').val();
@@ -246,7 +259,7 @@ $('#toggle-password').change(function () {
             console.error('Error:', error);
         }
     });
-    });
+});
 
 
 

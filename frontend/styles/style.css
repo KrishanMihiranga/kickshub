@@ -1129,7 +1129,7 @@ border: 2px solid var(--color-primary);
 }
 
  /* popup */
- .popup,.popup-inv,.popup-paymentmetod-card,.popup-paymentmetod-cash,.popup-edit-confirm{
+ .popup,.popup-inv,.popup-refund,.popup-paymentmetod-card,.popup-paymentmetod-cash,.popup-edit-confirm{
     z-index: 5;
     position: absolute;
     top: -150%;
@@ -1162,6 +1162,7 @@ border: 2px solid var(--color-primary);
                 transform 20ms ease-in-out 0ms;
  }
  .popup.active-popup,
+ .popup-refund.active-popup,
  .popup-inv.active-popup,
  .popup-stock.active-popup,
  .popup-paymentmetod.active-popup,
@@ -1176,6 +1177,7 @@ border: 2px solid var(--color-primary);
     transform 20ms ease-in-out 0ms;
  }
  .popup .close-btn-popup,
+ .popup-refund .close-btn-popup,
  .popup-inv .close-btn-popup,
 .popup-stock .close-btn-popup,
 .popup-paymentmetod .close-btn-popup,
@@ -1199,6 +1201,7 @@ border: 2px solid var(--color-primary);
     cursor: pointer;
  }
  .popup .form-popup h2,
+ .popup-refund .form-popup h2,
  .popup-inv .form-popup h2,
  .popup-stock .form-popup h2,
  .popup-paymentmetod .form-popup h2,
@@ -1210,6 +1213,8 @@ border: 2px solid var(--color-primary);
     font-size: 25px;
  }
  .popup-paymentmetod .form-popup p,
+ .popup .form-popup h2,
+ .popup-refund .form-popup h2,
  .popup-paymentmetod-inv .form-popup p,
  .popup-paymentmetod-card .form-popup p,
  .popup-paymentmetod-cash .form-popup p,
@@ -1218,6 +1223,8 @@ border: 2px solid var(--color-primary);
     margin: 10px 0 20px;
  }
  .popup .form-popup .form-elment,
+ .popup-refund .form-popup .form-elment,
+ .popup .form-popup h2,
  .popup-inv .form-popup .form-elment,
  .popup-stock .form-popup .form-elment,
  .popup-paymentmetod .form-popup .form-elment,
@@ -1227,6 +1234,7 @@ border: 2px solid var(--color-primary);
     margin: 15px 0;
  }
  .popup .form-popup .form-elment label,
+ .popup-refund .form-popup .form-elment label,
  .popup-inv .form-popup .form-elment label,
  .popup-stock .form-popup .form-elment label
  .popup-paymentmetod .form-popup .form-elment label,
@@ -1236,6 +1244,7 @@ border: 2px solid var(--color-primary);
     font-size: 14px;
  }
  .popup .form-popup .form-elment input,
+ .popup-refund .form-popup .form-elment input,
  .popup-inv .form-popup .form-elment input,
  .popup .form-popup .form-elment input,
  .popup-stock .form-popup .form-elment input,
@@ -1250,6 +1259,7 @@ border: 2px solid var(--color-primary);
     border-radius: var(--bordr-radius-1);
  }
  .popup .form-popup .form-elment button,
+ .popup-refund .form-popup .form-elment button,
  .popup-inv .form-popup .form-elment button,
  .popup-stock .form-popup .form-elment button,
  .popup-paymentmetod .form-popup .form-elment button,
@@ -1266,6 +1276,7 @@ border: 2px solid var(--color-primary);
     border-radius: var(--bordr-radius-1);
     cursor: pointer;
  }
+ .popup-paymentmetod .form-popup .form-elment button,
  .popup-paymentmetod .form-popup .form-elment button,
  .popup-paymentmetod-inv .form-popup .form-elment button,
  .popup-paymentmetod-card .form-popup .form-elment button,
@@ -1289,6 +1300,7 @@ border: 2px solid var(--color-primary);
     background-color: var(--color-success-hover);
  }
  .popup .form-popup .form-elment button:hover,
+ .popup-refund .form-popup .form-elment button:hover,
  .popup-inv .form-popup .form-elment button:hover,
  .popup-stock .form-popup .form-elment button:hover,
  .popup-paymentmetod .form-popup .form-elment button:hover,
@@ -1551,7 +1563,7 @@ border: 2px solid var(--color-primary);
     margin-top: 1rem;
     padding: 3rem;
   }
-  #recent-orders-refund-page-details{
+  .recent-orders-refund-page-details{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1594,8 +1606,8 @@ border: 2px solid var(--color-primary);
     gap: .5rem;
     margin-top: 1rem;
   }
-  #refund-page-right-cusName,
-  #refund-page-right-date{
+  .refund-page-right-cusName,
+  .refund-page-right-date{
     background-color: var(--color-light);
     padding: 2px 6px;
     border-radius: 10px;
@@ -1603,7 +1615,7 @@ border: 2px solid var(--color-primary);
   .radio-ref > input{
     background-color: var(--color-primary);
   }
-  #refund-page-refund-btn,#recent-orders-back{
+  .refund-page-refund-btn,#recent-orders-back{
     width: 8rem;
     height: 2.5rem;
     border-radius: var(--bordr-radius-2);
@@ -1616,11 +1628,25 @@ border: 2px solid var(--color-primary);
   #recent-orders-back{
     background-color: var(--color-primary);
   }
-  #refund-page-refund-btn:hover{
+  .refund-page-refund-btn:hover{
     background: var(--color-danger-hover);
   }
+  .refund-page-left{
+    width: 50rem;
+  }
+  .refund-desc{
+    border: 1px solid var(--color-primary);
+    border-radius: var(--bordr-radius-1);
+    margin-top: 1rem;
+    padding: .5rem 1rem;
+    width: 100%;
+    max-width: 600px;
+    min-height: 4rem;
+    background-color: transparent;
+    color: var(--color-dark);
+  }
   @media all and( max-width:1290px ) {
-    #recent-orders-refund-page-details{
+    .recent-orders-refund-page-details{
         display: flex;
         flex-direction: column;
     }
@@ -2324,6 +2350,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 /* //toggle password */
 #toggle-password,
+#toggle-password-refund,
 #toggle-password-inv{
     border: 2px solid var(--color-primary);
     width: 15px;

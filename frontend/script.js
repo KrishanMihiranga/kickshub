@@ -361,10 +361,6 @@ const updateProgress = () => {
 
 //open popup
 
-$('#refund-page-refund-btn').on('click', () => {
-  $('.popup').addClass("active-popup");
-  $('.overlay').addClass("active-overlay"); // Add class to overlay
-});
 $('#popup-stock-update-btn').on('click',() =>{
   $('.popup-stock').removeClass("active-popup");
   $('.popup-inv').addClass("active-popup");
@@ -381,6 +377,7 @@ $('#ep-no-btn').on('click', () => {
 });
 $('.close-btn-popup').on('click', () => {
   $('.popup').removeClass("active-popup");
+  $('.popup-refund').removeClass("active-popup");
   $('.popup-inv').removeClass("active-popup");
   $('.popup-stock').removeClass("active-popup");
   $('.popup-paymentmetod').removeClass("active-popup");

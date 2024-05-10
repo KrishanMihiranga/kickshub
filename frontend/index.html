@@ -195,7 +195,7 @@
                     <thead>
                         <tr>
                             <th>Product Name</th>
-                            <th>Product Number</th>
+                            <th>Order Id</th>
                             <th>Payment</th>
                             <th>Status</th>
                         </tr>
@@ -1023,7 +1023,7 @@
                             <thead>
                                 <tr>
                                     <th>Product Name</th>
-                                    <th>Product Number</th>
+                                    <th>Orders Number</th>
                                     <th>Payment</th>
                                     <th>Status</th>
                                 </tr>
@@ -1067,60 +1067,87 @@
                             </tbody>
                         </table>
                     </div>
-                    <button id="nexttest">next</button>
                 </div>
-                <div id="recent-orders-refund-page">
-                    <button id="recent-orders-back">back</button>
-                    <h2>Refund Payments</h2>
-                    <p>Money back transaction</p>
-                    <div id="recent-orders-refund-page-details">
-                        <div class="refund-page-left">
-                            <img src="assets/images/shoe-nike.png" alt="image-refund">
-                        </div>
-                        <div class="refund-page-right">
-                            <p>HEADPHONES</p>
-                            <h1>Beats EP</h1>
-                            <p>The preferred choice of a vast range of acclaimed DJs. Punchy, bass-focused sound and high isolation. Sturdy headband and on-ear cushions suitable for live performance</p>
-                            <hr>
-                            <div class="refund-page-right-cs">
-                             <div>
-                                <p>Color</p>
-                                <div class="refund-page-color"></div>
-                             </div>   
-                                <div>
-                                    <p>Size</p>
-                                    <div class="radio-wapper radio-ref">
-                                        <input type="radio" id="ref-g-m"  class="radioG"checked>
-                                        <label class="labelE label-1" for="ref-g-m">Male</label>
+                <div id="recent-orders-refund-page-wrapper">
+                    <div id="recent-orders-refund-page">
+                        <button id="recent-orders-back">back</button>
+                        <h2>Refund Payments</h2>
+                        <p>Money back transaction</p>
+                        <!-- <div id="recent-orders-refund-page-details">
+                            <div class="refund-page-left">
+                                <img src="assets/images/shoe-nike.png" alt="image-refund">
+                            </div>
+                            <div class="refund-page-right">
+                                <p class="refund-page-right-cat">HEADPHONES</p>
+                                <h1 id="refund-page-right-item-name">Beats EP</h1>
+                                <p>The preferred choice of a vast range of acclaimed DJs. Punchy, bass-focused sound and high isolation. Sturdy headband and on-ear cushions suitable for live performance</p>
+                                <hr>
+                                <div class="refund-page-right-cs">
+                                    <div>
+                                        <p>Color</p>
+                                        <div class="refund-page-color"></div>
+                                    </div>   
+                                        <div>
+                                            <p>Size</p>
+                                            <div class="radio-wapper radio-ref">
+                                                <input type="radio" id="ref-g-m"  class="radioG"checked>
+                                                <label class="labelE label-1" for="ref-g-m">Male</label>
+                                            </div>
                                     </div>
-                             </div>
-                             <div>
-                                <p>Qty</p>
-                                <div class="radio-wapper radio-ref">
-                                    <input type="radio" id="ref-g-s"  class="radioref" checked>
-                                    <label class="labelE label-1" for="ref-g-s">Male</label>
+                                    <div>
+                                        <p>Qty</p>
+                                        <div class="radio-wapper radio-ref">
+                                            <input type="radio" id="ref-g-s"  class="radioref" checked>
+                                            <label class="labelE label-2" for="ref-g-s">Male</label>
+                                        </div>
+                                    </div>
                                 </div>
-                         </div>
-                            </div>
-                        
-                            <small>Refunds can't be undone</small>
                             
-                            <h2>148$</h2>
-                            <hr>
-                            <p>Customer Details</p>
-                            <div class="refund-page-right-cusDetails">
-                                <div id="refund-page-right-cusName">
-                                    <span>Krishan Mihiranga</span>
+                                <small>Refunds can't be undone</small>
+                                
+                                <h2>148$</h2>
+                                <hr>
+                                <p>Customer Details</p>
+                                <div class="refund-page-right-cusDetails">
+                                    <div id="refund-page-right-cusName">
+                                        <span>Krishan Mihiranga</span>
+                                    </div>
+                                    <div id="refund-page-right-date">
+                                        <span>2024-04-20</span>
+                                    </div>
                                 </div>
-                                <div id="refund-page-right-date">
-                                    <span>2024-04-20</span>
-                                </div>
+                                <button id="refund-page-refund-btn">Open Refund</button>
                             </div>
-                            <button id="refund-page-refund-btn">Open Refund</button>
-                        </div>
+                        </div> -->
+                    </div>
+                    
+                </div>
+            </div>
+
+            <!-- ******** refund Popup ********* -->
+            <div class="popup-refund">
+                <div class="close-btn-popup">&times;</div>
+                <div class="form-popup">
+                    <h2>Confirm Changes</h2>
+                    <div class="form-elment">
+                        <label for="email-popup" class="text-muted">Email</label>
+                        <input type="email" id="email-popup-refund" placeholder="Enter Email">
+                    </div>
+                    <div class="form-elment">
+                        <label for="password-popup" class="text-muted">Password</label>
+                        <input type="password" id="password-popup-refund" placeholder="Enter Password">
+                        <input type="password" id="password-confirm-popup-refund" placeholder="Confirm Password">
+                        <div class="password-toggle-wrapper"><label>Toggle password</label><input type="checkbox" id="toggle-password-refund" class="toggle-password"></div>
+                    </div>
+                    <div class="form-elment">
+                        <button id="save-up-btn-refund">Save Changes</button>
+                    </div>
+                    <div class="form-element">
+                        <a href="#" class="forgot-password-popup">Forgot Password?</a>
                     </div>
                 </div>
             </div>
+
             <!-- ******** Item page ********  -->
             <div id="add-item-page">
                 <h2>Item Information</h2>
@@ -1442,7 +1469,6 @@
                 </div>
             </div>
 
-
              <!-- ******** Order Page ******** -->
             <div id="sale-page">
                 <h2>Add Order</h2>
@@ -1533,7 +1559,7 @@
 
                                     <div class="sale-cart-item-count">
                                         <div class="cart-btn-min"><span class="material-icons-sharp">remove</span></div>
-                                        <input type="number" value="0" id="count-or">
+                                        <input type="number" value="0" id="count-or" readonly>
                                         <div class="cart-btn-add"><span class="material-icons-sharp">add</span></div>
                                     </div>
                                 </div>
@@ -1759,6 +1785,7 @@
     <script type="module" src="./controller/AddProductController.js"></script>
     <script type="module" src="./controller/InventoryController.js"></script>
     <script type="module" src="./controller/SaleController.js"></script>
+    <script type="module" src="./controller/RefundController.js"></script>
     
     <script>
         //routes
@@ -1777,14 +1804,6 @@
   $('#add-supplier').on('click', () => {
     $('#save-changes-employee, .charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer, #update-profile, #information-page, #refund-page, #add-item-page, #add-product-page, #inventory-page').hide();
     $('#page-supplier').show();
-  });
-  $('#refund-btn').on('click', () => {
-    $('#save-changes-employee, .charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer,#page-supplier, #update-profile, #information-page, #recent-orders-refund-page, #add-item-page, #add-product-page, #inventory-page, #sale-page').hide();
-    $('#refund-page').show();
-  });
-  $('#nexttest').on('click', () => {
-    $('#recent-orders-refund-page').show();
-    $('#recent-orders-refund').hide();
   });
   $('#recent-orders-back').on('click', () => {
     $('#recent-orders-refund-page').hide();

@@ -1,9 +1,6 @@
 package lk.ijse.shoeshop.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,8 +17,13 @@ public class RefundEntity {
     private String refundId;
     private String description;
     private Date refundDate;
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "employeeCode")
     private EmployeeEntity employee;
-    @OneToOne
+    @ManyToOne
+    @JoinColumns({
+            @JoinColumn(name = "inventoryCode", referencedColumnName = "inventoryCode"),
+            @JoinColumn(name = "orderId", referencedColumnName = "orderId")
+    })
     private SaleItemEntity saleItem;
 }

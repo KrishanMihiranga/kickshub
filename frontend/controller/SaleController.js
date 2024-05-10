@@ -125,7 +125,7 @@ function renderSaleCartItem(name, price, imageUrl, code, color,invcode) {
                     <p class="sale-cart-item-price">${price}</p>
                     <div class="sale-cart-item-count">
                         <div class="cart-btn-min"><span class="material-icons-sharp">remove</span></div>
-                        <input type="number" value="1">
+                        <input type="number" value="1" id="count-or" readonly>
                         <div class="cart-btn-add"><span class="material-icons-sharp">add</span></div>
                     </div>
                 </div>
@@ -148,7 +148,7 @@ $(document).on('click', '.sale-item-overlay-yes', function() {
     var $saleCartItem = $(this).closest('.sale-cart-item');
     var inventoryCode = $saleCartItem.data('invcode');
     var price = parseInt($saleCartItem.find('.sale-cart-item-price').text().replace('$', ''), 10);
-    
+    var count = $($saleCartItem).find('#count-or').val();
     // Remove the sale cart item from the DOM
     $saleCartItem.remove();
 
@@ -156,8 +156,8 @@ $(document).on('click', '.sale-item-overlay-yes', function() {
     console.log(price)
     console.log(subtotal)
     console.log(total)
-    subtotal -= price;
-    total -= price;
+    subtotal -= price * count;
+    total -= price * count;
 
     // Update subtotal and total in the DOM
     $('#subtotal>span').text(subtotal);
@@ -213,8 +213,6 @@ $('#submit-order').on('click', () => {
         }
     });
 });
-
-
 
    
 $(document).on('click', '.cart-btn-add', function() {

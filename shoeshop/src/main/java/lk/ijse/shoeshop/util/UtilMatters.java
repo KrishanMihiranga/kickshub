@@ -10,7 +10,15 @@ import java.util.UUID;
 
 public class UtilMatters {
     public static String generateId(){
-        return UUID.randomUUID().toString();
+        UUID uuid = UUID.randomUUID();
+        byte[] uuidBytes =new byte[16];
+        long msb = uuid.getMostSignificantBits();
+        long lsb = uuid.getLeastSignificantBits();
+        for (int i = 0; i < 8; i++) {
+            uuidBytes[i] = (byte) ((msb >> (8 * (7 - i))) & 0xFF);
+            uuidBytes[8 + i] = (byte) ((lsb >> (8 * (7 - i))) & 0xFF);
+        }
+        return Base64.getUrlEncoder().withoutPadding().encodeToString(uuidBytes);
     }
     public static String convertBase64(byte[] data){
         return Base64.getEncoder().encodeToString(data);

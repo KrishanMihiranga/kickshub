@@ -15,10 +15,13 @@ import lk.ijse.shoeshop.service.SaleService;
 import lk.ijse.shoeshop.util.Mapping;
 import lk.ijse.shoeshop.util.UtilMatters;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.util.List;
 
 @Service
 @Transactional
@@ -41,7 +44,9 @@ public class SaleServiceImpl implements SaleService {
             saleDTO.setAddedPoints(points);
 
             // Save sale
-            SaleEntity savedSaleEntity = saleRepo.save(mapping.toSaleEntity(saleDTO));
+            SaleEntity convertedEntity = mapping.toSaleEntity(saleDTO);
+            convertedEntity.setTimestamp(Timestamp.from(Instant.now()));
+            SaleEntity savedSaleEntity = saleRepo.save(convertedEntity);
 
             // Update inventory
             updateInventory(savedSaleEntity);
@@ -60,6 +65,46 @@ public class SaleServiceImpl implements SaleService {
             throw new RuntimeException("Failed to save sale: " + e.getMessage(), e);
         }
     }
+
+    @Override
+    public List<SaleDTO> getALl() {
+        return mapping.getSaleList(saleRepo.findAll());
+    }
+
+    @Override
+    public SaleDTO findSale(String orderId) {
+        SaleEntity saleEntity = saleRepo.findById(orderId)
+                .orElseThrow(() -> new IllegalArgumentException("Sale not found for code: " + orderId));
+        return mapping.toSaleDTO(saleEntity);
+    }
+
+    @Override
+    public List<SaleDTO> latestOrders() {
+        Pageable pageable = PageRequest.of(0, 5);
+        List<SaleEntity> saleEntities = saleRepo.findTop5ByOrderByTimestampDesc(pageable);
+        return mapping.toSaleDTOList(saleEntities);
+    }
+
+    @Override
+    public String getProductName(String orderId) {
+        String items = null;
+        String tempItems;
+        List<SaleItemEntity> allBySaleItemIdOrderId = saleItemRepo.findAllBySaleItemIdSaleOrderId(orderId);
+
+        for (SaleItemEntity saleItem : allBySaleItemIdOrderId){
+            InventoryEntity inventory = inventoryRepo.findById(saleItem.getSaleItemId().getItem().getInventoryCode())
+                    .orElseThrow(() -> new IllegalArgumentException("Item not found for code: " + orderId));
+            tempItems = inventory.getItem().getDescription();
+            if (items == null){
+                items = tempItems;
+            }else {
+                items = items+","+tempItems;
+            }
+
+        }
+        return items;
+    }
+
 
     @Transactional
     private void updateCustomer(SaleDTO saleDTO) {
@@ -98,6 +143,8 @@ public class SaleServiceImpl implements SaleService {
             inventoryRepo.save(inventoryEntity);
         }
     }
+
+
 
     private String determineCustomerLevel(int points) {
         if (points >= 200) {
