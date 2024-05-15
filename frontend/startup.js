@@ -171,7 +171,7 @@ $.ajax({
          });
          
 
-         var today = new Date().toLocaleString('en-US', {
+        var today = new Date().toLocaleString('en-US', {
             timeZone: 'Asia/Colombo'
         }).split(',')[0].split('/');
     
@@ -179,7 +179,7 @@ $.ajax({
         var day = ('0' + today[1]).slice(-2); 
         var year = today[2];
         today = year + '-' + month + '-' + day;
-
+        $('#selectedDate').val(today);
         console.log("Date _ "+ today);
          $.ajax({
              url: 'http://localhost:9090/shoeshop/api/v1/sale/gettotalsales',
@@ -509,9 +509,24 @@ const barChartOptions = {
     },
   };
 
-  $('#selectedDate').change(function(){
+$('#selectedDate').change(function(){
+
+    var today = new Date().toLocaleString('en-US', {
+        timeZone: 'Asia/Colombo'
+    }).split(',')[0].split('/');
+
+    var month = ('0' + today[0]).slice(-2); 
+    var day = ('0' + today[1]).slice(-2); 
+    var year = today[2];
+    today = year + '-' + month + '-' + day;
+
     var selectedDate = $('#selectedDate').val();
-   
+    if(today == selectedDate){
+        $('.timeDuraion').text("Last 24 Hours");
+    }else{
+        $('.timeDuraion').text(selectedDate);
+    }
+    
     $.ajax({
         url: 'http://localhost:9090/shoeshop/api/v1/sale/gettotalsales',
         type: 'POST',
@@ -611,8 +626,8 @@ const barChartOptions = {
     error: function(xhr, status, error) {
         console.error('Error:', error);
     }
-});
-    
+    });
+
    $.ajax({
        url: 'http://localhost:9090/shoeshop/api/v1/sale/gettopselling',
        type: 'POST',

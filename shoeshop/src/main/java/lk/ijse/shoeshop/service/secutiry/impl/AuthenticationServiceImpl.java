@@ -11,6 +11,7 @@ import lk.ijse.shoeshop.service.secutiry.JWTService;
 import lk.ijse.shoeshop.util.Mapping;
 import lk.ijse.shoeshop.util.UtilMatters;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class AuthenticationServiceImpl implements AuthenticationService {
     private final UserRepo userRepo;
     private final JWTService jwtService;
@@ -29,37 +31,43 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public JwtAuthResponse signIn(SignIn signIn) {
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(signIn.getEmail(), signIn.getPassword()));
-        var userByEmail = userRepo.findByEmail(signIn.getEmail())
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-        var generatedToken = jwtService.generateToken(userByEmail);
-        var employee = mapping.toEmployeeDTO(userByEmail);
+        log.info("Signing in user with email: {}", signIn.getEmail());
 
-        ResponseEmployeeDTO responseEmployeeDTO = null;
-        responseEmployeeDTO = ResponseEmployeeDTO.builder()
-                .employeeCode(employee.getEmployeeCode())
-                .name(employee.getName())
-                .profilePic(employee.getProfilePic())
-                .gender(employee.getGender())
-                .status(employee.getStatus())
-                .designation(employee.getDesignation())
-                .role(employee.getRole())
-                .dob(employee.getDob())
-                .joinedDate(employee.getJoinedDate())
-                .branch(employee.getBranch())
-                .addressNo(employee.getAddressNo())
-                .addressLane(employee.getAddressLane())
-                .addressCity(employee.getAddressCity())
-                .addressState(employee.getAddressState())
-                .postalCode(employee.getPostalCode())
-                .email(employee.getEmail())
-                .phone(employee.getPhone())
-                .guardianOrNominatedPerson(employee.getGuardianOrNominatedPerson())
-                .emergencyContact(employee.getEmergencyContact())
-                .build();
-        System.out.println(employee.getProfilePic());
-        return JwtAuthResponse.builder().token(generatedToken).employee(responseEmployeeDTO).build();
+        try {
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(signIn.getEmail(), signIn.getPassword()));
+            var userByEmail = userRepo.findByEmail(signIn.getEmail())
+                    .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+            var generatedToken = jwtService.generateToken(userByEmail);
+            var employee = mapping.toEmployeeDTO(userByEmail);
+
+            ResponseEmployeeDTO responseEmployeeDTO = ResponseEmployeeDTO.builder()
+                    .employeeCode(employee.getEmployeeCode())
+                    .name(employee.getName())
+                    .profilePic(employee.getProfilePic())
+                    .gender(employee.getGender())
+                    .status(employee.getStatus())
+                    .designation(employee.getDesignation())
+                    .role(employee.getRole())
+                    .dob(employee.getDob())
+                    .joinedDate(employee.getJoinedDate())
+                    .branch(employee.getBranch())
+                    .addressNo(employee.getAddressNo())
+                    .addressLane(employee.getAddressLane())
+                    .addressCity(employee.getAddressCity())
+                    .addressState(employee.getAddressState())
+                    .postalCode(employee.getPostalCode())
+                    .email(employee.getEmail())
+                    .phone(employee.getPhone())
+                    .guardianOrNominatedPerson(employee.getGuardianOrNominatedPerson())
+                    .emergencyContact(employee.getEmergencyContact())
+                    .build();
+
+            log.info("Logged into system for user: {}", employee.getName());
+            return JwtAuthResponse.builder().token(generatedToken).employee(responseEmployeeDTO).build();
+        } catch (Exception e) {
+            log.error("Failed to sign in: {}", e.getMessage(), e);
+            throw new RuntimeException("Failed to sign in: " + e.getMessage(), e);
+        }
     }
 
 

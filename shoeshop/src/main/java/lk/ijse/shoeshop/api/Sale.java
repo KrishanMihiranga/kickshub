@@ -47,7 +47,6 @@ public class Sale {
     public ResponseEntity<String> saveSale(@RequestBody SaleDTO saleDTO){
 //        return ResponseEntity.ok(saleService.saveSale(saleDTO));
         try {
-            System.out.println(saleDTO);
             saleService.saveSale(saleDTO);
             String successMessage = "Sale saved successfully!";
             return ResponseEntity.ok(successMessage);

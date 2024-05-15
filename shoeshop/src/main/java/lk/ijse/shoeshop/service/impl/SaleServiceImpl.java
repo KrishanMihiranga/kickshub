@@ -15,6 +15,7 @@ import lk.ijse.shoeshop.service.SaleService;
 import lk.ijse.shoeshop.util.Mapping;
 import lk.ijse.shoeshop.util.UtilMatters;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,7 @@ import java.util.List;
 @Service
 @Transactional
 @RequiredArgsConstructor
+@Slf4j
 public class SaleServiceImpl implements SaleService {
     private final Mapping mapping;
     private final SaleRepo saleRepo;
@@ -36,6 +38,8 @@ public class SaleServiceImpl implements SaleService {
     @Override
     @Transactional
     public SaleDTO saveSale(SaleDTO saleDTO) {
+        log.info("Saving sale: {}", saleDTO);
+
         try {
             // Set order ID and calculate points
             saleDTO.setOrderId(UtilMatters.generateId());
@@ -47,104 +51,171 @@ public class SaleServiceImpl implements SaleService {
             SaleEntity convertedEntity = mapping.toSaleEntity(saleDTO);
             convertedEntity.setTimestamp(Timestamp.from(Instant.now()));
             SaleEntity savedSaleEntity = saleRepo.save(convertedEntity);
+            log.debug("Sale saved: {}", savedSaleEntity);
 
             // Update inventory
             updateInventory(savedSaleEntity);
+            log.debug("Inventory updated for sale: {}", savedSaleEntity);
 
-            //update customer
+            // Update customer
             updateCustomer(saleDTO);
+            log.debug("Customer updated for sale: {}", savedSaleEntity);
 
             // Save sale items
             for (SaleItemEntity saleItem : savedSaleEntity.getSaleItems()) {
                 saleItem.getSaleItemId().setSale(savedSaleEntity);
                 saleItemRepo.save(saleItem);
+                log.debug("Sale item saved: {}", saleItem);
             }
 
+            log.info("Sale saved successfully.");
             return mapping.toSaleDTO(savedSaleEntity);
         } catch (Exception e) {
+            log.error("Failed to save sale: {}", e.getMessage(), e);
             throw new RuntimeException("Failed to save sale: " + e.getMessage(), e);
         }
     }
 
     @Override
     public List<SaleDTO> getALl() {
-        return mapping.getSaleList(saleRepo.findAll());
+        log.info("Fetching all sales.");
+
+        try {
+            List<SaleEntity> allSales = saleRepo.findAll();
+            log.debug("Total sales fetched: {}", allSales.size());
+            return mapping.getSaleList(allSales);
+        } catch (Exception e) {
+            log.error("Failed to fetch all sales: {}", e.getMessage(), e);
+            throw new RuntimeException("Failed to fetch all sales: " + e.getMessage(), e);
+        }
     }
 
     @Override
     public SaleDTO findSale(String orderId) {
-        SaleEntity saleEntity = saleRepo.findById(orderId)
-                .orElseThrow(() -> new IllegalArgumentException("Sale not found for code: " + orderId));
-        return mapping.toSaleDTO(saleEntity);
+        log.info("Finding sale with order ID: {}", orderId);
+
+        try {
+            SaleEntity saleEntity = saleRepo.findById(orderId)
+                    .orElseThrow(() -> new IllegalArgumentException("Sale not found for code: " + orderId));
+            log.debug("Sale found: {}", saleEntity);
+            return mapping.toSaleDTO(saleEntity);
+        } catch (IllegalArgumentException e) {
+            log.warn("Sale not found for order ID: {}", orderId);
+            throw e;
+        } catch (Exception e) {
+            log.error("Failed to find sale: {}", e.getMessage(), e);
+            throw new RuntimeException("Failed to find sale: " + e.getMessage(), e);
+        }
     }
 
     @Override
     public List<SaleDTO> latestOrders() {
-        Pageable pageable = PageRequest.of(0, 5);
-        List<SaleEntity> saleEntities = saleRepo.findTop5ByOrderByTimestampDesc(pageable);
-        return mapping.toSaleDTOList(saleEntities);
+        log.info("Fetching latest 5 orders.");
+
+        try {
+            Pageable pageable = PageRequest.of(0, 5);
+            List<SaleEntity> saleEntities = saleRepo.findTop5ByOrderByTimestampDesc(pageable);
+            log.debug("Latest orders fetched: {}", saleEntities);
+            return mapping.toSaleDTOList(saleEntities);
+        } catch (Exception e) {
+            log.error("Failed to fetch latest orders: {}", e.getMessage(), e);
+            throw new RuntimeException("Failed to fetch latest orders: " + e.getMessage(), e);
+        }
     }
 
     @Override
     public String getProductName(String orderId) {
-        String items = null;
-        String tempItems;
-        List<SaleItemEntity> allBySaleItemIdOrderId = saleItemRepo.findAllBySaleItemIdSaleOrderId(orderId);
+        log.info("Fetching product name for order ID: {}", orderId);
 
-        for (SaleItemEntity saleItem : allBySaleItemIdOrderId){
-            InventoryEntity inventory = inventoryRepo.findById(saleItem.getSaleItemId().getItem().getInventoryCode())
-                    .orElseThrow(() -> new IllegalArgumentException("Item not found for code: " + orderId));
-            tempItems = inventory.getItem().getDescription();
-            if (items == null){
-                items = tempItems;
-            }else {
-                items = items+","+tempItems;
+        try {
+            StringBuilder items = new StringBuilder();
+            List<SaleItemEntity> allBySaleItemIdOrderId = saleItemRepo.findAllBySaleItemIdSaleOrderId(orderId);
+
+            for (SaleItemEntity saleItem : allBySaleItemIdOrderId) {
+                InventoryEntity inventory = inventoryRepo.findById(saleItem.getSaleItemId().getItem().getInventoryCode())
+                        .orElseThrow(() -> new IllegalArgumentException("Item not found for code: " + orderId));
+                String tempItem = inventory.getItem().getDescription();
+                if (items.length() == 0) {
+                    items.append(tempItem);
+                } else {
+                    items.append(",").append(tempItem);
+                }
             }
 
+            String productName = items.toString();
+            log.debug("Product name for order ID {}: {}", orderId, productName);
+            return productName;
+        } catch (IllegalArgumentException e) {
+            log.warn("Item not found for order ID: {}", orderId);
+            throw e;
+        } catch (Exception e) {
+            log.error("Failed to fetch product name: {}", e.getMessage(), e);
+            throw new RuntimeException("Failed to fetch product name: " + e.getMessage(), e);
         }
-        return items;
     }
-
 
     @Transactional
     private void updateCustomer(SaleDTO saleDTO) {
-        String customerCode = saleDTO.getCustomer().getCustomerCode();
+        log.info("Updating customer for sale: {}", saleDTO);
 
-        double totalPrice = saleDTO.getTotalPrice();
-        int points = (int) (totalPrice / 800);
+        try {
+            String customerCode = saleDTO.getCustomer().getCustomerCode();
+            double totalPrice = saleDTO.getTotalPrice();
+            int points = (int) (totalPrice / 800);
 
-        CustomerEntity customerEntity = customerRepo.findById(customerCode)
-                .orElseThrow(() -> new IllegalArgumentException("Customer not found for code: " + customerCode));
+            CustomerEntity customerEntity = customerRepo.findById(customerCode)
+                    .orElseThrow(() -> new IllegalArgumentException("Customer not found for code: " + customerCode));
 
-        customerEntity.setTotalPoints(customerEntity.getTotalPoints()+points);
-        int totalPoints = customerEntity.getTotalPoints();
-        String level = determineCustomerLevel(totalPoints);
-        customerEntity.setLevel(CustomerLevel.valueOf(level));
+            customerEntity.setTotalPoints(customerEntity.getTotalPoints() + points);
+            int totalPoints = customerEntity.getTotalPoints();
+            String level = determineCustomerLevel(totalPoints);
+            customerEntity.setLevel(CustomerLevel.valueOf(level));
 
-        customerEntity.setRecentPurchaseDateTime(Timestamp.from(Instant.now()));
+            customerEntity.setRecentPurchaseDateTime(Timestamp.from(Instant.now()));
+            log.debug("Customer updated: {}", customerEntity);
+        } catch (IllegalArgumentException e) {
+            log.warn("Customer not found for sale: {}", saleDTO);
+            throw e;
+        } catch (Exception e) {
+            log.error("Failed to update customer: {}", e.getMessage(), e);
+            throw new RuntimeException("Failed to update customer: " + e.getMessage(), e);
+        }
 
     }
 
     @Transactional
     private void updateInventory(SaleEntity saleEntity) {
-        for (SaleItemEntity saleItem : saleEntity.getSaleItems()) {
-            String invCode = saleItem.getSaleItemId().getItem().getInventoryCode();
-            int quantity = saleItem.getQty();
+        log.info("Updating inventory for sale: {}", saleEntity);
 
-            InventoryEntity inventoryEntity = inventoryRepo.findById(invCode)
-                    .orElseThrow(() -> new IllegalArgumentException("Inventory not found for code: " + invCode));
+        try {
+            for (SaleItemEntity saleItem : saleEntity.getSaleItems()) {
+                String invCode = saleItem.getSaleItemId().getItem().getInventoryCode();
+                int quantity = saleItem.getQty();
 
-            int updatedQty = inventoryEntity.getCurrentQty() - quantity;
-            if (updatedQty < 0) {
-                throw new RuntimeException("Insufficient quantity in inventory for code: " + invCode);
+                InventoryEntity inventoryEntity = inventoryRepo.findById(invCode)
+                        .orElseThrow(() -> new IllegalArgumentException("Inventory not found for code: " + invCode));
+
+                int updatedQty = inventoryEntity.getCurrentQty() - quantity;
+                if (updatedQty < 0) {
+                    throw new RuntimeException("Insufficient quantity in inventory for code: " + invCode);
+                }
+
+                inventoryEntity.setCurrentQty(updatedQty);
+                inventoryRepo.save(inventoryEntity);
+                log.debug("Inventory updated: {}", inventoryEntity);
             }
+        } catch (IllegalArgumentException e) {
+            log.warn("Inventory not found for sale: {}", saleEntity);
+            throw e;
+        } catch (RuntimeException e) {
+            log.error("Failed to update inventory: {}", e.getMessage(), e);
+            throw e;
+        } catch (Exception e) {
+            log.error("Failed to update inventory: {}", e.getMessage(), e);
+            throw new RuntimeException("Failed to update inventory: " + e.getMessage(), e);
 
-            inventoryEntity.setCurrentQty(updatedQty);
-            inventoryRepo.save(inventoryEntity);
         }
     }
-
-
 
     private String determineCustomerLevel(int points) {
         if (points >= 200) {
