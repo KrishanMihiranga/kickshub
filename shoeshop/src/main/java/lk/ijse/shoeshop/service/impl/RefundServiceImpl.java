@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -44,6 +45,7 @@ public class RefundServiceImpl implements RefundService {
 
         inventoryItem.setCurrentQty(inventoryItem.getCurrentQty() + refundDTO.getQty());
 
+
         RefundEntity refundEntity = mapping.toRefundEntity(refundDTO);
         refundEntity.setRefundId(UtilMatters.generateId());
         refundRepo.save(refundEntity);
@@ -60,28 +62,10 @@ public class RefundServiceImpl implements RefundService {
         calendar.add(Calendar.DAY_OF_YEAR, -3);
         Timestamp threeDaysAgo = new Timestamp(calendar.getTimeInMillis());
 
+
         List<SaleEntity> ordersWithinThreeDays = saleRepo.findAllByTimestampAfter(threeDaysAgo);
-        List<SaleDTO> availableOrders = new ArrayList<>();
-        for (SaleEntity order : ordersWithinThreeDays){
-            boolean isRefunded = false;
-            for (SaleItemEntity saleItem: order.getSaleItems()){
-                String inventoryCode = saleItem.getSaleItemId().getItem().getInventoryCode();
-                String orderId = order.getOrderId();
 
-                Optional<RefundEntity> existingRefund = refundRepo.findByInventoryCodeAndOrderId(inventoryCode, orderId);
-                if (existingRefund.isPresent()){
-                    // If any item in the order is refunded, mark the order as refunded and break the loop
-                    isRefunded = true;
-                    break;
-                }
-            }
-            // If the order is not refunded, add it to the list of available orders
-            if (!isRefunded){
-                availableOrders.add(mapping.toSaleRefundDTO(order));
-            }
-        }
-
-        return availableOrders;
+        return mapping.getSaleList(ordersWithinThreeDays);
     }
 
 

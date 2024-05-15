@@ -543,6 +543,9 @@ border: 2px solid var(--color-primary);
     justify-content: space-between;
     align-items: start;
 }
+.popular-product{
+    height: 13rem;
+}
 .popular-product-card-left img{
     width: 9rem;
 }
@@ -2438,4 +2441,13 @@ input[type=number]::-webkit-outer-spin-button {
 
 .other {
    background-color: var(--color-light);
+}
+.total-amount-wrapper{
+    display: flex;
+    align-items: center;
+}
+.total-amount-wrapper small{
+    position: relative;
+    bottom: .5rem;
+    left: .5rem;
 }

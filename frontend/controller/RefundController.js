@@ -24,6 +24,7 @@ $('#refund-table-orders-wrapper').on('click', 'tbody tr', function() {
     var items = response.split(',');
 
     
+    // $('#refund-page-right-cusName>span').text(order.customer.name);
     $('#refund-page-right-cusName>span').text(order.customer.name);
 
 
@@ -184,7 +185,7 @@ $.ajax({
                     console.log('Success:', response);
                 },
                 error: function(xhr, status, error) {
-                    console.log('Error:', error);
+                    alert("Already refunded");
                 }
             });
          

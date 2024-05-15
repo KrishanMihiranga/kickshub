@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @CrossOrigin
@@ -35,5 +36,9 @@ public class Customer {
     @PostMapping("/check")
     public ResponseEntity<Boolean> check(@RequestBody CheckCustomerDTO customerDTO){
         return ResponseEntity.ok(customerService.check(customerDTO));
+    }
+    @PostMapping("/getcustomercount")
+    public ResponseEntity<Integer> getCustomerCount(@RequestBody LocalDate date){
+        return ResponseEntity.ok(customerService.totalPaymentMethods(date));
     }
 }

@@ -10,6 +10,9 @@ import org.springframework.stereotype.Component;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -176,6 +179,16 @@ public class Mapping {
         try {
             updatedDate = dateFormat.parse(date);
         } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return updatedDate;
+    }
+    public static LocalDate convertToLocalDate(String date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate updatedDate = null;
+        try {
+            updatedDate = LocalDate.parse(date, formatter);
+        } catch (DateTimeParseException e) {
             e.printStackTrace();
         }
         return updatedDate;

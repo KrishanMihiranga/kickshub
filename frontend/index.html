@@ -99,7 +99,7 @@
 
             <div class="dateAndSession">
                 <div class="date">
-                    <input type="date">
+                    <input type="date" id="selectedDate">
                 </div>
                 <div class="session-time">
                     <p>Your session ends in: <span id="session-time">08:00:00</span></p>
@@ -116,7 +116,8 @@
                     <div class="middle">
                         <div class="left">
                             <h3>Total Sales</h3>
-                            <h1>$25,900</h1>
+                            <div class="total-amount-wrapper"><h1 id="total-sales-amount">25,000</h1><small>LKR</small></div>
+                            
                         </div>
                         <div class="progress">
                             <svg>
@@ -135,7 +136,7 @@
                     <div class="middle">
                         <div class="left">
                             <h3>Total Expenses</h3>
-                            <h1>$14,600</h1>
+                            <div class="total-amount-wrapper"><h1 id="total-sales-expenses">25,000</h1><small>LKR</small></div>
                         </div>
                         <div class="progress">
                             <svg>
@@ -154,7 +155,7 @@
                     <div class="middle">
                         <div class="left">
                             <h3>Total Income</h3>
-                            <h1>$10,900</h1>
+                            <div class="total-amount-wrapper"><h1 id="total-sales-income">25,000</h1><small>LKR</small></div>
                         </div>
                         <div class="progress">
                             <svg>
@@ -1023,9 +1024,9 @@
                             <thead>
                                 <tr>
                                     <th>Product Name</th>
-                                    <th>Orders Number</th>
+                                    <th>Order Number</th>
                                     <th>Payment</th>
-                                    <th>Status</th>
+                                    
                                 </tr>
                             </thead>
                             <tbody>
@@ -1704,14 +1705,14 @@
 
                 <div class="item popular-product">
                     <div class="popular-product-card-left">
-                        <img src="/assets/images/shoe-nike.png" alt="">
+                        <img src="/assets/images/shoe-nike.png" alt="" id="popular-product-card-right-image">
                         <div class="popular-product-card-left-footer">
                             <small class="text-muted">last 24 Hours</small>
-                            <h3>$300</h3>
+                            <h3 id="popular-product-card-right-price">$300</h3>
                         </div>
                     </div>
                     <div class="popular-product-card-right">
-                        <h3>Air Jordan 1 Low</h3>
+                        <h3 id="popular-product-card-right-name">Air Jordan 1 Low</h3>
                         <p>The Air Jordan 1 low shoe is inspire by the first AJ1,offering fans of Jordan retros a chance to follow.</p>
                     </div>
                 </div>
@@ -1726,7 +1727,7 @@
                             <small class="text-muted">Last 24 Hours</small>
                         </div>
                         <h5 class="danger">-15%</h5>
-                        <h3>73</h3>
+                        <h3 id="item-cash-count">73</h3>
                     </div>
                 </div>
 
@@ -1740,7 +1741,7 @@
                             <small class="text-muted">Last 24 Hours</small>
                         </div>
                         <h5 class="success">+40%</h5>
-                        <h3>120</h3>
+                        <h3 id="item-card-count">120</h3>
                     </div>
                 </div>
 
@@ -1754,7 +1755,7 @@
                             <small class="text-muted">Last 24 Hours</small>
                         </div>
                         <h5 class="success">+23%</h5>
-                        <h3>310</h3>
+                        <h3 id="item-customer-count">310</h3>
                     </div>
                 </div>
                 <!-- <div class="item add-product">

@@ -2,6 +2,7 @@ import {authData} from "../db/loginData.js";
 import {dataEmp} from "../db/detailCheck.js";
 import {employeeData} from "../db/employee.js";
 import{recentOrders} from "../db/Orders.js";
+import {top5names,count} from "../db/Dashboard.js";
 var pop_email = null;
 var pop_password = null;
 var pop_rePass = null;
@@ -24,12 +25,15 @@ $(document).ready(function() {
         $('.popup-edit-confirm').removeClass("active-popup");
         $('.overlay').removeClass("active-overlay"); 
     });
+
     
 });
 
 
 
 $('#dashboard-photo').on('click', () => {
+
+    
     //route
     $('#save-changes-employee, .charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer,#page-supplier, #information-page, #refund-page, #add-item-page, #add-product-page, #inventory-page, #sale-page').hide();
     $('#update-profile').show();
@@ -261,6 +265,9 @@ $('#save-up-btn').on('click', () => {
     });
 });
 
+
+
+ 
 
 
 

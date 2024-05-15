@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -14,4 +15,6 @@ public interface SaleRepo extends JpaRepository<SaleEntity, String> {
     List<SaleEntity> findTop5ByOrderByTimestampDesc(Pageable pageable);
     List<SaleEntity> findAllByTimestampAfter(Timestamp timestamp);
     SaleEntity findByOrderId(String orderId);
+
+    List<SaleEntity> findAllByTimestampBetween(LocalDateTime startDate, LocalDateTime endDate);
 }
