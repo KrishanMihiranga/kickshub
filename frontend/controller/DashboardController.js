@@ -19,8 +19,17 @@ $(document).ready(function() {
 
     $('#ep-yes-btn').click(function() {
         var isDisabled = $('#update-profile input, #update-profile select').prop('disabled');
+        var isDisabledInformation = $('#Information-update-profile input, #Information-update-profile select').prop('disabled');
+        var isDisabledInformationSupplier = $('#Information-update-supplier input, #Information-update-supplier select').prop('disabled');
+        var isDisabledInformationCustomer = $('#Information-update-customer input, #Information-update-customer select').prop('disabled');
         $('#update-profile input, #update-profile select').prop('disabled', !isDisabled);
+        $('#Information-update-profile input, #Information-update-profile select').prop('disabled', !isDisabledInformation);
+        $('#Information-update-supplier input, #Information-update-supplier select').prop('disabled', !isDisabledInformationSupplier);
+        $('#Information-update-customer input, #Information-update-customer select').prop('disabled', !isDisabledInformationCustomer);
         $('#save-changes-employee').show();
+        $('#Information-save-changes-employee').show();
+        $('#Information-save-changes-supplier').show();
+        $('#Information-save-changes-customer').show();
 
         $('.popup-edit-confirm').removeClass("active-popup");
         $('.overlay').removeClass("active-overlay"); 
@@ -163,13 +172,46 @@ $('#save-changes-employee').on('click', () => {
     console.log(employeeData);
     $('.popup').addClass("active-popup");
     $('.overlay').addClass("active-overlay");
-
     
 });
 
 $('#toggle-password').change(function () {
     var passwordInput = $('#password-popup');
     var confirmPasswordInput = $('#password-confirm-popup');
+    if ($(this).is(':checked')) {
+        passwordInput.attr('type', 'text');
+        confirmPasswordInput.attr('type', 'text');
+    } else {
+        passwordInput.attr('type', 'password');
+        confirmPasswordInput.attr('type', 'password');
+    }
+});
+$('#toggle-password-info').change(function () {
+    var passwordInput = $('#password-popup-info');
+    var confirmPasswordInput = $('#password-confirm-popup-info');
+    if ($(this).is(':checked')) {
+        passwordInput.attr('type', 'text');
+        confirmPasswordInput.attr('type', 'text');
+    } else {
+        passwordInput.attr('type', 'password');
+        confirmPasswordInput.attr('type', 'password');
+    }
+});
+
+$('#toggle-password-supplier').change(function () {
+    var passwordInput = $('#password-popup-info-supplier');
+    var confirmPasswordInput = $('#password-confirm-popup-info-supplier');
+    if ($(this).is(':checked')) {
+        passwordInput.attr('type', 'text');
+        confirmPasswordInput.attr('type', 'text');
+    } else {
+        passwordInput.attr('type', 'password');
+        confirmPasswordInput.attr('type', 'password');
+    }
+});
+$('#toggle-password-customer').change(function () {
+    var passwordInput = $('#password-popup-info-customer');
+    var confirmPasswordInput = $('#password-confirm-popup-info-customer');
     if ($(this).is(':checked')) {
         passwordInput.attr('type', 'text');
         confirmPasswordInput.attr('type', 'text');
@@ -264,11 +306,6 @@ $('#save-up-btn').on('click', () => {
         }
     });
 });
-
-
-
- 
-
 
 
 // $('#save-up-btn').on('click', () => {

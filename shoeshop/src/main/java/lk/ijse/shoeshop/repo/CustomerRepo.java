@@ -14,4 +14,6 @@ public interface CustomerRepo extends JpaRepository<CustomerEntity, String> {
     Optional<CustomerEntity> findByNameAndPhone(String name, String phone);
 
     List<CustomerEntity> findAllByjoinedDateAsLoyaltyBetween(LocalDateTime startDate, LocalDateTime endDate);
+
+    Optional<CustomerEntity> findByCustomerCode(String customerCode);
 }

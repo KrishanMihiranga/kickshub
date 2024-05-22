@@ -1,10 +1,10 @@
-import {authData} from "../db/loginData.js";
-import {supplierData} from "../db/supplier.js";
+import { authData } from "../db/loginData.js";
+import { supplierData } from "../db/supplier.js";
 
-$('#add-sup-btn').on('click', function(){
-    
+$('#add-sup-btn').on('click', function () {
+
     supplierData.code = null;
-    supplierData.supplierName = $('#reg-sup-fn').val()+" "+$('#reg-sup-ln').val();
+    supplierData.supplierName = $('#reg-sup-fn').val() + " " + $('#reg-sup-ln').val();
     supplierData.category = $('#reg-sup-radio-cat input[type="radio"]:checked').val();
     supplierData.addressNo = $('#reg-sup-add-no').val();
     supplierData.addressLane = $('#reg-sup-add-street').val();
@@ -24,11 +24,11 @@ $('#add-sup-btn').on('click', function(){
             'Authorization': 'Bearer ' + authData.token
         },
         data: JSON.stringify(supplierData),
-        success: function(response) {
+        success: function (response) {
             console.log('Success:', response);
             alert("Saved");
         },
-        error: function(xhr, status, error) {
+        error: function (xhr, status, error) {
             console.error('Error:', error);
         }
     });

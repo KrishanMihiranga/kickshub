@@ -1,7 +1,7 @@
-export{authData} from "../db/loginData.js";
-import{refundOrders} from "../db/Orders.js";
+export { authData } from "../db/loginData.js";
+import { refundOrders } from "../db/Orders.js";
 import { authData } from "./RefundController.js";
-import {inventoryItems} from "../db/inventory.js";
+import { inventoryItems } from "../db/inventory.js";
 
 var order;
 var itemCode;
@@ -15,15 +15,15 @@ $('#refund-btn').on('click', () => {
     console.log('clicked');
 });
 // Event delegation for dynamically added elements
-$('#refund-table-orders-wrapper').on('click', 'tbody tr', function() {
+$('#refund-table-orders-wrapper').on('click', 'tbody tr', function () {
 
-    console.log("Token : ",authData.token);
+    console.log("Token : ", authData.token);
     order = $(this).data('order');
 
     var response = $(this).data('response');
     var items = response.split(',');
 
-    
+
     // $('#refund-page-right-cusName>span').text(order.customer.name);
     $('#refund-page-right-cusName>span').text(order.customer.name);
 
@@ -32,10 +32,10 @@ $('#refund-table-orders-wrapper').on('click', 'tbody tr', function() {
     $('#recent-orders-refund').hide();
 
     setRefundItems(order);
-    
+
 });
 
-function createRefundPageDetails(item, index, order) { 
+function createRefundPageDetails(item, index, order) {
     var refundPageDetails = `
         <div class="recent-orders-refund-page-details" id="recent-orders-refund-page-details-${index}">
             <div class="refund-page-left">
@@ -86,7 +86,7 @@ function createRefundPageDetails(item, index, order) {
     return refundPageDetails;
 }
 
-function setRefundItems(order){
+function setRefundItems(order) {
     $.ajax({
         url: 'http://localhost:9090/shoeshop/api/v1/refund/getrefunddetails',
         type: 'POST',
@@ -95,22 +95,22 @@ function setRefundItems(order){
             'Authorization': 'Bearer ' + authData.token
         },
         data: order.orderId,
-        success: function(response) {
+        success: function (response) {
             console.log(response);
             response.forEach((item, index) => {
-                var refundPageDetailsHTML = createRefundPageDetails(item, index,order);
+                var refundPageDetailsHTML = createRefundPageDetails(item, index, order);
                 $('#recent-orders-refund-page').append(refundPageDetailsHTML);
                 $('.refund-page-color').eq(index).css('background-color', item.color);
             });
         },
-        error: function(xhr, status, error) {
+        error: function (xhr, status, error) {
             // Handle error
             console.error('Error:', error);
         }
     });
 }
 
-$(document).on('click', '.refund-page-refund-btn', function() {
+$(document).on('click', '.refund-page-refund-btn', function () {
     itemCode = $(this).data('item-code');
     orderId = $(this).data('order');
     quantity = $(this).data('qty');
@@ -126,77 +126,77 @@ $(document).on('click', '.refund-page-refund-btn', function() {
 
 
     $('.popup-refund').addClass("active-popup");
-    $('.overlay').addClass("active-overlay"); 
+    $('.overlay').addClass("active-overlay");
 });
 
 $('#save-up-btn-refund').on('click', () => {
-   var email = $('#email-popup-refund').val();
-   var password = $('#password-popup-refund').val();
-   var reenter= $('#password-confirm-popup-refund').val();
+    var email = $('#email-popup-refund').val();
+    var password = $('#password-popup-refund').val();
+    var reenter = $('#password-confirm-popup-refund').val();
 
-   if (password !== reenter) {
-    alert("Password Mismatch");
-    return;
-   }
-var dataEmp = {
-    email: email,
-    password: CryptoJS.SHA256(password).toString(CryptoJS.enc.Hex)
-};
+    if (password !== reenter) {
+        alert("Password Mismatch");
+        return;
+    }
+    var dataEmp = {
+        email: email,
+        password: CryptoJS.SHA256(password).toString(CryptoJS.enc.Hex)
+    };
 
 
-$.ajax({
-    url: 'http://localhost:9090/shoeshop/api/v1/employee/check',
-    type: 'POST',
-    contentType: 'application/json',
-    headers: {
-        'Authorization': 'Bearer ' + authData.token
-    },
-    data: JSON.stringify(dataEmp),
-    success: function (response) {
-        if(response) {
-            $.ajax({
-                url: 'http://localhost:9090/shoeshop/api/v1/refund/saverefund',
-                type: 'POST',
-                contentType: 'application/json',
-                headers: {
-                    'Authorization': 'Bearer ' + authData.token
-                },
-                data: JSON.stringify({
-                    refundId: null,
-                    qty: quantity,
-                    description: description,
-                    refundDate: new Date(),
-                    status:'Refunded',
-                    employee: {
-                        employeeCode: authData.employee.employeeCode
+    $.ajax({
+        url: 'http://localhost:9090/shoeshop/api/v1/employee/check',
+        type: 'POST',
+        contentType: 'application/json',
+        headers: {
+            'Authorization': 'Bearer ' + authData.token
+        },
+        data: JSON.stringify(dataEmp),
+        success: function (response) {
+            if (response) {
+                $.ajax({
+                    url: 'http://localhost:9090/shoeshop/api/v1/refund/saverefund',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    headers: {
+                        'Authorization': 'Bearer ' + authData.token
                     },
-                    saleItem: {
-                        saleItemId: {
-                            sale: {
-                                orderId: orderId
-                            },
-                            item: {
-                                inventoryCode: itemCode
+                    data: JSON.stringify({
+                        refundId: null,
+                        qty: quantity,
+                        description: description,
+                        refundDate: new Date(),
+                        status: 'Refunded',
+                        employee: {
+                            employeeCode: authData.employee.employeeCode
+                        },
+                        saleItem: {
+                            saleItemId: {
+                                sale: {
+                                    orderId: orderId
+                                },
+                                item: {
+                                    inventoryCode: itemCode
+                                }
                             }
                         }
+                    }),
+                    success: function (response) {
+                        console.log('Success:', response);
+                    },
+                    error: function (xhr, status, error) {
+                        alert("Already refunded");
                     }
-                }),
-                success: function(response) {
-                    console.log('Success:', response);
-                },
-                error: function(xhr, status, error) {
-                    alert("Already refunded");
-                }
-            });
-         
-        } else {
-            alert("No User Found");
+                });
+
+            } else {
+                alert("No User Found");
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error('Error:', error);
         }
-    },
-    error: function (xhr, status, error) {
-        console.error('Error:', error);
-    }
-});
+    });
 
 });
 

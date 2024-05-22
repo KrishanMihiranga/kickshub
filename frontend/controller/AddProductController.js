@@ -1,5 +1,5 @@
 import { items, itemImages, addToInventory } from "../db/item.js";
-import {authData} from "../db/loginData.js";
+import { authData } from "../db/loginData.js";
 var relatedArray = null;
 var imgArray = null;
 
@@ -12,7 +12,7 @@ $('#add-product-btn').on('click', () => {
 
 function createCards() {
     $('.container-ap-wrapper').empty();
-    
+
     items.forEach(item => {
         createCard(item);
     });
@@ -26,19 +26,19 @@ function createCard(item) {
 
     var textContainer = $('<div class="text-container-ap"></div>');
     var heading = $('<div class="heading-ap">' + item.description + '</div>');
-    var description = $('<div class="description-ap"><p>' + item.supplier.supplierName + '</p></div>'); 
+    var description = $('<div class="description-ap"><p>' + item.supplier.supplierName + '</p></div>');
 
     var footer = $('<div class="footer-ap"></div>');
     var price = $('<div class="price-ap">$' + item.unitPriceSale + '</div>');
     var button = $('<div class="button-ap"><span class="material-icons-sharp">add</span> Add</div>');
 
-    button.on('click', function() {
+    button.on('click', function () {
         relatedArray = item;
         imgArray = getImage(item.itemCode);
         $('.popup-stock').addClass("active-popup");
         $('.overlay').addClass("active-overlay"); // Add class to overlay
     });
-    
+
     imageContainer.append(image);
     textContainer.append(heading);
     textContainer.append(description);
@@ -52,7 +52,7 @@ function createCard(item) {
     $('.container-ap-wrapper').append(card);
 }
 
-function getImage(itemId){
+function getImage(itemId) {
     var itemImage = itemImages.find(item => item.id === itemId);
     return itemImage;
 }
@@ -64,7 +64,7 @@ function getImageForItemId(itemId) {
 
 
 // $('.button-ap').on('click', () => {
-    
+
 // // });
 // function popupt(){
 //     $('.popup-stock').addClass("active-popup");
@@ -84,16 +84,16 @@ $('#toggle-password-inv').change(function () {
     }
 });
 
-$('.upi-item-radio-color input[type="radio"]').on('change', function() {
+$('.upi-item-radio-color input[type="radio"]').on('change', function () {
     if ($(this).is(':checked')) {
         var colorValue = $(this).val();
-        
+
         // Remove styles from all labels
         $('.upi-item-radio-color label').css({
             'background-color': '', // Remove background color
             'border': '' // Remove border
         });
-        
+
         // Apply styles to the label of the selected radio button
         $(this).next('label').css({
             'background-color': colorValue,
@@ -102,7 +102,7 @@ $('.upi-item-radio-color input[type="radio"]').on('change', function() {
     }
 });
 
-$('#popup-stock-update-btn').on('click',()=>{
+$('#popup-stock-update-btn').on('click', () => {
     var amountToUpdate = $('#stock-amount-popup').val();
     var size = $('.upi-item-radio-size input[type="radio"]:checked').val();
     var color = $('.upi-item-radio-color input[type="radio"]:checked').val();
@@ -116,7 +116,7 @@ $('#popup-stock-update-btn').on('click',()=>{
     console.log(addToInventory);
 });
 
-$('#save-up-btn-inv').on('click',()=>{
+$('#save-up-btn-inv').on('click', () => {
     var pop_email = $('#email-popup-inv').val();
     var pop_password = $('#password-popup-inv').val();
     var pop_rePass = $('#password-confirm-popup-inv').val();
@@ -130,7 +130,7 @@ $('#save-up-btn-inv').on('click',()=>{
         password: CryptoJS.SHA256(pop_password).toString(CryptoJS.enc.Hex)
     };
 
-    
+
 
     $.ajax({
         url: 'http://localhost:9090/shoeshop/api/v1/employee/check',
@@ -141,8 +141,8 @@ $('#save-up-btn-inv').on('click',()=>{
         },
         data: JSON.stringify(dataEmp),
         success: function (response) {
-            if(response) {
-                
+            if (response) {
+
 
                 $.ajax({
                     url: 'http://localhost:9090/shoeshop/api/v1/inventory/saveinventoryitem',

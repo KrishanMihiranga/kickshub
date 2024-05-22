@@ -20,10 +20,10 @@ export var itemImages = [];
 export var addToInventory = {
     inventoryCode: null,
     size: null,
-    colors: null, 
-    originalQty: null, 
-    currentQty: null, 
-    status: null, 
-    item: null, 
+    colors: null,
+    originalQty: null,
+    currentQty: null,
+    status: null,
+    item: null,
     itemImage: null
 };

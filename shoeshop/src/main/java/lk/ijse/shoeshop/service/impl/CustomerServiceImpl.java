@@ -1,13 +1,19 @@
 package lk.ijse.shoeshop.service.impl;
 
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Id;
 import jakarta.transaction.Transactional;
 import lk.ijse.shoeshop.dto.CheckCustomerDTO;
 import lk.ijse.shoeshop.dto.CustomerDTO;
 import lk.ijse.shoeshop.dto.PaymentDetailsDTO;
 import lk.ijse.shoeshop.entity.CustomerEntity;
 import lk.ijse.shoeshop.entity.SaleEntity;
+import lk.ijse.shoeshop.entity.SupplierEntity;
 import lk.ijse.shoeshop.entity.enums.CustomerLevel;
+import lk.ijse.shoeshop.entity.enums.Gender;
 import lk.ijse.shoeshop.entity.enums.PaymentMethods;
+import lk.ijse.shoeshop.exception.NotFoundException;
 import lk.ijse.shoeshop.repo.CustomerRepo;
 import lk.ijse.shoeshop.service.CustomerService;
 import lk.ijse.shoeshop.util.Mapping;
@@ -16,8 +22,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -92,4 +100,38 @@ public class CustomerServiceImpl implements CustomerService {
             throw new RuntimeException("Failed to calculate total payment methods: " + e.getMessage(), e);
         }
     }
+
+    @Override
+    public CustomerDTO updateCustomer(CustomerDTO customerDTO) {
+        try {
+            CustomerEntity existingCustomer = customerRepo.findByCustomerCode(customerDTO.getCustomerCode())
+                    .orElseThrow(() -> new NotFoundException("Customer not found"));
+
+            // Update customer details
+            existingCustomer.setCustomerCode(existingCustomer.getCustomerCode());
+            existingCustomer.setName(customerDTO.getName());
+            existingCustomer.setGender(customerDTO.getGender());
+            existingCustomer.setJoinedDateAsLoyalty(customerDTO.getJoinedDateAsLoyalty());
+            existingCustomer.setLevel(existingCustomer.getLevel());
+            existingCustomer.setTotalPoints(existingCustomer.getTotalPoints());
+            existingCustomer.setDob(customerDTO.getDob());
+            existingCustomer.setAddressNo(customerDTO.getAddressNo());
+            existingCustomer.setAddressLane(customerDTO.getAddressLane());
+            existingCustomer.setAddressCity(customerDTO.getAddressCity());
+            existingCustomer.setAddressState(customerDTO.getAddressState());
+            existingCustomer.setPostalCode(customerDTO.getPostalCode());
+            existingCustomer.setEmail(customerDTO.getEmail());
+            existingCustomer.setPhone(customerDTO.getPhone());
+            existingCustomer.setRecentPurchaseDateTime(existingCustomer.getRecentPurchaseDateTime());
+
+            // Save and return updated customer
+            CustomerEntity updatedCustomer = customerRepo.save(existingCustomer);
+            log.debug("Customer updated: {}", updatedCustomer);
+            return mapping.toCustomerDTO(updatedCustomer);
+        } catch (Exception e) {
+            log.error("Failed to update customer: {}", e.getMessage(), e);
+            throw new RuntimeException("Failed to update customer: " + e.getMessage(), e);
+        }
+    }
+
 }

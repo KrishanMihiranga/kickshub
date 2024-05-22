@@ -41,4 +41,8 @@ public class Customer {
     public ResponseEntity<Integer> getCustomerCount(@RequestBody LocalDate date){
         return ResponseEntity.ok(customerService.totalPaymentMethods(date));
     }
+    @PatchMapping("/updatecustomer")
+    public ResponseEntity<CustomerDTO> updateCustomer(@RequestBody CustomerDTO customer){
+        return ResponseEntity.ok(customerService.updateCustomer(customer));
+    }
 }

@@ -1,23 +1,23 @@
-import {inventoryItems} from "../db/inventory.js";
-import {cart} from "../db/sale.js";
-import {dataCus} from "../db/detailCheck.js";
-import {authData } from "../db/loginData.js";
-import {saleData, saleitem} from "../db/transaction.js";
-import {customers} from "../db/Customer.js";
+import { inventoryItems } from "../db/inventory.js";
+import { cart } from "../db/sale.js";
+import { dataCus } from "../db/detailCheck.js";
+import { authData } from "../db/loginData.js";
+import { saleData, saleitem } from "../db/transaction.js";
+import { customers } from "../db/Customer.js";
 var discount = 0;
 var subtotal = 0;
 var total = 0;
 var points = 0;
 var name = null;
 var contact = null;
-    // Function to initialize sale page
+// Function to initialize sale page
 $('#sale-btn').on('click', () => {
     $('#save-changes-employee, .charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer,#page-supplier, #update-profile, #information-page, #recent-orders-refund-page, #refund-page, #add-item-page, #add-product-page, #inventory-page').hide();
     $('#sale-page').show();
     $('.sale-page-items').empty();
     $('.sale-page-right-cart').empty();
     cart.length = 0;
-    
+
     $('#subtotal>span').text(subtotal);
     $('#discounts>span').text(discount);
     $('#total>span').text(total);
@@ -27,7 +27,7 @@ $('#sale-btn').on('click', () => {
 
 // Render inventory items on sale page
 function renderInventoryItems() {
-   
+
     inventoryItems.forEach(item => {
         addSaleItem(item.inventoryCode, item.item.description, item.item.supplier.supplierName, item.item.unitPriceSale, 'data:image;base64,' + item.itemImage.image, item.colors.toLowerCase(), item.item.itemCode);
     });
@@ -62,7 +62,7 @@ function addSaleItem(invcode, name, supplier, price, imageUrl, color, code) {
 
 
 // Add sale item to cart
-$(document).on('click', '.add-to-cart', function() {
+$(document).on('click', '.add-to-cart', function () {
     var itemName = $(this).closest('.sale-page-item').find('.sale-item-card-name').text();
     var price = $(this).closest('.sale-page-item').find('.sale-item-card-price').text();
     var $salePageItem = $(this).closest('.sale-page-item');
@@ -70,7 +70,7 @@ $(document).on('click', '.add-to-cart', function() {
     var code = $(this).closest('.sale-page-item').find('.sale-item-code').text();
     var imageUrl = $(this).closest('.sale-page-item').find('.sale-item-img img').attr('src');
     var color = $(this).closest('.sale-page-item').find('.sale-item-clr').css('background-color');
-    addSaleCartItem(invcode,itemName, price, imageUrl, code, color);
+    addSaleCartItem(invcode, itemName, price, imageUrl, code, color);
 });
 
 // Add sale item to cart items array
@@ -98,7 +98,7 @@ function addSaleCartItem(invcode, name, price, imageUrl, code, color) {
     subtotal += price;
     total += price;
     // Update subtotal and total in the DOM
-    $('#subtotal>span').text( subtotal);
+    $('#subtotal>span').text(subtotal);
     $('#total>span').text(total);
     $('#payment-cash-total').text(total);
 
@@ -108,7 +108,7 @@ function addSaleCartItem(invcode, name, price, imageUrl, code, color) {
 
 
 // Render sale item in cart
-function renderSaleCartItem(name, price, imageUrl, code, color,invcode) {
+function renderSaleCartItem(name, price, imageUrl, code, color, invcode) {
     var newItem = `
         <div class="sale-cart-item" data-invcode="${invcode}">
             <div>
@@ -144,7 +144,7 @@ function renderSaleCartItem(name, price, imageUrl, code, color,invcode) {
 }
 
 
-$(document).on('click', '.sale-item-overlay-yes', function() {
+$(document).on('click', '.sale-item-overlay-yes', function () {
     var $saleCartItem = $(this).closest('.sale-cart-item');
     var inventoryCode = $saleCartItem.data('invcode');
     var price = parseInt($saleCartItem.find('.sale-cart-item-price').text().replace('$', ''), 10);
@@ -170,20 +170,20 @@ $(document).on('click', '.sale-item-overlay-yes', function() {
         }
     });
 
-    console.log(cart); 
+    console.log(cart);
 });
 
 
-$('#popup-payment-cash-btn').on('click',()=>{
+$('#popup-payment-cash-btn').on('click', () => {
     $('.popup-paymentmetod').removeClass("active-popup");
-    $('.popup-paymentmetod-card').removeClass("active-popup"); 
-    $('.popup-paymentmetod-cash').addClass("active-popup"); 
+    $('.popup-paymentmetod-card').removeClass("active-popup");
+    $('.popup-paymentmetod-cash').addClass("active-popup");
 });
 
-$('#popup-payment-card-btn').on('click',()=>{
+$('#popup-payment-card-btn').on('click', () => {
     $('.popup-paymentmetod').removeClass("active-popup");
     $('.popup-paymentmetod-card').addClass("active-popup");
-            
+
 });
 $('#submit-order').on('click', () => {
     name = $('#sale-cus-name').val();
@@ -214,8 +214,8 @@ $('#submit-order').on('click', () => {
     });
 });
 
-   
-$(document).on('click', '.cart-btn-add', function() {
+
+$(document).on('click', '.cart-btn-add', function () {
     var $saleCartItem = $(this).closest('.sale-cart-item');
     var inventoryCode = $saleCartItem.data('invcode');
     var input = $(this).closest('.sale-cart-item-details').find('input[type="number"]');
@@ -236,14 +236,14 @@ $(document).on('click', '.cart-btn-add', function() {
     $('#payment-cash-total').text(total);
 });
 
-$(document).on('click', '.cart-btn-min', function() {
+$(document).on('click', '.cart-btn-min', function () {
     var $saleCartItem = $(this).closest('.sale-cart-item');
     var inventoryCode = $saleCartItem.data('invcode');
     var input = $(this).closest('.sale-cart-item-details').find('input[type="number"]');
     var priceI = parseInt($saleCartItem.find('.sale-cart-item-price').text().replace('$', ''), 10);
 
     var currentValue = parseInt(input.val());
-    
+
     if (currentValue > 1) {
         input.val(currentValue - 1);
         subtotal -= priceI;
@@ -261,25 +261,25 @@ $(document).on('click', '.cart-btn-min', function() {
     }
 });
 
-$('#payment-cash-paid').on('input', function(){
+$('#payment-cash-paid').on('input', function () {
     var cashPaid = parseInt($(this).val()) || 0;
     if (total === 800) {
         points = 1;
     } else {
         points = Math.floor(total / 800);
     }
-    
+
     var balance = cashPaid - total;
 
     if (balance > 0) {
         $('#payment-cash-balance').text(balance);
-    } else { 
-        $('#payment-cash-balance').text(0);    
-    }  
+    } else {
+        $('#payment-cash-balance').text(0);
+    }
 
-    
+
 });
-$('#btn-order-now').on('click', () => { 
+$('#btn-order-now').on('click', () => {
     var saleData = prepareSaleData();
     $.ajax({
         url: 'http://localhost:9090/shoeshop/api/v1/sale/savesale',
@@ -288,12 +288,12 @@ $('#btn-order-now').on('click', () => {
         headers: {
             'Authorization': 'Bearer ' + authData.token
         },
-        data: JSON.stringify(saleData), 
-        success: function(response) {
+        data: JSON.stringify(saleData),
+        success: function (response) {
             console.log(response);
             alert(response);
         },
-        error: function(xhr, status, error) {
+        error: function (xhr, status, error) {
             console.error('Error:', error);
         }
     });
@@ -338,9 +338,9 @@ function prepareSaleData() {
 
 function searchCustomerByName(name) {
     var customerCode = null;
-    customers.forEach(function(customer) {
+    customers.forEach(function (customer) {
         if (customer.name === name) {
-           customerCode = customer.customerCode;
+            customerCode = customer.customerCode;
         }
     });
     return customerCode;
