@@ -4,7 +4,7 @@ var relatedArray = null;
 var imgArray = null;
 
 $('#add-product-btn').on('click', () => {
-    $('#save-changes-employee, .charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer,#page-supplier, #update-profile, #information-page, #recent-orders-refund-page, #refund-page, #add-item-page, #inventory-page, #sale-page').hide();
+    $('#page-user, #save-changes-employee, .charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer,#page-supplier, #update-profile, #information-page, #recent-orders-refund-page, #refund-page, #add-item-page, #inventory-page, #sale-page').hide();
     $('#add-product-page').show();
     console.log(items, itemImages)
     createCards();
@@ -33,10 +33,17 @@ function createCard(item) {
     var button = $('<div class="button-ap"><span class="material-icons-sharp">add</span> Add</div>');
 
     button.on('click', function () {
-        relatedArray = item;
-        imgArray = getImage(item.itemCode);
-        $('.popup-stock').addClass("active-popup");
-        $('.overlay').addClass("active-overlay"); // Add class to overlay
+        const role = authData.employee.role;
+
+        if (role === 'ADMIN') {
+            relatedArray = item;
+            imgArray = getImage(item.itemCode);
+            $('.popup-stock').addClass("active-popup");
+            $('.overlay').addClass("active-overlay"); // Add class to overlay
+        }else if (role === 'USER'){
+            showError("You don't have permissions to do this");
+        }
+
     });
 
     imageContainer.append(image);
@@ -122,15 +129,13 @@ $('#save-up-btn-inv').on('click', () => {
     var pop_rePass = $('#password-confirm-popup-inv').val();
 
     if (pop_password !== pop_rePass) {
-        alert("Password Mismatch");
+        showError("Password you entered didn't match");
         return;
     }
     var dataEmp = {
         email: pop_email,
         password: CryptoJS.SHA256(pop_password).toString(CryptoJS.enc.Hex)
     };
-
-
 
     $.ajax({
         url: 'http://localhost:9090/shoeshop/api/v1/employee/check',
@@ -153,21 +158,24 @@ $('#save-up-btn-inv').on('click', () => {
                     },
                     data: JSON.stringify(addToInventory),
                     success: function (response) {
-                        alert('Inventory Updated');
+                        console.log('Inventory updated : ' + response);
+                        showSuccess('Inventory Successfully updated');
                     },
                     error: function (xhr, status, error) {
                         console.error('Error:', error);
+                        showError('Failed to update Inventory');
                     }
                 });
 
 
 
             } else {
-                alert("No User Found");
+                showError('Error while updating Inventory');
             }
         },
         error: function (xhr, status, error) {
             console.error('Error:', error);
+            showError('User not found');
         }
     });
 

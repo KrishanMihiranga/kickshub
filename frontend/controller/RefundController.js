@@ -10,28 +10,34 @@ var quantity;
 var description;
 
 $('#refund-btn').on('click', () => {
-    $('#save-changes-employee, .charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer,#page-supplier, #update-profile, #information-page, #recent-orders-refund-page, #add-item-page, #add-product-page, #inventory-page, #sale-page').hide();
+    $('#page-user, #save-changes-employee, .charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer,#page-supplier, #update-profile, #information-page, #recent-orders-refund-page, #add-item-page, #add-product-page, #inventory-page, #sale-page').hide();
     $('#refund-page').show();
     console.log('clicked');
 });
 // Event delegation for dynamically added elements
 $('#refund-table-orders-wrapper').on('click', 'tbody tr', function () {
 
-    console.log("Token : ", authData.token);
-    order = $(this).data('order');
+    const role = authData.employee.role;
+    if (role === 'ADMIN') {
+        console.log("Token : ", authData.token);
+        order = $(this).data('order');
 
-    var response = $(this).data('response');
-    var items = response.split(',');
-
-
-    // $('#refund-page-right-cusName>span').text(order.customer.name);
-    $('#refund-page-right-cusName>span').text(order.customer.name);
+        var response = $(this).data('response');
+        var items = response.split(',');
 
 
-    $('#recent-orders-refund-page').show();
-    $('#recent-orders-refund').hide();
+        // $('#refund-page-right-cusName>span').text(order.customer.name);
+        $('#refund-page-right-cusName>span').text(order.customer.name);
 
-    setRefundItems(order);
+
+        $('#recent-orders-refund-page').show();
+        $('#recent-orders-refund').hide();
+
+        setRefundItems(order);
+
+    } else if (role === 'USER') {
+        showError("You don't have permissions to do it");
+    }
 
 });
 
@@ -97,6 +103,7 @@ function setRefundItems(order) {
         data: order.orderId,
         success: function (response) {
             console.log(response);
+            $('#recent-orders-refund-page .recent-orders-refund-page-details').remove();
             response.forEach((item, index) => {
                 var refundPageDetailsHTML = createRefundPageDetails(item, index, order);
                 $('#recent-orders-refund-page').append(refundPageDetailsHTML);
@@ -104,7 +111,6 @@ function setRefundItems(order) {
             });
         },
         error: function (xhr, status, error) {
-            // Handle error
             console.error('Error:', error);
         }
     });
@@ -135,7 +141,7 @@ $('#save-up-btn-refund').on('click', () => {
     var reenter = $('#password-confirm-popup-refund').val();
 
     if (password !== reenter) {
-        alert("Password Mismatch");
+        showError("Password you entered didn't match");
         return;
     }
     var dataEmp = {
@@ -183,22 +189,26 @@ $('#save-up-btn-refund').on('click', () => {
                     }),
                     success: function (response) {
                         console.log('Success:', response);
+                        showSuccess('Successfully refunded');
                     },
                     error: function (xhr, status, error) {
-                        alert("Already refunded");
+                        showError('Already refunded');
                     }
                 });
 
             } else {
-                alert("No User Found");
+                showError('Faild to Refund');
             }
         },
         error: function (xhr, status, error) {
             console.error('Error:', error);
+            showError('No User Found');
         }
     });
 
 });
 
-
-// refundId, refundDate
+$('#recent-orders-back').on('click', () => {
+    $('#recent-orders-refund-page').hide();
+    $('#recent-orders-refund').show();
+});

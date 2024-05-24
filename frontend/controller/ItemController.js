@@ -1,28 +1,36 @@
-import {authData} from "../db/loginData.js";
-import {suppliers} from "../db/supplier.js";
-import {regItem} from "../db/Item.js";
-import {supplierData} from "../db/supplier.js";
+import { authData } from "../db/loginData.js";
+import { suppliers } from "../db/supplier.js";
+import { regItem } from "../db/Item.js";
+import { supplierData } from "../db/supplier.js";
 var supCode;
+import {
+    validateInput,
+    validateRadioGroup,
+    validatePriceInput,
+    validateMarginInput,
+    validateInputTwoNames
+} from '../security/FieldValidation.js';
+
 
 $('#add-item-btn').on('click', () => {
     // Hide other elements and show the add item page
-    $('#save-changes-employee, .charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer,#page-supplier, #update-profile, #information-page, #recent-orders-refund-page, #refund-page, #add-product-page, #inventory-page, #sale-page').hide();
+    $('#page-user, #save-changes-employee, .charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer,#page-supplier, #update-profile, #information-page, #recent-orders-refund-page, #refund-page, #add-product-page, #inventory-page, #sale-page').hide();
     $('#add-item-page').show();
 
     // Populate the supplier dropdown with options
-    $.each(suppliers, function(index, supplier) {
+    $.each(suppliers, function (index, supplier) {
         var option = $('<option></option>').attr('value', supplier.supplierName).text(supplier.supplierName);
         $('.reg-item-supplier').append(option);
     });
 
     // Event listener for supplier change
-    $('.reg-item-supplier').change(function() {
+    $('.reg-item-supplier').change(function () {
         var selectedName = $(this).val();
-        
-        var selectedSupplier = suppliers.find(function(supplier) {
+
+        var selectedSupplier = suppliers.find(function (supplier) {
             return supplier.supplierName === selectedName;
         });
-        
+
         if (selectedSupplier) {
             // Set supplier code
             supCode = selectedSupplier.code;
@@ -35,7 +43,7 @@ $('#add-item-btn').on('click', () => {
 
 
 $('#reg-item-btn').on('click', () => {
-  
+
     regItem.description = $('#reg-item-name').val();
     regItem.category = $('.reg-item-category').val();
     regItem.occasion = $('.reg-item-radio-occasion input[type="radio"]:checked').val();
@@ -46,8 +54,8 @@ $('#reg-item-btn').on('click', () => {
     regItem.expectedPrice = $('#reg-i-ex-profit').val();
     regItem.profitMargin = $('#reg-i-mar').val();
 
-   
-    var selectedSupplier = suppliers.find(function(supplier) {
+
+    var selectedSupplier = suppliers.find(function (supplier) {
         return supplier.supplierName === regItem.supplierName;
     });
 
@@ -91,21 +99,47 @@ $('#reg-item-btn').on('click', () => {
         console.log(pair[0] + ': ' + pair[1]);
     }
 
-    $.ajax({
-        url: 'http://localhost:9090/shoeshop/api/v1/svi/saveimage',
-        type: 'POST',
-        headers: {
-            'Authorization': 'Bearer ' + authData.token
-        },
-        data: formData,
-        contentType: false,
-        processData: false,
-        success: function(response) {
-            console.log('Success:', response);
-            alert("Successful");
-        },
-        error: function(xhr, status, error) {
-            console.error('Error:', error);
-        }
-    });
+
+    function validateItemForm() {
+        let isValid = true;
+
+        isValid = validateInputTwoNames($('#reg-item-name'), $('#name-error-itm'), 'Item Name') && isValid;
+        isValid = validateRadioGroup('category', $('#category-error-itm'), 'Item Category') && isValid;
+        isValid = validateRadioGroup('size', $('#size-error-itm'), 'Size') && isValid;
+        isValid = validateRadioGroup('gender', $('#gender-error-itm'), 'Gender') && isValid;
+        isValid = validateRadioGroup('occasion', $('#occasion-error-itm'), 'Occasion') && isValid;
+        isValid = validatePriceInput($('#reg-i-pur'), $('#purchase-error-itm'), 'Purchase Price') && isValid;
+        isValid = validatePriceInput($('#reg-i-sell'), $('#selling-error-itm'), 'Selling Price') && isValid;
+        isValid = validatePriceInput($('#reg-i-ex-profit'), $('#profit-error-itm'), 'Expected Profit') && isValid;
+        isValid = validateMarginInput($('#reg-i-mar'), $('#margin-error-itm')) && isValid;
+
+        return isValid;
+    }
+
+
+    if (validateItemForm()) {
+
+        $.ajax({
+            url: 'http://localhost:9090/shoeshop/api/v1/svi/saveimage',
+            type: 'POST',
+            headers: {
+                'Authorization': 'Bearer ' + authData.token
+            },
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                console.log('Success:', response);
+                showSuccess('Item saved successfully');
+            },
+            error: function (xhr, status, error) {
+                console.error('Error:', error);
+                showError('Failed to save Item');
+            }
+        });
+
+    } else {
+        showError('Please correct the errors in the form');
+    }
+
 });

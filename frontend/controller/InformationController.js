@@ -120,7 +120,7 @@ function setDataToEmployeeTable() {
 $(document).ready(function () {
     $('#info-log').on('click', function () {
         // Hide all other sections
-        $('#save-changes-employee, .charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer, #page-supplier, #update-profile, #refund-page, #add-item-page, #add-product-page, #inventory-page, #sale-page,#Information-update-profile, #Information-update-supplier, #Information-update-customer').hide();
+        $('#page-user, #save-changes-employee, .charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer, #page-supplier, #update-profile, #refund-page, #add-item-page, #add-product-page, #inventory-page, #sale-page,#Information-update-profile, #Information-update-supplier, #Information-update-customer').hide();
 
         // Show the information page and the employee table by default
         $('#information-page').show();
@@ -154,214 +154,244 @@ $(document).ready(function () {
     });
 
     $(document).on('click', '#information-table-customer-wrapper tbody tr', function () {
-        var customerCode = $(this).find('td').eq(0).text();
-        selectedCustomer = customers.find(function (customer) {
-            return customer.customerCode == customerCode;
-        });
-        if (selectedCustomer) {
-            console.log(selectedCustomer);
-            $('#information-page, #Information-save-changes-customer').hide();
-            $('#Information-update-customer input, #Information-update-customer select').prop('disabled', true);
-            $('#Information-update-customer').show();
+        const role = authData.employee.role;
 
-            var fullName = selectedCustomer.name;
-            var nameParts = fullName.split(" ");
-            var lastName = nameParts[0];
-            var firstName = nameParts.slice(1).join(" ");
-            $('#info-reg-customer-fn').val(lastName);
-            $('#info-reg-customer-ln').val(firstName);
+        if (role === 'ADMIN') {
+            var customerCode = $(this).find('td').eq(0).text();
+            selectedCustomer = customers.find(function (customer) {
+                return customer.customerCode == customerCode;
+            });
+            if (selectedCustomer) {
+                console.log(selectedCustomer);
+                $('#information-page, #Information-save-changes-customer').hide();
+                $('#Information-update-customer input, #Information-update-customer select').prop('disabled', true);
+                $('#Information-update-customer').show();
+
+                var fullName = selectedCustomer.name;
+                var nameParts = fullName.split(" ");
+                var lastName = nameParts[0];
+                var firstName = nameParts.slice(1).join(" ");
+                $('#info-reg-customer-fn').val(lastName);
+                $('#info-reg-customer-ln').val(firstName);
 
 
-            var date = new Date(selectedCustomer.dob);
+                var date = new Date(selectedCustomer.dob);
 
 
-            var day = date.getDate().toString().padStart(2, '0');
-            var month = (date.getMonth() + 1).toString().padStart(2, '0');
-            var year = date.getFullYear().toString();
-            $('#reg-customer-day').val(day);
-            $('#reg-customer-month').val(month);
-            $('#reg-customer-year').val(year);
+                var day = date.getDate().toString().padStart(2, '0');
+                var month = (date.getMonth() + 1).toString().padStart(2, '0');
+                var year = date.getFullYear().toString();
+                $('#reg-customer-day').val(day);
+                $('#reg-customer-month').val(month);
+                $('#reg-customer-year').val(year);
 
-            var gender = selectedCustomer.gender;
-            $('.reg-customer-info-radio-gender input[name="gender"]').filter('[value="' + gender + '"]').prop('checked', true);
+                var gender = selectedCustomer.gender;
+                $('.reg-customer-info-radio-gender input[name="gender"]').filter('[value="' + gender + '"]').prop('checked', true);
 
-            var datePart = selectedCustomer.joinedDateAsLoyalty.split('T')[0];
-            $('#info-customer-reg-joined-loyal').val(datePart);
+                var datePart = selectedCustomer.joinedDateAsLoyalty.split('T')[0];
+                $('#info-customer-reg-joined-loyal').val(datePart);
 
-            $('#info-cus-reg-phone').val(selectedCustomer.phone);
-            $('#info-cus-reg-street').val(selectedCustomer.addressLane);
-            $('#info-cus-reg-building').val(selectedCustomer.addressNo);
-            $('#info-cus-reg-city').val(selectedCustomer.addressCity);
-            $('#info-cus-reg-state').val(selectedCustomer.addressState);
-            $('#info-cus-reg-zip').val(selectedCustomer.postalCode);
+                $('#info-cus-reg-phone').val(selectedCustomer.phone);
+                $('#info-cus-reg-street').val(selectedCustomer.addressLane);
+                $('#info-cus-reg-building').val(selectedCustomer.addressNo);
+                $('#info-cus-reg-city').val(selectedCustomer.addressCity);
+                $('#info-cus-reg-state').val(selectedCustomer.addressState);
+                $('#info-cus-reg-zip').val(selectedCustomer.postalCode);
 
-            $('#info-reg-customer-email').val(selectedCustomer.email);
+                $('#info-reg-customer-email').val(selectedCustomer.email);
 
-        } else {
-            alert("Customer Not found");
+            } else {
+                alert("Customer Not found");
+            }
+        } else if (role === 'USER') {
+            showError("You don't have permissons to do this");
         }
+    });
+
+    $('#information-edit-customer-back').on('click', () => {
+        $('#information-page').show();
+        $('#Information-update-customer').hide();
+
+    });
+
+    $('#information-edit-supplier-back').on('click', () => {
+        $('#information-page').show();
+        $('#Information-update-supplier').hide();
+
     });
 
     $(document).on('click', '#information-table-supplier-wrapper tbody tr', function () {
-        var supplierCode = $(this).find('td').eq(0).text();
 
-        // Find the supplier object with the matching code
-        selectedSupplier = suppliers.find(function (supplier) {
-            return supplier.code === supplierCode;
-        });
+        const role = authData.employee.role;
 
-        if (selectedSupplier) {
-            console.log(selectedSupplier);
-            // alert('Supplier Code: ' + supplierCode + '\nName: ' + selectedSupplier.name);
-            $('#information-page, #Information-save-changes-supplier').hide();
-            $('#Information-update-supplier input, #Information-update-supplier select').prop('disabled', true);
-            $('#Information-update-supplier').show();
+        if (role === 'ADMIN') {
 
-            var fullName = selectedSupplier.supplierName;
-            var nameParts = fullName.split(" ");
-            var lastName = nameParts[0];
-            var firstName = nameParts.slice(1).join(" ");
-            $('#info-reg-sup-ln').val(firstName);
-            $('#info-reg-sup-fn').val(lastName);
+            var supplierCode = $(this).find('td').eq(0).text();
 
-            var category = selectedSupplier.category;
-            if (category === 'LOCAL') {
-                $('#info-sup-supplier-cat-local').prop('checked', true);
-            } else if (category === 'INTERNATIONAL') {
-                $('#info-sup-supplier-cat-international').prop('checked', true);
-            }
-
-            $('#info-reg-sup-tel').val(selectedSupplier.contactNo1);
-            $('#info-reg-sup-tel-2').val(selectedSupplier.contactNo2);
-            $('#info-reg-sup-add-street').val(selectedSupplier.addressLane);
-            $('#info-reg-sup-add-no').val(selectedSupplier.addressNo);
-            $('#info-reg-sup-add-city').val(selectedSupplier.addressCity);
-            $('#info-reg-sup-add-state').val(selectedSupplier.addressState);
-            $('#info-reg-sup-add-zip').val(selectedSupplier.postalCode);
-
-            var country = selectedSupplier.originCountry;
-            $('#country-Supplier-up option').each(function () {
-                if ($(this).val() === country) {
-                    $(this).prop('selected', true);
-                }
+            // Find the supplier object with the matching code
+            selectedSupplier = suppliers.find(function (supplier) {
+                return supplier.code === supplierCode;
             });
 
-            $('#info-reg-sup-email').val(selectedSupplier.email);
-        } else {
-            alert('Supplier not found');
+            if (selectedSupplier) {
+                console.log(selectedSupplier);
+                // alert('Supplier Code: ' + supplierCode + '\nName: ' + selectedSupplier.name);
+                $('#information-page, #Information-save-changes-supplier').hide();
+                $('#Information-update-supplier input, #Information-update-supplier select').prop('disabled', true);
+                $('#Information-update-supplier').show();
+
+                var fullName = selectedSupplier.supplierName;
+                var nameParts = fullName.split(" ");
+                var lastName = nameParts[0];
+                var firstName = nameParts.slice(1).join(" ");
+                $('#info-reg-sup-ln').val(firstName);
+                $('#info-reg-sup-fn').val(lastName);
+
+                var category = selectedSupplier.category;
+                if (category === 'LOCAL') {
+                    $('#info-sup-supplier-cat-local').prop('checked', true);
+                } else if (category === 'INTERNATIONAL') {
+                    $('#info-sup-supplier-cat-international').prop('checked', true);
+                }
+
+                $('#info-reg-sup-tel').val(selectedSupplier.contactNo1);
+                $('#info-reg-sup-tel-2').val(selectedSupplier.contactNo2);
+                $('#info-reg-sup-add-street').val(selectedSupplier.addressLane);
+                $('#info-reg-sup-add-no').val(selectedSupplier.addressNo);
+                $('#info-reg-sup-add-city').val(selectedSupplier.addressCity);
+                $('#info-reg-sup-add-state').val(selectedSupplier.addressState);
+                $('#info-reg-sup-add-zip').val(selectedSupplier.postalCode);
+
+                var country = selectedSupplier.originCountry;
+                $('#country-Supplier-up option').each(function () {
+                    if ($(this).val() === country) {
+                        $(this).prop('selected', true);
+                    }
+                });
+
+                $('#info-reg-sup-email').val(selectedSupplier.email);
+            } else {
+                alert('Supplier not found');
+            }
+        } else if (role === 'USER') {
+            showError("You don't have permissions to this");
         }
+
     });
 
     $(document).on('click', '#information-table-employee-wrapper tbody tr', function () {
-        var employeeCode = $(this).find('td').eq(1).text();
-        selectedEmployee = employees.find(function (employee) {
-            return employee.employeeCode === employeeCode;
-        });
 
-        console.log(selectedEmployee);
-
-        if (selectedEmployee) {
-            // alert('Employee Code: ' + employeeCode + '\nName: ' + selectedEmployee.name);
-            $('#information-page, #Information-save-changes-employee').hide();
-            $('#Information-update-profile input, #Information-update-profile select').prop('disabled', true);
-
-            $('#Information-update-profile').show();
-
-            $('.Information-update-profile-user-unique-code').text(selectedEmployee.employeeCode);
-            $('#Information-update-profile-top-left-profilePic').attr("src", "data:image/png;base64," + selectedEmployee.profilePic);
-            $('#Information-update-profile-user-role').text(selectedEmployee.role);
-
-            var fullName = selectedEmployee.name;
-            $('#Information-up-user-name').text(fullName);
-            var nameParts = fullName.split(" ");
-            var lastName = nameParts[0];
-            var firstName = nameParts.slice(1).join(" ");
-            $('#Information-up-ln').val(firstName);
-            $('#Information-up-fn').val(lastName);
-
-            var dateString = selectedEmployee.dob;
-            var dateParts = dateString.split("T")[0].split("-");
-            var year = dateParts[0];
-            var month = dateParts[1];
-            var day = dateParts[2];
-
-            $('#Information-up-d').val(day);
-            $('#Information-up-m').val(month);
-            $('#Information-up-y').val(year);
-
-
-            var gender = selectedEmployee.gender;
-            var status = selectedEmployee.status;
-            var designation;
-            if (selectedEmployee.role === 'ADMIN') {
-                designation = 'MANAGER'
-            } else {
-                designation = 'SALESMAN'
-            }
-
-
-            if (gender == 'MALE') {
-                $('.Information-update-profile-details-personal #Information-emp-g-m').prop('checked', true);
-            } else if (gender == 'FEMALE') {
-                $('.Information-update-profile-details-personal #Information-emp-g-f').prop('checked', true);
-            } else {
-                $('.Information-update-profile-details-personal #Information-emp-g-o').prop('checked', true);
-            }
-            if (designation == 'MANAGER') {
-                $('.Information-update-profile-details-personal #Information-emp-des-m').prop('checked', true);
-            } else {
-                $('.Information-update-profile-details-personal #Information-emp-des-s').prop('checked', true);
-            }
-
-            if (status == 'MARRIED') {
-                $('.Information-update-profile-details-personal #Information-emp-s-m').prop('checked', true);
-            } else if (status == 'UNMARRIED') {
-                $('.Information-update-profile-details-personal #Information-emp-s-um').prop('checked', true);
-            } else {
-                $('.Information-update-profile-details-personal #Information-emp-s-std').prop('checked', true);
-            }
-
-            var branch = selectedEmployee.branch;
-            $('#Information-up-bn option').each(function () {
-                if ($(this).val() === branch) {
-                    $(this).prop('selected', true);
-                }
+        const role = authData.employee.role;
+        if (role === 'ADMIN') {
+            var employeeCode = $(this).find('td').eq(1).text();
+            selectedEmployee = employees.find(function (employee) {
+                return employee.employeeCode === employeeCode;
             });
 
-            var formattedJoinedDate = new Date(selectedEmployee.joinedDate).toISOString().split('T')[0];
-            $('#Information-up-jd').val(formattedJoinedDate);
+            console.log(selectedEmployee);
+
+            if (selectedEmployee) {
+                // alert('Employee Code: ' + employeeCode + '\nName: ' + selectedEmployee.name);
+                $('#information-page, #Information-save-changes-employee').hide();
+                $('#Information-update-profile input, #Information-update-profile select').prop('disabled', true);
+
+                $('#Information-update-profile').show();
+
+                $('.Information-update-profile-user-unique-code').text(selectedEmployee.employeeCode);
+                $('#Information-update-profile-top-left-profilePic').attr("src", "data:image/png;base64," + selectedEmployee.profilePic);
+                $('#Information-update-profile-user-role').text(selectedEmployee.role);
+
+                var fullName = selectedEmployee.name;
+                $('#Information-up-user-name').text(fullName);
+                var nameParts = fullName.split(" ");
+                var lastName = nameParts[0];
+                var firstName = nameParts.slice(1).join(" ");
+                $('#Information-up-ln').val(firstName);
+                $('#Information-up-fn').val(lastName);
+
+                var dateString = selectedEmployee.dob;
+                var dateParts = dateString.split("T")[0].split("-");
+                var year = dateParts[0];
+                var month = dateParts[1];
+                var day = dateParts[2];
+
+                $('#Information-up-d').val(day);
+                $('#Information-up-m').val(month);
+                $('#Information-up-y').val(year);
 
 
-            $('#Information-up-tel').val(selectedEmployee.phone);
-            $('#Information-up-street').val(selectedEmployee.addressLane);
-            $('#Information-up-building').val(selectedEmployee.addressNo);
-            $('#Information-up-city').val(selectedEmployee.addressCity);
-            $('#Information-up-province').val(selectedEmployee.addressState);
-            $('#Information-up-zip').val(selectedEmployee.postalCode);
-            $('#Information-up-email').val(selectedEmployee.email);
-            $('#Information-up-nom').val(selectedEmployee.guardianOrNominatedPerson);
-
-            var country = selectedEmployee.country;
-            $('#Information-country-ep').each(function () {
-                if ($(this).val() === country) {
-                    $(this).prop('selected', true);
+                var gender = selectedEmployee.gender;
+                var status = selectedEmployee.status;
+                var designation;
+                if (selectedEmployee.role === 'ADMIN') {
+                    designation = 'MANAGER'
+                } else {
+                    designation = 'SALESMAN'
                 }
-            });
 
 
-        } else {
-            alert('Employee not found');
+                if (gender == 'MALE') {
+                    $('.Information-update-profile-details-personal #Information-emp-g-m').prop('checked', true);
+                } else if (gender == 'FEMALE') {
+                    $('.Information-update-profile-details-personal #Information-emp-g-f').prop('checked', true);
+                } else {
+                    $('.Information-update-profile-details-personal #Information-emp-g-o').prop('checked', true);
+                }
+                if (designation == 'MANAGER') {
+                    $('.Information-update-profile-details-personal #Information-emp-des-m').prop('checked', true);
+                } else {
+                    $('.Information-update-profile-details-personal #Information-emp-des-s').prop('checked', true);
+                }
+
+                if (status == 'MARRIED') {
+                    $('.Information-update-profile-details-personal #Information-emp-s-m').prop('checked', true);
+                } else if (status == 'UNMARRIED') {
+                    $('.Information-update-profile-details-personal #Information-emp-s-um').prop('checked', true);
+                } else {
+                    $('.Information-update-profile-details-personal #Information-emp-s-std').prop('checked', true);
+                }
+
+                var branch = selectedEmployee.branch;
+                $('#Information-up-bn option').each(function () {
+                    if ($(this).val() === branch) {
+                        $(this).prop('selected', true);
+                    }
+                });
+
+                var formattedJoinedDate = new Date(selectedEmployee.joinedDate).toISOString().split('T')[0];
+                $('#Information-up-jd').val(formattedJoinedDate);
+
+
+                $('#Information-up-tel').val(selectedEmployee.phone);
+                $('#Information-up-street').val(selectedEmployee.addressLane);
+                $('#Information-up-building').val(selectedEmployee.addressNo);
+                $('#Information-up-city').val(selectedEmployee.addressCity);
+                $('#Information-up-province').val(selectedEmployee.addressState);
+                $('#Information-up-zip').val(selectedEmployee.postalCode);
+                $('#Information-up-email').val(selectedEmployee.email);
+                $('#Information-up-nom').val(selectedEmployee.guardianOrNominatedPerson);
+
+                var country = selectedEmployee.country;
+                $('#Information-country-ep').each(function () {
+                    if ($(this).val() === country) {
+                        $(this).prop('selected', true);
+                    }
+                });
+
+
+            } else {
+                alert('Employee not found');
+            }
+        } else if (role === 'USER') {
+            showError("You don't have permissions to do this");
         }
-        // alert('Employee Code: ' + employeeCode);
+
     });
 });
 
 $('#information-edit-back').on('click', () => {
     $('#information-page').show();
     $('#Information-update-profile').hide();
-
-
-
 });
 
 $('#Information-save-changes-employee').on('click', () => {
@@ -447,7 +477,7 @@ $('#save-up-btn-supplier').on('click', () => {
     var pop_rePass = $('#password-confirm-popup-info-supplier').val();
 
     if (pop_password !== pop_rePass) {
-        alert("Password Mismatch");
+        showError("Password you entered didn't match");
         return;
     }
 
@@ -475,27 +505,27 @@ $('#save-up-btn-supplier').on('click', () => {
                     },
                     data: JSON.stringify(supplierDataInfo),
                     success: function (response) {
-                        alert('Success:', response);
+
                         $('.popup-info-supplier').removeClass("active-popup");
                         $('.overlay').removeClass("active-overlay");
+                        showSuccess('Supplier Successfully Updated');
                     },
                     error: function (xhr, status, error) {
                         console.error('Error:', error);
+                        showError('Failed to update Supplier');
                     }
                 });
 
             } else {
-                alert("No Supplier Found");
+                showError('Error While Updating Supplier');
             }
         },
         error: function (xhr, status, error) {
             console.error('Error:', error);
+            showError('User Not Found');
         }
     });
 });
-
-
-
 
 $('#save-up-btn-info').on('click', () => {
     var pop_email = $('#email-popup-info').val();
@@ -503,7 +533,7 @@ $('#save-up-btn-info').on('click', () => {
     var pop_rePass = $('#password-confirm-popup-info').val();
 
     if (pop_password !== pop_rePass) {
-        alert("Password Mismatch");
+        showError("Password you entered didn't match");
         return;
     }
 
@@ -555,18 +585,20 @@ $('#save-up-btn-info').on('click', () => {
                     processData: false,
                     success: function (response) {
                         $('.close-btn-popup').click();
-                        alert("Update Successful");
+                        showSuccess('Employee Successfully updated');
                     },
                     error: function (xhr, status, error) {
                         console.error('Error:', error);
+                        showError('Failed to update Employee');
                     }
                 });
             } else {
-                alert("No User Found");
+                showError('Error while updating Employee');
             }
         },
         error: function (xhr, status, error) {
             console.error('Error:', error);
+            showError('User Not found');
         }
     });
 });
@@ -621,7 +653,7 @@ $('#save-up-btn-customer').on('click', () => {
     var pop_rePass = $('#password-confirm-popup-info-customer').val();
 
     if (pop_password !== pop_rePass) {
-        alert("Password Mismatch");
+        showError("Password you entered didn't match");
         return;
     }
 
@@ -649,20 +681,22 @@ $('#save-up-btn-customer').on('click', () => {
                     },
                     data: JSON.stringify(customerDataInfo),
                     success: function (response) {
-                        alert('Success:', response);
+                        showSuccess('Customer successfully saved');
                         $('.popup-info-customer').removeClass("active-popup");
                         $('.overlay').removeClass("active-overlay");
                     },
                     error: function (xhr, status, error) {
+                        showError('failed to update customer');
                         console.error('Error:', error);
                     }
                 });
 
             } else {
-                alert("No Customer Found");
+                showError('No Customer Found');
             }
         },
         error: function (xhr, status, error) {
+            showError('User Not Found');
             console.error('Error:', error);
         }
     });

@@ -12,7 +12,7 @@ var name = null;
 var contact = null;
 // Function to initialize sale page
 $('#sale-btn').on('click', () => {
-    $('#save-changes-employee, .charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer,#page-supplier, #update-profile, #information-page, #recent-orders-refund-page, #refund-page, #add-item-page, #add-product-page, #inventory-page').hide();
+    $('#page-user, #save-changes-employee, .charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer,#page-supplier, #update-profile, #information-page, #recent-orders-refund-page, #refund-page, #add-item-page, #add-product-page, #inventory-page').hide();
     $('#sale-page').show();
     $('.sale-page-items').empty();
     $('.sale-page-right-cart').empty();
@@ -60,7 +60,6 @@ function addSaleItem(invcode, name, supplier, price, imageUrl, color, code) {
     $('.sale-page-items').append(newItem);
 }
 
-
 // Add sale item to cart
 $(document).on('click', '.add-to-cart', function () {
     var itemName = $(this).closest('.sale-page-item').find('.sale-item-card-name').text();
@@ -105,8 +104,6 @@ function addSaleCartItem(invcode, name, price, imageUrl, code, color) {
     renderSaleCartItem(name, price, imageUrl, code, color, invcode);
 }
 
-
-
 // Render sale item in cart
 function renderSaleCartItem(name, price, imageUrl, code, color, invcode) {
     var newItem = `
@@ -143,7 +140,6 @@ function renderSaleCartItem(name, price, imageUrl, code, color, invcode) {
     $('.sale-page-right-cart').append(newItem);
 }
 
-
 $(document).on('click', '.sale-item-overlay-yes', function () {
     var $saleCartItem = $(this).closest('.sale-cart-item');
     var inventoryCode = $saleCartItem.data('invcode');
@@ -173,7 +169,6 @@ $(document).on('click', '.sale-item-overlay-yes', function () {
     console.log(cart);
 });
 
-
 $('#popup-payment-cash-btn').on('click', () => {
     $('.popup-paymentmetod').removeClass("active-popup");
     $('.popup-paymentmetod-card').removeClass("active-popup");
@@ -185,6 +180,7 @@ $('#popup-payment-card-btn').on('click', () => {
     $('.popup-paymentmetod-card').addClass("active-popup");
 
 });
+
 $('#submit-order').on('click', () => {
     name = $('#sale-cus-name').val();
     contact = $('#sale-cus-tel').val();
@@ -200,20 +196,20 @@ $('#submit-order').on('click', () => {
         },
         data: JSON.stringify(dataCus),
         success: function (response) {
-            alert(response);
             if (response) {
                 $('.popup-paymentmetod').addClass("active-popup");
                 $('.overlay').addClass("active-overlay");
-
                 prepareSaleData();
+            }else{
+                showError("Customer not found");
             }
         },
         error: function (xhr, status, error) {
             console.error('Error:', error);
+            showError("Faild to Search Customer");
         }
     });
 });
-
 
 $(document).on('click', '.cart-btn-add', function () {
     var $saleCartItem = $(this).closest('.sale-cart-item');
@@ -279,6 +275,7 @@ $('#payment-cash-paid').on('input', function () {
 
 
 });
+
 $('#btn-order-now').on('click', () => {
     var saleData = prepareSaleData();
     $.ajax({
@@ -291,10 +288,11 @@ $('#btn-order-now').on('click', () => {
         data: JSON.stringify(saleData),
         success: function (response) {
             console.log(response);
-            alert(response);
+            showSuccess('Order saved successfully');
         },
         error: function (xhr, status, error) {
             console.error('Error:', error);
+            showError('Faild to save order');
         }
     });
 });

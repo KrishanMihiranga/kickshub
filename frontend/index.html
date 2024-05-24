@@ -17,6 +17,35 @@
 </head>
 
 <body>
+
+    <div class="toast ">
+        <div class="toast-content">
+            <i class="fas fa-solid fa-check check"></i>
+
+            <div class="message">
+                <span class="text text-1">Success</span>
+                <span class="text text-2">Your changes has been saved</span>
+            </div>
+        </div>
+        <i class="fa-solid fa-xmark close"></i>
+
+        <div class="progress"></div>
+    </div>
+
+    <div class="toast-error ">
+        <div class="toast-error-content">
+            <i class="fas fa-solid fa-check check"></i>
+
+            <div class="message-error">
+                <span class="text-error text-3">Error</span>
+                <span class="text-error text-4">Error while saving Data</span>
+            </div>
+        </div>
+        <i class="fa-solid fa-xmark close"></i>
+
+        <div class="progress-error "></div>
+    </div>
+
     <div class="overlay"></div>
 
     <div class="container">
@@ -77,7 +106,7 @@
                     <span class="material-icons-sharp">shopping_cart</span>
                     <h3>Sale</h3>
                 </a>
-                <a href="#">
+                <!-- <a href="#">
                     <span class="material-icons-sharp">insights</span>
                     <h3>Analytics</h3>
                 </a>
@@ -94,7 +123,7 @@
                 <a href="#">
                     <span class="material-icons-sharp">settings</span>
                     <h3>Settings</h3>
-                </a>
+                </a> -->
                 <a href="#">
                     <span class="material-icons-sharp">logout</span>
                     <h3>Logout</h3>
@@ -257,6 +286,16 @@
             </div>
             <!-- end-of-recent-ordrs -->
 
+
+            <div id="page-user">
+                <div>
+                    <h2>KICKS <span class="danger">HUB</span></h2>
+                </div>
+                <small>Developed by Krishan</small>
+            </div>
+
+
+
             <!-- ******Employee Registration****** -->
             <div id="page" class="site">
                 <div class="employee-register-container">
@@ -295,21 +334,24 @@
                                 <div>
                                     <label>First Name</label>
                                     <input type="text" placeholder="e.g. Krishan" id="reg-emp-fn">
+                                    <span class="error" id="fn-error"></span>
                                 </div>
                                 <div>
                                     <label>Last Name</label>
                                     <input type="text" placeholder="e.g. Mihiranga" id="reg-emp-ln">
+                                    <span class="error" id="ln-error"></span>
                                 </div>
                                 <div class="birth">
                                     <label>Date of Birth</label>
                                     <div class="grouping">
-                                        <input type="text" pattern="[0-9]*" name="day" min="0" max="31" placeholder="DD"
+                                        <input type="text" pattern="[0-9]*" name="day" min="1" max="31" placeholder="DD"
                                             id="reg-mp-date">
-                                        <input type="text" pattern="[0-9]*" name="month" min="0" max="12"
+                                        <input type="text" pattern="[0-9]*" name="month" min="1" max="12"
                                             placeholder="MM" id="reg-mp-month">
-                                        <input type="text" pattern="[0-9]*" name="year" min="0" max="2050"
+                                        <input type="text" pattern="[0-9]*" name="year" min="1900" max="2050"
                                             placeholder="YYYY" id="reg-mp-year">
                                     </div>
+                                    <span class="error" id="dob-error"></span>
                                 </div>
                                 <div>
                                     <label>Gender</label>
@@ -347,6 +389,7 @@
                                 <div>
                                     <label>Attached Branch</label>
                                     <select name="branch" id="branch-employee" class="reg-employee-abranch">
+                                        <option value="">Select Branch</option>
                                         <option value="branch1">Branch 01</option>
                                         <option value="branch2">Branch 02</option>
                                         <option value="branch3">Branch 03</option>
@@ -358,11 +401,14 @@
                                         <option value="branch9">Branch 09</option>
                                         <option value="branch10">Branch 10</option>
                                     </select>
+                                    <span class="error" id="branch-error"></span>
                                 </div>
                                 <div>
                                     <label>Joined Date</label>
                                     <input type="date" id="reg-emp-jdate">
+                                    <span class="error" id="joined-date-error"></span>
                                 </div>
+                                
                             </div>
                             <div class="form-two form-step">
                                 <div class="bg-svg"></div>
@@ -370,25 +416,31 @@
                                 <div>
                                     <label>Phone</label>
                                     <input type="tel" placeholder="+94xxxxxxx29" id="reg-emp-phone">
+                                    <span class="error" id="phone-error"></span>
                                 </div>
                                 <div>
                                     <label>Address</label>
                                     <input type="text" placeholder="Street Address" id="reg-emp-street">
+                                    <span class="error" id="street-error"></span>
                                 </div>
                                 <div>
                                     <input type="text" placeholder="Suite, Building" id="reg-emp-building">
+                                    <span class="error" id="building-error"></span>
                                 </div>
                                 <div>
                                     <label>City</label>
                                     <input type="text" placeholder="city" id="reg-emp-city">
+                                    <span class="error" id="city-error"></span>
                                 </div>
                                 <div>
                                     <label>State</label>
                                     <input type="text" placeholder="State / Province" id="reg-emp-state">
+                                    <span class="error" id="state-error"></span>
                                 </div>
                                 <div>
                                     <label>Zip Code</label>
                                     <input type="text" placeholder="Zip / Postal Code" id="reg-emp-zip">
+                                    <span class="error" id="zip-error"></span>
                                 </div>
                                 <div>
                                     <label>Country</label>
@@ -403,14 +455,17 @@
                                 <div>
                                     <label>Email</label>
                                     <input type="email" placeholder="Your email address" id="reg-emp-email">
+                                    <span class="error" id="email-error"></span>
                                 </div>
                                 <div>
                                     <label>Guardian or Nominated Person</label>
                                     <input type="text" placeholder="Guardian / Nominee Name" id="reg-emp-nominee">
+                                    <span class="error" id="nominee-error"></span>
                                 </div>
                                 <div>
                                     <label>Username</label>
                                     <input type="text" placeholder="Username" id="reg-emp-username">
+                                    <span class="error" id="username-error"></span>
                                 </div>
                                 <div>
                                     <label>Password</label>
@@ -418,6 +473,7 @@
                                 </div>
                                 <div>
                                     <input type="password" placeholder="Confirm Password" id="reg-emp-confirmp">
+                                    <span class="error" id="password-match-error"></span>
                                 </div>
                                 <div class="checkbox">
                                     <input type="checkbox">
@@ -459,6 +515,110 @@
                             </ul>
                         </div>
                         <form action="">
+                            <div class="form-one form-stepCustomer active-step">
+                                <div class="bg-svg"></div>
+                                <h2>Personal Information</h2>
+                                <p class="text-muted">Enter your personal information correctly</p>
+                                <div>
+                                    <label>First Name</label>
+                                    <input type="text" placeholder="e.g. Krishan" id="reg-cus-fn">
+                                    <span id="fn-error-cus" class="error"></span>
+                                </div>
+                                <div>
+                                    <label>Last Name</label>
+                                    <input type="text" placeholder="e.g. Mihiranga" id="reg-cus-ln">
+                                    <span id="ln-error-cus" class="error"></span>
+                                </div>
+                                <div class="birth">
+                                    <label>Date of Birth</label>
+                                    <div class="grouping">
+                                        <input type="text" pattern="[0-9]*" name="day" value="" min="0" max="31"
+                                            placeholder="DD" id="reg-cus-day">
+                                        <input type="text" pattern="[0-9]*" name="month" value="" min="0" max="12"
+                                            placeholder="MM" id="reg-cus-month">
+                                        <input type="text" pattern="[0-9]*" name="year" value="" min="0" max="2050"
+                                            placeholder="YYYY" id="reg-cus-year">
+                                        <span id="dob-error-cus" class="error"></span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label>Gender</label>
+                                    <div class="radio-wapper reg-customer-radio-gender">
+                                        <input type="radio" id="cus-g-m" name="gender" value="MALE" class="radioG" checked>
+                                        <label class="labelE label-1" for="cus-g-m">Male</label>
+                                        <input type="radio" id="cus-g-f" name="gender" value="FEMALE" class="radioG">
+                                        <label class="labelE label-2" for="cus-g-f">Female</label>
+                                        <input type="radio" id="cus-g-o" name="gender" value="OTHER" class="radioG">
+                                        <label class="labelE label-3" for="cus-g-o">Other</label>
+                                        <span id="gender-error-cus" class="error"></span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label>Joined Date as a Loyalty Customer</label>
+                                    <input type="date" id="cus-reg-joined-loyal">
+                                    <span id="joined-date-error-cus" class="error"></span>
+                                </div>
+                            </div>
+                            <div class="form-two form-stepCustomer">
+                                <div class="bg-svg"></div>
+                                <h2>Contact Information</h2>
+                                <div>
+                                    <label>Phone</label>
+                                    <input type="tel" placeholder="+94xxxxxxx29" id="cus-reg-phone">
+                                    <span id="phone-error-cus" class="error"></span>
+                                </div>
+                                <div>
+                                    <label>Address</label>
+                                    <input type="text" placeholder="Street Address" id="cus-reg-street">
+                                    <span id="street-error-cus" class="error"></span>
+                                </div>
+                                <div>
+                                    <input type="text" placeholder="Suite, Building" id="cus-reg-building">
+                                    <span id="building-error-cus" class="error"></span>
+                                </div>
+                                <div>
+                                    <label>City</label>
+                                    <input type="text" placeholder="City" id="cus-reg-city">
+                                    <span id="city-error-cus" class="error"></span>
+                                </div>
+                                <div>
+                                    <label>State</label>
+                                    <input type="text" placeholder="State / Province" id="cus-reg-state">
+                                    <span id="state-error-cus" class="error"></span>
+                                </div>
+                                <div>
+                                    <label>Zip Code</label>
+                                    <input type="text" placeholder="Zip / Postal Code" id="cus-reg-zip">
+                                    <span id="zip-error-cus" class="error"></span>
+                                </div>
+                                <div>
+                                    <label>Country</label>
+                                    <select name="country" id="country-customer">
+                                        <option value="Sri Lanka">Sri Lanka</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-three form-stepCustomer">
+                                <div class="bg-svg"></div>
+                                <h2>Security Information</h2>
+                                <div>
+                                    <label>Email</label>
+                                    <input type="email" placeholder="Your email address" id="reg-cus-email">
+                                    <span id="email-error-cus" class="error"></span>
+                                </div>
+                                <div class="checkbox">
+                                    <input type="checkbox">
+                                    <label>Receive our newsletter and special offers</label>
+                                </div>
+                            </div>
+                            <div class="btn-group">
+                                <button type="button" class="btn-prev" disabled>Back</button>
+                                <button type="button" class="btn-next">Next Step</button>
+                                <button type="button" class="btn-submit" id="reg-cus-submit">Submit</button>
+                            </div>
+                        </form>
+                        
+                        <!-- <form action="">
                             <div class="form-one form-stepCustomer active-step">
                                 <div class="bg-svg"></div>
                                 <h2>Personal Information</h2>
@@ -549,7 +709,7 @@
                                 <button type="button" class="btn-next">Next Step</button>
                                 <button type="button" class="btn-submit" id="reg-cus-submit">Submit</button>
                             </div>
-                        </form>
+                        </form> -->
                     </div>
                 </div>
             </div>
@@ -579,6 +739,95 @@
                             </ul>
                         </div>
                         <form action="">
+                            <div class="form-one form-stepSupplier active-step">
+                                <div class="bg-svg"></div>
+                                <h2>Personal Information</h2>
+                                <p class="text-muted">Enter your personal information correctly</p>
+                                <div>
+                                    <label>First Name</label>
+                                    <input type="text" placeholder="e.g. Krishan" id="reg-sup-fn">
+                                    <span id="fn-error-sup" class="error"></span>
+                                </div>
+                                <div>
+                                    <label>Last Name</label>
+                                    <input type="text" placeholder="e.g. Mihiranga" id="reg-sup-ln">
+                                    <span id="ln-error-sup" class="error"></span>
+                                </div>
+                                <div>
+                                    <label>Category</label>
+                                    <div class="radio-wapper" id="reg-sup-radio-cat">
+                                        <input type="radio" id="sup-cat-l" name="category" value="LOCAL" class="radioG">
+                                        <label class="labelE label-1" for="sup-cat-l">Local</label>
+                                        <input type="radio" id="sup-cat-Int" name="category" value="INTERNATIONAL" class="radioG">
+                                        <label class="labelE label-2" for="sup-cat-Int">International</label>
+                                    </div>
+                                    <span id="category-error-sup" class="error"></span>
+                                </div>
+                            </div>
+                            <div class="form-two form-stepSupplier">
+                                <div class="bg-svg"></div>
+                                <h2>Contact Information</h2>
+                                <div>
+                                    <label>Phone</label>
+                                    <input type="tel" placeholder="+94xxxxxxx29" id="reg-sup-tel">
+                                    <span id="phone-error-sup" class="error"></span>
+                                </div>
+                                <div>
+                                    <input type="tel" placeholder="+38xxxxxxx29" id="reg-sup-tel-2">
+                                    <span id="phone-2-error-sup" class="error"></span>
+                                </div>
+                                <div>
+                                    <label>Address</label>
+                                    <input type="text" placeholder="Street Address" id="reg-sup-add-street">
+                                    <span id="street-error-sup" class="error"></span>
+                                </div>
+                                <div>
+                                    <input type="text" placeholder="Suite, Building" id="reg-sup-add-no">
+                                    <span id="building-error-sup" class="error"></span>
+                                </div>
+                                <div>
+                                    <label>City</label>
+                                    <input type="text" placeholder="city" id="reg-sup-add-city">
+                                    <span id="city-error-sup" class="error"></span>
+                                </div>
+                                <div>
+                                    <label>State</label>
+                                    <input type="text" placeholder="State / Province" id="reg-sup-add-state">
+                                    <span id="state-error-sup" class="error"></span>
+                                </div>
+                                <div>
+                                    <label>Zip Code</label>
+                                    <input type="text" placeholder="Zip / Postal Code" id="reg-sup-add-zip">
+                                    <span id="zip-error-sup" class="error"></span>
+                                </div>
+                                <div>
+                                    <label>Country</label>
+                                    <select name="country" id="country-Supplier">
+                                        <option value="Sri Lanka">Sri Lanka</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-three form-stepSupplier">
+                                <div class="bg-svg"></div>
+                                <h2>Security Information</h2>
+                                <div>
+                                    <label>Email</label>
+                                    <input type="email" placeholder="Your email address" id="reg-sup-email">
+                                    <span id="email-error-sup" class="error"></span>
+                                </div>
+                                <div class="checkbox">
+                                    <input type="checkbox">
+                                    <label>Receive our newsletter and special offers</label>
+                                </div>
+                            </div>
+                            <div class="btn-group">
+                                <button type="button" class="btn-prev" disabled>Back</button>
+                                <button type="button" class="btn-next">Next Step</button>
+                                <button type="button" class="btn-submit" id="add-sup-btn">Submit</button>
+                            </div>
+                        </form>
+                        
+                        <!-- <form action="">
                             <div class="form-one form-stepSupplier active-step">
                                 <div class="bg-svg"></div>
                                 <h2>Personal Information</h2>
@@ -655,7 +904,7 @@
                                 <button type="button" class="btn-next">Next Step</button>
                                 <button type="button" class="btn-submit" id="add-sup-btn">Submit</button>
                             </div>
-                        </form>
+                        </form> -->
                     </div>
                 </div>
             </div>
@@ -895,6 +1144,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="popup-info-supplier">
                 <div class="close-btn-popup">&times;</div>
                 <div class="form-popup">
@@ -918,6 +1168,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="popup-info-customer">
                 <div class="close-btn-popup">&times;</div>
                 <div class="form-popup">
@@ -1099,7 +1350,7 @@
 
             <!-- ******** Information_employee_update ******** -->
             <div id="Information-update-profile">
-                <button id="information-edit-back">back</button>
+                <button id="information-edit-back">&larr;</button>
                 <div class="Information-profile-container">
                     <div class="Information-profile-cover">
                         <!-- <h1>KICKS<span> HUB</span></h1> -->
@@ -1281,7 +1532,7 @@
             </div>
 
             <div id="Information-update-supplier">
-                <button id="information-edit-supplier-back">back</button>
+                <button id="information-edit-supplier-back">&larr;</button>
                 <div class="Information-profile-container">
 
                     <div class="Information-update-profile-details">
@@ -1374,7 +1625,7 @@
             </div>
 
             <div id="Information-update-customer">
-                <button id="information-edit-customer-back">back</button>
+                <button id="information-edit-customer-back">&larr;</button>
                 <div class="Information-profile-container">
 
                     <div class="Information-update-profile-details">
@@ -1407,12 +1658,14 @@
                                 <div>
                                     <label>Gender</label>
                                     <div class="radio-wapper reg-customer-info-radio-gender">
-                                        <input type="radio" id="info-customer-g-m" name="gender" value="MALE" class="radioG"
-                                            >
+                                        <input type="radio" id="info-customer-g-m" name="gender" value="MALE"
+                                            class="radioG">
                                         <label class="labelE label-1" for="info-customer-g-m">Male</label>
-                                        <input type="radio" id="info-customer-g-f" name="gender" value="FEMALE" class="radioG">
+                                        <input type="radio" id="info-customer-g-f" name="gender" value="FEMALE"
+                                            class="radioG">
                                         <label class="labelE label-2" for="info-customer-g-f">Female</label>
-                                        <input type="radio" id="info-customer-g-o" name="gender" value="OTHER" class="radioG">
+                                        <input type="radio" id="info-customer-g-o" name="gender" value="OTHER"
+                                            class="radioG">
                                         <label class="labelE label-3" for="info-customer-g-o">Other</label>
                                     </div>
                                 </div>
@@ -1640,6 +1893,7 @@
                                 <div>
                                     <label>Item Name</label>
                                     <input type="text" placeholder="Enter Item Name" id="reg-item-name">
+                                    <span id="name-error-itm" class="error"></span>
                                 </div>
                                 <div>
                                     <label>Item Category</label>
@@ -1652,6 +1906,7 @@
                                         <option value="SHOES">Shoes</option>
                                         <option value="SLIPPERS">Slippers</option>
                                     </select>
+                                    <span id="category-error-itm" class="error"></span>
                                 </div>
                                 <div>
                                     <label>Size</label>
@@ -1713,6 +1968,7 @@
                                         <div>
                                             <label>Purchase Price</label>
                                             <input type="text" placeholder="Enter Price" id="reg-i-pur">
+                                            <span id="purchase-error-itm" class="error"></span>
                                         </div>
                                         <div>
                                             <label>Selling Price</label>
@@ -1727,11 +1983,11 @@
                                         <div>
                                             <label>Profit Margin</label>
                                             <input type="text" placeholder="Enter margin %" id="reg-i-mar">
+                                            <span id="margin-error-itm" class="error"></span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                         </form>
                         <div class="reg-item-btn-wrapper">
                             <button id="reg-item-btn">Register</button>
@@ -2133,8 +2389,8 @@
                 </div>
                 <div class="profile">
                     <div class="info">
-                        <p>Hey, <b>Krishan</b></p>
-                        <small class="text-muted">Admin</small>
+                        <p>Hey, <b> <span id="dashboard-user-name">Demo Name</span> </b></p>
+                        <small class="text-muted" id="dashboard-user-role">Admin</small>
                     </div>
                     <div class="profile-photo" id="dashboard-photo">
                         <img src="assets/images/profile-1.jpg" alt="user profile picture" id="dashboard-right-top-dp">
@@ -2255,7 +2511,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
     <script src="./script.js"></script>
     <script type="module" src="./startup.js"></script>
-    <script src="./employeeController.js"></script>
+    <script type="module" src="./employeeController.js"></script>
     <script type="module" src="./customerController.js"></script>
     <script src="./sessiontimeController.js"></script>
     <script type="module" src="./controller/DashboardController.js"></script>
@@ -2266,29 +2522,31 @@
     <script type="module" src="./controller/InventoryController.js"></script>
     <script type="module" src="./controller/SaleController.js"></script>
     <script type="module" src="./controller/RefundController.js"></script>
+    <script type="module" src="./controller/ToastController.js"></script>
+    <script type="module" src="./security/Authorization.js"></script>
+    <script type="module" src="./security/FieldValidation.js"></script>
 
     <script>
+        $('#page-supplier, #page-customer, #Information-update-profile, #Information-update-supplier, #Information-update-customer, #update-profile, #information-page, #refund-page, #sale-page, #add-item-page, #inventory-page, #add-product-page').hide();
+
         //routes
         $('#add-employee').on('click', () => {
-            $('#save-changes-employee, .charts, .recent-orders, .sales, .expenses, .income, #page-customer, #page-supplier, #update-profile, #information-page, #refund-page, #add-item-page, #add-product-page, #inventory-page, #sale-page').hide();
+            $('#page-user, #save-changes-employee, .charts, .recent-orders, .sales, .expenses, .income, #page-customer, #page-supplier, #update-profile, #information-page, #refund-page, #add-item-page, #add-product-page, #inventory-page, #sale-page').hide();
             $('#page').show();
         });
         $('#dashboard-btn').on('click', () => {
             $('.charts, .recent-orders, .sales, .expenses, .income').show();
-            $('#save-changes-employee, #page, #page-customer, #page-supplier, #update-profile, #information-page, #refund-page, #add-item-page, #add-product-page, #inventory-page, #sale-page').hide();
+            $('#page-user, #save-changes-employee, #page, #page-customer, #page-supplier, #update-profile, #information-page, #refund-page, #add-item-page, #add-product-page, #inventory-page, #sale-page').hide();
         });
         $('#add-customer').on('click', () => {
-            $('#save-changes-employee, .charts, .recent-orders, .sales, .expenses, .income, #page, #page-supplier, #update-profile, #information-page, #refund-page, #add-item-page, #add-product-page, #inventory-page, #sale-page').hide();
+            $('#page-user, #save-changes-employee, .charts, .recent-orders, .sales, .expenses, .income, #page, #page-supplier, #update-profile, #information-page, #refund-page, #add-item-page, #add-product-page, #inventory-page, #sale-page').hide();
             $('#page-customer').show();
         });
         $('#add-supplier').on('click', () => {
-            $('#save-changes-employee, .charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer, #update-profile, #information-page, #refund-page, #add-item-page, #add-product-page, #inventory-page').hide();
+            $('#page-user, #save-changes-employee, .charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer, #update-profile, #information-page, #refund-page, #add-item-page, #add-product-page, #inventory-page').hide();
             $('#page-supplier').show();
         });
-        $('#recent-orders-back').on('click', () => {
-            $('#recent-orders-refund-page').hide();
-            $('#recent-orders-refund').show();
-        });
+
     </script>
 </body>
 

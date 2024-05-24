@@ -44,7 +44,7 @@ $('#dashboard-photo').on('click', () => {
 
     
     //route
-    $('#save-changes-employee, .charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer,#page-supplier, #information-page, #refund-page, #add-item-page, #add-product-page, #inventory-page, #sale-page').hide();
+    $('#page-user, #save-changes-employee, .charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer,#page-supplier, #information-page, #refund-page, #add-item-page, #add-product-page, #inventory-page, #sale-page').hide();
     $('#update-profile').show();
 
     $('#update-profile input, #update-profile select').prop('disabled', true);
@@ -239,7 +239,7 @@ $('#save-up-btn').on('click', () => {
     var pop_rePass = $('#password-confirm-popup').val();
 
     if (pop_password !== pop_rePass) {
-        alert("Password Mismatch");
+        showError("Password you entered didn't match");
         return;
     }
 
@@ -291,18 +291,20 @@ $('#save-up-btn').on('click', () => {
                     processData: false,
                     success: function(response) {
                         $('.close-btn-popup').click();
-                        alert("Update Successful");
+                        showSuccess('Employee Successfully updated');
                     },
                     error: function(xhr, status, error) {
                         console.error('Error:', error);
+                        showError('Failed to update Employee');
                     }
                 });
             } else {
-                alert("No User Found");
+                showError('Error while updating Employee');
             }
         },
         error: function (xhr, status, error) {
             console.error('Error:', error);
+            showError('User not found');
         }
     });
 });

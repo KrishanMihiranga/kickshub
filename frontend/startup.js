@@ -7,11 +7,13 @@ import { inventoryItems } from "../db/inventory.js";
 import { orders, recentOrders, refundOrders } from "../db/Orders.js";
 import { top5names, count } from "./db/Dashboard.js";
 let barChart;
+const colorDark = $(':root').css('--color-label').trim();
+
 var signInData = {
-    // email: 'adminkrishan@gmail.com',
-    // password: CryptoJS.SHA256('admin123').toString(CryptoJS.enc.Hex)
+    // email: 'krishanUse@gmail.com',
     email: 'krishande@gmail.com',
     password: CryptoJS.SHA256('1234').toString(CryptoJS.enc.Hex)
+    
 };
 
 $.ajax({
@@ -22,7 +24,9 @@ $.ajax({
     success: function (response) {
         authData.token = response.token;
         authData.employee = response.employee;
-        alert("Welcome! You are now acting as " + response.employee.name);
+        $(document).trigger('authDataUpdated');
+        showSuccess("Welcome! You are now acting as " + response.employee.name);
+        // alert("Welcome! You are now acting as " + response.employee.name);
         $('#dashboard-right-top-dp').attr("src", "data:image/png;base64," + authData.employee.profilePic);
         $.ajax({
             url: 'http://localhost:9090/shoeshop/api/v1/supplier/getAllSuppliers',
@@ -330,7 +334,7 @@ $.ajax({
 
     },
     error: function (xhr, status, error) {
-        alert('Sign-in failed');
+        showError('Sign-in failed');
     }
 });
 
@@ -406,7 +410,6 @@ function populateRefundOrdersTable() {
 const barChartOptions = {
     series: [
         {
-            // data: [10, 8, 6, 4, 2],
             data: count,
             name: 'Products',
         },
@@ -449,7 +452,7 @@ const barChartOptions = {
     },
     legend: {
         labels: {
-            colors: '#f5f7ff',
+            colors: colorDark,
         },
         show: true,
         position: 'top',
@@ -465,11 +468,10 @@ const barChartOptions = {
         theme: 'dark',
     },
     xaxis: {
-        //   categories: ['Laptop', 'Phone', 'Monitor', 'Headphones', 'Camera'],
         categories: top5names,
         title: {
             style: {
-                color: '#f5f7ff',
+                color: colorDark,
             },
         },
         axisBorder: {
@@ -482,7 +484,7 @@ const barChartOptions = {
         },
         labels: {
             style: {
-                colors: '#f5f7ff',
+                colors: colorDark,
             },
         },
     },
@@ -490,7 +492,7 @@ const barChartOptions = {
         title: {
             text: 'Count',
             style: {
-                color: '#f5f7ff',
+                color: colorDark,
             },
         },
         axisBorder: {
@@ -503,11 +505,12 @@ const barChartOptions = {
         },
         labels: {
             style: {
-                colors: '#f5f7ff',
+                colors: colorDark,
             },
         },
     },
 };
+
 
 $('#selectedDate').change(function () {
 

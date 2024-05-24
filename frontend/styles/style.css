@@ -20,6 +20,7 @@
     --color-primary-variant: #111e88;
     --color-dark-variant: #677483;
     --color-background: #f6f6f9;
+    --color-label: #55596e;
 
     --card-border-radius: 2rem;
     --bordr-radius-1: 0.4rem;
@@ -1960,8 +1961,7 @@ main::-webkit-scrollbar {
 }
 
 .refund-page-refund-btn,
-#recent-orders-back,
-#information-edit-back {
+#recent-orders-back {
     width: 8rem;
     height: 2.5rem;
     border-radius: var(--bordr-radius-2);
@@ -1972,8 +1972,7 @@ main::-webkit-scrollbar {
     transition: .3s all ease;
 }
 
-#recent-orders-back,
-#information-edit-back {
+#recent-orders-back {
     background-color: var(--color-primary);
 }
 
@@ -2765,6 +2764,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 .sale-page-right-cart {
     max-height: 380px;
+    min-height: 380px;
     overflow-y: auto;
 }
 
@@ -3002,4 +3002,177 @@ input[type=number]::-webkit-outer-spin-button {
 
 #Information-update-customer .grouping>input {
     width: 5rem;
+}
+
+#information-edit-supplier-back,
+#information-edit-customer-back,
+#information-edit-back {
+    background-color: transparent;
+    color: var(--color-primary);
+    border: none;
+    padding: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 50%;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+#information-edit-supplier-back:hover,
+#information-edit-customer-back:hover,
+#information-edit-back:hover {
+    background-color: #6474d1;
+    color: #fff;
+}
+
+/* --------- toast ------------- */
+.toast,
+.toast-error {
+    position: absolute;
+    top: 25px;
+    right: 30px;
+    border-radius: 12px;
+    background: #fff;
+    padding: 20px 35px 20px 25px;
+    box-shadow: 0 6px 20px -5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transform: translateX(calc(100% + 30px));
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.35);
+    z-index: 50;
+}
+
+.toast.activeToast,
+.toast-error.activeToast {
+    transform: translateX(0%);
+}
+
+.toast .toast-content,
+.toast-error .toast-error-content {
+    display: flex;
+    align-items: center;
+}
+
+.toast-content .check,
+.toast-error-content .check {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 35px;
+    min-width: 35px;
+    background-color: var(--color-success-hover);
+    color: #fff;
+    font-size: 20px;
+    border-radius: 50%;
+}
+
+.toast-error-content .check {
+    background-color: var(--color-danger);
+}
+
+.toast-content .message,
+.toast-error-content .message-error {
+    display: flex;
+    flex-direction: column;
+    margin: 0 20px;
+}
+
+.message .text,
+.message-error .text-error {
+    font-size: 14px;
+    font-weight: 400;
+    color: #666666;
+}
+
+.message .text.text-1,
+.message-error .text-error.text-3 {
+    font-weight: 600;
+    color: #333;
+}
+
+.toast .close,
+.toast-error .close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    padding: 5px;
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.toast .close:hover,
+.toast-error .close:hover {
+    opacity: 1;
+}
+
+.toast .progress,
+.toast-error .progress-error {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 100%;
+
+}
+
+.toast .progress:before,
+.toast-error .progress-error:before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    background-color: var(--color-success-hover);
+}
+
+.toast-error .progress-error:before {
+    background-color: var(--color-danger);
+}
+
+.progress.activeToast:before,
+.progress-error.activeToast:before {
+    animation: progress 5s linear forwards;
+}
+
+@keyframes progress {
+    100% {
+        right: 100%;
+    }
+}
+
+/* Authorization */
+
+#add-employee,
+#add-supplier,
+#add-item-btn,
+#dashboard-btn {
+    display: none;
+}
+
+#page-user {
+    padding: var(--card-padding);
+    margin-top: 1.4rem;
+    border-radius: var(--bordr-radius-3);
+    background: var(--color-white);
+    box-shadow: var(--box-shadow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 80vh;
+}
+#page-user h2{
+    font-size: 10rem;
+}
+#page-user div{
+    margin-top: 15rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4rem;
+}
+
+/* validation  */
+.error{
+    color: var(--color-danger);
 }

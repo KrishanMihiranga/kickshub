@@ -47,7 +47,7 @@ public class JWTServiceImpl implements JWTService {
     private String generateToken(Map<String,Object> extractClaims, UserDetails userDetails){
         extractClaims.put("role",userDetails.getAuthorities());
         Date now = new Date();
-        Date expire = new Date(now.getTime() + 1000 * 600);
+        Date expire = new Date(now.getTime() + 1000 * 60 * 60 * 8);
         Date refreshExpire = new Date(now.getTime() + 1000 * 600 *600);
 
         String accessToken = Jwts.builder().setClaims(extractClaims)
