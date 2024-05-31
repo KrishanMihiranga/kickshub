@@ -6,353 +6,392 @@ import { items, itemImages } from "../db/item.js";
 import { inventoryItems } from "../db/inventory.js";
 import { orders, recentOrders, refundOrders } from "../db/Orders.js";
 import { top5names, count } from "./db/Dashboard.js";
+import { OldToken } from "./db/Token.js";
 let barChart;
 const colorDark = $(':root').css('--color-label').trim();
 
-var signInData = {
-    // email: 'krishanUse@gmail.com',
-    // email: 'krishande@gmail.com',
-    email: 'zenc@gmail.com',
-    password: CryptoJS.SHA256('Password1234@#').toString(CryptoJS.enc.Hex)
-
+$('.container').hide();
+const signInDataArr = {
+    email: null,
+    password: null
 };
 
-$.ajax({
-    type: 'POST',
-    url: 'http://localhost:9090/shoeshop/api/v1/auth/signin',
-    contentType: 'application/json',
-    data: JSON.stringify(signInData),
-    success: function (response) {
-        authData.token = response.token;
-        authData.employee = response.employee;
-        $(document).trigger('authDataUpdated');
-        showSuccess("Welcome! You are now acting as " + response.employee.name);
-        // alert("Welcome! You are now acting as " + response.employee.name);
-        $('#dashboard-right-top-dp').attr("src", "data:image/png;base64," + authData.employee.profilePic);
-        $.ajax({
-            url: 'http://localhost:9090/shoeshop/api/v1/supplier/getAllSuppliers',
-            type: 'GET',
-            headers: {
-                'Authorization': 'Bearer ' + authData.token
-            },
-            success: function (response) {
-                suppliers.length = 0;
-                suppliers.push(...response);
-                console.log('Suppliers Array:', suppliers);
-            },
-            error: function (xhr, status, error) {
-                console.error('Error:', error);
-            }
-        });
+function startTimer(duration) {
+    setTimeout(function () {
+        $('.container').hide();
+        $('.login').show();
+        showError("Your session has expired");
+    }, duration);
+}
 
-        $.ajax({
-            url: 'http://localhost:9090/shoeshop/api/v1/customer/getAllCustomers',
-            type: 'GET',
-            headers: {
-                'Authorization': 'Bearer ' + authData.token
-            },
-            success: function (response) {
-                customers.length = 0;
-                customers.push(...response);
-                console.log('Customers Array:', customers);
-            },
-            error: function (xhr, status, error) {
-                console.error('Error:', error);
-            }
-        });
+$('#login-btn').on('click', () => {
+    const email_login = $('#email-login').val();
+    const password_login = $('#password-login').val();
 
-        $.ajax({
-            url: 'http://localhost:9090/shoeshop/api/v1/employee/getAllEmployees',
-            type: 'GET',
-            headers: {
-                'Authorization': 'Bearer ' + authData.token
-            },
-            success: function (response) {
-                employees.length = 0;
-                employees.push(...response);
-                console.log('Employees Array:', employees);
-            },
-            error: function (xhr, status, error) {
-                console.error('Error:', error);
-            }
-        });
+    // Hash the password using CryptoJS SHA256
+    const hashedPassword = CryptoJS.SHA256(password_login).toString(CryptoJS.enc.Hex);
 
-        $.ajax({
-            url: 'http://localhost:9090/shoeshop/api/v1/item/getall',
-            type: 'GET',
-            headers: {
-                'Authorization': 'Bearer ' + authData.token
-            },
-            success: function (response) {
-                items.length = 0;
-                items.push(...response);
-                console.log('items Array:', items);
-            },
-            error: function (xhr, status, error) {
-                console.error('Error:', error);
-            }
-        });
+    // Update signInDataArr with email and hashed password
+    signInDataArr.email = email_login;
+    signInDataArr.password = hashedPassword;
 
-        $.ajax({
-            url: 'http://localhost:9090/shoeshop/api/v1/itemimage/getall',
-            type: 'GET',
-            headers: {
-                'Authorization': 'Bearer ' + authData.token
-            },
-            success: function (response) {
-                itemImages.length = 0;
-                itemImages.push(...response);
-                console.log('itemImages Array:', itemImages);
-            },
-            error: function (xhr, status, error) {
-                console.error('Error:', error);
-            }
-        });
+    // Call the startDashboard function with signInDataArr
+    startDashboard(signInDataArr);
 
-        $.ajax({
-            url: 'http://localhost:9090/shoeshop/api/v1/inventory/getall',
-            type: 'GET',
-            headers: {
-                'Authorization': 'Bearer ' + authData.token
-            },
-            success: function (response) {
-                inventoryItems.length = 0;
-                inventoryItems.push(...response);
-                console.log('inventoryItems Array:', inventoryItems);
-            },
-            error: function (xhr, status, error) {
-                console.error('Error:', error);
-            }
-        });
-
-        $.ajax({
-            url: ' http://localhost:9090/shoeshop/api/v1/sale/getall',
-            type: 'GET',
-            headers: {
-                'Authorization': 'Bearer ' + authData.token
-            },
-            success: function (response) {
-                orders.length = 0;
-                orders.push(...response);
-                console.log('Orders Array:', orders);
-            },
-            error: function (xhr, status, error) {
-                console.error('Error:', error);
-            }
-        });
-
-        $.ajax({
-            url: 'http://localhost:9090/shoeshop/api/v1/sale/getrecent',
-            type: 'GET',
-            headers: {
-                'Authorization': 'Bearer ' + authData.token
-            },
-            success: function (response) {
-                recentOrders.length = 0;
-                recentOrders.push(...response);
-                console.log('Recent Orders Array:', recentOrders);
-                populateRecentOrdersTable();
-            },
-            error: function (xhr, status, error) {
-                console.error('Error:', error);
-            }
-        });
-
-        $.ajax({
-            url: 'http://localhost:9090/shoeshop/api/v1/refund/getavailablerefund',
-            type: 'GET',
-            headers: {
-                'Authorization': 'Bearer ' + authData.token
-            },
-            success: function (response) {
-                refundOrders.length = 0;
-                refundOrders.push(...response);
-                console.log('Refund Orders Array:', refundOrders);
-                populateRefundOrdersTable();
-            },
-            error: function (xhr, status, error) {
-                console.error('Error:', error);
-            }
-        });
-
-
-        var today = new Date().toLocaleString('en-US', {
-            timeZone: 'Asia/Colombo'
-        }).split(',')[0].split('/');
-
-        var month = ('0' + today[0]).slice(-2);
-        var day = ('0' + today[1]).slice(-2);
-        var year = today[2];
-        today = year + '-' + month + '-' + day;
-        $('#selectedDate').val(today);
-        console.log("Date _ " + today);
-        $.ajax({
-            url: 'http://localhost:9090/shoeshop/api/v1/sale/gettotalsales',
-            type: 'POST',
-            contentType: 'application/json',
-            headers: {
-                'Authorization': 'Bearer ' + authData.token
-            },
-            data: JSON.stringify(today),
-            success: function (response) {
-                var formattedResponse = parseFloat(response).toLocaleString('en-US', {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2
-                });
-                $('#total-sales-amount').text(formattedResponse);
-            },
-            error: function (xhr, status, error) {
-                console.error('Error:', error);
-                // Handle errors here
-            }
-        });
-
-        $.ajax({
-            url: 'http://localhost:9090/shoeshop/api/v1/sale/gettotalexpenses',
-            type: 'POST',
-            contentType: 'application/json',
-            headers: {
-                'Authorization': 'Bearer ' + authData.token
-            },
-            data: JSON.stringify(today),
-            success: function (response) {
-                var formattedResponse = parseFloat(response).toLocaleString('en-US', {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2
-                });
-                $('#total-sales-expenses').text(formattedResponse);
-            },
-            error: function (xhr, status, error) {
-                console.error('Error:', error);
-
-            }
-        });
-
-        $.ajax({
-            url: 'http://localhost:9090/shoeshop/api/v1/sale/gettotalincome',
-            type: 'POST',
-            contentType: 'application/json',
-            headers: {
-                'Authorization': 'Bearer ' + authData.token
-            },
-            data: JSON.stringify(today),
-            success: function (response) {
-                var formattedResponse = parseFloat(response).toLocaleString('en-US', {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2
-                });
-                $('#total-sales-income').text(formattedResponse);
-            },
-            error: function (xhr, status, error) {
-                console.error('Error:', error);
-
-            }
-        });
-
-        $.ajax({
-            url: 'http://localhost:9090/shoeshop/api/v1/sale/gettopproducts',
-            type: 'POST',
-            contentType: 'application/json',
-            headers: {
-                'Authorization': 'Bearer ' + authData.token
-            },
-            data: JSON.stringify(today),
-            success: function (response) {
-                response.forEach(res => {
-                    let name = res.name;
-                    let itemcount = res.count;
-                    top5names.push(name);
-                    count.push(itemcount);
-                });
-                barChart = new ApexCharts(
-                    document.querySelector('#bar-chart'),
-                    barChartOptions
-                );
-                barChart.render();
-
-            },
-            error: function (xhr, status, error) {
-                console.error('Error:', error);
-            }
-        });
-
-        $.ajax({
-            url: 'http://localhost:9090/shoeshop/api/v1/sale/gettopselling',
-            type: 'POST',
-            contentType: 'application/json',
-            headers: {
-                'Authorization': 'Bearer ' + authData.token
-            },
-            data: JSON.stringify(today),
-            success: function (response) {
-                var formattedPrice = parseFloat(response.price).toLocaleString('en-US', {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2
-                });
-                $('#popular-product-card-right-name').text(response.name);
-                $('#popular-product-card-right-price').text(formattedPrice);
-                $('#popular-product-card-right-image').attr('src', 'data:image/png;base64,' + response.image);
-            },
-            error: function (xhr, status, error) {
-                console.error('Error:', error);
-            }
-        });
-
-        $.ajax({
-            url: 'http://localhost:9090/shoeshop/api/v1/sale/gettotalpaymentmethods',
-            type: 'POST',
-            contentType: 'application/json',
-            headers: {
-                'Authorization': 'Bearer ' + authData.token
-            },
-            data: JSON.stringify(today),
-            success: function (response) {
-
-                $('#item-cash-count').text(response.cash);
-                $('#item-card-count').text(response.card);
-            },
-            error: function (xhr, status, error) {
-                console.error('Error:', error);
-            }
-        });
-        $.ajax({
-            url: 'http://localhost:9090/shoeshop/api/v1/customer/getcustomercount',
-            type: 'POST',
-            contentType: 'application/json',
-            headers: {
-                'Authorization': 'Bearer ' + authData.token
-            },
-            data: JSON.stringify(today),
-            success: function (response) {
-
-                $('#item-customer-count').text(response);
-            },
-            error: function (xhr, status, error) {
-                console.error('Error:', error);
-            }
-        });
-
-        $.ajax({
-            url: 'http://localhost:9090/shoeshop/api/v1/alert/getlatestalerts',
-            type: 'GET',
-            contentType: 'application/json',
-            headers: {
-                'Authorization': 'Bearer ' + authData.token
-            },
-            success: function (response) {
-                console.log(response);
-                updateAlertBox(response);
-            },
-            error: function (xhr, status, error) {
-                console.error('Error:', error);
-            }
-        });
-
-    },
-    error: function (xhr, status, error) {
-        showError('Sign-in failed');
-    }
 });
+
+function startDashboard(signInData) {
+    $.ajax({
+        type: 'POST',
+        url: 'http://localhost:9090/shoeshop/api/v1/auth/signin',
+        contentType: 'application/json',
+        data: JSON.stringify(signInData),
+        success: function (response) {
+            OldToken.token = authData.token;
+            authData.token = response.token;
+            authData.employee = response.employee;
+            console.log("Old: "+ OldToken.token);
+            console.log("New: "+ authData.token);
+            $(document).trigger('authDataUpdated');
+            showSuccess("Welcome! You are now acting as " + response.employee.name);
+            // alert("Welcome! You are now acting as " + response.employee.name);
+            $('#dashboard-right-top-dp').attr("src", "data:image/png;base64," + authData.employee.profilePic);
+
+            $('.login').hide();
+            $('.container').show();
+
+            // Start the timer for 8 hours
+            // startTimer(8 * 60 * 60 * 1000);
+            startTimer(60 * 1000);
+
+
+            $.ajax({
+                url: 'http://localhost:9090/shoeshop/api/v1/supplier/getAllSuppliers',
+                type: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + authData.token
+                },
+                success: function (response) {
+                    suppliers.length = 0;
+                    suppliers.push(...response);
+                    console.log('Suppliers Array:', suppliers);
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
+
+            $.ajax({
+                url: 'http://localhost:9090/shoeshop/api/v1/customer/getAllCustomers',
+                type: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + authData.token
+                },
+                success: function (response) {
+                    customers.length = 0;
+                    customers.push(...response);
+                    console.log('Customers Array:', customers);
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
+
+            $.ajax({
+                url: 'http://localhost:9090/shoeshop/api/v1/employee/getAllEmployees',
+                type: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + authData.token
+                },
+                success: function (response) {
+                    employees.length = 0;
+                    employees.push(...response);
+                    console.log('Employees Array:', employees);
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
+
+            $.ajax({
+                url: 'http://localhost:9090/shoeshop/api/v1/item/getall',
+                type: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + authData.token
+                },
+                success: function (response) {
+                    items.length = 0;
+                    items.push(...response);
+                    console.log('items Array:', items);
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
+
+            $.ajax({
+                url: 'http://localhost:9090/shoeshop/api/v1/itemimage/getall',
+                type: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + authData.token
+                },
+                success: function (response) {
+                    itemImages.length = 0;
+                    itemImages.push(...response);
+                    console.log('itemImages Array:', itemImages);
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
+
+            $.ajax({
+                url: 'http://localhost:9090/shoeshop/api/v1/inventory/getall',
+                type: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + authData.token
+                },
+                success: function (response) {
+                    inventoryItems.length = 0;
+                    inventoryItems.push(...response);
+                    console.log('inventoryItems Array:', inventoryItems);
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
+
+            $.ajax({
+                url: ' http://localhost:9090/shoeshop/api/v1/sale/getall',
+                type: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + authData.token
+                },
+                success: function (response) {
+                    orders.length = 0;
+                    orders.push(...response);
+                    console.log('Orders Array:', orders);
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
+
+            $.ajax({
+                url: 'http://localhost:9090/shoeshop/api/v1/sale/getrecent',
+                type: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + authData.token
+                },
+                success: function (response) {
+                    recentOrders.length = 0;
+                    recentOrders.push(...response);
+                    console.log('Recent Orders Array:', recentOrders);
+                    populateRecentOrdersTable();
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
+
+            $.ajax({
+                url: 'http://localhost:9090/shoeshop/api/v1/refund/getavailablerefund',
+                type: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + authData.token
+                },
+                success: function (response) {
+                    refundOrders.length = 0;
+                    refundOrders.push(...response);
+                    console.log('Refund Orders Array:', refundOrders);
+                    populateRefundOrdersTable();
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
+
+
+            var today = new Date().toLocaleString('en-US', {
+                timeZone: 'Asia/Colombo'
+            }).split(',')[0].split('/');
+
+            var month = ('0' + today[0]).slice(-2);
+            var day = ('0' + today[1]).slice(-2);
+            var year = today[2];
+            today = year + '-' + month + '-' + day;
+            $('#selectedDate').val(today);
+            console.log("Date _ " + today);
+            $.ajax({
+                url: 'http://localhost:9090/shoeshop/api/v1/sale/gettotalsales',
+                type: 'POST',
+                contentType: 'application/json',
+                headers: {
+                    'Authorization': 'Bearer ' + authData.token
+                },
+                data: JSON.stringify(today),
+                success: function (response) {
+                    var formattedResponse = parseFloat(response).toLocaleString('en-US', {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    });
+                    $('#total-sales-amount').text(formattedResponse);
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error:', error);
+                    // Handle errors here
+                }
+            });
+
+            $.ajax({
+                url: 'http://localhost:9090/shoeshop/api/v1/sale/gettotalexpenses',
+                type: 'POST',
+                contentType: 'application/json',
+                headers: {
+                    'Authorization': 'Bearer ' + authData.token
+                },
+                data: JSON.stringify(today),
+                success: function (response) {
+                    var formattedResponse = parseFloat(response).toLocaleString('en-US', {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    });
+                    $('#total-sales-expenses').text(formattedResponse);
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error:', error);
+
+                }
+            });
+
+            $.ajax({
+                url: 'http://localhost:9090/shoeshop/api/v1/sale/gettotalincome',
+                type: 'POST',
+                contentType: 'application/json',
+                headers: {
+                    'Authorization': 'Bearer ' + authData.token
+                },
+                data: JSON.stringify(today),
+                success: function (response) {
+                    var formattedResponse = parseFloat(response).toLocaleString('en-US', {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    });
+                    $('#total-sales-income').text(formattedResponse);
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error:', error);
+
+                }
+            });
+
+            $.ajax({
+                url: 'http://localhost:9090/shoeshop/api/v1/sale/gettopproducts',
+                type: 'POST',
+                contentType: 'application/json',
+                headers: {
+                    'Authorization': 'Bearer ' + authData.token
+                },
+                data: JSON.stringify(today),
+                success: function (response) {
+                    response.forEach(res => {
+                        let name = res.name;
+                        let itemcount = res.count;
+                        top5names.push(name);
+                        count.push(itemcount);
+                    });
+                    barChart = new ApexCharts(
+                        document.querySelector('#bar-chart'),
+                        barChartOptions
+                    );
+                    barChart.render();
+
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
+
+            $.ajax({
+                url: 'http://localhost:9090/shoeshop/api/v1/sale/gettopselling',
+                type: 'POST',
+                contentType: 'application/json',
+                headers: {
+                    'Authorization': 'Bearer ' + authData.token
+                },
+                data: JSON.stringify(today),
+                success: function (response) {
+                    var formattedPrice = parseFloat(response.price).toLocaleString('en-US', {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    });
+                    $('#popular-product-card-right-name').text(response.name);
+                    $('#popular-product-card-right-price').text(formattedPrice);
+                    $('#popular-product-card-right-image').attr('src', 'data:image/png;base64,' + response.image);
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
+
+            $.ajax({
+                url: 'http://localhost:9090/shoeshop/api/v1/sale/gettotalpaymentmethods',
+                type: 'POST',
+                contentType: 'application/json',
+                headers: {
+                    'Authorization': 'Bearer ' + authData.token
+                },
+                data: JSON.stringify(today),
+                success: function (response) {
+
+                    $('#item-cash-count').text(response.cash);
+                    $('#item-card-count').text(response.card);
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
+            $.ajax({
+                url: 'http://localhost:9090/shoeshop/api/v1/customer/getcustomercount',
+                type: 'POST',
+                contentType: 'application/json',
+                headers: {
+                    'Authorization': 'Bearer ' + authData.token
+                },
+                data: JSON.stringify(today),
+                success: function (response) {
+
+                    $('#item-customer-count').text(response);
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
+
+            $.ajax({
+                url: 'http://localhost:9090/shoeshop/api/v1/alert/getlatestalerts',
+                type: 'GET',
+                contentType: 'application/json',
+                headers: {
+                    'Authorization': 'Bearer ' + authData.token
+                },
+                success: function (response) {
+                    console.log(response);
+                    updateAlertBox(response);
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
+
+        },
+        error: function (xhr, status, error) {
+            showError('Sign-in failed');
+        }
+    });
+
+}
+
 
 function populateRecentOrdersTable() {
 

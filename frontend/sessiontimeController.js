@@ -1,6 +1,9 @@
+// import { authData } from "./db/loginData.js";
+// import { token } from "./db/Token.js";
+
 function decrementTime() {
-    var spanElement = document.getElementById('session-time');
-    var currentTime = spanElement.innerText;
+    var spanElement = $('#session-time');
+    var currentTime = spanElement.text();
     var timeArray = currentTime.split(':');
     var hours = parseInt(timeArray[0]);
     var minutes = parseInt(timeArray[1]);
@@ -10,6 +13,8 @@ function decrementTime() {
     if (hours === 0 && minutes === 0 && seconds === 0) {
         clearInterval(timer);
         console.log("Time's up!");
+        ('.login').show();
+        ('container').hide();
     } else {
         if (seconds > 0) {
             seconds--;
@@ -30,7 +35,10 @@ function decrementTime() {
 
     // Update the time displayed
     var newTime = padNumber(hours) + ':' + padNumber(minutes) + ':' + padNumber(seconds);
-    spanElement.innerText = newTime;
+    spanElement.text(newTime);
+
+    // Save the current time to localStorage
+    localStorage.setItem('sessionTime', newTime);
 }
 
 // Function to pad single-digit numbers with leading zero
@@ -38,5 +46,15 @@ function padNumber(num) {
     return (num < 10 ? '0' : '') + num;
 }
 
-// Run decrementTime function every second
-var timer = setInterval(decrementTime, 1000);
+// Initialize the timer
+function initializeTimer() {
+    var savedTime = localStorage.getItem('sessionTime');
+    var initialTime = savedTime ? savedTime : '08:00:00';
+    $('#session-time').text(initialTime);
+    timer = setInterval(decrementTime, 1000);
+}
+
+// Run the initializeTimer function when the page loads
+$(document).ready(function () {
+    initializeTimer();
+});

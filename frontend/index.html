@@ -48,6 +48,33 @@
 
     <div class="overlay"></div>
 
+
+    <div class="login">
+        <div class="wrapper">
+            
+                <h1>Login</h1>
+                <div class="input-box">
+                    <input id="email-login" type="text" placeholder="Email" required>
+                    <i class='bx bxs-user'></i>
+                </div>
+                <div class="input-box">
+                    <input id="password-login" type="password" placeholder="Password" required>
+                    <i class='bx bxs-lock-alt'></i>
+                </div>
+                <div class="remember-forgot">
+                    <label><input type="checkbox">Remember Me</label>
+                    <a href="#">Forgot Password</a>
+                </div>
+                <button class="btn" id="login-btn">Login</button>
+                <div class="register-link">
+                    <p>Dont have an account? <a href="#">Register</a></p>
+                </div>
+            
+        </div>
+    </div>
+    
+
+
     <div class="container">
         <!-- side-bar -->
         <aside>
@@ -408,7 +435,7 @@
                                     <input type="date" id="reg-emp-jdate">
                                     <span class="error" id="joined-date-error"></span>
                                 </div>
-                                
+
                             </div>
                             <div class="form-two form-step">
                                 <div class="bg-svg"></div>
@@ -544,7 +571,8 @@
                                 <div>
                                     <label>Gender</label>
                                     <div class="radio-wapper reg-customer-radio-gender">
-                                        <input type="radio" id="cus-g-m" name="gender" value="MALE" class="radioG" checked>
+                                        <input type="radio" id="cus-g-m" name="gender" value="MALE" class="radioG"
+                                            checked>
                                         <label class="labelE label-1" for="cus-g-m">Male</label>
                                         <input type="radio" id="cus-g-f" name="gender" value="FEMALE" class="radioG">
                                         <label class="labelE label-2" for="cus-g-f">Female</label>
@@ -617,7 +645,7 @@
                                 <button type="button" class="btn-submit" id="reg-cus-submit">Submit</button>
                             </div>
                         </form>
-                        
+
                         <!-- <form action="">
                             <div class="form-one form-stepCustomer active-step">
                                 <div class="bg-svg"></div>
@@ -758,7 +786,8 @@
                                     <div class="radio-wapper" id="reg-sup-radio-cat">
                                         <input type="radio" id="sup-cat-l" name="category" value="LOCAL" class="radioG">
                                         <label class="labelE label-1" for="sup-cat-l">Local</label>
-                                        <input type="radio" id="sup-cat-Int" name="category" value="INTERNATIONAL" class="radioG">
+                                        <input type="radio" id="sup-cat-Int" name="category" value="INTERNATIONAL"
+                                            class="radioG">
                                         <label class="labelE label-2" for="sup-cat-Int">International</label>
                                     </div>
                                     <span id="category-error-sup" class="error"></span>
@@ -826,7 +855,7 @@
                                 <button type="button" class="btn-submit" id="add-sup-btn">Submit</button>
                             </div>
                         </form>
-                        
+
                         <!-- <form action="">
                             <div class="form-one form-stepSupplier active-step">
                                 <div class="bg-svg"></div>
@@ -2524,7 +2553,8 @@
     <script type="module" src="./controller/ToastController.js"></script>
     <script type="module" src="./security/Authorization.js"></script>
     <script type="module" src="./security/FieldValidation.js"></script>
-
+    <script type="module" src="./controller/LoginController.js"></script>
+    <script type="module" src="./db/Token.js"></script>
     <script>
         $('#page-supplier, #page-customer, #Information-update-profile, #Information-update-supplier, #Information-update-customer, #update-profile, #information-page, #refund-page, #sale-page, #add-item-page, #inventory-page, #add-product-page').hide();
 
