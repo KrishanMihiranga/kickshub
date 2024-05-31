@@ -17,6 +17,8 @@ import java.util.Date;
 public class AlertEntity {
     @Id
     private String id;
+    private String empId;
+    private String name;
     private String message;
     private Date date;
 }

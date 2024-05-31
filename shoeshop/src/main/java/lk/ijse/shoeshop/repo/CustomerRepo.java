@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,4 +17,5 @@ public interface CustomerRepo extends JpaRepository<CustomerEntity, String> {
     List<CustomerEntity> findAllByjoinedDateAsLoyaltyBetween(LocalDateTime startDate, LocalDateTime endDate);
 
     Optional<CustomerEntity> findByCustomerCode(String customerCode);
+
 }

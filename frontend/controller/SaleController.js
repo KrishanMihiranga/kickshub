@@ -4,12 +4,15 @@ import { dataCus } from "../db/detailCheck.js";
 import { authData } from "../db/loginData.js";
 import { saleData, saleitem } from "../db/transaction.js";
 import { customers } from "../db/Customer.js";
+import { employees } from "../db/employee.js"
 var discount = 0;
 var subtotal = 0;
 var total = 0;
 var points = 0;
 var name = null;
 var contact = null;
+var profilePic = null;
+
 // Function to initialize sale page
 $('#sale-btn').on('click', () => {
     $('#page-user, #save-changes-employee, .charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer,#page-supplier, #update-profile, #information-page, #recent-orders-refund-page, #refund-page, #add-item-page, #add-product-page, #inventory-page').hide();
@@ -200,7 +203,7 @@ $('#submit-order').on('click', () => {
                 $('.popup-paymentmetod').addClass("active-popup");
                 $('.overlay').addClass("active-overlay");
                 prepareSaleData();
-            }else{
+            } else {
                 showError("Customer not found");
             }
         },
@@ -289,6 +292,23 @@ $('#btn-order-now').on('click', () => {
         success: function (response) {
             console.log(response);
             showSuccess('Order saved successfully');
+
+            $.ajax({
+                url: 'http://localhost:9090/shoeshop/api/v1/alert/getlatestalerts',
+                type: 'GET',
+                contentType: 'application/json',
+                headers: {
+                    'Authorization': 'Bearer ' + authData.token
+                },
+                success: function (response) {
+                    console.log(response);
+                    updateAlertBox(response);
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
+
         },
         error: function (xhr, status, error) {
             console.error('Error:', error);
@@ -342,4 +362,64 @@ function searchCustomerByName(name) {
         }
     });
     return customerCode;
+}
+
+function updateAlertBox(response) {
+    var updatesContainer = document.getElementById('updates-container');
+    updatesContainer.innerHTML = '';
+
+    response.forEach(alert => {
+        var profilePic = '/assets/images/default_user.jpg';
+        var name = alert.name;
+        var message = alert.message;
+
+        employees.forEach(employee => {
+            if (employee.employeeCode === alert.empId) {
+                profilePic = employee.profilePic ? 'data:image;base64,' + employee.profilePic : profilePic;
+            }
+        });
+
+        var newUpdateHtml = '<div class="update" data-date="' + alert.date + '">';
+        newUpdateHtml += '<div class="profile-photo">';
+        newUpdateHtml += '<img src="' + profilePic + '" alt="">';
+        newUpdateHtml += '</div>';
+        newUpdateHtml += '<div class="message">';
+        newUpdateHtml += '<p><b>' + name + '</b> ' + message + '</p>';
+        newUpdateHtml += '<small class="text-muted time-ago">' + timeAgo(new Date(alert.date)) + '</small>';
+        newUpdateHtml += '</div>';
+        newUpdateHtml += '</div>';
+
+        updatesContainer.innerHTML += newUpdateHtml;
+    });
+
+    // Call refreshTimes initially and then set interval for periodic updates
+    refreshTimes();
+    setInterval(refreshTimes, 60000); // Update every minute
+}
+
+function timeAgo(date) {
+    const now = new Date();
+    const secondsAgo = Math.floor((now - date) / 1000);
+
+    if (secondsAgo < 60) {
+        return 'Just now';
+    } else if (secondsAgo < 3600) {
+        const minutesAgo = Math.floor(secondsAgo / 60);
+        return `${minutesAgo} minute${minutesAgo > 1 ? 's' : ''} ago`;
+    } else if (secondsAgo < 86400) {
+        const hoursAgo = Math.floor(secondsAgo / 3600);
+        return `${hoursAgo} hour${hoursAgo > 1 ? 's' : ''} ago`;
+    } else {
+        const daysAgo = Math.floor(secondsAgo / 86400);
+        return `${daysAgo} day${daysAgo > 1 ? 's' : ''} ago`;
+    }
+}
+
+function refreshTimes() {
+    const updates = document.querySelectorAll('.update');
+    updates.forEach(update => {
+        const date = new Date(update.getAttribute('data-date'));
+        const timeAgoText = timeAgo(date);
+        update.querySelector('.time-ago').textContent = timeAgoText;
+    });
 }

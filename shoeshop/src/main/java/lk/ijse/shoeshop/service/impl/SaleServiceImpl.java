@@ -1,16 +1,16 @@
 package lk.ijse.shoeshop.service.impl;
 
 import jakarta.transaction.Transactional;
+import lk.ijse.shoeshop.dto.AlertDTO;
 import lk.ijse.shoeshop.dto.SaleDTO;
 import lk.ijse.shoeshop.entity.CustomerEntity;
 import lk.ijse.shoeshop.entity.InventoryEntity;
 import lk.ijse.shoeshop.entity.SaleEntity;
 import lk.ijse.shoeshop.entity.SaleItemEntity;
 import lk.ijse.shoeshop.entity.enums.CustomerLevel;
-import lk.ijse.shoeshop.repo.CustomerRepo;
-import lk.ijse.shoeshop.repo.InventoryRepo;
-import lk.ijse.shoeshop.repo.SaleItemRepo;
-import lk.ijse.shoeshop.repo.SaleRepo;
+import lk.ijse.shoeshop.entity.enums.Gender;
+import lk.ijse.shoeshop.repo.*;
+import lk.ijse.shoeshop.service.AlertService;
 import lk.ijse.shoeshop.service.SaleService;
 import lk.ijse.shoeshop.util.Mapping;
 import lk.ijse.shoeshop.util.UtilMatters;
@@ -23,6 +23,7 @@ import org.springframework.stereotype.Service;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -34,6 +35,7 @@ public class SaleServiceImpl implements SaleService {
     private final SaleItemRepo saleItemRepo;
     private final InventoryRepo inventoryRepo;
     private final CustomerRepo customerRepo;
+    private final AlertService alertService;
 
     @Override
     @Transactional
@@ -68,12 +70,35 @@ public class SaleServiceImpl implements SaleService {
                 log.debug("Sale item saved: {}", saleItem);
             }
 
+            //Update alert
+            updateAlert(saleDTO);
+            log.debug("Alert updated for sale: {}", savedSaleEntity);
+
             log.info("Sale saved successfully.");
             return mapping.toSaleDTO(savedSaleEntity);
         } catch (Exception e) {
             log.error("Failed to save sale: {}", e.getMessage(), e);
             throw new RuntimeException("Failed to save sale: " + e.getMessage(), e);
         }
+    }
+
+    @Transactional
+    private void updateAlert(SaleDTO saleDTO) {
+        AlertDTO alertDTO = new AlertDTO();
+
+        String customerCode = saleDTO.getCustomer().getCustomerCode();
+        Optional <CustomerEntity> customer = customerRepo.findByCustomerCode(customerCode);
+        String customerName = customer.get().getName();
+        alertDTO.setName(customerName);
+        alertDTO.setEmpId(saleDTO.getEmployee().getEmployeeCode());
+
+        String genderPronoun = customer.get().getGender().equals(Gender.MALE) ? "his" : "her";
+        String productName = getProductName(saleDTO.getOrderId());
+
+        String alertMessage = "received "+genderPronoun+" order of "+productName;
+        alertDTO.setMessage(alertMessage);
+
+        alertService.saveAlert(alertDTO);
     }
 
     @Override

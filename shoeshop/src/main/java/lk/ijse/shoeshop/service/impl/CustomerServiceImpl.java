@@ -1,18 +1,13 @@
 package lk.ijse.shoeshop.service.impl;
 
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Id;
 import jakarta.transaction.Transactional;
+import lk.ijse.shoeshop.dto.AlertDTO;
 import lk.ijse.shoeshop.dto.CheckCustomerDTO;
 import lk.ijse.shoeshop.dto.CustomerDTO;
-import lk.ijse.shoeshop.dto.PaymentDetailsDTO;
+import lk.ijse.shoeshop.dto.SaleDTO;
 import lk.ijse.shoeshop.entity.CustomerEntity;
-import lk.ijse.shoeshop.entity.SaleEntity;
-import lk.ijse.shoeshop.entity.SupplierEntity;
 import lk.ijse.shoeshop.entity.enums.CustomerLevel;
 import lk.ijse.shoeshop.entity.enums.Gender;
-import lk.ijse.shoeshop.entity.enums.PaymentMethods;
 import lk.ijse.shoeshop.exception.NotFoundException;
 import lk.ijse.shoeshop.repo.CustomerRepo;
 import lk.ijse.shoeshop.service.CustomerService;
@@ -22,9 +17,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -81,6 +77,7 @@ public class CustomerServiceImpl implements CustomerService {
             throw new RuntimeException("Failed to check customer: " + e.getMessage(), e);
         }
     }
+
     @Override
     public int totalPaymentMethods(LocalDate date) {
         log.info("Calculating total payment methods for date: {}", date);
@@ -132,6 +129,11 @@ public class CustomerServiceImpl implements CustomerService {
             log.error("Failed to update customer: {}", e.getMessage(), e);
             throw new RuntimeException("Failed to update customer: " + e.getMessage(), e);
         }
+    }
+
+    @Override
+    public List<String> getMails() {
+        return null;
     }
 
 }

@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @CrossOrigin
@@ -44,5 +45,10 @@ public class Customer {
     @PatchMapping("/updatecustomer")
     public ResponseEntity<CustomerDTO> updateCustomer(@RequestBody CustomerDTO customer){
         return ResponseEntity.ok(customerService.updateCustomer(customer));
+    }
+
+    @GetMapping("/getmails")
+    public ResponseEntity<List<String>> getMails(){
+        return ResponseEntity.ok(customerService.getMails());
     }
 }

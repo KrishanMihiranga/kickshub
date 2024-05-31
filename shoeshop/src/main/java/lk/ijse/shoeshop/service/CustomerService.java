@@ -12,4 +12,6 @@ public interface CustomerService {
     Boolean check(CheckCustomerDTO customerDTO);
     int totalPaymentMethods(LocalDate date);
     CustomerDTO updateCustomer(CustomerDTO customerDTO);
+
+    List<String> getMails();
 }

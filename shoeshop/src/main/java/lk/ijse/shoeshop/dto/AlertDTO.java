@@ -13,6 +13,8 @@ import java.util.Date;
 public class AlertDTO implements SuperDTO{
     @Null(message = "ID Auto Generated")
     private String id;
+    private String empId;
+    private String name;
     private String message;
     private Date date;
 }
