@@ -1,5 +1,6 @@
 
 import {authData} from "../db/loginData.js";
+import {customers} from "./db/Customer.js";
 import {
     validateInput,
     validatePhone,
@@ -99,6 +100,22 @@ $('#reg-cus-submit').on('click', function() {
             success: function(response) {
                 console.log("Customer saved successfully:", response);
                 showSuccess("Customer saved successfully");
+
+                $.ajax({
+                    url: 'http://localhost:9090/shoeshop/api/v1/customer/getAllCustomers',
+                    type: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + authData.token
+                    },
+                    success: function (response) {
+                        customers.length = 0;
+                        customers.push(...response);
+                        console.log('Customers Array:', customers);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Error:', error);
+                    }
+                });
             },
             error: function(xhr, status, error) {
                 console.error("Failed to save customer:", error);

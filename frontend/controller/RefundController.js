@@ -12,7 +12,6 @@ var description;
 $('#refund-btn').on('click', () => {
     $('#page-user, #save-changes-employee, .charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer,#page-supplier, #update-profile, #information-page, #recent-orders-refund-page, #add-item-page, #add-product-page, #inventory-page, #sale-page').hide();
     $('#refund-page').show();
-    console.log('clicked');
 });
 // Event delegation for dynamically added elements
 $('#refund-table-orders-wrapper').on('click', 'tbody tr', function () {

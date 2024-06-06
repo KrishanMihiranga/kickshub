@@ -1,6 +1,6 @@
 import { authData } from "../db/loginData.js";
 import { suppliers } from "../db/supplier.js";
-import { regItem } from "../db/Item.js";
+import { regItem, itemImages, items } from "../db/Item.js";
 import { supplierData } from "../db/supplier.js";
 var supCode;
 import {
@@ -131,6 +131,38 @@ $('#reg-item-btn').on('click', () => {
             success: function (response) {
                 console.log('Success:', response);
                 showSuccess('Item saved successfully');
+
+                $.ajax({
+                    url: 'http://localhost:9090/shoeshop/api/v1/item/getall',
+                    type: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + authData.token
+                    },
+                    success: function (response) {
+                        items.length = 0;
+                        items.push(...response);
+                        console.log('items Array:', items);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Error:', error);
+                    }
+                });
+    
+                $.ajax({
+                    url: 'http://localhost:9090/shoeshop/api/v1/itemimage/getall',
+                    type: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + authData.token
+                    },
+                    success: function (response) {
+                        itemImages.length = 0;
+                        itemImages.push(...response);
+                        console.log('itemImages Array:', itemImages);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Error:', error);
+                    }
+                });
             },
             error: function (xhr, status, error) {
                 console.error('Error:', error);

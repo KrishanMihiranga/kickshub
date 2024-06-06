@@ -1,6 +1,6 @@
 import {authData} from "../db/loginData.js";
 import {dataEmp} from "../db/detailCheck.js";
-import {employeeData} from "../db/employee.js";
+import {employeeData, employees} from "../db/employee.js";
 import{recentOrders} from "../db/Orders.js";
 import {top5names,count} from "../db/Dashboard.js";
 var pop_email = null;

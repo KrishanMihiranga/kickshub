@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -29,17 +30,20 @@ import java.util.List;
 public class ItemImage {
     private final ItemImageService itemImageService;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/health")
     public String healthCheck(){
         return "Item Image health check";
     }
 
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/getall")
     public ResponseEntity<List<ItemImageDTO>> getAll(){
         return ResponseEntity.ok(itemImageService.getAll());
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE , value= "/saveimage")
     public ResponseEntity<ItemImageDTO> saveItemImage(@Valid

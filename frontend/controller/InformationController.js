@@ -7,40 +7,6 @@ var selectedSupplier;
 var selectedCustomer;
 var changeCat;
 
-// $('#inf-cat').change(function() {
-//     changeCat = $('input[name="category"]:checked').val();
-
-//     if(changeCat == 'customer'){
-//         $('#information-table-customer-wrapper').show();
-//         $('#information-table-supplier-wrapper').hide();
-//         $('#information-table-employee-wrapper').hide();
-//       }else if((changeCat == 'supplier')){
-//         $('#information-table-customer-wrapper').hide();
-//         $('#information-table-supplier-wrapper').show();
-//         $('#information-table-employee-wrapper').hide();
-//       }else if((changeCat == 'employee')){
-//         $('#information-table-customer-wrapper').hide();
-//         $('#information-table-supplier-wrapper').hide();
-//         $('#information-table-employee-wrapper').show();
-//       }else{
-//         $('#information-table-customer-wrapper').hide();
-//         $('#information-table-supplier-wrapper').hide();
-//         $('#information-table-employee-wrapper').hide();
-//       }
-// });
-
-
-// $('#info-log').on('click', () => {
-//   $('#save-changes-employee, .charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer,#page-supplier, #update-profile, #refund-page, #add-item-page, #add-product-page, #inventory-page, #sale-page').hide();
-//   $('#information-page, #information-table-employee-wrapper').show();
-
-//   setDataToTable();
-//   setDataToCustomerTable();
-//   setDataToEmployeeTable();
-// });
-
-
-
 function setDataToTable() {
     var tableBody = document.querySelector("#information-table-supplier-wrapper tbody");
 
@@ -100,22 +66,6 @@ function setDataToEmployeeTable() {
         tableBody.innerHTML += newRow;
     });
 }
-
-
-// $(document).ready(function(){
-//   $('#information-table-customer-wrapper tbody tr').click(function(){
-//       var customerName = $(this).find('td').eq(1).text();
-//       alert('Customer Name: ' + customerName);
-//   });
-//   $('#information-table-supplier-wrapper tbody tr').click(function(){
-//       var supplierName = $(this).find('td').eq(1).text();
-//       alert('Supplier Name: ' + supplierName);
-//   });
-//   $('#information-table-employee-wrapper tbody tr').click(function(){
-//       var employeeName = $(this).find('td').eq(2).text();
-//       alert('Employee Name: ' + employeeName);
-//   });
-// });
 
 $(document).ready(function () {
     $('#info-log').on('click', function () {
@@ -509,6 +459,7 @@ $('#save-up-btn-supplier').on('click', () => {
                         $('.popup-info-supplier').removeClass("active-popup");
                         $('.overlay').removeClass("active-overlay");
                         showSuccess('Supplier Successfully Updated');
+
                     },
                     error: function (xhr, status, error) {
                         console.error('Error:', error);
@@ -586,6 +537,7 @@ $('#save-up-btn-info').on('click', () => {
                     success: function (response) {
                         $('.close-btn-popup').click();
                         showSuccess('Employee Successfully updated');
+                        
                     },
                     error: function (xhr, status, error) {
                         console.error('Error:', error);
@@ -684,6 +636,7 @@ $('#save-up-btn-customer').on('click', () => {
                         showSuccess('Customer successfully saved');
                         $('.popup-info-customer').removeClass("active-popup");
                         $('.overlay').removeClass("active-overlay");
+                        
                     },
                     error: function (xhr, status, error) {
                         showError('failed to update customer');

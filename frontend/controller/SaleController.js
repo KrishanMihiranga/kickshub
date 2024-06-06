@@ -1,10 +1,14 @@
 import { inventoryItems } from "../db/inventory.js";
 import { cart } from "../db/sale.js";
+import { orders, recentOrders, refundOrders } from "../db/Orders.js";
 import { dataCus } from "../db/detailCheck.js";
 import { authData } from "../db/loginData.js";
 import { saleData, saleitem } from "../db/transaction.js";
 import { customers } from "../db/Customer.js";
 import { employees } from "../db/employee.js"
+import { top5names, count } from "../db/Dashboard.js";
+const colorDark = $(':root').css('--color-label').trim();
+let barChart;
 var discount = 0;
 var subtotal = 0;
 var total = 0;
@@ -294,6 +298,24 @@ $('#btn-order-now').on('click', () => {
             showSuccess('Order saved successfully');
 
             $.ajax({
+                url: 'http://localhost:9090/shoeshop/api/v1/refund/getavailablerefund',
+                type: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + authData.token
+                },
+                success: function (response) {
+                    refundOrders.length = 0;
+                    refundOrders.push(...response);
+                    console.log('Refund Orders Array:', refundOrders);
+                    populateRefundOrdersTable();
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
+
+
+            $.ajax({
                 url: 'http://localhost:9090/shoeshop/api/v1/alert/getlatestalerts',
                 type: 'GET',
                 contentType: 'application/json',
@@ -309,6 +331,180 @@ $('#btn-order-now').on('click', () => {
                 }
             });
 
+            $.ajax({
+                url: ' http://localhost:9090/shoeshop/api/v1/sale/getall',
+                type: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + authData.token
+                },
+                success: function (response) {
+                    orders.length = 0;
+                    orders.push(...response);
+                    console.log('Orders Array:', orders);
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
+
+            $.ajax({
+                url: 'http://localhost:9090/shoeshop/api/v1/sale/getrecent',
+                type: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + authData.token
+                },
+                success: function (response) {
+                    recentOrders.length = 0;
+                    recentOrders.push(...response);
+                    console.log('Recent Orders Array:', recentOrders);
+                    populateRecentOrdersTable();
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
+
+            var today = new Date().toLocaleString('en-US', {
+                timeZone: 'Asia/Colombo'
+            }).split(',')[0].split('/');
+
+            var month = ('0' + today[0]).slice(-2);
+            var day = ('0' + today[1]).slice(-2);
+            var year = today[2];
+            today = year + '-' + month + '-' + day;
+            $('#selectedDate').val(today);
+            console.log("Date _ " + today);
+            $.ajax({
+                url: 'http://localhost:9090/shoeshop/api/v1/sale/gettotalsales',
+                type: 'POST',
+                contentType: 'application/json',
+                headers: {
+                    'Authorization': 'Bearer ' + authData.token
+                },
+                data: JSON.stringify(today),
+                success: function (response) {
+                    var formattedResponse = parseFloat(response).toLocaleString('en-US', {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    });
+                    $('#total-sales-amount').text(formattedResponse);
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error:', error);
+                    // Handle errors here
+                }
+            });
+
+            $.ajax({
+                url: 'http://localhost:9090/shoeshop/api/v1/sale/gettotalexpenses',
+                type: 'POST',
+                contentType: 'application/json',
+                headers: {
+                    'Authorization': 'Bearer ' + authData.token
+                },
+                data: JSON.stringify(today),
+                success: function (response) {
+                    var formattedResponse = parseFloat(response).toLocaleString('en-US', {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    });
+                    $('#total-sales-expenses').text(formattedResponse);
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error:', error);
+
+                }
+            });
+
+            $.ajax({
+                url: 'http://localhost:9090/shoeshop/api/v1/sale/gettotalincome',
+                type: 'POST',
+                contentType: 'application/json',
+                headers: {
+                    'Authorization': 'Bearer ' + authData.token
+                },
+                data: JSON.stringify(today),
+                success: function (response) {
+                    var formattedResponse = parseFloat(response).toLocaleString('en-US', {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    });
+                    $('#total-sales-income').text(formattedResponse);
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error:', error);
+
+                }
+            });
+
+            $.ajax({
+                url: 'http://localhost:9090/shoeshop/api/v1/sale/gettopproducts',
+                type: 'POST',
+                contentType: 'application/json',
+                headers: {
+                    'Authorization': 'Bearer ' + authData.token
+                },
+                data: JSON.stringify(today),
+                success: function (response) {
+                    response.forEach(res => {
+                        let name = res.name;
+                        let itemcount = res.count;
+                        top5names.push(name);
+                        count.push(itemcount);
+                    });
+                    console.log("***** COUNT -> " + count);
+                    console.log("***** TOP 5 NAMES -> " + top5names);
+                    barChart = new ApexCharts(
+                        document.querySelector('#bar-chart'),
+                        barChartOptions
+                    );
+                    barChart.render();
+
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
+
+            $.ajax({
+                url: 'http://localhost:9090/shoeshop/api/v1/sale/gettopselling',
+                type: 'POST',
+                contentType: 'application/json',
+                headers: {
+                    'Authorization': 'Bearer ' + authData.token
+                },
+                data: JSON.stringify(today),
+                success: function (response) {
+                    var formattedPrice = parseFloat(response.price).toLocaleString('en-US', {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    });
+                    $('#popular-product-card-right-name').text(response.name);
+                    $('#popular-product-card-right-price').text(formattedPrice);
+                    $('#popular-product-card-right-image').attr('src', 'data:image/png;base64,' + response.image);
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
+
+            $.ajax({
+                url: 'http://localhost:9090/shoeshop/api/v1/sale/gettotalpaymentmethods',
+                type: 'POST',
+                contentType: 'application/json',
+                headers: {
+                    'Authorization': 'Bearer ' + authData.token
+                },
+                data: JSON.stringify(today),
+                success: function (response) {
+
+                    $('#item-cash-count').text(response.cash);
+                    $('#item-card-count').text(response.card);
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
         },
         error: function (xhr, status, error) {
             console.error('Error:', error);
@@ -316,6 +512,36 @@ $('#btn-order-now').on('click', () => {
         }
     });
 });
+function populateRefundOrdersTable() {
+    $('#refund-table-orders-wrapper tbody').empty();
+
+    refundOrders.forEach(function (order) {
+        $.ajax({
+            url: 'http://localhost:9090/shoeshop/api/v1/sale/getitemname',
+            type: 'POST',
+            contentType: 'text/plain',
+            headers: {
+                'Authorization': 'Bearer ' + authData.token
+            },
+            data: order.orderId,
+            success: function (response) {
+                var row = $('<tr>');
+                row.data('order', order);
+                row.data('response', response);
+
+                row.append($('<td>').text(response));
+                row.append($('<td>').text(order.orderId));
+                row.append($('<td>').text(order.paymentMethod));
+                row.append($('<td class="primary">').text("Details"));
+
+                $('#refund-table-orders-wrapper tbody').append(row);
+            },
+            error: function (xhr, status, error) {
+                console.error('Error:', error);
+            }
+        });
+    });
+}
 
 function prepareSaleData() {
     var saleData = {
@@ -423,3 +649,144 @@ function refreshTimes() {
         update.querySelector('.time-ago').textContent = timeAgoText;
     });
 }
+
+function populateRecentOrdersTable() {
+
+    $('.recent-orders tbody').empty();
+
+    recentOrders.forEach(function (order) {
+
+        $.ajax({
+            url: 'http://localhost:9090/shoeshop/api/v1/sale/getitemname',
+            type: 'POST',
+            contentType: 'text/plain',
+            headers: {
+                'Authorization': 'Bearer ' + authData.token
+            },
+            data: order.orderId,
+            success: function (response) {
+                var row = $('<tr>');
+
+                row.append($('<td>').text(response));
+                row.append($('<td>').text(order.orderId));
+                row.append($('<td>').text(order.paymentMethod));
+                row.append($('<td class="success">').text("Paid"));
+                row.append($('<td class="primary">').text("Details"));
+
+                $('.recent-orders tbody').append(row);
+
+            },
+            error: function (xhr, status, error) {
+                console.error('Error:', error);
+
+            }
+        });
+
+
+
+    });
+}
+//bar chart
+const barChartOptions = {
+    series: [
+        {
+            data: count,
+            name: 'Products',
+        },
+    ],
+    chart: {
+        type: 'bar',
+        background: 'transparent',
+        height: 350,
+        toolbar: {
+            show: false,
+        },
+    },
+    colors: ['#2962ff', '#ff7782', '#41f1b6', '#ffbb55', '#7380ec'],
+    plotOptions: {
+        bar: {
+            distributed: true,
+            borderRadius: 4,
+            horizontal: false,
+            columnWidth: '40%',
+        },
+    },
+    dataLabels: {
+        enabled: false,
+    },
+    fill: {
+        opacity: 1,
+    },
+    grid: {
+        borderColor: '#55596e',
+        yaxis: {
+            lines: {
+                show: true,
+            },
+        },
+        xaxis: {
+            lines: {
+                show: true,
+            },
+        },
+    },
+    legend: {
+        labels: {
+            colors: colorDark,
+        },
+        show: true,
+        position: 'top',
+    },
+    stroke: {
+        colors: ['transparent'],
+        show: true,
+        width: 2,
+    },
+    tooltip: {
+        shared: true,
+        intersect: false,
+        theme: 'dark',
+    },
+    xaxis: {
+        categories: top5names,
+        title: {
+            style: {
+                color: colorDark,
+            },
+        },
+        axisBorder: {
+            show: true,
+            color: '#55596e',
+        },
+        axisTicks: {
+            show: true,
+            color: '#55596e',
+        },
+        labels: {
+            style: {
+                colors: colorDark,
+            },
+        },
+    },
+    yaxis: {
+        title: {
+            text: 'Count',
+            style: {
+                color: colorDark,
+            },
+        },
+        axisBorder: {
+            color: '#55596e',
+            show: true,
+        },
+        axisTicks: {
+            color: '#55596e',
+            show: true,
+        },
+        labels: {
+            style: {
+                colors: colorDark,
+            },
+        },
+    },
+};

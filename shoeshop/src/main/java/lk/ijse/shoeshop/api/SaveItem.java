@@ -13,6 +13,7 @@ import lk.ijse.shoeshop.util.UtilMatters;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,11 +28,14 @@ import java.io.IOException;
 public class SaveItem {
     private final SaveItemService saveItemService;
     private final ObjectMapper objectMapper;
+
+
     @GetMapping("health")
     public String get(){
         return "Health Check ";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping( value= "/saveimage")
     public ResponseEntity<SaveItemDTO> saveItem(@Valid @RequestPart("id")String id,

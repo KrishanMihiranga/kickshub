@@ -28,10 +28,12 @@ import java.util.List;
 public class Employee {
     private final EmployeeService employeeService;
 
+
     @GetMapping("/health")
     public String healthCheck(){
         return "Employee Health Check";
     }
+
 
     @GetMapping("/user")
     public String helloUser(){
@@ -45,12 +47,12 @@ public class Employee {
     }
 
     //check valid user
-
     @PostMapping("/check")
     public ResponseEntity<Boolean> checkValidation(@RequestBody CheckUserDTO user){
         return ResponseEntity.ok(employeeService.check(user));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<EmployeeDTO> saveEmployee(@Valid
@@ -113,6 +115,7 @@ public class Employee {
         return ResponseEntity.ok(employeeService.saveEmployee(updatedBuildEmployee));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PatchMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<EmployeeDTO> updateEmployee(@Valid
@@ -174,9 +177,6 @@ public class Employee {
 
         return ResponseEntity.ok(employeeService.updateEmployee(updatedBuildEmployee));
     }
-
-
-
 
     @GetMapping(value = "/getAllEmployees",produces = "application/json")
     public ResponseEntity<List<EmployeeDTO>> getALlEmployees(){

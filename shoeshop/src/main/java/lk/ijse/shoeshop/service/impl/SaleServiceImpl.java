@@ -226,6 +226,10 @@ public class SaleServiceImpl implements SaleService {
                 }
 
                 inventoryEntity.setCurrentQty(updatedQty);
+                int orgQty = inventoryEntity.getOriginalQty();
+                if ((orgQty / 2 ) > updatedQty ){
+                    inventoryEntity.setStatus("LOW");
+                }
                 inventoryRepo.save(inventoryEntity);
                 log.debug("Inventory updated: {}", inventoryEntity);
             }

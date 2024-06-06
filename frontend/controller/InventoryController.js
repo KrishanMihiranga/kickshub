@@ -5,8 +5,6 @@ $('#inventory-btn').on('click', () => {
   $('#page-user, #save-changes-employee, .charts, .recent-orders, .sales, .expenses, .income, #page, #page-customer,#page-supplier, #update-profile, #information-page, #recent-orders-refund-page, #refund-page, #add-item-page, #add-product-page, #sale-page').hide();
   $('#inventory-page').show();
 
-
-
   setDataToInventoryTable();
 });
 

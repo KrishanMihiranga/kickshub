@@ -2,7 +2,7 @@ import { authData } from "./db/loginData.js";
 import { suppliers } from "../db/supplier.js";
 import { employees } from "../db/employee.js";
 import { customers } from "../db/Customer.js";
-import { items, itemImages } from "../db/item.js";
+import { items, itemImages } from "../db/Item.js";
 import { inventoryItems } from "../db/inventory.js";
 import { orders, recentOrders, refundOrders } from "../db/Orders.js";
 import { top5names, count } from "./db/Dashboard.js";
@@ -61,8 +61,8 @@ function startDashboard(signInData) {
             $('.container').show();
 
             // Start the timer for 8 hours
-            // startTimer(8 * 60 * 60 * 1000);
-            startTimer(60 * 1000);
+            startTimer(8 * 60 * 60 * 1000);
+            // startTimer(60 * 1000);
 
 
             $.ajax({
@@ -297,6 +297,8 @@ function startDashboard(signInData) {
                     response.forEach(res => {
                         let name = res.name;
                         let itemcount = res.count;
+                        top5names.length = 0;
+                        count.length = 0;
                         top5names.push(name);
                         count.push(itemcount);
                     });

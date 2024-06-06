@@ -8,6 +8,7 @@ import lk.ijse.shoeshop.service.RefundService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,15 +20,19 @@ import java.util.List;
 public class Refund {
     private final RefundService refundService;
 
+
     @GetMapping("/health")
     public String healthCheck(){
         return "Refund health check";
     }
 
+
     @GetMapping("/getavailablerefund")
     public ResponseEntity<List<SaleDTO>> getRefunds(){
         return ResponseEntity.ok(refundService.getAvailableOrders());
     }
+
+
     @PostMapping("/getrefunddetails")
     public ResponseEntity<List<RefundDetailsDTO>> getRefundDetails(@RequestBody String orderId){
         return ResponseEntity.ok(refundService.getRefundDetails(orderId));

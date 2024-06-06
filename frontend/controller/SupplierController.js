@@ -1,5 +1,5 @@
 import { authData } from "../db/loginData.js";
-import { supplierData } from "../db/supplier.js";
+import { supplierData} from "../db/supplier.js";
 import {
     validateInput,
     validatePhone,
@@ -12,7 +12,7 @@ import {
 } from '../security/FieldValidation.js';
 
 $('#add-sup-btn').on('click', function () {
-    
+
     supplierData.code = null;
     supplierData.supplierName = $('#reg-sup-fn').val() + " " + $('#reg-sup-ln').val();
     supplierData.category = $('#reg-sup-radio-cat input[type="radio"]:checked').val();
@@ -30,7 +30,7 @@ $('#add-sup-btn').on('click', function () {
 
     function validateSupplierForm() {
         let isValid = true;
-    
+
         isValid &= validateInput($('#reg-sup-fn'), $('#fn-error-sup'), 'First Name');
         isValid &= validateInput($('#reg-sup-ln'), $('#ln-error-sup'), 'Last Name');
         isValid &= validateRadioGroup('category', $('#category-error-sup'), 'Category');
@@ -42,12 +42,12 @@ $('#add-sup-btn').on('click', function () {
         isValid &= validateName($('#reg-sup-add-state'), $('#state-error-sup'), 'State');
         isValid &= validateZip($('#reg-sup-add-zip'), $('#zip-error-sup'));
         isValid &= validateEmail($('#reg-sup-email'), $('#email-error-sup'));
-    
+
         return isValid;
     }
-    
 
-    if(validateSupplierForm()){
+
+    if (validateSupplierForm()) {
         $.ajax({
             url: 'http://localhost:9090/shoeshop/api/v1/supplier',
             type: 'POST',
@@ -65,9 +65,9 @@ $('#add-sup-btn').on('click', function () {
                 showError('Failed to save Supplier');
             }
         });
-    }else{
+    } else {
         showError('Please correct the errors in the form');
     }
-    
+
 
 });

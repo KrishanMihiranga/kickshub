@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,11 +24,13 @@ public class Inventory {
         return "Inventory health check";
     }
 
+
     @GetMapping("/getall")
     public ResponseEntity<List<InventoryDTO>> getAll(){
         return ResponseEntity.ok(inventoryService.getAll());
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/saveinventoryitem")
     public ResponseEntity<InventoryDTO> saveInventoryItem(@RequestBody InventoryDTO inventory){

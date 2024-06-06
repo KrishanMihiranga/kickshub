@@ -67,7 +67,7 @@
                 </div>
                 <button class="btn" id="login-btn">Login</button>
                 <div class="register-link">
-                    <p>Dont have an account? <a href="#">Register</a></p>
+                    <p>Dont have an account? <a id="register-login">Register</a></p>
                 </div>
             
         </div>
@@ -133,24 +133,6 @@
                     <span class="material-icons-sharp">shopping_cart</span>
                     <h3>Sale</h3>
                 </a>
-                <!-- <a href="#">
-                    <span class="material-icons-sharp">insights</span>
-                    <h3>Analytics</h3>
-                </a>
-                <a href="#">
-                    <span class="material-icons-sharp">mail_outline</span>
-                    <h3>Messages</h3>
-                    <span class="message-count">99+</span>
-                </a>
-
-                <a href="#">
-                    <span class="material-icons-sharp">report_gmailerrorred</span>
-                    <h3>Reports</h3>
-                </a>
-                <a href="#">
-                    <span class="material-icons-sharp">settings</span>
-                    <h3>Settings</h3>
-                </a> -->
                 <a href="#">
                     <span class="material-icons-sharp">logout</span>
                     <h3>Logout</h3>
@@ -320,8 +302,6 @@
                 </div>
                 <small>Developed by Krishan</small>
             </div>
-
-
 
             <!-- ******Employee Registration****** -->
             <div id="page" class="site">
@@ -1780,34 +1760,6 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>Nike Red Shoe</td>
-                                    <td>83212</td>
-                                    <td>Card</td>
-                                    <td class="success">Available</td>
-                                    <td class="primary">Details</td>
-                                </tr>
-                                <tr>
-                                    <td>Nike Blue Shoe</td>
-                                    <td>83452</td>
-                                    <td>Card</td>
-                                    <td class="warning">Unavailable</td>
-                                    <td class="primary">Details</td>
-                                </tr>
-                                <tr>
-                                    <td>Nike White Shoe</td>
-                                    <td>8342</td>
-                                    <td>Cash</td>
-                                    <td class="success">Available</td>
-                                    <td class="primary">Details</td>
-                                </tr>
-                                <tr>
-                                    <td>Nike Pink Shoe</td>
-                                    <td>34512</td>
-                                    <td>Card</td>
-                                    <td class="danger">Low</td>
-                                    <td class="primary">Details</td>
-                                </tr>
-                                <tr>
                                     <td>Nike Browm Shoe</td>
                                     <td>34512</td>
                                     <td>Cash</td>
@@ -2033,16 +1985,28 @@
                         <p class="text-muted">Sort by</p>
                         <div>
                             <div class="radio-wapper radio-reg-emp-gender">
-                                <input type="radio" id="srt-n" name="sort-by" value="Price" class="radioG">
-                                <label class="labelE label-1" for="srt-n">Price</label>
-                                <input type="radio" id="srt-p" name="sort-by" value="Name" class="radioG">
-                                <label class="labelE label-2" for="srt-p">Name</label>
                                 <input type="radio" id="srt-m" name="sort-by" value="Male" class="radioG">
                                 <label class="labelE label-3" for="srt-m">Male</label>
                                 <input type="radio" id="srt-f" name="sort-by" value="Female" class="radioG">
                                 <label class="labelE label-4" for="srt-f">Female</label>
+                                <input type="radio" id="srt-o" name="sort-by" value="Other" class="radioG">
+                                <label class="labelE label-5" for="srt-o">Other</label>
                             </div>
                         </div>
+                        <div>
+                            <div class="radio-wapper radio-reg-emp-occasion">
+                                <input type="radio" id="srt-formal" name="sort-by-oc" value="Formal" class="radioG">
+                                <label class="labelE label-6" for="srt-formal">Formal</label>
+                                <input type="radio" id="srt-casual" name="sort-by-oc" value="Casual" class="radioG">
+                                <label class="labelE label-7" for="srt-casual">Casual</label>
+                                <input type="radio" id="srt-industrial" name="sort-by-oc" value="Industrial" class="radioG">
+                                <label class="labelE label-8" for="srt-industrial">Industrial</label>
+                                <input type="radio" id="srt-sport" name="sort-by-oc" value="Sport" class="radioG">
+                                <label class="labelE label-9" for="srt-sport">Sport</label>
+                                <div id="radio-reg-emp-occasion-remove"> <span>Remove filters</span></div>
+                            </div>
+                        </div>
+
                     </div>
                     <div class="container-search">
                         <form action="" class="search" id="search-bar-stock">
@@ -2142,21 +2106,6 @@
                 <h2>Inventory</h2>
                 <p class="text-muted">Items currently in stock</p>
                 <div class="sort-by">
-                    <div>
-                        <p class="text-muted">Sort by</p>
-                        <div>
-                            <div class="radio-wapper radio-reg-emp-gender">
-                                <input type="radio" id="srts-n" name="sort-by" value="Price" class="radioG">
-                                <label class="labelE label-1" for="srts-n">Price</label>
-                                <input type="radio" id="srts-p" name="sort-by" value="Name" class="radioG">
-                                <label class="labelE label-2" for="srts-p">Name</label>
-                                <input type="radio" id="srts-m" name="sort-by" value="Male" class="radioG">
-                                <label class="labelE label-3" for="srts-m">Male</label>
-                                <input type="radio" id="srts-f" name="sort-by" value="Female" class="radioG">
-                                <label class="labelE label-4" for="srts-f">Female</label>
-                            </div>
-                        </div>
-                    </div>
                     <div class="container-search">
                         <form action="" class="search" id="search-bar-inv">
                             <input type="search" placeholder="Type something..." name="q" class="search__input">
@@ -2553,8 +2502,7 @@
     <script type="module" src="./controller/ToastController.js"></script>
     <script type="module" src="./security/Authorization.js"></script>
     <script type="module" src="./security/FieldValidation.js"></script>
-    <script type="module" src="./controller/LoginController.js"></script>
-    <script type="module" src="./db/Token.js"></script>
+    <script type="module" src="./controller/LoginPageController.js"></script>
     <script>
         $('#page-supplier, #page-customer, #Information-update-profile, #Information-update-supplier, #Information-update-customer, #update-profile, #information-page, #refund-page, #sale-page, #add-item-page, #inventory-page, #add-product-page').hide();
 

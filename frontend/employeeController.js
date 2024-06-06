@@ -14,7 +14,8 @@ import {
     validateBranch,
     validateJoinedDate
 } from './security/FieldValidation.js';
-
+import {employees} from "./db/employee.js";
+import { authData } from './db/loginData.js';
 //buttons
 const registerEmployee = $('#register-employee-btn');
 
@@ -155,6 +156,22 @@ registerEmployee.on('click', function () {
             success: function (response) {
                 console.log('Success:', response);
                 showSuccess('Employee Registered');
+                $.ajax({
+                    url: 'http://localhost:9090/shoeshop/api/v1/employee/getAllEmployees',
+                    type: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + authData.token
+                    },
+                    success: function (response) {
+                        console.log(response);
+                        employees.length = 0;
+                        employees.push(...response);
+                        console.log('Employees Array:', employees);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Error:', error);
+                    }
+                });
             },
             error: function (xhr, status, error) {
                 console.error('Error:', error);

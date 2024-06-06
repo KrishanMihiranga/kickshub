@@ -1604,10 +1604,16 @@ main::-webkit-scrollbar {
 .popup-paymentmetod .form-popup .form-elment button:hover,
 .popup-paymentmetod-card .form-popup .form-elment button:hover,
 .popup-paymentmetod-cash .form-popup .form-elment button:hover,
-.popup-edit-confirm .form-popup .form-elment button:hover {
+.popup-edit-confirm .form-popup .form-elment button:hover .active-overlay,
+#radio-reg-emp-occasion-remove:hover{
     background-color: var(--color-btn-dark);
 }
-
+#radio-reg-emp-occasion-remove{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 2rem;
+}
 .forgot-password-popup {
     position: relative;
     right: 2px;
@@ -1621,6 +1627,9 @@ main::-webkit-scrollbar {
 
 .forgot-password-popup:hover {
     text-decoration: underline;
+}
+.highlight {
+    background-color: var(--color-primary);
 }
 
 .overlay {
@@ -1776,7 +1785,9 @@ main::-webkit-scrollbar {
     color: #fff;
 }
 
-
+.radio-wapper.radio-reg-emp-occasion{
+    margin-top: 1rem;
+}
 /* ****** Refund page ****** */
 #refund-page {
     padding: var(--card-padding);
@@ -2188,7 +2199,8 @@ table tbody tr td {
     justify-content: end;
 }
 
-.reg-item-btn-wrapper button {
+.reg-item-btn-wrapper button,
+#radio-reg-emp-occasion-remove {
     background: var(--color-primary);
     color: #fff;
     height: 2.8rem;
