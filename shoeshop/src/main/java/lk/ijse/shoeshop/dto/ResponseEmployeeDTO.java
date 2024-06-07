@@ -16,22 +16,39 @@ import java.util.Date;
 @Builder
 public class ResponseEmployeeDTO implements SuperDTO{
         private String employeeCode;
+        @NotNull
         private String name;
+        @NotNull
         private String profilePic;
+        @NotNull
         private Gender gender;
+        @NotNull
         private String status;
+        @NotNull
         private String designation;
+        @NotNull
         private UserRole role;
+        @NotNull
         private Date dob;
         private Date joinedDate;
+        @NotNull
         private String branch;
+        @NotNull
         private String addressNo;
+        @NotNull
         private String addressLane;
+        @NotNull
         private String addressCity;
+        @NotNull
         private String addressState;
+        @NotNull
         private String postalCode;
+        @NotNull
         private String email;
+        @NotNull
         private String phone;
+        @NotNull
         private String guardianOrNominatedPerson;
+        @NotNull
         private String emergencyContact;
 }

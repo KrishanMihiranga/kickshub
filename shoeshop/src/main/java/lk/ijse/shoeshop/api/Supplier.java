@@ -1,5 +1,6 @@
 package lk.ijse.shoeshop.api;
 
+import jakarta.validation.Valid;
 import lk.ijse.shoeshop.dto.SupplierDTO;
 import lk.ijse.shoeshop.service.SupplierService;
 import lombok.RequiredArgsConstructor;
@@ -24,13 +25,13 @@ public class Supplier {
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
-    public ResponseEntity<SupplierDTO> saveSupplier(@RequestBody SupplierDTO supplier){
+    public ResponseEntity<SupplierDTO> saveSupplier(@Valid @RequestBody SupplierDTO supplier){
         return ResponseEntity.ok(supplierService.saveSupplier(supplier));
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/updatesupplier")
-    public ResponseEntity<SupplierDTO> updateSupplier(@RequestBody SupplierDTO supplier){
+    public ResponseEntity<SupplierDTO> updateSupplier(@Valid @RequestBody SupplierDTO supplier){
         return ResponseEntity.ok(supplierService.updateSupplier(supplier));
     }
 

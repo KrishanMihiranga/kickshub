@@ -1,5 +1,6 @@
 package lk.ijse.shoeshop.api;
 
+import jakarta.validation.Valid;
 import lk.ijse.shoeshop.dto.InventoryDTO;
 import lk.ijse.shoeshop.service.InventoryService;
 import lombok.RequiredArgsConstructor;
@@ -33,7 +34,7 @@ public class Inventory {
     @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/saveinventoryitem")
-    public ResponseEntity<InventoryDTO> saveInventoryItem(@RequestBody InventoryDTO inventory){
+    public ResponseEntity<InventoryDTO> saveInventoryItem(@Valid  @RequestBody InventoryDTO inventory){
         return ResponseEntity.ok(inventoryService.saveInventoryItem(inventory));
     }
 

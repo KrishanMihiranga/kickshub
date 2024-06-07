@@ -1,5 +1,6 @@
 package lk.ijse.shoeshop.api;
 
+import jakarta.validation.Valid;
 import lk.ijse.shoeshop.dto.RefundDTO;
 import lk.ijse.shoeshop.dto.RefundDetailsDTO;
 import lk.ijse.shoeshop.dto.SaleDTO;
@@ -40,7 +41,7 @@ public class Refund {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/saverefund")
-    public ResponseEntity<String> saveRefund(@RequestBody RefundDTO refundDTO){
+    public ResponseEntity<String> saveRefund(@Valid @RequestBody RefundDTO refundDTO){
         //return ResponseEntity.ok(refundService.saveRefund(refundDTO));
         try {
             refundService.saveRefund(refundDTO);

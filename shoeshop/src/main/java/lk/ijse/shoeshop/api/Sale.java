@@ -1,5 +1,6 @@
 package lk.ijse.shoeshop.api;
 
+import jakarta.validation.Valid;
 import lk.ijse.shoeshop.dto.*;
 import lk.ijse.shoeshop.service.SaleService;
 import lk.ijse.shoeshop.service.SaveItemService;
@@ -54,7 +55,7 @@ public class Sale {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/savesale")
-    public ResponseEntity<String> saveSale(@RequestBody SaleDTO saleDTO){
+    public ResponseEntity<String> saveSale(@Valid @RequestBody SaleDTO saleDTO){
 //        return ResponseEntity.ok(saleService.saveSale(saleDTO));
         try {
             saleService.saveSale(saleDTO);

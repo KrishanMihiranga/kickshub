@@ -1,5 +1,6 @@
 package lk.ijse.shoeshop.dto;
 
+import jakarta.validation.constraints.NotNull;
 import lk.ijse.shoeshop.entity.keys.ResupplyItemId;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,6 +13,8 @@ import java.util.Date;
 @Data
 public class ResupplyItemDTO implements SuperDTO{
     private ResupplyItemId resupplyItemId;
+    @NotNull
     private Integer suppliedQty;
+    @NotNull
     private Date suppliedDate;
 }

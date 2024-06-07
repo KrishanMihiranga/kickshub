@@ -1,5 +1,6 @@
 package lk.ijse.shoeshop.api;
 
+import jakarta.validation.Valid;
 import lk.ijse.shoeshop.dto.CheckCustomerDTO;
 import lk.ijse.shoeshop.dto.CustomerDTO;
 import lk.ijse.shoeshop.service.CustomerService;
@@ -28,7 +29,7 @@ public class Customer {
 
 
     @PostMapping
-    public ResponseEntity<CustomerDTO> saveCustomer(@RequestBody CustomerDTO customer){
+    public ResponseEntity<CustomerDTO> saveCustomer(@Valid @RequestBody CustomerDTO customer){
 
         return ResponseEntity.ok(customerService.saveCustomer(customer));
     }
@@ -51,7 +52,7 @@ public class Customer {
     }
 
     @PatchMapping("/updatecustomer")
-    public ResponseEntity<CustomerDTO> updateCustomer(@RequestBody CustomerDTO customer){
+    public ResponseEntity<CustomerDTO> updateCustomer(@Valid @RequestBody CustomerDTO customer){
         return ResponseEntity.ok(customerService.updateCustomer(customer));
     }
 

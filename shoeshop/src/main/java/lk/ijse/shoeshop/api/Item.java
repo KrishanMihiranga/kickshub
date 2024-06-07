@@ -1,5 +1,6 @@
 package lk.ijse.shoeshop.api;
 
+import jakarta.validation.Valid;
 import lk.ijse.shoeshop.dto.ItemDTO;
 import lk.ijse.shoeshop.service.ItemService;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +27,7 @@ public class Item {
     @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/saveitem")
-    public ResponseEntity<ItemDTO> saveItem(@RequestBody ItemDTO item){
+    public ResponseEntity<ItemDTO> saveItem(@Valid  @RequestBody ItemDTO item){
         return ResponseEntity.ok(itemService.saveItem(item));
     }
 

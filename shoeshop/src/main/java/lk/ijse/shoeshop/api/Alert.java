@@ -1,5 +1,6 @@
 package lk.ijse.shoeshop.api;
 
+import jakarta.validation.Valid;
 import lk.ijse.shoeshop.dto.AlertDTO;
 import lk.ijse.shoeshop.dto.EmailDTO;
 import lk.ijse.shoeshop.service.AlertService;

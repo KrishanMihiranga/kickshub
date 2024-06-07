@@ -1,5 +1,6 @@
 package lk.ijse.shoeshop.api;
 
+import jakarta.validation.Valid;
 import lk.ijse.shoeshop.dto.ItemDTO;
 import lk.ijse.shoeshop.dto.ResupplyDTO;
 import lk.ijse.shoeshop.service.ResupplyService;
@@ -24,7 +25,7 @@ public class Resupply {
     @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/saveresupply")
-    public ResponseEntity<ResupplyDTO> saveResupply(@RequestBody ResupplyDTO resupply){
+    public ResponseEntity<ResupplyDTO> saveResupply(@Valid @RequestBody ResupplyDTO resupply){
         return ResponseEntity.ok(resupplyService.saveResupply(resupply));
     }
 }
