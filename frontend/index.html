@@ -1219,6 +1219,18 @@
                     </div>
                 </div>
                 <div id="information-table-customer-wrapper" class="hidden-inf">
+                    <div class="sale-page-search-item">
+                        <div class="container-search">
+                            <form action="" class="search" id="search-bar-customer-info">
+                                <input type="search" placeholder="Enter Name" name="q" class="search__input">
+
+                                <div class="search__button" id="search-customer-info">
+                                    <i class="ri-search-2-line search__icon"></i>
+                                    <i class="ri-close-line search__close"></i>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                     <h2>Customer Information</h2>
                     <table>
                         <thead>
@@ -1247,6 +1259,18 @@
                     </table>
                 </div>
                 <div id="information-table-supplier-wrapper" class="hidden-inf">
+                    <div class="sale-page-search-item">
+                        <div class="container-search">
+                            <form action="" class="search" id="search-bar-supplier-info">
+                                <input type="search" placeholder="Enter Name" name="q" class="search__input">
+
+                                <div class="search__button" id="search-supplier-info">
+                                    <i class="ri-search-2-line search__icon"></i>
+                                    <i class="ri-close-line search__close"></i>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                     <h2>Supplier Information</h2>
                     <table>
                         <thead>
@@ -1889,29 +1913,7 @@
                                     </select>
                                     <span id="category-error-itm" class="error"></span>
                                 </div>
-                                <div>
-                                    <label>Size</label>
-                                    <div class="radio-wapper reg-item-radio-size">
-
-                                        <input type="radio" id="reg-i-s5" name="size" value="SIZE_5" class="radioG">
-                                        <label class="labelE label-1" for="reg-i-s5">5</label>
-                                        <input type="radio" id="reg-i-s6" name="size" value="SIZE_6" class="radioG">
-                                        <label class="labelE label-2" for="reg-i-s6">6</label>
-                                        <input type="radio" id="reg-i-s7" name="size" value="SIZE_7" class="radioG">
-                                        <label class="labelE label-3" for="reg-i-s7">7</label>
-                                        <input type="radio" id="reg-i-s8" name="size" value="SIZE_8" class="radioG">
-                                        <label class="labelE label-4" for="reg-i-s8">8</label>
-                                        <input type="radio" id="reg-i-s9" name="size" value="SIZE_9" class="radioG">
-                                        <label class="labelE label-5" for="reg-i-s9">9</label>
-                                        <input type="radio" id="reg-i-s10" name="size" value="SIZE_10" class="radioG">
-                                        <label class="labelE label-6" for="reg-i-s10">10</label>
-                                        <input type="radio" id="reg-i-s11" name="size" value="SIZE_11" class="radioG">
-                                        <label class="labelE label-7" for="reg-i-s11">11</label>
-                                        <input type="radio" id="reg-i-s12" name="size" value="SIZE_12" class="radioG">
-                                        <label class="labelE label-8" for="reg-i-s12">12</label>
-
-                                    </div>
-                                </div>
+                                
                                 <div>
                                     <label>Gender</label>
                                     <div class="radio-wapper reg-item-radio-gender">
@@ -2194,6 +2196,11 @@
                                 <label>Contact Number</label>
                                 <input type="tel" placeholder="+94 xxx xxx x39" id="sale-cus-tel">
                             </div>
+                            <div id="check-cus-sale-wrapper">
+                                <label class="transparent">Check</label>
+                                <div id="check-cus-sale"> <span>Apply</span></div>
+                            </div>
+                            
                         </div>
                         <p class="si-l">Search Item</p>
                         <div class="sale-page-search-item">
@@ -2245,10 +2252,10 @@
                     <div class="sale-page-right">
                         <div class="sale-page-right-heading">
                             <img src="./assets/images/logo.png">
-                            <p>Order #<span class="order-number">999</span></p>
+                            <p><span class="order-number">Select Customer</span></p>
                         </div>
                         <div class="sale-page-right-date">
-                            <p class="time-stamp">2024-04-26 08:39:52</p>
+                            <p class="time-stamp" id="timeStamp">2024-04-26 08:39:52</p>
                         </div>
                         <hr>
                         <div class="sale-page-right-cart">
@@ -2296,7 +2303,7 @@
                             </div>
                             <div class="discounts">
                                 <p>Discounts</p>
-                                <p id="discounts">$<span>500.00</span></p>
+                                <p id="discounts">$<span>0</span></p>
                             </div>
                             <hr>
                             <div class="total">
@@ -2335,18 +2342,25 @@
             <div class="popup-paymentmetod-card">
                 <div class="close-btn-popup">&times;</div>
                 <div class="form-popup">
-                    <h2>Payment Method</h2>
-                    <p>Select payment method</p>
-
+                    <h2>Card Payment</h2>
+                    <p>Enter your card details</p>
+                    <div class="payment-options">
+                        <label for="card-number">Card Number (Last 4 digits)</label>
+                        <input type="text" id="card-number" name="card-number" placeholder="****">
+                        <label for="bank-name">Bank Name</label>
+                        <input type="text" id="bank-name" name="bank-name" placeholder="Bank Name">
+                        <button id="pay-now">Pay Now</button>
+                    </div>
                 </div>
             </div>
+            
 
-            <div class="popup-paymentmetod-cash">
+            <div class="popup-paymentmetod-cash"> 
                 <div class="close-btn-popup">&times;</div>
                 <div class="form-popup">
                     <h2>Payment Details</h2>
-                    <div><span>Total: </span><span id="payment-cash-total"></span></div>
-                    <div> <span>Paid Amount : </span> <input type="number" id="payment-cash-paid"></div>
+                    <div><span>Total : </span><span id="payment-cash-total"></span></div>
+                    <div> <span>Paid Amount</span> <input type="number" id="payment-cash-paid"></div>
                     <div><label>Balance : </label><label id="payment-cash-balance"></label></div>
                     <button id="btn-order-now">Order Now</button>
                 </div>

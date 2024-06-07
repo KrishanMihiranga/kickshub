@@ -105,7 +105,7 @@ $('#reg-item-btn').on('click', () => {
 
         isValid = validateInputTwoNames($('#reg-item-name'), $('#name-error-itm'), 'Item Name') && isValid;
         isValid = validateRadioGroup('category', $('#category-error-itm'), 'Item Category') && isValid;
-        isValid = validateRadioGroup('size', $('#size-error-itm'), 'Size') && isValid;
+        // isValid = validateRadioGroup('size', $('#size-error-itm'), 'Size') && isValid;
         isValid = validateRadioGroup('gender', $('#gender-error-itm'), 'Gender') && isValid;
         isValid = validateRadioGroup('occasion', $('#occasion-error-itm'), 'Occasion') && isValid;
         isValid = validatePriceInput($('#reg-i-pur'), $('#purchase-error-itm'), 'Purchase Price') && isValid;

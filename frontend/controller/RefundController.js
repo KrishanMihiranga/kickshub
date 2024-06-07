@@ -211,3 +211,43 @@ $('#recent-orders-back').on('click', () => {
     $('#recent-orders-refund-page').hide();
     $('#recent-orders-refund').show();
 });
+
+$('#search-bar input').on('input', function () {
+    const searchText = $(this).val().trim().toLowerCase();
+
+    if (!searchText) {
+        // If search text is empty, remove all highlights
+        resetHighlight();
+    } else {
+        // Otherwise, filter and highlight matches
+        $('#refund-table-orders-wrapper tbody tr').each(function () {
+            const orderNumber = $(this).find('td:nth-child(2)').text().trim().toLowerCase();
+            const matched = orderNumber.includes(searchText);
+            if (matched) {
+                $(this).show();
+                highlightMatchedText($(this).find('td:nth-child(2)'), searchText);
+            } else {
+                $(this).hide();
+            }
+        });
+    }
+});
+
+function highlightMatchedText(element, searchText) {
+    if (!searchText) return;
+    const regex = new RegExp(`(${searchText})`, 'gi');
+    element.each(function () {
+        const originalText = $(this).text();
+        const highlightedText = originalText.replace(regex, '<span class="highlight">$1</span>');
+        $(this).html(highlightedText);
+    });
+}
+
+function resetHighlight() {
+    $('#refund-table-orders-wrapper tbody tr').each(function () {
+        const orderNumber = $(this).find('td:nth-child(2)');
+        // Remove highlight span by setting text back to original
+        orderNumber.html(orderNumber.text());
+        $(this).show(); // Ensure all rows are shown when search is cleared
+    });
+}

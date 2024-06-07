@@ -189,6 +189,8 @@ toggleSearch('search-bar', 'search-button');
 toggleSearch('search-bar-stock', 'search-button-stock');
 toggleSearch('search-bar-inv', 'search-button-inv');
 toggleSearch('search-bar-sale', 'search-button-sale');
+toggleSearch('search-bar-customer-info', 'search-customer-info');
+toggleSearch('search-bar-supplier-info', 'search-supplier-info');
 
 //sale remove item cart
 $(document).on('click', '.overlay-active-btn-sale', function () {

@@ -654,3 +654,38 @@ $('#save-up-btn-customer').on('click', () => {
         }
     });
 });
+$('#search-bar-customer-info input').on('input', function () {
+    const searchText = $(this).val().trim().toLowerCase();
+    $('#information-table-customer-wrapper table tbody tr').each(function () {
+        const nameElement = $(this).find('td:nth-child(2)'); 
+        const originalText = nameElement.text();
+        if (originalText.toLowerCase().includes(searchText)) {
+            const highlightedText = highlightMatchedText(originalText, searchText);
+            nameElement.html(highlightedText);
+            $(this).show();
+        } else {
+            $(this).hide(); 
+        }
+    });
+});
+
+$('#search-bar-supplier-info input').on('input', function () {
+    const searchText = $(this).val().trim().toLowerCase();
+    $('#information-table-supplier-wrapper table tbody tr').each(function () {
+        const nameElement = $(this).find('td:nth-child(2)'); 
+        const originalText = nameElement.text();
+        if (originalText.toLowerCase().includes(searchText)) {
+            const highlightedText = highlightMatchedText(originalText, searchText);
+            nameElement.html(highlightedText);
+            $(this).show();
+        } else {
+            $(this).hide(); 
+        }
+    });
+});
+
+function highlightMatchedText(text, searchText) {
+    if (!searchText) return text;
+    const regex = new RegExp(`(${searchText})`, 'gi');
+    return text.replace(regex, match => `<span class="highlight">${match}</span>`);
+}

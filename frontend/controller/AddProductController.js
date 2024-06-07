@@ -91,8 +91,6 @@ $('#popup-stock-update-btn').on('click', () => {
         item: relatedArray,
         itemImage: imgArray
     });
-
-    console.log(addToInventory);
 });
 
 $('#save-up-btn-inv').on('click', () => {
@@ -125,7 +123,11 @@ $('#save-up-btn-inv').on('click', () => {
                     headers: { 'Authorization': 'Bearer ' + authData.token },
                     data: JSON.stringify(addToInventory),
                     success: function (response) {
-                        console.log('Inventory updated: ' + response);
+                        $('.popup-inv').removeClass("active-popup");
+                        $('.overlay').removeClass("active-overlay");
+                        $('#email-popup-inv').val('');
+                        $('#password-popup-inv').val('');
+                        $('#password-confirm-popup-inv').val('');
                         showSuccess('Inventory Successfully updated');
                         refreshInventory();
                     },
@@ -190,19 +192,14 @@ $(document).ready(function () {
         createCards(items);
     });
 
-    $('#search-bar-stock > input').on('input', function () {
+    $('#search-bar-stock input').on('input', function () {
         const searchText = $(this).val().trim().toLowerCase();
-        $('.container-ap').each(function () {
-            const headingText = $(this).find('.heading-ap').text().trim().toLowerCase();
-            const matched = headingText.includes(searchText);
-            if (matched) {
-                $(this).show();
-            } else {
-                $(this).hide();
-            }
+        $('.heading-ap').each(function () {
+            const headingText = $(this).text().trim().toLowerCase();
+            const highlightedText = highlightMatchedText(headingText, searchText);
+            $(this).html(highlightedText);
         });
     });
-    
 
     createCards(items);
 });

@@ -34,3 +34,45 @@ function setDataToInventoryTable() {
   });
 }
 
+$('#search-bar-inv input').on('input', function () {
+  const searchText = $(this).val().trim().toLowerCase();
+
+  if (!searchText) {
+      // If search text is empty, remove all highlights
+      resetHighlight();
+  } else {
+      // Otherwise, filter and highlight matches
+      $('#inventory-page tbody tr').each(function () {
+          const inventoryCode = $(this).find('td:nth-child(3)').text().trim().toLowerCase();
+          const description = $(this).find('td:nth-child(4)').text().trim().toLowerCase();
+          const matched = inventoryCode.includes(searchText) || description.includes(searchText);
+          if (matched) {
+              $(this).show();
+              highlightMatchedText($(this).find('td:nth-child(3)'), searchText);
+              highlightMatchedText($(this).find('td:nth-child(4)'), searchText);
+          } else {
+              $(this).hide();
+          }
+      });
+  }
+});
+
+function highlightMatchedText(element, searchText) {
+  if (!searchText) return;
+  const regex = new RegExp(`(${searchText})`, 'gi');
+  element.each(function () {
+      const originalText = $(this).text();
+      const highlightedText = originalText.replace(regex, '<span class="highlight">$1</span>');
+      $(this).html(highlightedText);
+  });
+}
+
+function resetHighlight() {
+  $('#inventory-page tbody tr').each(function () {
+      const inventoryCode = $(this).find('td:nth-child(3)');
+      const description = $(this).find('td:nth-child(4)');
+      inventoryCode.html(inventoryCode.text());
+      description.html(description.text());
+  });
+}
+

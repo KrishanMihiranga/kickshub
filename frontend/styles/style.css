@@ -1605,10 +1605,12 @@ main::-webkit-scrollbar {
 .popup-paymentmetod-card .form-popup .form-elment button:hover,
 .popup-paymentmetod-cash .form-popup .form-elment button:hover,
 .popup-edit-confirm .form-popup .form-elment button:hover .active-overlay,
-#radio-reg-emp-occasion-remove:hover{
+#radio-reg-emp-occasion-remove:hover,
+#check-cus-sale:hover{
     background-color: var(--color-btn-dark);
 }
-#radio-reg-emp-occasion-remove{
+#radio-reg-emp-occasion-remove,
+#check-cus-sale{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1630,6 +1632,7 @@ main::-webkit-scrollbar {
 }
 .highlight {
     background-color: var(--color-primary);
+    color: var(--color-info-light);
 }
 
 .overlay {
@@ -2198,9 +2201,12 @@ table tbody tr td {
     display: flex;
     justify-content: end;
 }
-
+.transparent{
+    color: transparent;
+}
 .reg-item-btn-wrapper button,
-#radio-reg-emp-occasion-remove {
+#radio-reg-emp-occasion-remove ,
+#check-cus-sale{
     background: var(--color-primary);
     color: #fff;
     height: 2.8rem;
@@ -2209,7 +2215,6 @@ table tbody tr td {
     cursor: pointer;
     transition: all .3s ease;
 }
-
 .reg-item-btn-wrapper button:hover {
     background: var(--color-btn-dark);
 }
@@ -2519,7 +2524,7 @@ table tbody tr td {
 }
 
 .sale-item-desc {
-    padding: 1rem;
+    padding: 1.5rem .2rem;
     display: flex;
     justify-content: space-between;
 }
@@ -2546,14 +2551,17 @@ table tbody tr td {
 .sale-item-desc>div>div {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     margin-top: .5rem;
 }
 
 .sale-item-desc>div>div>div {
     margin-right: .5rem;
 }
-
+.sale-item-card-gender{
+    margin-left: 1rem;
+    font-weight: 800;
+}
 /* cart right  */
 .sale-page-right-heading>img {
     width: 2rem;
@@ -3306,4 +3314,80 @@ input[type=number]::-webkit-outer-spin-button {
 
 .register-link p a:hover {
     text-decoration: underline;
+}
+
+
+
+.popup-paymentmetod-cash .form-popup {
+    text-align: center;
+}
+
+.popup-paymentmetod-cash .form-popup h2 {
+    margin-top: 0;
+}
+
+.popup-paymentmetod-cash .form-popup div {
+    margin-bottom: 10px;
+}
+
+.popup-paymentmetod-cash .form-popup input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.popup-paymentmetod-cash .form-popup button {
+    background-color: var(--color-primary);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.popup-paymentmetod-cash .form-popup button:hover {
+    background-color: var(--color-btn-dark);
+}
+
+
+.popup-paymentmetod-card .form-popup {
+    text-align: center;
+}
+
+.popup-paymentmetod-card .form-popup h2 {
+    margin-top: 0;
+}
+
+.popup-paymentmetod-card .form-popup p {
+    margin-bottom: 20px;
+}
+
+.popup-paymentmetod-card .payment-options label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.popup-paymentmetod-card .payment-options input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+.popup-paymentmetod-card .payment-options button {
+    width: 100%;
+    background-color: var(--color-primary);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.popup-paymentmetod-card .payment-options button:hover {
+    background-color: var(--color-btn-dark);
 }
