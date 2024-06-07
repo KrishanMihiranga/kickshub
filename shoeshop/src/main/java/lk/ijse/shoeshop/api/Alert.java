@@ -1,7 +1,9 @@
 package lk.ijse.shoeshop.api;
 
 import lk.ijse.shoeshop.dto.AlertDTO;
+import lk.ijse.shoeshop.dto.EmailDTO;
 import lk.ijse.shoeshop.service.AlertService;
+import lk.ijse.shoeshop.service.EmailSenderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +17,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class Alert {
     private final AlertService alertService;
-
     @GetMapping("/health")
     public String healthCheck(){
         return "Alert health check";

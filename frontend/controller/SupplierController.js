@@ -57,7 +57,7 @@ $('#add-sup-btn').on('click', function () {
             },
             data: JSON.stringify(supplierData),
             success: function (response) {
-                console.log('Success:', response);
+                clearSupplierFormFields();
                 showSuccess('Supplier saved successfully');
             },
             error: function (xhr, status, error) {
@@ -71,3 +71,10 @@ $('#add-sup-btn').on('click', function () {
 
 
 });
+
+function clearSupplierFormFields() {
+    $('#page-supplier input[type="text"], #page-supplier input[type="tel"], #page-supplier input[type="email"]').val('');
+    $('#page-supplier input[type="radio"], #page-supplier input[type="checkbox"]').prop('checked', false);
+    $('#page-supplier select').prop('selectedIndex', 0);
+    $('#page-supplier span.error').text('');
+}

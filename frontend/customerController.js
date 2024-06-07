@@ -98,7 +98,7 @@ $('#reg-cus-submit').on('click', function() {
             },
             data: JSON.stringify(customerData),
             success: function(response) {
-                console.log("Customer saved successfully:", response);
+                clearCustomerFormFields();
                 showSuccess("Customer saved successfully");
 
                 $.ajax({
@@ -130,3 +130,18 @@ $('#reg-cus-submit').on('click', function() {
 
 
 
+function clearCustomerFormFields() {
+    
+    $('#page-customer input[type="text"], #page-customer input[type="password"], #page-customer input[type="tel"], #page-customer input[type="email"], #page-customer input[type="date"]').val('');
+
+    $('#page-customer input[type="radio"], #page-customer input[type="checkbox"]').prop('checked', false);
+
+    $('#page-customer select').prop('selectedIndex', 0);
+
+
+    $('#page-customer span.error').text('');
+
+
+    $('#page-customer #reg-cus-day, #page-customer #reg-cus-month, #page-customer #reg-cus-year').val('');
+    $('#page-customer #country-customer').val('Sri Lanka');
+}

@@ -154,7 +154,7 @@ registerEmployee.on('click', function () {
             processData: false,
             contentType: false,
             success: function (response) {
-                console.log('Success:', response);
+                clearFormFields();
                 showSuccess('Employee Registered');
                 $.ajax({
                     url: 'http://localhost:9090/shoeshop/api/v1/employee/getAllEmployees',
@@ -184,3 +184,12 @@ registerEmployee.on('click', function () {
     }
 
 });
+
+function clearFormFields() {
+    $('#page input[type="text"], #page input[type="password"], #page input[type="tel"], #page input[type="email"], #page input[type="date"]').val('');
+    $('#employee-file').val('');
+    $('#page input[type="radio"], #page input[type="checkbox"]').prop('checked', false);
+    $('#page select').prop('selectedIndex', 0);
+    $('#page span.error').text('');
+    $('#profile-picture-employee').attr('src', '/assets/images/default_user.jpg');
+}

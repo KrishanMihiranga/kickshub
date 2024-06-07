@@ -187,8 +187,12 @@ $('#save-up-btn-refund').on('click', () => {
                         }
                     }),
                     success: function (response) {
-                        console.log('Success:', response);
+                        $('#email-popup-refund').val('');
+                        $('#password-popup-refund').val('');
+                        $('#password-confirm-popup-refund').val('');
                         showSuccess('Successfully refunded');
+                        $('.popup-refund').removeClass("active-popup");
+                        $('.overlay').removeClass("active-overlay");
                     },
                     error: function (xhr, status, error) {
                         showError('Already refunded');

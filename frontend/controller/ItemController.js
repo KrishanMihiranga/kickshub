@@ -105,7 +105,6 @@ $('#reg-item-btn').on('click', () => {
 
         isValid = validateInputTwoNames($('#reg-item-name'), $('#name-error-itm'), 'Item Name') && isValid;
         isValid = validateRadioGroup('category', $('#category-error-itm'), 'Item Category') && isValid;
-        // isValid = validateRadioGroup('size', $('#size-error-itm'), 'Size') && isValid;
         isValid = validateRadioGroup('gender', $('#gender-error-itm'), 'Gender') && isValid;
         isValid = validateRadioGroup('occasion', $('#occasion-error-itm'), 'Occasion') && isValid;
         isValid = validatePriceInput($('#reg-i-pur'), $('#purchase-error-itm'), 'Purchase Price') && isValid;
@@ -129,7 +128,7 @@ $('#reg-item-btn').on('click', () => {
             contentType: false,
             processData: false,
             success: function (response) {
-                console.log('Success:', response);
+                clearItemFormFields();
                 showSuccess('Item saved successfully');
 
                 $.ajax({
@@ -147,7 +146,7 @@ $('#reg-item-btn').on('click', () => {
                         console.error('Error:', error);
                     }
                 });
-    
+
                 $.ajax({
                     url: 'http://localhost:9090/shoeshop/api/v1/itemimage/getall',
                     type: 'GET',
@@ -175,3 +174,15 @@ $('#reg-item-btn').on('click', () => {
     }
 
 });
+
+function clearItemFormFields() {
+    $('#add-item-page input[type="text"]').val('');
+    $('#add-item-page select').prop('selectedIndex', 0);
+    $('#add-item-page input[type="radio"]').prop('checked', false);
+    $('#add-item-page span.error').text('');
+    $('#add-item-page #file').val('');
+    $('#add-item-page .img-area').attr('data-img', '');
+    $('#add-item-page .img-area').html("<i class='bx bxs-cloud-upload icon'></i><h3>Upload Image</h3><p>Image size must be less than <span>2MB</span></p>");
+    $('#add-item-page .reg-item-supplier-code span').text('xxxxxxxxxx-xxxxxxxxx-xxxxx');
+}
+
